@@ -1,22 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
-import GenericButton from './components/GenericButton';
-import Tache from './components/Tache';
 
-const handleSubmit = (event) => {
-  event.preventDefault()
-  console.log('Bouton cliqué')
-}
+import PageAccueil from './components/PageAccueil';
+import Base from './components/Base';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-      </header>
-      <GenericButton label={'Valider'} buttonStyle={'boutonValider'} method={handleSubmit}/>
-      <GenericButton label={'Annuler'} buttonStyle={'boutonAnnuler'} method={handleSubmit}/>
-      <Tache/>
-    </div>
+    <Router>
+      <Routes>
+        <Route path ="/pageAccueil" element={<PageAccueil/>} />
+        <Route path = "/" element={<Base/>} />
+      </Routes>
+    </Router>
   );
 }
 
