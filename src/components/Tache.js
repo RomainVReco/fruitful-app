@@ -18,7 +18,7 @@ function Tache ({nomHabitude, quota, quantiteQuota, typeEvenement, heure}) {
                 {quota} {quantiteQuota}
             </div>
             <div className="check-tache">
-                <input type="checkbox"/>
+                <input type="checkbox" style={{width:'80%', height:'80%'}}/>
             </div>
             <div className="type-tache">
                 <TypeTache label='Habitude' color='rgba(44, 203, 79, 1)'/>
