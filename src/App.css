@@ -3,10 +3,9 @@
   padding: 0;
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
-  font-weight: <weight>;
   font-style: normal;
-  font-variation-settings:
-    "slnt" 0;
+  font-variation-settings:"slnt" 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -33,7 +32,7 @@ body {
   height: 31px;
   flex-shrink: 0;
   border-radius: 5px;
-  border: 1px solid var(--Bleu-clair, #4C9CDA);
+  /*border: 1px solid var(--Bleu-clair, #4C9CDA); */
   background: var(--Blanc, #FFF);
   color: var(--Bleu-clair, #4C9CDA);
   text-align: center;
@@ -42,6 +41,14 @@ body {
   font-weight: 600;
   line-height: 28px; /* 200% */
 }
+
+/* COMPOSANTS TACHES */
+
+.tache-container {
+  margin-top: 100px;
+}
+
+
 /*@keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
