@@ -1,28 +1,30 @@
 import React from "react";
+import rasp from '../assets/logo-rasp.svg'
+import TypeTache from './TypeTache'
 
 
-
-function Tache () {
+// les props sont placés en attendant la récupération des données 
+function Tache ({nomHabitude, quota, quantiteQuota, typeEvenement, heure}) {
 
     return (
         <div className="tache-container">
             <div className="tache-logo">
-                Logo
+                <img src={rasp} alt="icone evt" style={{height:'42px', width:'52px'}}></img>
             </div>
             <div className="tache-titre">
-                Titre
+                {nomHabitude}
             </div>
             <div className="tache-quota">
-                Quota
+                {quota} {quantiteQuota}
             </div>
             <div className="check-tache">
                 <input type="checkbox"/>
             </div>
             <div className="type-tache">
-                Type
+                <TypeTache label='Habitude' color='rgba(44, 203, 79, 1)'/>
             </div>
             <div className="heure-tache">
-                Heure
+                {heure}
             </div>
 
 
