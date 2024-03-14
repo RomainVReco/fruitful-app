@@ -1,23 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
+import GenericButton from './components/GenericButton';
+
+const handleSubmit = () => {
+  console.log('Bouton cliqué')
+}
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
+      <GenericButton label={'Valider'} buttonStyle={'boutonValider'}/>
+      <GenericButton label={'Annuler'} buttonStyle={'boutonAnnuler'}/>
     </div>
   );
 }
