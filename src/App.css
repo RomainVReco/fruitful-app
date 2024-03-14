@@ -47,7 +47,7 @@ body {
 .tache-container {
   width: 370px;
   height: 70px;
-  margin: 100px 0.5em;
+  margin: 30px 0.5em;
   border: solid black 1px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -69,8 +69,16 @@ body {
   justify-content: center;
 }
 
+.boutonlogo {
+  border: none;
+  background: none;
+  padding: 0;
+  outline: none;
+}
+
 .tache-titre, .tache-quota, .type-tache, .heure-tache {
   place-self: center;
+  
 }
 
 .check-tache{
@@ -92,6 +100,20 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* ACTION BAR */
+
+.actionbar-container {
+  display: flex;
+  max-width: 425px;
+  height: 60px;
+  justify-content:space-around;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  align-items: center;
+  gap: 25px;
+  background: var(--Couleur-header, #C12A71);
 }
 
 /*@keyframes App-logo-spin {
