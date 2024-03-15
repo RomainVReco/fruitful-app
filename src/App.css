@@ -106,6 +106,17 @@ body {
   justify-content: center;
 }
 
+.choix-bouton{
+  border-color: #C12A71 !important;
+  color: #C12A71 !important;
+}
+
+.choix-bouton:hover{
+  color: #FFFFFF !important;
+  background-color: #C12A71 !important;
+}
+
+
 /* ACTION BAR */
 
 .actionbar {

@@ -1,11 +1,11 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-function WithHeaderExample() {
+function Header() {
   return (
     
     <Card>
-      <Card.Header style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#C12A71', color: 'white' }}>
+      <Card.Header style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#C12A71', color: 'white', marginBottom:'30px' }}>
         <div style={{ marginRight: '10px' }}>
             <img 
                 src={require('../assets/logo5.png')} 
@@ -18,15 +18,8 @@ function WithHeaderExample() {
                 />
         </div>
         </Card.Header>
-      <Card.Body>
-        <Card.Title>Special title treatment</Card.Title>
-        <Card.Text>
-          With supporting text below as a natural lead-in to additional content.
-        </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
-      </Card.Body>
     </Card>
   );
 }
 
-export default WithHeaderExample;
+export default Header;
