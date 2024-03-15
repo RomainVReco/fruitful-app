@@ -1,5 +1,5 @@
 import React from 'react'
-import WithHeaderExample from './Header'
+import Header from './Header'
 import InputTache from './InputTache'
 import SelectLogo from './SelectLogo'
 
@@ -16,30 +16,31 @@ const handleClickFrequency = () => {
     console.log('handleClickFrequency création tache')
 }
 
+const handleClickToDo = () => {
+    console.log('handleClickToDo choix fait/faire')
+}
+
+const handleClickQuota = () => {
+    console.log('handleClickQuota')
+}
+
 export default function CreationTache() {
   return (
     <>
-    <WithHeaderExample/>
-    <div className='container'>
-        <div className='row'>
-            <div className='col'>
-                <InputTache nomLabel={'Nommez votre nouvelle habitude !'} functionInput={handleClick}/>
-                <SelectLogo/>
-            </div>
-        </div>
-        <div className='row'>
-            <div className='col'>
-                <InputTache nomLabel={'A partir du : '} functionInput={handleClickCalendar}/>
-            </div>
-        </div>
-        <div className='row'>
-            <div className='col'>
-                <InputTache nomLabel={'Fréquence'} functionInput={handleClickFrequency}/>
-            </div>
-        </div>
-    </div>
-    <div>CreationTache</div>
-    </>
+    <Header/>
+    <h3 className='container' style={{marginBottom:'25px'}}> Créez-vous une nouvelle habitude</h3>
+    <InputTache nomLabel={'Nommez là !'} 
+        method={handleClick} exemple='Couche-tôt !'/>
+    <SelectLogo/>
+    <InputTache nomLabel={'A partir du : '} 
+        method={handleClickCalendar} exemple={new Date().toLocaleDateString()}/>
+    <InputTache nomLabel={'Fréquence : '} method={handleClickFrequency} exemple='Quotidiennement'/>
 
+    <div className='container' style={{marginTop:'25px'}}> Type : </div>
+    <div className='container d-flex justify-content-evenly'>
+                <button className='btn btn-outline-primary choix-bouton' data-bs-toggle="button" onClick={handleClickToDo}>Fait/ A faire</button>
+                <button className='btn btn-outline-primary choix-bouton' data-bs-toggle="button" onClick={handleClickQuota}>Quota à atteindre</button>
+    </div>
+    </>
   )
 }
