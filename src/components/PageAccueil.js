@@ -1,6 +1,8 @@
 import React from "react";
 
 import PurpleRectangle from './PurpleRectangle';
+import Header from './Header'; 
+import Image1Accueil from './Image1Accueil'
 
 import GenericButton from './GenericButton'
 import Tache from './Tache';
@@ -11,7 +13,9 @@ export default function PageAccueil () {
     return (
 
     <div className="PageAccueil">
-      <PurpleRectangle />
+    <Header />
+    <Image1Accueil />
+     {/*<PurpleRectangle /> */}
       {/* Autres composants ou contenu ici */}
     </div>
   );
