@@ -8,6 +8,7 @@ import Modale from "./Modale";
 function Tache ({nomHabitude, quota, quantiteQuota, typeEvenement, heure}) {
 
     return (
+        <div className="container-md d-flex justify-content-center">
         <div className="tache-container">
             <div className="tache-logo">
                 <button className="boutonlogo">
@@ -29,6 +30,7 @@ function Tache ({nomHabitude, quota, quantiteQuota, typeEvenement, heure}) {
             <div className="heure-tache">
                 {heure}
             </div>
+        </div>
         </div>
     )
 }
