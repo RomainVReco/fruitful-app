@@ -3,7 +3,6 @@ import Card from 'react-bootstrap/Card';
 
 function WithHeaderExample() {
   return (
-    
     <Card>
       <Card.Header style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#C12A71', color: 'white' }}>
         <div style={{ marginRight: '10px' }}>
@@ -18,13 +17,6 @@ function WithHeaderExample() {
                 />
         </div>
         </Card.Header>
-      <Card.Body>
-        <Card.Title>Special title treatment</Card.Title>
-        <Card.Text>
-          With supporting text below as a natural lead-in to additional content.
-        </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
-      </Card.Body>
     </Card>
   );
 }
