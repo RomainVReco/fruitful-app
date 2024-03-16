@@ -38,8 +38,8 @@ export default function CreationTache() {
 
     <div className='container' style={{marginTop:'25px'}}> Type : </div>
     <div className='container d-flex justify-content-evenly'>
-                <button className='btn btn-outline-primary choix-bouton' data-bs-toggle="button" onClick={handleClickToDo}>Fait/ A faire</button>
-                <button className='btn btn-outline-primary choix-bouton' data-bs-toggle="button" onClick={handleClickQuota}>Quota à atteindre</button>
+                <button className='btn btn-outline-primary choix-bouton-type' data-bs-toggle="button" onClick={handleClickToDo}>Fait/ A faire</button>
+                <button className='btn btn-outline-primary choix-bouton-type' data-bs-toggle="button" onClick={handleClickQuota}>Quota à atteindre</button>
     </div>
     </>
   )
