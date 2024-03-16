@@ -4,6 +4,7 @@ import InputTache from './InputTache'
 import ModaleLogo from './ModaleLogo'
 import rasp from '../assets/logo-rasp.svg'
 import { useState } from 'react'
+import { ReactDOM } from 'react'
 
 
 let isQuotaSelected = false
@@ -43,11 +44,14 @@ export default function CreationTache() {
 			<h3 style={{ marginBottom: '25px' }}> Créez-vous une nouvelle habitude</h3>
 			<InputTache nomLabel={'Nommez là !'}
 				method={handleClick} exemple='Couche-tôt !' />
-			<button className='boutonLogo'><img src={rasp} alt="icone evt" style={{height:'42px', width:'52px'}}></img>
+				<div>
+			<button className='btn btn-light boutonLogo' onClick={() => setIsOpen(true)}>
+				<img src={rasp} alt="icone evt" style={{height:'42px', width:'52px'}}></img>
 			</button>
-			<ModaleLogo open={isOpen}> 
+			<ModaleLogo open={isOpen} onClose={() => setIsOpen(false)}> 
 				Coucou
 			</ModaleLogo>
+			</div>
 			<InputTache nomLabel={'A partir du : '}
 				method={handleClickCalendar} exemple={new Date().toLocaleDateString()} />
 			<InputTache nomLabel={'Fréquence : '} method={handleClickFrequency} exemple='Quotidiennement' />
