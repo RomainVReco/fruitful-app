@@ -1,10 +1,12 @@
 import React from 'react'
 import Header from './Header'
-import InputTache from './InputTache'
+import InputTache from './InputGenericText'
+import InputGenericText from './InputGenericText'
 import ModaleLogo from './ModaleLogo'
 import rasp from '../assets/logo-rasp.svg'
 import { useState } from 'react'
 import { ReactDOM } from 'react'
+import InputModalText from './InputModalText'
 
 
 let isQuotaSelected = false
@@ -38,24 +40,45 @@ export default function CreationTache() {
 		dateDebut:new Date().toLocaleDateString(),
 		frequence:'',
 		type:'',
+		logo:rasp
 	})
 
-	const handleCallback = (nomChamp, data) => {
-		console.log("handleCallback : "+nomChamp)
-		console.log("handleCallback  : "+data)
-		setTache(prevState => ({
-			...prevState, [nomChamp]: data
-		}))
+	const handleCallbackLogo = (logo) => {
+		var taches = {...tache}
+		console.log('handleCallbackLogo : '+logo)
 	}
 
-	const handleVoidClick = () => {
+	const handleTitleChange = (event) => {
+		var taches = {...tache}
+		taches.nom = event.target.value
 		console.log('handleClick création tache')
-		console.log(tache)
+		console.log(taches)
+		setTache(taches)
+		console.log(taches)
 	}
 
-	const handleSubmit = (event) => {
-		console.log('handleSubmit Creation tache : '+event.target.value)
-		console.log("Valeurs des champs de tâche : "+tache)
+	const handleDateDebutChange = (event) => {
+		var taches = {...tache}
+		taches.dateDebut = event.target.value
+		console.log(taches)
+		setTache(taches)
+		console.log(taches)
+	}
+
+	const handleFrequenceChange = (event) => {
+		var taches = {...tache}
+		taches.frequence = event.target.value
+		console.log(taches)
+		setTache(taches)
+		console.log(taches)
+	}
+
+	const handleSubmit = () => {
+		console.log("Submit : "+tache)
+		Object.entries(tache).forEach(([key, value])=> {
+			console.log(key, value)
+		})
+		
 	}
 
 
@@ -64,19 +87,23 @@ export default function CreationTache() {
 			<Header />
 			<div className='container'>
 				<h3 style={{ marginBottom: '25px' }}> Créez-vous une nouvelle habitude</h3>
-				<InputTache nomLabel={'Nommez là !'}
-					method={handleVoidClick} exemple='Couche-tôt !' />
+
+				<InputGenericText nomLabel={'Nommez là !'} titre={tache.nom}
+					method={event => handleTitleChange(event)} exemple='Couche-tôt !' />
+
 				<div className='container'>
 					<button className='btn btn-light' onClick={() => setIsOpen(true)}>
-						<img src={rasp} alt="icone evt" style={{ height: '42px', width: '52px' }}></img>
+						<img src={tache.logo} alt="icone evt" style={{ height: '42px', width: '52px' }}></img>
 					</button>
-					<ModaleLogo open={isOpen} onClose={() => setIsOpen(false)} parentCallback={handleCallback}>
+					<ModaleLogo open={isOpen} onClose={() => setIsOpen(false)} parentCallback={handleCallbackLogo}>
 						Coucou
 					</ModaleLogo>
 				</div>
-				<InputTache nomLabel={'A partir du : '}
-					method={handleClickCalendar} exemple={new Date().toLocaleDateString()} />
-				<InputTache nomLabel={'Fréquence : '} method={handleClickFrequency} exemple='Quotidiennement' />
+
+				<InputModalText nomLabel={'A partir du : '}
+					method={handleDateDebutChange} exemple={new Date().toLocaleDateString()} onClick={() => console.log('Clic')}/>
+
+				<InputModalText nomLabel={'Fréquence : '} method={handleFrequenceChange} exemple='Quotidiennement' />
 
 				<div className='container' style={{ marginTop: '25px' }}> Type : </div>
 				<div className='container d-flex justify-content-evenly'>
