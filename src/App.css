@@ -14,32 +14,13 @@ body {
 }
 
 .boutonValider {
-  width: 100px;
-  height: 31px;
-  flex-shrink: 0;
-  border-radius: 5px;
-  background: var(--Couleur-header, #C12A71);
-  color: var(--Blanc, #FFF);
-  text-align: center;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 28px; /* 200% */
+    color: #FFFFFF !important;
+    background-color: #C12A71 !important;
 }
 
 .boutonAnnuler{
-  width: 100px;
-  height: 31px;
-  flex-shrink: 0;
-  border-radius: 5px;
-  /*border: 1px solid var(--Bleu-clair, #4C9CDA); */
-  background: var(--Blanc, #FFF);
-  color: var(--Bleu-clair, #4C9CDA);
-  text-align: center;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 28px; /* 200% */
+  border-color: #C12A71 !important;
+  color: #C12A71 !important;
 }
 
 /* COMPOSANTS TACHES */

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Modale({children}) {
+export default function ModaleLogo({children}) {
   return (
     <div>
         {children}

@@ -1,7 +1,6 @@
 import React from "react";
 import rasp from '../assets/logo-rasp.svg'
 import TypeTache from './TypeTache'
-import Modale from "./Modale";
 
 
 // les props sont placés en attendant la récupération des données 

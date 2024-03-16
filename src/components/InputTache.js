@@ -5,7 +5,7 @@ export default function InputTache({nomLabel, method, exemple}) {
   return (
     <div className='container'>
         <div className='row'>
-            <div className='col'>
+            <div className='col-md-5 col-12'>
         <form>
             <label for="nomTache" className='form-label'>{nomLabel}</label>
             <input type="text" id="nomTache" className='form-control' onClick={method}
