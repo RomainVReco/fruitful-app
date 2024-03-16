@@ -106,16 +106,16 @@ body {
   justify-content: center;
 }
 
-.choix-bouton{
+
+.choix-bouton-type{
   border-color: #C12A71 !important;
   color: #C12A71 !important;
 }
 
-.choix-bouton:hover{
+.choix-bouton-type:hover{
   color: #FFFFFF !important;
   background-color: #C12A71 !important;
 }
-
 
 /* ACTION BAR */
 
