@@ -9,7 +9,7 @@ function Header() {
         <div style={{ marginRight: '10px' }}>
             <img 
                 src={require('../assets/logo5.png')} 
-                alt="Logo" roundedCircle 
+                alt="Logo" 
                 style={{ 
                     maxWidth: '200px', // Largeur maximale de l'image
                     maxHeight: '100px', // Hauteur maximale de l'image
