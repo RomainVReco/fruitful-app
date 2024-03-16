@@ -2,6 +2,10 @@ import React from 'react'
 
 export default function InputTache({nomLabel, method, exemple}) {
 
+  const getTacheNom = (event) => {
+    console("log")
+  }
+
   return (
     <div className='container'>
         <div className='row'>

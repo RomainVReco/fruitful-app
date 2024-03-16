@@ -9,9 +9,7 @@ import { ReactDOM } from 'react'
 
 let isQuotaSelected = false
 
-const handleClick = () => {
-	console.log('handleClick création tache')
-}
+
 
 const handleClickCalendar = () => {
 	console.log('handleClickCalendar création tache')
@@ -29,13 +27,37 @@ const handleClickQuota = () => {
 	console.log('handleClickQuota')
 }
 
-const handleSubmit = () => {
-	console.log('handleSubmit Creation tache')
-}
+
 
 export default function CreationTache() {
 
 	const [isOpen, setIsOpen] = useState(false)
+
+	const [tache, setTache] = useState({
+		nom:'',
+		dateDebut:new Date().toLocaleDateString(),
+		frequence:'',
+		type:'',
+	})
+
+	const handleCallback = (nomChamp, data) => {
+		console.log("handleCallback : "+nomChamp)
+		console.log("handleCallback  : "+data)
+		setTache(prevState => ({
+			...prevState, [nomChamp]: data
+		}))
+	}
+
+	const handleVoidClick = () => {
+		console.log('handleClick création tache')
+		console.log(tache)
+	}
+
+	const handleSubmit = (event) => {
+		console.log('handleSubmit Creation tache : '+event.target.value)
+		console.log("Valeurs des champs de tâche : "+tache)
+	}
+
 
 	return (
 		<>
@@ -43,12 +65,12 @@ export default function CreationTache() {
 			<div className='container'>
 				<h3 style={{ marginBottom: '25px' }}> Créez-vous une nouvelle habitude</h3>
 				<InputTache nomLabel={'Nommez là !'}
-					method={handleClick} exemple='Couche-tôt !' />
+					method={handleVoidClick} exemple='Couche-tôt !' />
 				<div className='container'>
 					<button className='btn btn-light' onClick={() => setIsOpen(true)}>
 						<img src={rasp} alt="icone evt" style={{ height: '42px', width: '52px' }}></img>
 					</button>
-					<ModaleLogo open={isOpen} onClose={() => setIsOpen(false)}>
+					<ModaleLogo open={isOpen} onClose={() => setIsOpen(false)} parentCallback={handleCallback}>
 						Coucou
 					</ModaleLogo>
 				</div>
