@@ -1,24 +1,28 @@
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import React from "react";
+import logoComplet from '../assets/logo-fruit-titre.png'
+
 
 function Header() {
   return (
-    
-    <Card>
-      <Card.Header style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#C12A71', color: 'white', marginBottom:'30px' }}>
-        <div style={{ marginRight: '10px' }}>
-            <img 
-                src={require('../assets/logo5.png')} 
-                alt="Logo" 
-                style={{ 
-                    maxWidth: '200px', // Largeur maximale de l'image
-                    maxHeight: '100px', // Hauteur maximale de l'image
-                    marginRight: '10px' // Espacement à droite de l'image
-                }} 
-                />
+
+    <nav>
+      <div className="d-flex justify-content-evenly">
+        <img src={logoComplet} alt="logo fruitful" className=""></img>
+        <ul>
+          <li>Accueil</li>
+          <li>Tâches</li>
+          <li>Nouveau</li>
+          <li>Planning</li>
+          <li>Profil</li>
+        </ul>
+        <div>
+          <a href="#" className="btn">S'inscrire</a>
         </div>
-        </Card.Header>
-    </Card>
+        <div>
+          <a href="#" className="btn">Se connecter</a>
+        </div>
+      </div>
+    </nav>
   );
 }
 
