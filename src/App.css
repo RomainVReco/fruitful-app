@@ -43,17 +43,18 @@ body {
   list-style-type: none;
 }
 
+.lienHeader { /* S'inscrire et connexion */
+  text-align: center;
+  align-self: center;
+  margin-right: 5px;
+}
+
 .lien {
   cursor: pointer;
   text-decoration: none;
   color: #f1f1f1;
 }
 
-.lienHeader { /* S'inscrire et connexion */
-  text-align: center;
-  align-self: center;
-  margin-right: 5px;
-}
 
 /* COMPOSANTS GENERIQUES */ 
 
