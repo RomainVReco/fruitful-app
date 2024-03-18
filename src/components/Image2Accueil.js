@@ -1,14 +1,13 @@
 import React from 'react';
 import Image from 'react-bootstrap/Image';
-import logo from '../assets/tournesol.png';
+import logo from '../assets/Ciel_Bleu_Mieux_Vivre.png';
 
-function Image1Accueil() {
+function Image2Accueil() {
   return (
     <nav class="navbar bg-body-tertiary rounded-pi11">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <Image src={logo} rounded alt="Logo" className="img-fluid" style={{ maxWidth: '50%' }}/>
-                Apprenez à faire rayonner votre vie
             </a>
         </div>
         <div className="container-fluid">

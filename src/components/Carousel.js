@@ -13,14 +13,14 @@ function MyCarousel() {
   };
 
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect} style={{ height: '200px' }}>
-      <Carousel.Item>
+    <Carousel activeIndex={index} onSelect={handleSelect}>
+      <Carousel.Item style={{ height: '300px' }}>
         <Image src={logo1} className="d-block w-100 h-100 object-cover" alt="image1" />
       </Carousel.Item>
-      <Carousel.Item>
+      <Carousel.Item style={{ height: '300px' }}>
         <Image src={logo2} className="d-block w-100 h-100 object-cover" alt="image2" />
       </Carousel.Item>
-      <Carousel.Item>
+      <Carousel.Item style={{ height: '300px' }}>
         <Image src={logo3} className="d-block w-100 h-100 object-cover" alt="image3" />
       </Carousel.Item>
     </Carousel>
