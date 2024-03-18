@@ -1,25 +1,31 @@
 import React from "react";
+import {Link} from 'react-router-dom'
 import logoComplet from '../assets/logo-fruit-titre.png'
 
 
 function Header() {
   return (
 
-    <nav>
-      <div className="d-flex justify-content-evenly">
-        <img src={logoComplet} alt="logo fruitful" className=""></img>
-        <ul>
-          <li>Accueil</li>
-          <li>Tâches</li>
-          <li>Nouveau</li>
-          <li>Planning</li>
-          <li>Profil</li>
+    <nav className="headerTop">
+      <div className="d-flex justify-content-evenly" >
+        <Link className="" to='/'>
+          <img  src={logoComplet} alt="logo fruitful" className="image-header"></img>
+        </Link>
+        <ul className="listeMenu">
+          <li className="liensNav">
+            <Link className='lien' to="/">Tâches</Link></li>
+          <li className="liensNav">
+            <Link className='lien' to="/creationTache">Nouveau</Link>
+          </li>
+          <li className="liensNav">
+            <Link className='lien' to='/planning'>Planning</Link>
+          </li>
         </ul>
-        <div>
-          <a href="#" className="btn">S'inscrire</a>
+        <div className="lienHeader">
+          <a href="#" className="">S'inscrire</a>
         </div>
-        <div>
-          <a href="#" className="btn">Se connecter</a>
+        <div className="lienHeader">
+          <a href="#" className="btn">Connexion</a>
         </div>
       </div>
     </nav>

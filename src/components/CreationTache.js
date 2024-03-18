@@ -87,7 +87,7 @@ export default function CreationTache() {
 	return (
 		<>
 			<Header />
-			<div className='container'>
+			<div className='container'> 
 				<h3 style={{ marginBottom: '25px' }}> Créez-vous une nouvelle habitude</h3>
 
 				<InputGenericText nomLabel={'Nommez là !'} titre={tache.nom}
