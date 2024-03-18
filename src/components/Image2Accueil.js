@@ -13,7 +13,7 @@ function Image2Accueil() {
         <div className="container-fluid">
             <div className="row">
                 <div className="col-12 text-center">
-                    <p className="display-5">FruitFul, votre coach, est là pour vous!!!</p>
+                    <p className="display-5">Mieux-être</p>
                 </div>
             </div>
         </div>
@@ -21,4 +21,4 @@ function Image2Accueil() {
   );
 }
 
-export default Image1Accueil;
+export default Image2Accueil;
