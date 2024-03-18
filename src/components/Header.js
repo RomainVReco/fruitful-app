@@ -5,7 +5,7 @@ import logoComplet from '../assets/logo-fruit-titre.png'
 
 function Header() {
   return (
-
+    
     <nav className="headerTop">
       <div className="d-flex justify-content-evenly" >
         <Link className="" to='/'>
