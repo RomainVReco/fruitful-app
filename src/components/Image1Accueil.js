@@ -4,10 +4,10 @@ import logo from '../assets/tournesol.png'; // Assurez-vous de spécifier le bon
 
 function Image1Accueil() {
   return (
-    <nav class="navbar bg-body-tertiary">
+    <nav class="navbar bg-body-tertiary rounded-pi11">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                <Image src={logo} alt="Logo" width="500" class="d-inline-block align-text-top"/>
+                <Image src={logo} rounded alt="Logo" className="img-fluid" style={{ maxWidth: '50%' }}/>
                 Apprenez à faire rayonner votre vie
             </a>
         </div>
