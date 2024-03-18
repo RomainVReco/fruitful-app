@@ -1,23 +1,34 @@
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import React from "react";
+import {Link} from 'react-router-dom'
+import logoComplet from '../assets/logo-fruit-titre.png'
+
 
 function Header() {
   return (
-    <Card>
-      <Card.Header style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#C12A71', color: 'white', marginBottom:'30px' }}>
-        <div style={{ marginRight: '10px' }}>
-            <img 
-                src={require('../assets/logo5.png')} 
-                alt="Logo" 
-                style={{ 
-                    maxWidth: '200px', // Largeur maximale de l'image
-                    maxHeight: '100px', // Hauteur maximale de l'image
-                    marginRight: '10px' // Espacement à droite de l'image
-                }} 
-                />
+    
+    <nav className="headerTop">
+      <div className="d-flex justify-content-evenly" >
+        <Link className="" to='/'>
+          <img  src={logoComplet} alt="logo fruitful" className="image-header"></img>
+        </Link>
+        <ul className="listeMenu">
+          <li className="liensNav">
+            <Link className='lien' to="/">Tâches</Link></li>
+          <li className="liensNav">
+            <Link className='lien' to="/creationTache">Nouveau</Link>
+          </li>
+          <li className="liensNav">
+            <Link className='lien' to='/planning'>Planning</Link>
+          </li>
+        </ul>
+        <div className="lienHeader">
+          <a href="#" className="">S'inscrire</a>
         </div>
-        </Card.Header>
-    </Card>
+        <div className="lienHeader">
+          <a href="#" className="btn">Connexion</a>
+        </div>
+      </div>
+    </nav>
   );
 }
 

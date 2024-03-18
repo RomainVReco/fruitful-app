@@ -2,6 +2,7 @@ import React from "react";
 import GenericButton from './GenericButton'
 import Tache from './Tache';
 import ActionBar from "./ActionBar";
+import Header from "./Header";
 
 const handleSubmit = (event) => {
     event.preventDefault()
@@ -11,9 +12,8 @@ const handleSubmit = (event) => {
 export default function Base () {
 
     return (
-    <div className="App">
-      <header className="App-header">
-      </header>
+    <div className="">
+      <Header/>
       <Tache nomHabitude="Lire un livre" quota='20' quantiteQuota='pages' heure='10h30' />
       <Tache nomHabitude="Courir" quota='5' quantiteQuota='km' heure='19h30' />
       <Tache nomHabitude="Dire un mot doux à ma femme" quota='' quantiteQuota='' heure='18h50' />
