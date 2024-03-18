@@ -3,7 +3,6 @@ import Card from 'react-bootstrap/Card';
 
 function Header() {
   return (
-    
     <Card>
       <Card.Header style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#C12A71', color: 'white', marginBottom:'30px' }}>
         <div style={{ marginRight: '10px' }}>
