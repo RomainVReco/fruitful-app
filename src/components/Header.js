@@ -25,9 +25,11 @@ const estConnecte = <><div className="lienHeader lien"><svg xmlns="http://www.w3
     
     <nav className="headerTop">
       <div className="d-flex justify-content-evenly" >
+        <div>
         <Link className="" to='/'>
           <img src={logoComplet} alt="logo fruitful" className="image-header"></img>
         </Link>
+        </div>
         <ul className="listeMenu">
           <li className="liensNav">
             <Link className='lien' to="/">Tâches</Link></li>
