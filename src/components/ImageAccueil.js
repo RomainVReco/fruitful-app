@@ -4,7 +4,7 @@ import Image from 'react-bootstrap/Image';
 function ImageAccueil({ src, alt, brandText, paragraphText }) {
   return (
     <nav className="navbar bg-body-tertiary rounded-pi11">
-      <div className="container-fluid">
+      <div className="container-fluid d-flex justify-content-center align-items-center">
         <a className="navbar-brand" href="#">
           <Image src={src} rounded alt={alt} className="img-fluid" style={{ maxWidth: '50%' }} />
           {brandText}
