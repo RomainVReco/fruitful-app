@@ -17,10 +17,15 @@ body {
 
 .headerTop {
   background-color: #C12A71;
-  height: 65px;
+ /* height: 65px; */
   width: 100%;
   z-index: 1000;
   margin-bottom: 50px;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .image-header{
@@ -52,6 +57,26 @@ body {
   cursor: pointer;
   text-decoration: none;
   color: #f1f1f1;
+}
+
+.dropdown-toggle::after {
+  content: none !important;
+}
+
+@media (max-width: 645px) {
+
+
+  .listeMenu {
+    flex-direction: column;
+    justify-content: center ;
+    width: 100%;
+    gap: 0.5rem;
+    height: auto;
+  }
+  .header-container {
+    display: block;
+    text-align: center;
+  }
 }
 
 
