@@ -63,9 +63,13 @@ body {
   content: none !important;
 }
 
-.icon-test {
-  fill:#FFF;
+.menu-burger{
+  position: fixed;
+  display: none;
+  top:1.25rem;
+  right:1rem;
 }
+
 
 @media (max-width: 645px) {
 
@@ -75,6 +79,7 @@ body {
     width: 100%;
     gap: 0.5rem;
     height: 100%;
+    display: none;
   }
   .header-container {
     display: block;
@@ -93,6 +98,11 @@ body {
 
   .icon-media {
     padding: 1rem;
+    display: none;
+  }
+
+  .menu-burger{
+    display: flex;
   }
 
 

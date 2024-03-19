@@ -1,14 +1,39 @@
 import React from "react";
 import { Link } from 'react-router-dom'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import logoComplet from '../assets/logo-fruit-titre.png'
 import profilIcone from '../assets/person-square.svg'
 import closeIcon from '../assets/x-lg.svg'
+import menu from '../assets/list.svg'
 
 
 function Header() {
 
+  {/* useEffect (()=> {
+    const mediaQuery = window.matchMedia("(max-width:645px")
+    mediaQuery.addListener(handleMediaQueryChange)
+    handleMediaQueryChange(mediaQuery)
+
+    return () => {
+        mediaQuery.removeListener(handleMediaQueryChange)
+    }
+})
+*/}
+
   const [isConnected, setConnected] = useState(true)
+  const [isMenuOpen, setMenuOpen] = useState(false)
+  const [menuCloseIcon, setIcon] = useState(menu)
+  const [responsiveDisplay, setResponsiveDisplay] = useState("")
+
+  const handleClickMenu = () => {
+    console.log("handleClick", "isMenuOpen : "+isMenuOpen)
+    console.log("handleClick", "!isMenuOpen : "+!isMenuOpen)
+    setMenuOpen(!isMenuOpen)
+    setIcon(!isMenuOpen ? closeIcon : menu)
+    console.log("handleClick", "isMenuOpen : "+isMenuOpen)
+  }
+
+
 
   const blocConnexion = <>
     <div className="wrapper-lienHeader d-flex">
@@ -39,7 +64,16 @@ function Header() {
       </div>
     </div>
   </>
+  
 
+  {/* const handleMediaQueryChange = mediaQuery => {
+      if(mediaQuery.matches) {
+        setResponsiveDisplay('none')
+      } else {
+        setResponsiveDisplay('')
+      }
+  }
+*/}
   return (
 
     <nav className="headerTop">
@@ -49,7 +83,7 @@ function Header() {
             <img src={logoComplet} alt="logo fruitful" className="image-header"></img>
           </Link>
         </div>
-        <div><img src={closeIcon} className="icon-test"></img></div>
+        <div ><img src={menuCloseIcon} className="menu-burger" onClick={handleClickMenu}></img></div>
         <ul className="listeMenu show-content">
           <li className="liensNav">
             <Link className='lien' to="/">Tâches</Link></li>
@@ -61,7 +95,6 @@ function Header() {
           </li>
         </ul>
         {isConnected ? estConnecte : blocConnexion}
-
 
         {/*
         <div className="lienHeader">
