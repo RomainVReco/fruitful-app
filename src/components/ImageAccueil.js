@@ -6,7 +6,7 @@ function ImageAccueil({ src, alt, brandText, paragraphText }) {
     <nav className="navbar bg-body-tertiary rounded-pi11">
       <div className="container-fluid d-flex justify-content-center align-items-center">
         <a className="navbar-brand" href="#">
-          <Image src={src} rounded alt={alt} className="img-fluid" style={{ maxWidth: '50%' }} />
+          <Image src={src} rounded alt={alt} className="img-fluid" style={{ maxWidth: '100%' }} />
           {brandText}
         </a>
       </div>
