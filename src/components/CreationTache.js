@@ -1,6 +1,4 @@
 import React from 'react'
-import Header from './Header'
-import InputTache from './InputGenericText'
 import InputGenericText from './InputGenericText'
 import ModaleLogo from './ModaleLogo'
 import rasp from '../assets/logo-rasp.svg'
@@ -85,8 +83,6 @@ export default function CreationTache() {
 
 
 	return (
-		<>
-			<Header />
 			<div className='container'> 
 				<h3 style={{ marginBottom: '25px' }}> Créez-vous une nouvelle habitude</h3>
 
@@ -125,6 +121,5 @@ export default function CreationTache() {
 					{/* <GenericButton label="Valider" buttonStyle='boutonValider' method={handleSubmit}/> */}
 				</div>
 			</div>
-		</>
 	)
 }
