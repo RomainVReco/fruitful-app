@@ -17,10 +17,15 @@ body {
 
 .headerTop {
   background-color: #C12A71;
-  height: 65px;
+ /* height: 65px; */
   width: 100%;
   z-index: 1000;
   margin-bottom: 50px;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .image-header{
@@ -52,6 +57,55 @@ body {
   cursor: pointer;
   text-decoration: none;
   color: #f1f1f1;
+}
+
+.dropdown-toggle::after {
+  content: none !important;
+}
+
+.menu-burger{
+  position: fixed;
+  display: none;
+  top:1.25rem;
+  right:1rem;
+}
+
+
+@media (max-width: 645px) {
+
+  .listeMenu {
+    flex-direction: column;
+    justify-content: center ;
+    width: 100%;
+    gap: 0.5rem;
+    height: 100%;
+    display: none;
+  }
+  .header-container {
+    display: block;
+    text-align: center;
+  }
+
+  .image-header{
+    margin-bottom: 1rem;
+  }
+
+  .wrapper-lienHeader{
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+  }
+
+  .icon-media {
+    padding: 1rem;
+    display: none;
+  }
+
+  .menu-burger{
+    display: flex;
+  }
+
+
 }
 
 
