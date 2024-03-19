@@ -63,20 +63,39 @@ body {
   content: none !important;
 }
 
-@media (max-width: 645px) {
+.icon-test {
+  fill:#FFF;
+}
 
+@media (max-width: 645px) {
 
   .listeMenu {
     flex-direction: column;
     justify-content: center ;
     width: 100%;
     gap: 0.5rem;
-    height: auto;
+    height: 100%;
   }
   .header-container {
     display: block;
     text-align: center;
   }
+
+  .image-header{
+    margin-bottom: 1rem;
+  }
+
+  .wrapper-lienHeader{
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+  }
+
+  .icon-media {
+    padding: 1rem;
+  }
+
+
 }
 
 
