@@ -13,7 +13,7 @@ function ImageAccueil({ src, alt, brandText, paragraphText }) {
       <div className="container text-center">
         <div className="row">
           {/*div className="col-12 text-center"> */}
-            <p className="text-center">{paragraphText}</p>
+            {/*<p className="text-center">{paragraphText}</p> */}
             <p className="display-10 text-center">{paragraphText}</p>
           {/*</div> */}
         </div>
