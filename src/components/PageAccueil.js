@@ -15,8 +15,7 @@ export default function PageAccueil () {
     
     return (
 
-    <div class="container-fluid" className="PageAccueil">
-        <Header />
+    <div className="container-fluid PageAccueil">
         <ImageAccueil src={logo1} alt="image avec un tournesol" brandText="" paragraphText="Apprenez à faire rayonner votre vie! Fruitful, Votre coach, est là pour vous aider!" />
         <Carousel />
         <ImageAccueil src={logo2} alt="image du ciel bleu" brandText="" paragraphText="Mieux être" />
