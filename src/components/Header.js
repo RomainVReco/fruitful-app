@@ -59,6 +59,7 @@ function Header() {
           <li><a href="#" className="dropdown-item">Mon bilan</a></li>
           <li><a href="#" className="dropdown-item">Mes tâches</a></li>
           <li><a href="#" className="dropdown-item">Abonnement</a></li>
+          <li style={{borderBottom:'1px solid #000', width:'100%', marginBottom:'5px', marginUp:'5px'}}></li>
           <li><a href="#" className="dropdown-item">Déconnexion</a></li>
         </ul>
       </div>
