@@ -223,11 +223,35 @@ body {
 
 /** PROFIL **/
 
+.wrapper-profil {
+  margin-top: 50px;
+}
+
 .selecteur-profil {
   border: solid 1px rgba(76, 156, 218, 1) !important;
   color: rgba(76, 156, 218, 1) !important;
 }
 
+.profil-h6 {
+  margin-top: 30px;
+  padding-left: 1rem;
+}
+
+.render-info{
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.profil-border {
+  border: solid 1px #C12A71!important ;
+  height:50px;
+  border-radius: 0.5rem;
+}
+
+{/*
 .selecteur-bouton{
   display: flex;
   flex-direction: column;
@@ -240,14 +264,10 @@ body {
   background: var(--Blanc, #FFF);
   padding-left: 2rem;;
 }
-
-.selecteur-bouton::after{
-  position: absolute;
-  
-}
+*/}
 
 .diviseur {
-  border-bottom:5px solid #000;
+  border-bottom: 1px solid #000;
   width:100%;
   margin-bottom:5px;
 }
