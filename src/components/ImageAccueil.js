@@ -8,7 +8,7 @@ function ImageAccueil({ src, alt, brandText, paragraphText, link }) {
     const containerStyle = { width: imageStyle.maxWidth }; // Style du conteneur
     const cursorStyle = link ? { cursor: 'pointer' } : {}; // Style du curseur au survol de l'image s'il y a un hyperlien sur l'image
     const hoverEffect = link ? { transition: 'transform 0.3s' } : {}; //Effet de survol d'une image ayant un hyperlien
-    const imageClassName = link ? 'img link' : 'img'; //S'il y a un hyperlien : la classe css associée à Image (imageClassName) 
+    const imageClassName = link ? 'img link' : 'img'; //S'il y a un hyperlien : la classe css associée à la classe Image (imageClassName) 
                                                       //sera 'img link': ce qui permet d'avoir un effet de survol (App.css)
 
   return (
