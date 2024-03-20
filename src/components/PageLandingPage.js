@@ -13,8 +13,6 @@ import Col from 'react-bootstrap/Col';
 
 import BoutonAccesEER from './BoutonAccesEER';
 
-
-
 export default function PageLandingPage () {
     
     return (
