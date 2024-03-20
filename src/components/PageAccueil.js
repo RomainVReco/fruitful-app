@@ -12,7 +12,12 @@ export default function PageAccueil () {
     return (
 
     <div className="container-fluid PageAccueil">
-        <ImageAccueil src={logo1} alt="image avec un tournesol" brandText="" paragraphText="Apprenez à faire rayonner votre vie! Fruitful, Votre coach, est là pour vous aider!" />
+        <ImageAccueil 
+            src={logo1} 
+            alt="image avec un tournesol" 
+            brandText="" 
+            paragraphText="Apprenez à faire rayonner votre vie! Fruitful, Votre coach, est là pour vous aider!"
+            />
         
         <br />
         <br />

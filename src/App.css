@@ -243,6 +243,6 @@ body {
 
 /* EFFET DE SURVOL IMAGEACCUEIL AVEC HYPERLIEN */
 
-.navbar-brand img:hover {
-  transform: scale(1.05); /* Agrandissement de l'image au survol */
+.navbar-brand img.link:hover {
+  transform: scale(1.05); /* Agrandissement de l'image au survol uniquement si elle a un lien */
 }
