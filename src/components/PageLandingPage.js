@@ -4,7 +4,6 @@ import React from "react";
 import ImageAccueil from './ImageAccueil'
 import logo1 from '../assets/Ciel_Bleu_Mieux_Vivre.png';
 import logo2 from '../assets/tableau_bord.png';
-import Carousel from './Carousel'
 
 
 export default function PageLandingPage () {
