@@ -5,7 +5,8 @@ import PageAccueil from './components/PageAccueil';
 import Base from './components/Base';
 import CreationTache from './components/CreationTache';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-
+import PageInscriptionEntreeNom from './components/PageInscriptionEntreeNom';
+import Inscription from './components/Inscription';
 
 
 function App() {
@@ -13,8 +14,9 @@ function App() {
     <Router>
       <Routes>
         <Route path ="/pageAccueil" element={<PageAccueil/>} />
-        <Route path = "/" element={<Base/>} />
-        <Route path = "/creationTache" element={<CreationTache/>} />
+        <Route path = "/pageInscriptionEntreeNom" element={<PageInscriptionEntreeNom/>} />
+        <Route path = "/creationTache" element={<CreationTache/>} />    
+        <Route path = "/inscription" element={<Inscription/>} />
       </Routes>
     </Router>
   );

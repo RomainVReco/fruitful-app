@@ -1,10 +1,10 @@
 * {
-  margin:0;
+  margin: 0;
   padding: 0;
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
-  font-variation-settings:"slnt" 0;
+  font-variation-settings: "slnt" 0;
   box-sizing: border-box;
 }
 
@@ -16,15 +16,15 @@ body {
 /* HEADER */
 
 .headerTop {
-  background-color: #C12A71;
+  background-color: #c12a71;
   height: 65px;
   width: 100%;
   z-index: 1000;
   margin-bottom: 50px;
 }
 
-.image-header{
-  padding:5px;
+.image-header {
+  padding: 5px;
   height: 50px;
 }
 
@@ -42,7 +42,8 @@ body {
   list-style-type: none;
 }
 
-.lienHeader { /* S'inscrire et connexion */
+.lienHeader {
+  /* S'inscrire et connexion */
   text-align: center;
   align-self: center;
   margin-right: 5px;
@@ -54,18 +55,16 @@ body {
   color: #f1f1f1;
 }
 
-
-/* COMPOSANTS GENERIQUES */ 
-
+/* COMPOSANTS GENERIQUES */
 
 .boutonValider {
-    color: #FFFFFF !important;
-    background-color: #C12A71 !important;
+  color: #ffffff !important;
+  background-color: #c12a71 !important;
 }
 
-.boutonAnnuler{
-  border-color: #C12A71 !important;
-  color: #C12A71 !important;
+.boutonAnnuler {
+  border-color: #c12a71 !important;
+  color: #c12a71 !important;
 }
 
 /* COMPOSANTS TACHES */
@@ -79,7 +78,7 @@ body {
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
   grid-auto-rows: repeat(2, auto);
-  box-shadow: 15px 15px 7px -3px rgba(0,0,0,0.3);
+  box-shadow: 15px 15px 7px -3px rgba(0, 0, 0, 0.3);
 }
 
 .example {
@@ -106,47 +105,48 @@ body {
   outline: none;
 }
 
-.tache-titre, .tache-quota, .type-tache, .heure-tache {
+.tache-titre,
+.tache-quota,
+.type-tache,
+.heure-tache {
   place-self: center;
-  
 }
 
-.check-tache{
+.check-tache {
   grid-column: 4/5;
-  grid-row : 1/3;
+  grid-row: 1/3;
   place-self: center;
   width: 48px;
   height: 32px;
   text-align: right;
 }
 
-.type-tache{
+.type-tache {
   width: 114px;
   height: 27px;
   flex-shrink: 0;
   border-radius: 25px;
-  color: #FFF;
+  color: #fff;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-
-.choix-bouton-type{
-  border-color: #C12A71 !important;
-  color: #C12A71 !important;
+.choix-bouton-type {
+  border-color: #c12a71 !important;
+  color: #c12a71 !important;
 }
 
-.choix-bouton-type:hover{
-  color: #FFFFFF !important;
-  background-color: #C12A71 !important;
+.choix-bouton-type:hover {
+  color: #ffffff !important;
+  background-color: #c12a71 !important;
 }
 
 /* ACTION BAR */
 
 .actionbar {
-  background: var(--Couleur-header, #C12A71);
+  background: var(--Couleur-header, #c12a71);
 }
 
 /* STYLE POUR MODALE */
@@ -154,8 +154,8 @@ body {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
-  background-color: #FFF;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
   padding: 50px;
   z-index: 1000;
 }
@@ -166,7 +166,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0, 0, 0, 0.7);
   z-index: 1000;
 }
 
@@ -179,3 +179,29 @@ body {
   }
 }
 */
+
+/* INSCRIPTION */
+.corps-inscription {
+  padding-top: 5%;
+  color: #c12a71;
+  opacity: 1;
+  text-align: center;
+}
+
+.centre{
+  text-align: center;
+}
+
+label {
+  margin-bottom: 5%;
+}
+.fond-inscription {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: url("assets/fond_ecran2.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover;
+}
