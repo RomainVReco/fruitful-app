@@ -7,6 +7,7 @@ function ImageAccueil({ src, alt, brandText, paragraphText, link }) {
     const imageStyle = { width: '500px', height: 'auto' }; // Style de l'image
     const containerStyle = { width: imageStyle.maxWidth }; // Style du conteneur
     const cursorStyle = link ? { cursor: 'pointer' } : {}; // Style du curseur au survol de l'image s'il y a un hyperlien sur l'image
+    const hoverEffect = link ? { transition: 'transform 0.3s' } : {}; //Effet de survol d'une image ayant un hyperlien
 
   return (
     <div className="container-fluid d-flex justify-content-center align-items-center" style={containerStyle}>
@@ -14,7 +15,7 @@ function ImageAccueil({ src, alt, brandText, paragraphText, link }) {
             <div className="container-fluid d-flex justify-content-center align-items-center">
                 {link ? (
                             <Link className="navbar-brand" to={link}>
-                                <Image src={src} rounded alt={alt} className="img" style={{ ...imageStyle, ...cursorStyle }} />
+                                <Image src={src} rounded alt={alt} className="img" style={{ ...imageStyle, ...cursorStyle, ...hoverEffect }}  />
                                 {brandText}
                             </Link>
                 ) : (
@@ -24,11 +25,13 @@ function ImageAccueil({ src, alt, brandText, paragraphText, link }) {
                     </div>
                 )}
             </div>
+            {/*
             <div className="container-fluid text-center">
                 <div className="row">
 
                 </div>
             </div>
+            */}
 
             <div className="container-fluid d-flex justify-content-center align-items-center">
                 <h1>
