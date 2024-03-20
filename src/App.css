@@ -233,3 +233,10 @@ body {
   }
 }
 */
+
+/* CAROUSEL PAGE ACCUEIL */
+
+.carousel-container {
+  max-width: 1000px; 
+  margin: 0 auto; /* centrage du conteneur horizontalement */
+}
