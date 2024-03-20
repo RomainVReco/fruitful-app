@@ -251,6 +251,26 @@ body {
   border-radius: 0.5rem;
 }
 
+.lien-label{
+  color:#C12A71;
+  text-decoration: none;
+  font-size: smaller;
+  padding-left:0.25rem;
+}
+.lien-label:hover{
+  text-decoration:underline;
+  color: #C282A0;
+}
+
+.boutonValiderProfil {
+  color: #FFFFFF !important;
+  background-color: #C12A71 !important;
+  border-radius: 50px !important;
+  display: block;
+  width: 200px;
+
+}
+
 {/*
 .selecteur-bouton{
   display: flex;

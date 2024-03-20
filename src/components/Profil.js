@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import chevron from '../assets/chevron-down.svg'
 import InputProfilText from './InputProfilText'
+import GenericButton from './GenericButton'
 
 export default function Profil() {
 
@@ -34,7 +35,10 @@ export default function Profil() {
         console.log("getAddressFromAPI")
     }
     const handlePasswordChange = (event) => {
-        console.log("handlePasswordChange :"+event.target.value)
+        console.log("handlePasswordChange :" + event.target.value)
+    }
+    const initiatePasswordChange = () => {
+        console.log("initiatePasswordChange")
     }
 
 
@@ -62,10 +66,23 @@ export default function Profil() {
                                     <label htmlFor="password" className='form-label'>Mot de passe</label>
                                     <input type="text" id="password" className='form-control profil-border' onChange={handlePasswordChange}
                                         value={client.password} disabled></input>
-                                    <a id="modifierPassword" className="lien-label">We'll never share your email with anyone else.</a>
+                                    <a href="#modifierPassword" id="modifierPassword" className="lien-label" onClick={initiatePasswordChange}>Modifier mon mot de passe </a>
                                 </form>
                             </div>
                         </div>
+                    </div>
+                    <div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked={client.newsletter}/>
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Newsletter</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked={client.specialOffers} />
+                                <label class="form-check-label" for="flexSwitchCheckChecked">Offres spéciales de nos partenaires</label>
+                        </div>
+                    </div>
+                    <div className='d-flex justify-content-center'>
+                        <GenericButton buttonStyle={"boutonValiderProfil"} label={"Enregistrer"} />
                     </div>
 
                 </div>
