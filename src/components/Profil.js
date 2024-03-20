@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import chevron from '../assets/chevron-down.svg'
 import InputProfilText from './InputProfilText'
 import GenericButton from './GenericButton'
+import axios from 'axios'
 
 export default function Profil() {
 
@@ -22,7 +23,24 @@ export default function Profil() {
         specialOffers: false
     }
 
+
     const [isActif, setSelecteurActif] = useState(false)
+    const [subNewsletter, setNewsletter] = useState(client.newsletter)
+    const [subSpecialOffer, setSpecialOffer] = useState(client.specialOffers)
+
+    useEffect(() => {
+        console.log("useEffect profil")
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://localhost:3306/backend/api/utilisateurs.php')
+                console.log(response.data)
+            } catch (error) {
+                console.log("Erreur : "+error)
+            }
+        }
+        fetchData()
+    }, [])
+
 
     const handleSelectorChange = () => {
         setSelecteurActif(!isActif)
@@ -39,6 +57,17 @@ export default function Profil() {
     }
     const initiatePasswordChange = () => {
         console.log("initiatePasswordChange")
+    }
+
+    const handleClickNewsletter = (event) => {
+        setNewsletter(!subNewsletter)
+        console.log("newsletter checked : "+event.target.checked)
+    }
+
+    const handleClickSpecialOffer = (event) => {
+        setSpecialOffer(!subSpecialOffer)
+        console.log("special offer checked : "+event.target.checked)
+
     }
 
 
@@ -73,12 +102,12 @@ export default function Profil() {
                     </div>
                     <div>
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked={client.newsletter}/>
-                                <label class="form-check-label" for="flexSwitchCheckDefault">Newsletter</label>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchNewsletter" checked={subNewsletter} onClick={handleClickNewsletter}/>
+                                <label class="form-check-label" for="flexSwitchNewsletter">Newsletter</label>
                         </div>
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked={client.specialOffers} />
-                                <label class="form-check-label" for="flexSwitchCheckChecked">Offres spéciales de nos partenaires</label>
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchSpecialOffer" checked={subSpecialOffer} onClick={handleClickSpecialOffer}/>
+                                <label class="form-check-label" for="flexSwitchSpecialOffer">Offres spéciales de nos partenaires</label>
                         </div>
                     </div>
                     <div className='d-flex justify-content-center'>
