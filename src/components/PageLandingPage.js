@@ -1,11 +1,10 @@
 import React from "react";
 
+
 import ImageAccueil from './ImageAccueil'
-import Image1Accueil from './Image1Accueil'
-//import Image2Accueil from './Image2Accueil'
-import Carousel from './Carousel'
-import logo2 from '../assets/tableau_bord.png';
 import logo1 from '../assets/Ciel_Bleu_Mieux_Vivre.png';
+import logo2 from '../assets/tableau_bord.png';
+import Carousel from './Carousel'
 
 
 export default function PageLandingPage () {
