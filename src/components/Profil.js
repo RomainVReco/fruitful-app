@@ -30,7 +30,7 @@ export default function Profil() {
 
     useEffect(() => {
         console.log("useEffect profil")
-        const fetchData = async () => {
+        {/*const fetchData = async () => {
             try {
                 const response = await axios.get('http://localhost:8000/api/utilisateurs.php')
                 console.log(response.data)
@@ -38,7 +38,17 @@ export default function Profil() {
                 console.log("Erreur : "+error)
             }
         }
+    fetchData() */}
+        const fetchData = async ()=>{
+            axios.get('http://localhost:8081/getAllUsers')
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => console.log(err))
+        }
+
         fetchData()
+
     }, [])
 
 
