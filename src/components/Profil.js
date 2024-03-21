@@ -32,7 +32,7 @@ export default function Profil() {
         console.log("useEffect profil")
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:3306/backend/api/utilisateurs.php')
+                const response = await axios.get('http://localhost:8000/api/utilisateurs.php')
                 console.log(response.data)
             } catch (error) {
                 console.log("Erreur : "+error)
