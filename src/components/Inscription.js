@@ -8,24 +8,17 @@ import { ReactDOM } from "react";
 import InputModalText from "./InputModalText";
 import velo from "../assets/velo.png";
 import GenericButton from "./GenericButton";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
+import { BrowserRouter as Router, Route, Routes, unstable_HistoryRouter } from "react-router-dom";
+import Inscription2 from "./Inscription2";
 
 export default function Inscription() {
-    var nom = "";
+  var nom = "";
   var dateNaissance = "";
   var email = "";
   var motDePasse = "";
   var motDePasse2 = "";
 
-  var page = 1;
-
-  const pages = {
-    1:'Comment pouvons-nous vous appeler ?',
-    2:'Quelle est votre date de naissance ?',
-    3:'On reste en contact'
-  }
-
+  
   function AffichageImage() {
     return (
       <div>
@@ -34,16 +27,9 @@ export default function Inscription() {
     );
   }
 
-  function AffichageTitre(page) {
-    console.log("page = ", pages[page]);
+  function handleSubmit() {
+ <link to="/inscription2"></link>;
   }
-
-  function handleSubmit(page2) {
-    console.log("page submit : ", page2);
-  
-    AffichageTitre(page2);
-  }
-
   return (
     <>
       <Header />
@@ -52,9 +38,7 @@ export default function Inscription() {
           <div className="col"></div>
           <div className="col corps-inscription">
             <label for="comment">
-              <h2>
-                <AffichageTitre />
-              </h2>
+              <h2>Comment pouvons-nous vous appeler ?</h2>
             </label>
 
             <AffichageImage />
@@ -66,8 +50,9 @@ export default function Inscription() {
               name="text"
             ></input>
             <br></br>
-            <a href="#" className='btn boutonValider' onClick={handleSubmit(2)}>Suivant</a>
-
+            <a href="#" className="btn boutonValider" onClick={handleSubmit()}>
+              Suivant
+            </a>
           </div>
           <div class="col"></div>
         </div>

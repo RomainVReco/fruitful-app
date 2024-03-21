@@ -10,7 +10,7 @@ import bebe from "../assets/bebe.png";
 import GenericButton from "./GenericButton";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Inscription2 from "./Inscription2";
-//import Inscription3 from "./Inscription3";
+import Inscription3 from "./Inscription3";
 
 export default function Inscription() {
  
@@ -27,7 +27,7 @@ export default function Inscription() {
 
     <Router>
       <Routes>
-        <Route path ="/inscription" element={<Inscription/>} />
+        <Route path ="/inscription2" element={<Inscription3/>} />
         </Routes>
     </Router>
   }
