@@ -5,7 +5,7 @@ function GenericButton ({label, buttonStyle, method}) {
 
     return (
         <div>
-            <button type="submit" className={buttonStyle} onClick={method}>{label}</button>
+            <button type="submit" className={`btn ${buttonStyle}`} onClick={method}>{label}</button>
         </div>
     )
 }
