@@ -8,7 +8,13 @@ import { ReactDOM } from "react";
 import InputModalText from "./InputModalText";
 import velo from "../assets/velo.png";
 import GenericButton from "./GenericButton";
-import { BrowserRouter as Router, Route, Routes, unstable_HistoryRouter } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  unstable_HistoryRouter,
+} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Inscription2 from "./Inscription2";
 
 export default function Inscription() {
@@ -18,7 +24,6 @@ export default function Inscription() {
   var motDePasse = "";
   var motDePasse2 = "";
 
-  
   function AffichageImage() {
     return (
       <div>
@@ -27,8 +32,12 @@ export default function Inscription() {
     );
   }
 
+  function Button (){
+
+  };
+
   function handleSubmit() {
- <link to="/inscription2"></link>;
+    <link to="/inscription2"></link>;
   }
   return (
     <>
@@ -40,7 +49,6 @@ export default function Inscription() {
             <label for="comment">
               <h2>Comment pouvons-nous vous appeler ?</h2>
             </label>
-
             <AffichageImage />
             <p></p>
             <input
@@ -50,9 +58,10 @@ export default function Inscription() {
               name="text"
             ></input>
             <br></br>
-            <a href="#" className="btn boutonValider" onClick={handleSubmit()}>
-              Suivant
-            </a>
+            <Link to="/Inscription2">
+              <Button className="btn boutonValider">Suivant</Button>
+            </Link>
+            Suivant
           </div>
           <div class="col"></div>
         </div>
