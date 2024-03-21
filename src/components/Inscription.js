@@ -34,10 +34,8 @@ export default function Inscription() {
     );
   }
 
-
   return (
     <>
-      <Header />
       <div className="fond-inscription">
         <div className="row ">
           <div className="col"></div>
@@ -46,15 +44,14 @@ export default function Inscription() {
               <h2>Comment pouvons-nous vous appeler ?</h2>
             </label>
             <AffichageImage />
-            <p></p>
             <input
               className="form-control"
               rows="1"
-              id="comment"
-              name="text"
+              id="nom"
+              name="nom" placeholder="Veuillez indiquer votre nom"
             ></input>
             <br></br>
-            <BoutonSuivant page="2" />
+            <BoutonSuivant page="2" texte="Suivant"/>
           </div>
           <div class="col"></div>
         </div>

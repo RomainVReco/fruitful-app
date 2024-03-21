@@ -12,11 +12,13 @@ import inscription3 from "./Inscription3";
 //Fonction concernant le Bouton d'Acces à l'Entrée En Relation (EER) avec l'utilisateur (questionnaire pour mieux le connaitre)
 function BoutonSuivant(page) {
   console.log("page :", page.page);
-  var page = page.page;
-  function adresseDestination(page) {
+  console.log("texte :", page.texte);
+  var page2 = page.page;
+
+  function adresseDestination(page2) {
     console.log("page :", page);
 
-    switch (page) {
+    switch (page2) {
       case "2":
         return "/Inscription2";
       case "3":
@@ -40,8 +42,10 @@ function BoutonSuivant(page) {
     >
       <Row>
         <Col className="text-center">
-          <Link to={adresseDestination(page)}>
-            <Button className="btn boutonValider">Suivant</Button>
+          <Link to={adresseDestination(page2)}>
+            <Button className="btn boutonValider">
+              {page.texte}
+            </Button>
           </Link>
         </Col>
       </Row>

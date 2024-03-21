@@ -24,7 +24,6 @@ export default function Inscription() {
 
   return (
     <>
-      <Header />
       <div className="fond-inscription">
         <div className="row ">
           <div className="col"></div>
@@ -34,16 +33,15 @@ export default function Inscription() {
             </label>
 
             <AffichageImage />
-            <p></p>
             <input
               className="form-control"
               rows="1"
-              id="comment"
-              name="text"
+              id="dateNaissance"
+              name="dateNaissance" placeholder="Veuillez indiquer votre date de naissance"
             ></input>
             <br></br>
 
-            <BoutonSuivant page="3"/>
+            <BoutonSuivant page="3" texte="Suivant"/>
           </div>
           <div class="col"></div>
         </div>
