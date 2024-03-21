@@ -10,22 +10,7 @@ import velo from "../assets/velo.png";
 import GenericButton from "./GenericButton";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-
 export default function Inscription() {
-    var nom = "";
-  var dateNaissance = "";
-  var email = "";
-  var motDePasse = "";
-  var motDePasse2 = "";
-
-  var page = 1;
-
-  const pages = {
-    1:'Comment pouvons-nous vous appeler ?',
-    2:'Quelle est votre date de naissance ?',
-    3:'On reste en contact'
-  }
-
   function AffichageImage() {
     return (
       <div>
@@ -33,15 +18,12 @@ export default function Inscription() {
       </div>
     );
   }
+  let page = 1;
 
-  function AffichageTitre(page) {
-    console.log("page = ", pages[page]);
-  }
-
-  function handleSubmit(page2) {
-    console.log("page submit : ", page2);
-  
-    AffichageTitre(page2);
+  function handleSubmit() {
+    if ((page = 1)) {
+      <Route path="/inscription2" element={<Inscription2 />} />;
+    }
   }
 
   return (
@@ -52,9 +34,7 @@ export default function Inscription() {
           <div className="col"></div>
           <div className="col corps-inscription">
             <label for="comment">
-              <h2>
-                <AffichageTitre />
-              </h2>
+              <h2>Comment pouvons-nous vous appeler ?</h2>
             </label>
 
             <AffichageImage />
@@ -65,13 +45,16 @@ export default function Inscription() {
               id="comment"
               name="text"
             ></input>
-            <br></br>
-            <a href="#" className='btn boutonValider' onClick={handleSubmit(2)}>Suivant</a>
-
           </div>
           <div class="col"></div>
         </div>
       </div>
+
+      <GenericButton
+        label="Suivant"
+        buttonStyle="boutonValider"
+        method={handleSubmit}
+      />
     </>
   );
 }

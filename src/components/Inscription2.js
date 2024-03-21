@@ -10,9 +10,21 @@ import velo from "../assets/velo.png";
 import GenericButton from "./GenericButton";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-
 export default function Inscription() {
-    var nom = "";
+  class RenseignementsInscription {
+    constructor(nom, dateNaissance, email, motDePasse, motDePasse2) {
+      this.nom;
+      this.dateNaissance;
+      this.email;
+      this.motDePasse;
+      this.motDePasse2;
+    }
+  }
+  var renseignementsInscription = new RenseignementsInscription();
+
+  
+  constructor(props);
+  var nom = "";
   var dateNaissance = "";
   var email = "";
   var motDePasse = "";
@@ -21,10 +33,10 @@ export default function Inscription() {
   var page = 1;
 
   const pages = {
-    1:'Comment pouvons-nous vous appeler ?',
-    2:'Quelle est votre date de naissance ?',
-    3:'On reste en contact'
-  }
+    1: "Comment pouvons-nous vous appeler ?",
+    2: "Quelle est votre date de naissance ?",
+    3: "On reste en contact",
+  };
 
   function AffichageImage() {
     return (
@@ -40,7 +52,7 @@ export default function Inscription() {
 
   function handleSubmit(page2) {
     console.log("page submit : ", page2);
-  
+
     AffichageTitre(page2);
   }
 
@@ -66,8 +78,9 @@ export default function Inscription() {
               name="text"
             ></input>
             <br></br>
-            <a href="#" className='btn boutonValider' onClick={handleSubmit(2)}>Suivant</a>
-
+            <a href="#" className="btn boutonValider" onClick={handleSubmit(2)}>
+              Suivant
+            </a>
           </div>
           <div class="col"></div>
         </div>
