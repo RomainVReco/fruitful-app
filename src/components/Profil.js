@@ -30,7 +30,18 @@ export default function Profil() {
 
     useEffect(() => {
         console.log("useEffect profil")
-        {/*const fetchData = async () => {
+        
+        const fetchSession = async () => {
+            try {
+                const response = await axios.get('http://localhost:8000/api/session.php')
+                console.log(response.data)
+            } catch (error) {
+                console.log("Erreur : "+error)
+            }
+        }
+    fetchSession()
+
+        const fetchData = async () => {
             try {
                 const response = await axios.get('http://localhost:8000/api/utilisateurs.php')
                 console.log(response.data)
@@ -38,16 +49,20 @@ export default function Profil() {
                 console.log("Erreur : "+error)
             }
         }
-    fetchData() */}
+    fetchData()
+
+
+        {/*
+        
+        Connexion BDD via Express
+
         const fetchData = async ()=>{
             axios.get('http://localhost:8081/getAllUsers')
             .then(res => {
                 console.log(res)
             })
             .catch(err => console.log(err))
-        }
-
-        fetchData()
+        } */}
 
     }, [])
 

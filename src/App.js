@@ -12,6 +12,7 @@ import PageLandingPage2 from './components/PageLandingPage2';
 import PageLandingPage3 from './components/PageLandingPage3';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import axios from 'axios'
 
 
 
@@ -32,5 +33,5 @@ function App() {
     </Router>
   );
 }
-
+axios.defaults.withCredentials = true;
 export default App;

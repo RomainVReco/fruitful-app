@@ -1,4 +1,4 @@
-<?php
+<?php 
 ini_set("session.cookie_domain", '.dev.local');
 session_set_cookie_params(3600, '/', '.dev.local');
 if(!isset($_SESSION)) {
@@ -13,18 +13,9 @@ header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Access-Control-Allow-Credentials: true');
 header('Access-Control-Allow-Headers: X-Requested-With, Origin, Content-Type, X-CSRF-Token, Accept');
 
-    require_once(__DIR__  . "/../config/config.php");
- @
-    $sql = "SELECT * FROM utilisateur";
-    $stmt = $mysqlClient->prepare($sql);
-    $stmt->execute();
-    $query_result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-   foreach ($query_result as $row) {
-        foreach ($row as $key => $value) {
-            echo $key . ': ' . $value . '<br>';
-        }
-    } 
-
+$_SESSION['user_id'] = "Romain";
+$_SESSION['session_id'] = $_COOKIE['PHPSESSID'];
+echo "session";
+echo json_encode($_SESSION);
 echo "Cookie";
 echo json_encode($_COOKIE);
