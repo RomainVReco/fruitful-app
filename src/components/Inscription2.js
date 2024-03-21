@@ -10,26 +10,16 @@ import bebe from "../assets/bebe.png";
 import GenericButton from "./GenericButton";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Inscription2 from "./Inscription2";
-//import Inscription3 from "./Inscription3";
+import Inscription3 from "./Inscription3";
+import BoutonSuivant from "./BoutonSuivant";
 
 export default function Inscription() {
- 
   function AffichageImage() {
     return (
       <div>
         <img src={bebe} alt="Bébé" style={{ height: 400, padding: 50 }} />
       </div>
     );
-  }
-
-  function handleSubmit(page) {
-    console.log("page submit : ", page);
-
-    <Router>
-      <Routes>
-        <Route path ="/inscription" element={<Inscription/>} />
-        </Routes>
-    </Router>
   }
 
   return (
@@ -40,9 +30,7 @@ export default function Inscription() {
           <div className="col"></div>
           <div className="col corps-inscription">
             <label for="comment">
-              <h2>
-              Quelle est votre date de naissance ?
-              </h2>
+              <h2>Quelle est votre date de naissance ?</h2>
             </label>
 
             <AffichageImage />
@@ -54,11 +42,8 @@ export default function Inscription() {
               name="text"
             ></input>
             <br></br>
-            <a href="#" className="btn boutonValider" onClick={handleSubmit(3)}>
-        
 
-              Suivant
-            </a>
+            <BoutonSuivant page="3"/>
           </div>
           <div class="col"></div>
         </div>

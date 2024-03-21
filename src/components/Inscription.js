@@ -16,6 +16,8 @@ import {
 } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Inscription2 from "./Inscription2";
+import BoutonSuivant from "./BoutonSuivant";
+
 
 export default function Inscription() {
   var nom = "";
@@ -32,13 +34,7 @@ export default function Inscription() {
     );
   }
 
-  function Button (){
 
-  };
-
-  function handleSubmit() {
-    <link to="/inscription2"></link>;
-  }
   return (
     <>
       <Header />
@@ -58,10 +54,7 @@ export default function Inscription() {
               name="text"
             ></input>
             <br></br>
-            <Link to="/Inscription2">
-              <Button className="btn boutonValider">Suivant</Button>
-            </Link>
-            Suivant
+            <BoutonSuivant page="2" />
           </div>
           <div class="col"></div>
         </div>
