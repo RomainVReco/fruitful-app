@@ -31,7 +31,7 @@ export default function Profil() {
     useEffect(() => {
         console.log("useEffect profil")
         
-        const fetchSession = async () => {
+        {/*const fetchSession = async () => {
             try {
                 const response = await axios.get('http://localhost:8000/api/session.php')
                 console.log(response.data)
@@ -39,7 +39,7 @@ export default function Profil() {
                 console.log("Erreur : "+error)
             }
         }
-    fetchSession()
+    fetchSession() */}
 
         const fetchData = async () => {
             try {

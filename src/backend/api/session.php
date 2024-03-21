@@ -3,6 +3,7 @@ ini_set("session.cookie_domain", '.dev.local');
 session_set_cookie_params(3600, '/', '.dev.local');
 if(!isset($_SESSION)) {
    session_start();
+   $_COOKIE[session_name()];
 }
 // csrf code add here (see below...)
 $http_origin = $_SERVER['HTTP_ORIGIN'];
@@ -14,8 +15,3 @@ header('Access-Control-Allow-Credentials: true');
 header('Access-Control-Allow-Headers: X-Requested-With, Origin, Content-Type, X-CSRF-Token, Accept');
 
 $_SESSION['user_id'] = "Romain";
-$_SESSION['session_id'] = $_COOKIE['PHPSESSID'];
-echo "session";
-echo json_encode($_SESSION);
-echo "Cookie";
-echo json_encode($_COOKIE);
