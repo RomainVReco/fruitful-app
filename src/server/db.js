@@ -23,6 +23,38 @@ app.get('/getAllUsers', (req, res) => {
     })
 })
 
+app.post('/getUser/:id', (req, res) => {
+    const idClient = req.params.id
+    
+    const sql = "SELECT * FROM utilisateur WHERE i_id_utilisateur = ?"
+    db.query(sql, [idClient], (err, data) => {
+        if (err) {
+            
+        }
+    })
+
+
+} )
+
+app.post('/login', (req, res) => {
+    console.log("req.body :"+req.body.email)
+    console.log("req.body :"+req.body.password)
+
+    const sql = "SELECT i_id_utilisateur FROM utilisateur WHERE "+
+    "s_email= ?  AND s_mot_de_passe = ?"
+    db.query(sql, [req.body.email, req.body.password], (err, data) => {
+        if (err) {
+            return res.json('Erreur de la tentative de login : '+err)
+        }
+        if (data.length > 0) {
+            return res.json(data[0])
+        } else {
+            console.log(res.json(data))
+            return res.json("Identifiant ou mot de passe incorrect")
+        }
+    })
+})
+
 
 app.listen(PORT, () => {
     console.log("Connected to the server")

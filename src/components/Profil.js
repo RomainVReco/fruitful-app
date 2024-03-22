@@ -23,13 +23,28 @@ export default function Profil() {
         specialOffers: false
     }
 
-
+    const [idClient, setIdClient] = useState('')
     const [isActif, setSelecteurActif] = useState(false)
     const [subNewsletter, setNewsletter] = useState(client.newsletter)
     const [subSpecialOffer, setSpecialOffer] = useState(client.specialOffers)
 
     useEffect(() => {
         console.log("useEffect profil")
+        console.log("sessionStorage : ", sessionStorage.getItem('idClient'))
+        setIdClient(sessionStorage.getItem('idClient'))
+        
+         {/* Connexion BDD via Express*/}
+
+        const fetchData = async ()=>{
+            try {
+                const response = axios.post(`http://localhost:8081/getUser/${idClient}`)
+                console.log("Fetchdata profil : "+response.data)
+            } catch (error) {
+                console.error('Erreur Fetchdata : ', error)
+            }
+        } 
+
+    fetchData()
         
         {/*const fetchSession = async () => {
             try {
@@ -39,7 +54,7 @@ export default function Profil() {
                 console.log("Erreur : "+error)
             }
         }
-    fetchSession() */}
+    fetchSession() 
 
         const fetchData = async () => {
             try {
@@ -49,20 +64,11 @@ export default function Profil() {
                 console.log("Erreur : "+error)
             }
         }
-    fetchData()
+    fetchData()*/}
 
 
-        {/*
-        
-        Connexion BDD via Express
+      
 
-        const fetchData = async ()=>{
-            axios.get('http://localhost:8081/getAllUsers')
-            .then(res => {
-                console.log(res)
-            })
-            .catch(err => console.log(err))
-        } */}
 
     }, [])
 

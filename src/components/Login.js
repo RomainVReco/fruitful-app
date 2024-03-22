@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import InputProfilText from './InputProfilText';
 
@@ -6,6 +7,13 @@ import InputProfilText from './InputProfilText';
 
 
 export default function Login() {
+    const headers = {
+        'Content-Type': 'application/json'
+    }
+
+    var navigate = useNavigate()
+
+
     const [user, setUser] = useState({
         email: "",
         password: ""
@@ -13,7 +21,7 @@ export default function Login() {
     const [errorMessage, setErrorMessage] = useState('');
 
     const handleChange = (event) => {
-        var temp = {...user}
+        var temp = { ...user }
         setUser(temp => ({ ...temp, [event.target.id]: [event.target.value] }))
         console.log("clé : " + event.target.id)
         console.log("valeur : " + event.target.value)
@@ -23,11 +31,15 @@ export default function Login() {
         event.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:8000/api/login.php',user);
-            console.log(response.data); // Handle successful login
+            const response = await axios.post('http://localhost:8081/login', user, headers);
+            console.log(response.data)
+            let idClient = response.data['i_id_utilisateur']
+            sessionStorage.setItem("idClient", idClient)
+            navigate("../profil")
+
         } catch (error) {
             console.error('Error:', error);
-            setErrorMessage('Failed to login. Please try again.'); // Display error message
+            setErrorMessage('Failed to login. Please try again.');
         }
     };
 
@@ -47,6 +59,6 @@ export default function Login() {
                 <button type="button" className='btn boutonValiderProfil' onClick={handleSubmit}>Se connecter</button>
             </div>
             {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
-    </div >
-  );
+        </div >
+    );
 };

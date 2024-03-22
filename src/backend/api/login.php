@@ -23,8 +23,8 @@ switch($method) {
         $stmt->bindParam(":password", $data['password'][0]);
         $stmt->execute();
         $query_result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($query_result)
-}
+        echo json_encode($query_result);
+};
 
 foreach ($query_result as $row) {
     foreach ($row as $key => $value) {
