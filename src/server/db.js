@@ -49,7 +49,6 @@ app.post('/login', (req, res) => {
         if (data.length > 0) {
             return res.json(data[0])
         } else {
-            console.log(res.json(data))
             return res.json("Identifiant ou mot de passe incorrect")
         }
     })
