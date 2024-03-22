@@ -6,6 +6,7 @@ import PageInscriptionPremium from './components/PageInscriptionPremium';
 import Base from './components/Base';
 import CreationTache from './components/CreationTache';
 import Profil from './components/Profil';
+import Login from './components/Login';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import PageInscriptionEntreeNom from './components/PageInscriptionEntreeNom';
 import Inscription from './components/Inscription';
@@ -16,6 +17,8 @@ import PageLandingPage2 from './components/PageLandingPage2';
 import PageLandingPage3 from './components/PageLandingPage3';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
+import axios from 'axios'
 
 
 
@@ -36,7 +39,8 @@ function App() {
         <Route path = "/" element={<Base/>} />
         <Route path = "/creationTache" element={<CreationTache/>} />
         <Route path = "/profil" element={<Profil/>}/>
-     </Routes>
+        <Route path = "/login" element={<Login/>}/>
+      </Routes>
     </Router>
   );
 }

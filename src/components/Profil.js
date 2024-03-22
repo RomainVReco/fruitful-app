@@ -30,6 +30,17 @@ export default function Profil() {
 
     useEffect(() => {
         console.log("useEffect profil")
+        
+        {/*const fetchSession = async () => {
+            try {
+                const response = await axios.get('http://localhost:8000/api/session.php')
+                console.log(response.data)
+            } catch (error) {
+                console.log("Erreur : "+error)
+            }
+        }
+    fetchSession() */}
+
         const fetchData = async () => {
             try {
                 const response = await axios.get('http://localhost:8000/api/utilisateurs.php')
@@ -38,7 +49,21 @@ export default function Profil() {
                 console.log("Erreur : "+error)
             }
         }
-        fetchData()
+    fetchData()
+
+
+        {/*
+        
+        Connexion BDD via Express
+
+        const fetchData = async ()=>{
+            axios.get('http://localhost:8081/getAllUsers')
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => console.log(err))
+        } */}
+
     }, [])
 
 
@@ -73,9 +98,9 @@ export default function Profil() {
 
     return (
         <div className='container-md wrapper-profil'>
-            <select class="form-select selecteur-profil" aria-label="Default select example"
-                onChange={event => handleSelectorChange(event)}>
-                <option value="0" selected>{profil[0]}</option>
+            <select className="form-select selecteur-profil" aria-label="Default select example"
+                onChange={event => handleSelectorChange(event)} defaultValue={profil[0]}>
+                <option value="0" >{profil[0]}</option>
                 <option value="1">{profil[1]}</option>
                 <option value="2">{profil[2]}</option>
                 <option value="3">{profil[3]}</option>
@@ -101,13 +126,13 @@ export default function Profil() {
                         </div>
                     </div>
                     <div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchNewsletter" checked={subNewsletter} onClick={handleClickNewsletter}/>
-                                <label class="form-check-label" for="flexSwitchNewsletter">Newsletter</label>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchNewsletter" checked={subNewsletter} onChange={handleClickNewsletter}/>
+                                <label className="form-check-label" htmlFor="flexSwitchNewsletter">Newsletter</label>
                         </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchSpecialOffer" checked={subSpecialOffer} onClick={handleClickSpecialOffer}/>
-                                <label class="form-check-label" for="flexSwitchSpecialOffer">Offres spéciales de nos partenaires</label>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchSpecialOffer" checked={subSpecialOffer} onChange={handleClickSpecialOffer}/>
+                                <label className="form-check-label" htmlFor="flexSwitchSpecialOffer">Offres spéciales de nos partenaires</label>
                         </div>
                     </div>
                     <div className='d-flex justify-content-center'>
