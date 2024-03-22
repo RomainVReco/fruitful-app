@@ -25,23 +25,34 @@ export default function Inscription() {
   return (
     <>
       <div className="fond-inscription">
-        <div className="row ">
+        <div className="row">
           <div className="col"></div>
           <div className="col corps-inscription">
-            <label for="comment">
-              <h2>Quelle est votre date de naissance ?</h2>
-            </label>
+            <div>
+              <label for="comment">
+                <h2>Quelle est votre date de naissance ?</h2>
+              </label>
+            </div>
+            <div>
+              <AffichageImage />
+            </div>
 
-            <AffichageImage />
-            <input
-              className="form-control"
-              rows="1"
-              id="dateNaissance"
-              name="dateNaissance" placeholder="Veuillez indiquer votre date de naissance"
-            ></input>
+            <div class="row">
+              <div class="col-sm-2"></div>
+              <div class="col-sm-8">
+                <input
+                  className="form-control"
+                  rows="1"
+                  id="dateNaissance"
+                  name="dateNaissance"
+                  placeholder="Veuillez indiquer votre date de naissance"
+                ></input>
+              </div>
+              <div class="col-sm-2"></div>
+            </div>
             <br></br>
 
-            <BoutonSuivant page="3" texte="Suivant"/>
+            <BoutonSuivant page="3" texte="Suivant" />
           </div>
           <div class="col"></div>
         </div>

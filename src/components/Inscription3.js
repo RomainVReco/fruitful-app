@@ -29,12 +29,18 @@ export default function Inscription() {
         <div className="row ">
           <div className="col"></div>
           <div className="col corps-inscription">
+            <div>
             <label for="comment">
               <h2>On reste en contact</h2>
             </label>
-
+            </div>
+            <div>
             <AffichageImage />
-
+            </div>
+            <div class="row">
+              <div class="col-sm-2"></div>
+              <div class="col-sm-8"> 
+            
             <input
               className="form-control"
               rows="1"
@@ -62,6 +68,9 @@ export default function Inscription() {
               name="motDePasse2"
               placeholder="Veuillez retaper votre mot de passe"
             ></input>
+                        </div>
+              <div class="col-sm-2"></div>
+            </div>
             <br></br>
 
             <BoutonSuivant page="4" texte="C'est parti !" />

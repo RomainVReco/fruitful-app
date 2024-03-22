@@ -23,7 +23,8 @@ CREATE TABLE utilisateur(
     d_date_naissance DATE,
     i_id_adresse INT,
     s_telephone VARCHAR (15),
-    s_est_abonne BOOLEAN,
+    b_est_abonne BOOLEAN,
+    b_a_paye BOOLEAN DEFAULT 0,
     PRIMARY KEY (i_id_utilisateur),
     FOREIGN KEY (i_id_adresse) REFERENCES adresse (i_id_adresse)
 ) ENGINE=INNODB ;
