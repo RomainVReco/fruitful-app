@@ -43,32 +43,15 @@ export default function PageAccueil() {
     <br />
     <br />
 
-    <ImageAccueil
-      src={logo2}
-      alt="image du ciel bleu"
-      brandText=""
-      paragraphText="Mieux être"
-      link="/PageLandingPage"
-    />
+    <ImageAccueil src={logo2} alt="image du ciel bleu" brandText="" paragraphText="Mieux être" link="/PageLandingPage" />
 
     <br />
 
-    <ImageAccueil
-      src={logo3}
-      alt="image de fleurs"
-      brandText=""
-      paragraphText="Mieux gérer sa vie"
-      link="/PageLandingPage"
-    />
+    <ImageAccueil src={logo3} alt="image de fleurs" brandText="" paragraphText="Mieux gérer sa vie" link="/PageLandingPage" />
 
     <br />
 
-    <ImageAccueil
-      src={logo4}
-      alt="image de fleurs"
-      brandText=""
-      paragraphText="Se libérer de ses addictions"
-      link="/PageLandingPage"
-    />
-  </div>;
+    <ImageAccueil src={logo4} alt="image de fleurs" brandText="" paragraphText="Se libérer de ses addictions" link="/PageLandingPage" />
+
+  </div>
 }
