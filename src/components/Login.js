@@ -32,10 +32,10 @@ export default function Login() {
 
         try {
             const response = await axios.post('http://localhost:8081/login', user, headers);
-            let idClient = response.data['i_id_utilisateur']
+            let idClient = response.data['idClient']
             sessionStorage.setItem("idClient", idClient)
             console.log('idClient : '+idClient)
-            {/* navigate("../profil") */}
+            navigate("../profil")
         } catch (error) {
             console.error('Error:', error);
             setErrorMessage('Failed to login. Please try again.');

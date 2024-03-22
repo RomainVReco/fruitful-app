@@ -12,40 +12,45 @@ export default function Profil() {
         2: 'Mes tâches',
         3: 'Abonnement'
     }
-
-    const client = {
-        nom: 'AYMARRE',
-        prenom: 'Jean',
-        email: 'adresse@mail.com',
-        adresse: '5 rue Armand Moisand, 75015 Paris',
-        password: '*********',
-        newsletter: true,
-        specialOffers: false
-    }
+    const [client, setClient] = useState({
+        nom: '',
+        prenom: '',
+        email: '',
+        adresse: '',
+        newsletter: '',
+        specialOffers: ''
+    })
 
     const [idClient, setIdClient] = useState('')
     const [isActif, setSelecteurActif] = useState(false)
     const [subNewsletter, setNewsletter] = useState(client.newsletter)
     const [subSpecialOffer, setSpecialOffer] = useState(client.specialOffers)
 
+
     useEffect(() => {
         console.log("useEffect profil")
-        console.log("sessionStorage : ", sessionStorage.getItem('idClient'))
+
         setIdClient(sessionStorage.getItem('idClient'))
+        console.log("id Client : ", idClient)
         
          {/* Connexion BDD via Express*/}
 
         const fetchData = async ()=>{
             try {
-                const response = axios.post(`http://localhost:8081/getUser/${idClient}`)
-                console.log("Fetchdata profil : "+response.data)
+                const response = await axios.post(`http://localhost:8081/getUser/${idClient}`)
+                console.log("Fetchdata profil : ", response.data)
+                Object.entries(response.data).forEach(([key, value])=> {
+                    console.log(key, value)
+                    client[key] = value
+                })
             } catch (error) {
                 console.error('Erreur Fetchdata : ', error)
             }
         } 
 
-    fetchData()
-        
+        if (idClient!=undefined) {
+            fetchData()
+        } 
         {/*const fetchSession = async () => {
             try {
                 const response = await axios.get('http://localhost:8000/api/session.php')
@@ -65,10 +70,6 @@ export default function Profil() {
             }
         }
     fetchData()*/}
-
-
-      
-
 
     }, [])
 
@@ -98,10 +99,21 @@ export default function Profil() {
     const handleClickSpecialOffer = (event) => {
         setSpecialOffer(!subSpecialOffer)
         console.log("special offer checked : "+event.target.checked)
-
+    }
+    const handleSubmit = () => {
+        console.log('coucou')
+        Object.entries(client).forEach(([key, value])=> {
+			console.log(key, value)
+		}) 
     }
 
-
+    const handleChange = (event) => {
+        var temp = { ...client}
+        setClient(temp => ({ ...temp, [event.target.id]: [event.target.value] }))
+        console.log("clé : " + event.target.id)
+        console.log("valeur : " + event.target.value)
+    }
+ 
     return (
         <div className='container-md wrapper-profil'>
             <select className="form-select selecteur-profil" aria-label="Default select example"
@@ -125,7 +137,7 @@ export default function Profil() {
                                 <form>
                                     <label htmlFor="password" className='form-label'>Mot de passe</label>
                                     <input type="text" id="password" className='form-control profil-border' onChange={handlePasswordChange}
-                                        value={client.password} disabled></input>
+                                        value="*********" disabled></input>
                                     <a href="#modifierPassword" id="modifierPassword" className="lien-label" onClick={initiatePasswordChange}>Modifier mon mot de passe </a>
                                 </form>
                             </div>
@@ -142,7 +154,7 @@ export default function Profil() {
                         </div>
                     </div>
                     <div className='d-flex justify-content-center'>
-                        <GenericButton buttonStyle={"boutonValiderProfil"} label={"Enregistrer"} />
+                        <GenericButton buttonStyle={"boutonValiderProfil"} label={"Enregistrer"} onClick={handleSubmit}/>
                     </div>
 
                 </div>
