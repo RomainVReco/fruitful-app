@@ -94,6 +94,9 @@ function Header() {
           <li className="liensNav">
             <Link className='lien' to='/planning'>Planning</Link>
           </li>
+          <li className="liensNav">
+            <Link className='lien' to='/inscription'>Inscription</Link>
+          </li>
         </ul>
         {isConnected ? estConnecte : blocConnexion}
 
