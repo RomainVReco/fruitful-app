@@ -311,7 +311,7 @@ body {
 
 /* INSCRIPTION */
 .corps-inscription {
-  padding-top: 5%;
+  padding-top:3%;
   color: #c12a71;
   opacity: 1;
   text-align: center;
@@ -322,7 +322,7 @@ body {
 }
 
 label {
-  margin-bottom: 5%;
+  margin-bottom: 3%;
 }
 .fond-inscription {
   position: fixed;

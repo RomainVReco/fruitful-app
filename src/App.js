@@ -8,7 +8,6 @@ import CreationTache from './components/CreationTache';
 import Profil from './components/Profil';
 import Login from './components/Login';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import PageInscriptionEntreeNom from './components/PageInscriptionEntreeNom';
 import Inscription from './components/Inscription';
 import Inscription2 from './components/Inscription2';
 import Inscription3 from './components/Inscription3';
