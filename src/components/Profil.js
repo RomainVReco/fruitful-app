@@ -3,6 +3,7 @@ import chevron from '../assets/chevron-down.svg'
 import InputProfilText from './InputProfilText'
 import GenericButton from './GenericButton'
 import axios from 'axios'
+import { gestionConnexion } from '../_helpers/gestion.connexion'
 
 export default function Profil() {
 
@@ -28,14 +29,14 @@ export default function Profil() {
 
     useEffect(() => {
         console.log("useEffect profil");
-        const idClient = sessionStorage.getItem('idClient');
-        console.log("id Client : ", idClient);
-        if (idClient !== undefined) {
-            fetchData(idClient);
+        console.log('jeton : ', sessionStorage.getItem('jeton'))
+        if (gestionConnexion.isLogged()) {
+            fetchData(gestionConnexion.getSessionId());
         }
     }, []);
 
     const fetchData = async (idClient) => {
+        console.log('fetchData : ', idClient)
         try {
             const response = await axios.post(`http://localhost:8081/getUser/${idClient}`);
             console.log("Fetchdata profil : ", response.data);

@@ -25,6 +25,7 @@ app.get('/getAllUsers', (req, res) => {
 
 app.post('/getUser/:id', (req, res) => {
     const idClient = req.params.id
+    console.log('server : ', idClient)
     
     const sql = "SELECT nom, prenom, email, newsletter, specialOffer FROM utilisateur WHERE idClient = ?"
     db.query(sql, [idClient], (err, data) => {
