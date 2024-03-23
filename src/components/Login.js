@@ -26,6 +26,9 @@ export default function Login() {
         setUser(temp => ({ ...temp, [event.target.id]: [event.target.value] }))
         console.log("clé : " + event.target.id)
         console.log("valeur : " + event.target.value)
+        event.array.forEach(element => {
+            
+        });
     }
 
     const handleSubmit = async (event) => {

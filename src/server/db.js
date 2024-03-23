@@ -58,6 +58,11 @@ app.post('/login', (req, res) => {
     })
 })
 
+app.get('/findAddressAPI/:adr', (req, res) =>{
+    const adresse = req.params.adr
+    
+})
+
 
 app.listen(PORT, () => {
     console.log("Connected to the server")
