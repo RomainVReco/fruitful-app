@@ -26,8 +26,8 @@ app.get('/getAllUsers', (req, res) => {
 app.post('/getUser/:id', (req, res) => {
     const idClient = req.params.id
     console.log('server : ', idClient)
-    
-    const sql = "SELECT nom, prenom, email, newsletter, specialOffer FROM utilisateur WHERE idClient = ?"
+    const sql = "SELECT nom, prenom, email, idAdresse, newsletter, specialOffer FROM utilisateur as u "+
+    " INNER JOIN adresse as a ON u.idAdresse = a.idAdresse WHERE idClient = ?"
     db.query(sql, [idClient], (err, data) => {
         if (err) { 
             return res.json('Erreur de connexion à la base')
@@ -38,6 +38,13 @@ app.post('/getUser/:id', (req, res) => {
             return res.json("Aucune information client trouvée")
         }
     })
+})
+
+app.post('/getAddress/:id', (req, res) => {
+    const idAdresse = req.params.id
+    console.log('server : ', idAdresse)
+    const sql = "SELECT idAdresse, adresse, codePostal, ville FROM adresse WHERE idAdresse = ?"
+    db.query
 })
 
 app.post('/login', (req, res) => {

@@ -18,15 +18,23 @@ export default function Profil() {
         nom: '',
         prenom: '',
         email: '',
-        adresse: '',
+        idAdresse: '',
         newsletter: '',
         specialOffer: ''
     })
 
+    const [adresse, setAdresse] = useState({
+        idAdresse:'',
+        adresse:'',
+        codePostal:'',
+        ville:'',
+        label:''
+    })
+
+    const [labelAdresse, setLabelAdresse] = useState('')
     const [isActif, setSelecteurActif] = useState(false)
     const [subNewsletter, setNewsletter] = useState(client.newsletter)
     const [subSpecialOffer, setSpecialOffer] = useState(client.specialOffer)
-    const [adresse, setAdresse] = useState(client.adresse)
     const [adresseAPI, setAdresseAPI] = useState('')
 
     useEffect(() => {
@@ -51,28 +59,12 @@ export default function Profil() {
         }
     }
 
-
-
-    {/*const fetchSession = async () => {
-            try {
-                const response = await axios.get('http://localhost:8000/api/session.php')
-                console.log(response.data)
-            } catch (error) {
-                console.log("Erreur : "+error)
-            }
+    const fetchAddress = async (idAdresse) => {
+        console.log('fetchAddress : ', idAdresse)
+        try {
+            const response = await axios.post(`http://localhost:8081/getAddress/${idAdresse}`)
         }
-    fetchSession() 
-
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('http://localhost:8000/api/utilisateurs.php')
-                console.log(response.data)
-            } catch (error) {
-                console.log("Erreur : "+error)
-            }
-        }
-    fetchData()*/}
-
+    }
 
     const handleSelectorChange = (event) => {
         setSelecteurActif(!isActif)
@@ -165,7 +157,6 @@ export default function Profil() {
                             })}
                         </ul>
                     </div>)}
-
                     <div className='container'>
                         <div className='row'>
                             <div className='col-md-5 col-12'>
