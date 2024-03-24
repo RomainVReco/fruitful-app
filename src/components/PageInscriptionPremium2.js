@@ -1,4 +1,8 @@
 import React, { useEffect } from 'react';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 
 const InscriptionPremium = () => {
   useEffect(() => {
@@ -37,10 +41,16 @@ const InscriptionPremium = () => {
     document.body.appendChild(script);
 
     return () => {
-      // Nettoyer le script lors du démontage du composant
-      document.body.removeChild(script);
+        // Nettoyer le script lors du démontage du composant
+        document.body.removeChild(script);
+      };
+    }, []);
+
+    const handlePaymentComplete = () => {
+        alert("Paiement effectué!");
     };
-  }, []);
+    
+
 
   return (
     <div>
@@ -49,7 +59,17 @@ const InscriptionPremium = () => {
       <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet" />
       <link rel="stylesheet" href="PageInscriptionPremium.css" type="text/css" />
 
-      <div id="paypal-button-container"></div>
+      <Container>
+      <Row className="justify-content-center">
+        <Col xs={12} sm={6} md={4}>
+          <div id="paypal-button-container"></div>
+          {/* Bouton "Paiement effectué" */}
+          <div className="text-center">
+             <button onClick={handlePaymentComplete} className="payment-complete-button">Confirmer paiement OK</button>
+          </div>
+        </Col>
+      </Row>
+    </Container>
     </div>
   );
 };
