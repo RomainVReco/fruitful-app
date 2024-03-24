@@ -140,6 +140,7 @@ export default function Profil() {
     // Enregistrement des modifications des informations de profi
 
     const handleSubmit = () => {
+        console.log("Handle submit profil")
         if (client.idAdresse===undefined && adresse.adresse!==undefined) {
             createNewAddress(adresse)
         } else if (client.idAdresse!==undefined) {

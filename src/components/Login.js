@@ -28,9 +28,7 @@ export default function Login() {
         console.log("valeur : " + event.target.value)
     }
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-
+    const handleSubmit = async () => {
         try {
             const response = await axios.post('http://localhost:8081/login', user, headers);
             let idClient = response.data['idClient']

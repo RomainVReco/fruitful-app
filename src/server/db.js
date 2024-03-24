@@ -60,7 +60,19 @@ app.post('/login', (req, res) => {
 })
 
 app.put('/updateClient', (req, res) => {
-    const sql = "UPDATE utilisateur SET nom = ?, prenom = ?, email = ?, "
+    const sql = "UPDATE utilisateur SET nom = ?, prenom = ?, email = ?, newsletter = ?, specialOffer = ?;"
+    db.query(sql, [req.body.nom, req.body.prenom, req.body.email, req.body.newsletter, req.body.specialOffer], (err, data) => {
+        if (err) {
+            console.log("Echec de l'exécution de la requête de mise à jours des informations clients : ", err)
+            return res.json("Echec de l'exécution de la requête de mise à jours des informations clients : "+err)
+        }
+        if (data.length > 0) {
+            return res.json(data)
+        } else {
+            return res.json("Comportement inattendu")
+        }
+    })
+
 })
 
 
