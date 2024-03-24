@@ -14,7 +14,6 @@ let parseAddressAPI = (array) => {
 }
 
 
-
 export const gestionRetourAdresseAPI = {
     parseAddressAPI
 }

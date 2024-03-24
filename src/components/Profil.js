@@ -8,6 +8,8 @@ import { gestionRetourAdresseAPI } from '../_helpers/gestion.retour.api'
 
 export default function Profil() {
 
+    // Déclaration des variables de la page
+
     const profil = {
         0: 'Mon profil',
         1: 'Mon bilan',
@@ -35,7 +37,6 @@ export default function Profil() {
     const [subNewsletter, setNewsletter] = useState(client.newsletter)
     const [subSpecialOffer, setSpecialOffer] = useState(client.specialOffer)
     const [adresseAPI, setAdresseAPI] = useState('')
-    const [hasAddressFocus, setAddressFocus] = useState(false)
 
     useEffect(() => {
         console.log("useEffect profil");
@@ -49,9 +50,7 @@ export default function Profil() {
         }
     }, [client.idAdresse]);
 
-    useEffect(()=> {
-
-    }, [client.newsletter, client.specialOffer])
+    // Récupération des données clients et d'adresse
 
     const fetchData = async (idClient) => {
         console.log('fetchData : ', idClient)
@@ -80,6 +79,8 @@ export default function Profil() {
         }
     }
 
+    // Méthode pour ecouter et mettre à jours les champs de la page
+
     const handleSelectorChange = (event) => {
         setSelecteurActif(!isActif)
         console.log("isActif :" + !isActif)
@@ -104,17 +105,13 @@ export default function Profil() {
         console.log('newsletter : ', client['newsletter'])
         console.log('specialOffer : ', client['specialOffer'])
     }
-    const handleSubmit = () => {
-        console.log('coucou')
-        Object.entries(client).forEach(([key, value]) => {
-            console.log(key, value)
-        })
-    }
 
     const handleChange = (event) => {
         console.log("Handle Change in profil")
         setClient(prevClient => ({ ...prevClient, [event.target.id]: event.target.value }))
     }
+
+    // Mise à jour des blocs relatifs à l'adresse postale 
 
     const handleAddressChange = (event) => {
         setAdresse(prevState => ({ ...prevState, [event.target.id]: event.target.value }))
@@ -125,7 +122,6 @@ export default function Profil() {
     }
 
     const getAddressFromAPI = async () => {
-        console.log(typeof (adresseAPI))
         try {
             const response = await axios.get(`https://api-adresse.data.gouv.fr/search/?q=${adresse.adresse}`)
             console.log("adresse(s) : ", response.data['features'])
@@ -135,12 +131,36 @@ export default function Profil() {
         }
     }
 
-    const updateAddress = (index) => {
+    const selectAddressAPI = (index) => {
         let data = adresseAPI[index]
         console.log("updateAddress : ", data)
         setAdresse(data)
     }
 
+    // Enregistrement des modifications des informations de profi
+
+    const handleSubmit = () => {
+        if (client.idAdresse===undefined && adresse.adresse!==undefined) {
+            createNewAddress(adresse)
+        } else if (client.idAdresse!==undefined) {
+            updateCurrentAddress(adresse)
+        }
+        updateUserInfo(client)
+    }
+
+    const createNewAddress = async (adresse) => {
+        try {
+            const response = await axios.post('https://localhost:8081/createAddress', adresse)
+            console.log("Création nouvelle adresse : ", response.data)
+        } catch (error) {
+            console.log("Erreur lors de l'enregistrement de la création de la nouvelle adresse : ", error)
+        }
+    }
+
+    const updateCurrentAddress = async  (adres)
+
+
+    
     return (
         <div className='container-md wrapper-profil'>
             <select className="form-select form-control profil-border" aria-label="Default select example"
@@ -163,7 +183,7 @@ export default function Profil() {
                         <ul className='liste-resultat-recherche'>
                             {adresseAPI.map((element, index) => {
                                 return <li key={index} pos={index} className='liste-resultat-recherche-item'
-                                    id='adresse' onClick={() => updateAddress(index)}
+                                    id='adresse' onClick={() => selectAddressAPI(index)}
                                     value={element.label}>{element.label}</li>
                             })}
                         </ul>
@@ -198,7 +218,6 @@ export default function Profil() {
                     <div className='d-flex justify-content-center'>
                         <GenericButton buttonStyle={"boutonValiderProfil"} label={"Enregistrer"} onClick={handleSubmit} />
                     </div>
-
                 </div>
             </div>
 
