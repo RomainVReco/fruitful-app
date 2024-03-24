@@ -18,6 +18,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 import axios from 'axios'
+import Renseignement from './components/Renseignement';
 
 
 
@@ -39,6 +40,7 @@ function App() {
         <Route path = "/creationTache" element={<CreationTache/>} />
         <Route path = "/profil" element={<Profil/>}/>
         <Route path = "/login" element={<Login/>}/>
+        <Route path = "/renseignement" element={<Renseignement/>}/>
       </Routes>
     </Router>
   );

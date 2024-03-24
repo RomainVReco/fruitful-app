@@ -11,7 +11,7 @@ import inscription3 from "./Inscription3";
 import Renseignement from "./Renseignement"; 
 
 //Fonction concernant le Bouton d'Acces à l'Entrée En Relation (EER) avec l'utilisateur (questionnaire pour mieux le connaitre)
-function BoutonSuivant(page) {
+function BoutonPrecedent(page) {
   console.log("page :", page.page);
   console.log("texte :", page.texte);
   var page2 = page.page;
@@ -44,7 +44,7 @@ function BoutonSuivant(page) {
       <Row>
         <Col className="text-center">
           <Link to={adresseDestination(page2)}>
-            <Button className="btn boutonValiderSuivant">
+            <Button className="btn boutonValiderPrecedent">
               {page.texte}
             </Button>
           </Link>
@@ -54,4 +54,4 @@ function BoutonSuivant(page) {
   );
 }
 
-export default BoutonSuivant;
+export default BoutonPrecedent;
