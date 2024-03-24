@@ -34,8 +34,8 @@ export default function Login() {
         try {
             const response = await axios.post('http://localhost:8081/login', user, headers);
             let idClient = response.data['idClient']
+            console.log('idClient : ', idClient)
             if (!!idClient) {
-                console.log('idClient : '+idClient)
                 gestionConnexion.saveSessionId(idClient)
                 navigate("../profil")
             } else {

@@ -4,7 +4,7 @@ import InputProfilText from './InputProfilText'
 import GenericButton from './GenericButton'
 import axios from 'axios'
 import { gestionConnexion } from '../_helpers/gestion.connexion'
-import { gestionRetourAPI } from '../_helpers/gestion.retour.api'
+import { gestionRetourAdresseAPI } from '../_helpers/gestion.retour.api'
 
 export default function Profil() {
 
@@ -24,26 +24,34 @@ export default function Profil() {
     })
 
     const [adresse, setAdresse] = useState({
-        idAdresse:'',
-        adresse:'',
-        codePostal:'',
-        ville:'',
-        label:''
+        idAdresse: '',
+        adresse: '',
+        codePostal: '',
+        ville: '',
+        label: ''
     })
 
-    const [labelAdresse, setLabelAdresse] = useState('')
     const [isActif, setSelecteurActif] = useState(false)
     const [subNewsletter, setNewsletter] = useState(client.newsletter)
     const [subSpecialOffer, setSpecialOffer] = useState(client.specialOffer)
     const [adresseAPI, setAdresseAPI] = useState('')
+    const [hasAddressFocus, setAddressFocus] = useState(false)
 
     useEffect(() => {
         console.log("useEffect profil");
         console.log('jeton : ', sessionStorage.getItem('jeton'))
         if (gestionConnexion.isLogged()) {
             fetchData(gestionConnexion.getSessionId());
+            if (client.idAdresse !== undefined) {
+                console.log(client.idAdresse)
+                fetchAddress(client.idAdresse)
+            }
         }
-    }, []);
+    }, [client.idAdresse]);
+
+    useEffect(()=> {
+
+    }, [client.newsletter, client.specialOffer])
 
     const fetchData = async (idClient) => {
         console.log('fetchData : ', idClient)
@@ -51,11 +59,11 @@ export default function Profil() {
             const response = await axios.post(`http://localhost:8081/getUser/${idClient}`);
             console.log("Fetchdata profil : ", response.data);
             Object.entries(response.data).forEach(([key, value]) => {
-                console.log(key, value);
-                setClient(prevClient => ({ ...prevClient, [key]: value }));
+                console.log(key, value)
+                setClient(prevClient => ({ ...prevClient, [key]: value }))
             });
         } catch (error) {
-            console.error('Erreur Fetchdata : ', error);
+            console.error('Erreur fetchDdata : ', error);
         }
     }
 
@@ -63,6 +71,12 @@ export default function Profil() {
         console.log('fetchAddress : ', idAdresse)
         try {
             const response = await axios.post(`http://localhost:8081/getAddress/${idAdresse}`)
+            Object.entries(response.data).forEach(([key, value]) => {
+                console.log(key, value)
+                setAdresse(prevAdresse => ({ ...prevAdresse, [key]: value }))
+            })
+        } catch (error) {
+            console.error('Erreur fetchAddress : ', error)
         }
     }
 
@@ -85,12 +99,10 @@ export default function Profil() {
     const handleClicCheck = (event) => {
         var temp = { ...client }
         console.log("cible du clic : ", event.target.id)
-        let hasBeenChecked = event.target.checked
+        let hasBeenChecked = Number(event.target.checked)
         setClient(temp => ({ ...temp, [event.target.id]: hasBeenChecked }))
-        console.log(hasBeenChecked)
-        Object.entries(client).forEach(([key, value]) => {
-            console.log(key, value);
-        });
+        console.log('newsletter : ', client['newsletter'])
+        console.log('specialOffer : ', client['specialOffer'])
     }
     const handleSubmit = () => {
         console.log('coucou')
@@ -104,31 +116,29 @@ export default function Profil() {
         setClient(prevClient => ({ ...prevClient, [event.target.id]: event.target.value }))
     }
 
+    const handleAddressChange = (event) => {
+        setAdresse(prevState => ({ ...prevState, [event.target.id]: event.target.value }))
+        console.log(event.target.value)
+        if (adresse.adresse.length > 3) {
+            getAddressFromAPI()
+        }
+    }
+
     const getAddressFromAPI = async () => {
-        console.log(typeof(adresseAPI))
+        console.log(typeof (adresseAPI))
         try {
-            const response = await axios.get(`https://api-adresse.data.gouv.fr/search/?q=${client.adresse}`)
+            const response = await axios.get(`https://api-adresse.data.gouv.fr/search/?q=${adresse.adresse}`)
             console.log("adresse(s) : ", response.data['features'])
-            setAdresseAPI(gestionRetourAPI.parseAddressAPI(response.data['features']))
+            setAdresseAPI(gestionRetourAdresseAPI.parseAddressAPI(response.data['features']))
         } catch (error) {
             console.log("Erreur lors de l'appel de l'API adresse : ", error)
         }
     }
 
-    const handleAddressChange = (event) => {
-        setClient(prevState => ({ ...prevState, [event.target.id]: event.target.value }))
-        console.log(event.target.value)
-        if (client.adresse.length > 3) {
-            getAddressFromAPI()
-        }
-    }
-
-
-
-
-    const updateAddress = (event) => {
-        console.log("texte content : ", event.target.textContent)
-
+    const updateAddress = (index) => {
+        let data = adresseAPI[index]
+        console.log("updateAddress : ", data)
+        setAdresse(data)
     }
 
     return (
@@ -147,16 +157,21 @@ export default function Profil() {
                     <InputProfilText label='nom' nomLabel='Nom' titre={client.nom} method={handleChange} />
                     <InputProfilText label='prenom' nomLabel='Prénom' titre={client.prenom} method={handleChange} />
                     <InputProfilText label='email' nomLabel='Email' titre={client.email} method={handleChange} />
-                    <InputProfilText label='adresse' nomLabel='Adresse' titre={client.adresse} method={handleAddressChange} />
+                    <InputProfilText label='adresse' nomLabel='Adresse' titre={adresse.adresse} method={handleAddressChange} />
                     {adresseAPI && (<div className='container d-flex flex-column resultat-recherche '>
                         <div className='diviseur'></div>
                         <ul className='liste-resultat-recherche'>
                             {adresseAPI.map((element, index) => {
-                                return <li key={index} className='liste-resultat-recherche-item' 
-                                id='adresse' onClick={updateAddress} value={element}>{element}</li>
+                                return <li key={index} pos={index} className='liste-resultat-recherche-item'
+                                    id='adresse' onClick={() => updateAddress(index)}
+                                    value={element.label}>{element.label}</li>
                             })}
                         </ul>
                     </div>)}
+                    <div className='d-flex col-md-5 col-12'>
+                        <InputProfilText label='codePostal' nomLabel='Code postal' titre={adresse.codePostal} />
+                        <InputProfilText label='ville' nomLabel='Ville' titre={adresse.ville} />
+                    </div>
                     <div className='container'>
                         <div className='row'>
                             <div className='col-md-5 col-12'>
@@ -169,6 +184,7 @@ export default function Profil() {
                             </div>
                         </div>
                     </div>
+                    
                     <div>
                         <div className="form-check form-switch">
                             <input className="form-check-input" type="checkbox" role="switch" id="newsletter" checked={client.newsletter} onChange={handleClicCheck} />
