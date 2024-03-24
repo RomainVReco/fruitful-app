@@ -18,7 +18,7 @@ import EntreeObjectif from "./EntreeObjectif";
 import banane from "../assets/banane.png";
 import raisin from "../assets/raisin.png";
 
-export default function Renseignement() {
+export default function Renseignement2() {
   return (
     <>
       <div className="fond-inscription">
@@ -27,22 +27,23 @@ export default function Renseignement() {
           <div className="col corps-inscription">
             <div>
               <label for="comment">
-                <h2>Quelle est votre principale motivation ?</h2>
+                <h2>Se sentir mieux</h2>
+                <h3>Chaque nuit je dors :</h3>
               </label>
             </div>
 
-            <EntreeObjectif fruit="banane" objectif="Se sentir mieux" />
-            <EntreeObjectif fruit="raisin" objectif="Mieux gérer sa vie" />
-            <EntreeObjectif fruit="pomme" objectif="Me détoxifier" />
+            <EntreeObjectif fruit="" objectif="Mois de 6 heures" />
+            <EntreeObjectif fruit="" objectif="Entre 6 et 8 heures" />
+            <EntreeObjectif fruit="" objectif="Plus de 8 heures" />
 
             <br />
             <div class="row container-fluid m-auto">
               <div class="col">
-                <BoutonPrecedent page="3" texte="Répondre plus tard" />
+                <BoutonPrecedent page="4" texte="Répondre plus tard" />
               </div>
 
               <div class="col">
-                <BoutonSuivant page="5" texte="Suivant" />
+                <BoutonSuivant page="6" texte="Suivant" />
               </div>
             </div>
           </div>

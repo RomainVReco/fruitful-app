@@ -8,7 +8,7 @@ import Col from "react-bootstrap/Col";
 import Inscription from "./Inscription";
 import inscription2 from "./Inscription2";
 import inscription3 from "./Inscription3";
-import Renseignement from "./Renseignement"; 
+import Renseignement from "./Renseignement";
 
 //Fonction concernant le Bouton d'Acces à l'Entrée En Relation (EER) avec l'utilisateur (questionnaire pour mieux le connaitre)
 function BoutonPrecedent(page) {
@@ -26,6 +26,10 @@ function BoutonPrecedent(page) {
         return "/Inscription3";
       case "4":
         return "/Renseignement";
+      case "5":
+        return "/Renseignement2";
+      case "6":
+        return "/Renseignement3";
     }
   }
 
@@ -44,9 +48,7 @@ function BoutonPrecedent(page) {
       <Row>
         <Col className="text-center">
           <Link to={adresseDestination(page2)}>
-            <Button className="btn boutonValiderPrecedent">
-              {page.texte}
-            </Button>
+            <Button className="btn boutonValiderPrecedent">{page.texte}</Button>
           </Link>
         </Col>
       </Row>
