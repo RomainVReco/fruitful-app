@@ -1,18 +1,17 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost
--- Généré le : sam. 23 mars 2024 à 09:40
--- Version du serveur : 10.4.28-MariaDB
--- Version de PHP : 8.2.4
+-- Hôte : 127.0.0.1
+-- Généré le : sam. 23 mars 2024 à 17:29
+-- Version du serveur : 10.4.27-MariaDB
+-- Version de PHP : 8.2.0
 
 DROP DATABASE IF EXISTS fruitful;
 
 CREATE DATABASE fruitful CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 USE fruitful;
-
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -35,23 +34,22 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `adresse` (
-  `i_id_adresse` int(11) NOT NULL,
-  `s_adresse` varchar(150) DEFAULT NULL,
-  `s_code_postal` varchar(10) DEFAULT NULL,
-  `s_ville` varchar(50) DEFAULT NULL,
-  `s_pays` varchar(20) DEFAULT NULL
+  `idAdresse` int(11) NOT NULL,
+  `adresse` varchar(150) DEFAULT NULL,
+  `codePostal` varchar(5) DEFAULT NULL,
+  `ville` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `adresse`
 --
 
-INSERT INTO `adresse` (`i_id_adresse`, `s_adresse`, `s_code_postal`, `s_ville`, `s_pays`) VALUES
-(1, '123 Main St', '12345', 'City1', 'Country1'),
-(2, '456 Elm St', '67890', 'City2', 'Country2'),
-(3, '789 Oak St', '13579', 'City3', 'Country3'),
-(4, '321 Pine St', '24680', 'City4', 'Country4'),
-(5, '654 Maple St', '98765', 'City5', 'Country5');
+INSERT INTO `adresse` (`idAdrese`, `adresse`, `codePostal`, `ville`) VALUES
+(1, '123 Main St', '12345', 'City1'),
+(2, '456 Elm St', '67890', 'City2'),
+(3, '789 Oak St', '13579', 'City3'),
+(4, '321 Pine St', '24680', 'City4'),
+(5, '654 Maple St', '98765', 'City5');
 
 -- --------------------------------------------------------
 
@@ -189,7 +187,7 @@ INSERT INTO `utilisateur` (`idClient`, `email`, `password`, `nom`, `prenom`, `ge
 -- Index pour la table `adresse`
 --
 ALTER TABLE `adresse`
-  ADD PRIMARY KEY (`i_id_adresse`);
+  ADD PRIMARY KEY (`idAdrese`);
 
 --
 -- Index pour la table `entree_agenda_evenement`
@@ -247,7 +245,7 @@ ALTER TABLE `utilisateur`
 -- AUTO_INCREMENT pour la table `adresse`
 --
 ALTER TABLE `adresse`
-  MODIFY `i_id_adresse` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idAdrese` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `entree_agenda_evenement`

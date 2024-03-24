@@ -293,10 +293,11 @@ body {
   margin-bottom:5px;
 }
 
-.chevron {
-  position:relative;
-  top:auto
-  
+.resultat-recherche{
+  z-index: 1000;
+  background-color: #C12A71;
+  position: relative;
+  background-position-y: center;
 }
 
 /*@keyframes App-logo-spin {
