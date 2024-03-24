@@ -157,9 +157,23 @@ export default function Profil() {
         }
     }
 
-    const updateCurrentAddress = async  (adres)
+    const updateCurrentAddress = async (adresse) => {
+        try {
+            const response = await axios.put('https://localhost:8081/updateAddress', adresse)
+            console.log("Mise à jour d'une adresse existante : ", response.data)
+        } catch (error) {
+            console.log("Erreur lors de la mise à jour de l'adresse : ", error)
+        }
+    }
 
-
+    const updateUserInfo = async (client) => {
+        try {
+            const response = await axios.put('https://localhost:8081/updateClient', client)
+            console.log("Mise à jour des informations clients : ", response.data)
+        } catch (error) {
+            console.log("Erreur lors de la mise à jour des informations client : ", error)
+        }
+    }
     
     return (
         <div className='container-md wrapper-profil'>

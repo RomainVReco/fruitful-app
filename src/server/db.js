@@ -15,6 +15,9 @@ const db = mysql.createConnection({
     database:"fruitful"
 })
 
+// ************** UTILISATEUR ****************** //
+/* Méthodes CRUD pour les utilisateurs */
+
 app.get('/getAllUsers', (req, res) => {
     const sql = "SELECT * FROM utilisateur"
     db.query(sql, (err, result) => {
@@ -40,6 +43,30 @@ app.post('/getUser/:id', (req, res) => {
     })
 })
 
+app.post('/login', (req, res) => {
+    const sql = "SELECT idClient FROM utilisateur WHERE "+
+    "email = ?  AND password = ?"
+    db.query(sql, [req.body.email, req.body.password], (err, data) => {
+        if (err) {
+            console.log('login error : ', err)
+            return res.json('Erreur de la tentative de login : '+err)
+        }
+        if (data.length > 0) {
+            return res.json(data[0])
+        } else {
+            return res.json("Identifiant ou mot de passe incorrect")
+        }
+    })
+})
+
+app.put('/updateClient', (req, res) => {
+    const sql = "UPDATE utilisateur SET nom = ?, prenom = ?, email = ?, "
+})
+
+
+// ************** ADRESSE ****************** //
+/* Méthode CRUD pour l'adresse */
+
 app.post('/getAddress/:id', (req, res) => {
     const idAdresse = req.params.id
     console.log('server : ', idAdresse)
@@ -56,18 +83,32 @@ app.post('/getAddress/:id', (req, res) => {
     })
 })
 
-app.post('/login', (req, res) => {
-    const sql = "SELECT idClient FROM utilisateur WHERE "+
-    "email = ?  AND password = ?"
-    db.query(sql, [req.body.email, req.body.password], (err, data) => {
+app.post('/createAddress', (req, res) => {
+    const sql = "INSERT INTO adresse (adresse, codePostal, ville) VALUES (?, ?, ?)"
+    db.query(sql, [req.body.adresse, req.body.codePostal, req.body.ville], (err, data) => {
         if (err) {
-            console.log('login error : ', err)
-            return res.json('Erreur de la tentative de login : '+err)
+            console.log("Erreur lors de l'exécution de la requête de création d'adresse :", err)
+            return res.json("Erreur lors de l'exécution de la requête de création d'adresse :", err)
+        }
+        if (data.affectedRows > 0) {
+            return res.json(data)
+        } else {
+            return res.json("Comportement inattendu lors de la création de la nouvelle adresse")
+        }
+    })
+})
+
+app.put('/updateAddress', (req, res) => {
+    const sql = "UPDATE adresse SET adresse = ?, codePostal = ?, ville = ? WHERE idAdresse = ?"
+    db.query(sql, [req.body.adresse, req.body.codePostal, req.body.ville, req.body.idAdresse], (err, data) => {
+        if (err) {
+            console.log("Erreur lors l'exécution de la requête de mise à jour de l'adresse :", err)
+            return res.json("Erreur lors l'exécution de la requête de mise à jour de l'adresse :", err)
         }
         if (data.length > 0) {
-            return res.json(data[0])
+            return res.json(data)
         } else {
-            return res.json("Identifiant ou mot de passe incorrect")
+            return res.json("Comportement inattendu lors de la mise à jour de la nouvelle adresse")
         }
     })
 })
