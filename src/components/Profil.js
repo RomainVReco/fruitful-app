@@ -151,7 +151,7 @@ export default function Profil() {
 
     const createNewAddress = async (adresse) => {
         try {
-            const response = await axios.post('https://localhost:8081/createAddress', adresse)
+            const response = await axios.post('http://localhost:8081/createAddress', adresse)
             console.log("Création nouvelle adresse : ", response.data)
         } catch (error) {
             console.log("Erreur lors de l'enregistrement de la création de la nouvelle adresse : ", error)
@@ -160,7 +160,7 @@ export default function Profil() {
 
     const updateCurrentAddress = async (adresse) => {
         try {
-            const response = await axios.put('https://localhost:8081/updateAddress', adresse)
+            const response = await axios.put('http://localhost:8081/updateAddress', adresse)
             console.log("Mise à jour d'une adresse existante : ", response.data)
         } catch (error) {
             console.log("Erreur lors de la mise à jour de l'adresse : ", error)
@@ -169,7 +169,7 @@ export default function Profil() {
 
     const updateUserInfo = async (client) => {
         try {
-            const response = await axios.put('https://localhost:8081/updateClient', client)
+            const response = await axios.put('http://localhost:8081/updateClient', client)
             console.log("Mise à jour des informations clients : ", response.data)
         } catch (error) {
             console.log("Erreur lors de la mise à jour des informations client : ", error)
@@ -231,7 +231,8 @@ export default function Profil() {
                         </div>
                     </div>
                     <div className='d-flex justify-content-center'>
-                        <GenericButton buttonStyle={"boutonValiderProfil"} label={"Enregistrer"} onClick={handleSubmit} />
+                        <a className='btn boutonValiderProfil'onClick={handleSubmit} >Enregistrer</a> 
+                       {/* <GenericButton buttonStyle={"boutonValiderProfil"} label={"Enregistrer"} onClick={handleSubmit} /> */}
                     </div>
                 </div>
             </div>
