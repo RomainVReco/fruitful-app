@@ -40,17 +40,30 @@ export default function Inscription() {
           <div className="col"></div>
           <div className="col corps-inscription">
             <div>
-            <label for="comment">
-              <h2>Comment pouvons-nous vous appeler ?</h2>
-            </label>
+              <label for="comment">
+                <h2>Comment pouvons-nous vous appeler ?</h2>
+              </label>
             </div>
             <div>
               <AffichageImage />
             </div>
 
-            <div class="row">
-              <div class="col-sm-2"></div>
-              <div class="col-sm-8">
+            <div className="row">
+              <div className="col-sm-2"></div>
+              <div className="col-sm-8">
+                <input
+                  className="form-control"
+                  rows="1"
+                  id="prenom"
+                  name="prenom"
+                  placeholder="Veuillez indiquer votre prénom"
+                ></input>
+              </div>
+
+              <div className="col-sm-2"></div></div>
+              <div className="row">
+              <div className="col-sm-2"></div></div>
+              <div className="col-sm-8">
                 <input
                   className="form-control"
                   rows="1"
@@ -59,16 +72,16 @@ export default function Inscription() {
                   placeholder="Veuillez indiquer votre nom"
                 ></input>
               </div>
+              <div className="col-sm-2"></div></div>
 
-              <div class="col-sm-2"></div>   </div>
               <br></br>
-
-              <BoutonSuivant page="2" texte="Suivant" />
-            </div>
-            <div class="col"></div>
+              <div>
+                <BoutonSuivant page="2" texte="Suivant" />
+              </div>
+              <div className="col"></div>
+           
           </div>
         </div>
-   
     </>
   );
 }

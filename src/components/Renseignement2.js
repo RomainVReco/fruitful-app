@@ -32,9 +32,9 @@ export default function Renseignement2() {
               </label>
             </div>
 
-            <EntreeObjectif fruit="" objectif="Mois de 6 heures" />
-            <EntreeObjectif fruit="" objectif="Entre 6 et 8 heures" />
-            <EntreeObjectif fruit="" objectif="Plus de 8 heures" />
+            <EntreeObjectif fruit="banane" objectif="Mois de 6 heures" />
+            <EntreeObjectif fruit="banane" objectif="Entre 6 et 8 heures" />
+            <EntreeObjectif fruit="banane" objectif="Plus de 8 heures" />
 
             <br />
             <div class="row container-fluid m-auto">
