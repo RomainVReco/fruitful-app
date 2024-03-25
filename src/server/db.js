@@ -9,10 +9,10 @@ app.use(cors())
 app.use(express.json())
 
 const db = mysql.createConnection({
-    host:"localhost",
-    user:"root",
-    password:'',
-    database:"fruitful"
+    host: "localhost",
+    user: "root",
+    password: '',
+    database: "fruitful"
 })
 
 // ************** UTILISATEUR ****************** //
@@ -21,7 +21,7 @@ const db = mysql.createConnection({
 app.get('/getAllUsers', (req, res) => {
     const sql = "SELECT * FROM utilisateur"
     db.query(sql, (err, result) => {
-        if (err) return res.json({Message:"Error in Node"})
+        if (err) return res.json({ Message: "Error in Node" })
         return res.json(result)
     })
 })
@@ -29,12 +29,12 @@ app.get('/getAllUsers', (req, res) => {
 app.post('/getUser/:id', (req, res) => {
     const idClient = req.params.id
     console.log('server : ', idClient)
-    const sql = "SELECT nom, prenom, email, u.idAdresse, newsletter, specialOffer FROM utilisateur as u "+
-    " INNER JOIN adresse as a ON u.idAdresse = a.idAdresse WHERE idClient = ?"
+    const sql = "SELECT nom, prenom, email, u.idAdresse, newsletter, specialOffer FROM utilisateur as u " +
+        " INNER JOIN adresse as a ON u.idAdresse = a.idAdresse WHERE idClient = ?"
     db.query(sql, [idClient], (err, data) => {
-        if (err) { 
+        if (err) {
             return res.json('Erreur de requête SQL')
-        } 
+        }
         if (data.length > 0) {
             return res.json(data[0])
         } else {
@@ -44,12 +44,12 @@ app.post('/getUser/:id', (req, res) => {
 })
 
 app.post('/login', (req, res) => {
-    const sql = "SELECT idClient FROM utilisateur WHERE "+
-    "email = ?  AND password = ?"
+    const sql = "SELECT idClient FROM utilisateur WHERE " +
+        "email = ?  AND password = ?"
     db.query(sql, [req.body.email, req.body.password], (err, data) => {
         if (err) {
             console.log('login error : ', err)
-            return res.json('Erreur de la tentative de login : '+err)
+            return res.json('Erreur de la tentative de login : ' + err)
         }
         if (data.length > 0) {
             return res.json(data[0])
@@ -64,7 +64,7 @@ app.put('/updateClient', (req, res) => {
     db.query(sql, [req.body.nom, req.body.prenom, req.body.email, req.body.newsletter, req.body.specialOffer], (err, data) => {
         if (err) {
             console.log("Echec de l'exécution de la requête de mise à jours des informations clients : ", err)
-            return res.json("Echec de l'exécution de la requête de mise à jours des informations clients : "+err)
+            return res.json("Echec de l'exécution de la requête de mise à jours des informations clients : " + err)
         }
         if (data.length > 0) {
             return res.json(data)

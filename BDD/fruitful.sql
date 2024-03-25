@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 23 mars 2024 à 17:29
+-- Généré le : lun. 25 mars 2024 à 21:17
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -44,12 +44,13 @@ CREATE TABLE `adresse` (
 -- Déchargement des données de la table `adresse`
 --
 
-INSERT INTO `adresse` (`idAdrese`, `adresse`, `codePostal`, `ville`) VALUES
+INSERT INTO `adresse` (`idAdresse`, `adresse`, `codePostal`, `ville`) VALUES
 (1, '123 Main St', '12345', 'City1'),
 (2, '456 Elm St', '67890', 'City2'),
 (3, '789 Oak St', '13579', 'City3'),
 (4, '321 Pine St', '24680', 'City4'),
-(5, '654 Maple St', '98765', 'City5');
+(5, '654 Maple St', '98765', 'City5'),
+(10, '14 rue des alouettes', '69008', 'Lyon');
 
 -- --------------------------------------------------------
 
@@ -187,7 +188,7 @@ INSERT INTO `utilisateur` (`idClient`, `email`, `password`, `nom`, `prenom`, `ge
 -- Index pour la table `adresse`
 --
 ALTER TABLE `adresse`
-  ADD PRIMARY KEY (`idAdrese`);
+  ADD PRIMARY KEY (`idAdresse`);
 
 --
 -- Index pour la table `entree_agenda_evenement`
@@ -245,7 +246,7 @@ ALTER TABLE `utilisateur`
 -- AUTO_INCREMENT pour la table `adresse`
 --
 ALTER TABLE `adresse`
-  MODIFY `idAdrese` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idAdresse` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `entree_agenda_evenement`

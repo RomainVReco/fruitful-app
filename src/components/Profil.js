@@ -141,9 +141,9 @@ export default function Profil() {
 
     const handleSubmit = () => {
         console.log("Handle submit profil")
-        if (client.idAdresse===undefined && adresse.adresse!==undefined) {
+        if (client.idAdresse === undefined && adresse.adresse !== undefined) {
             createNewAddress(adresse)
-        } else if (client.idAdresse!==undefined) {
+        } else if (client.idAdresse !== undefined) {
             updateCurrentAddress(adresse)
         }
         updateUserInfo(client)
@@ -175,7 +175,7 @@ export default function Profil() {
             console.log("Erreur lors de la mise à jour des informations client : ", error)
         }
     }
-    
+
     return (
         <div className='container-md wrapper-profil'>
             <select className="form-select form-control profil-border" aria-label="Default select example"
@@ -204,8 +204,8 @@ export default function Profil() {
                         </ul>
                     </div>)}
                     <div className='d-flex col-md-5 col-12'>
-                        <InputProfilText label='codePostal' nomLabel='Code postal' titre={adresse.codePostal} />
-                        <InputProfilText label='ville' nomLabel='Ville' titre={adresse.ville} />
+                        <InputProfilText label='codePostal' nomLabel='Code postal' titre={adresse.codePostal} method={handleAddressChange}/>
+                        <InputProfilText label='ville' nomLabel='Ville' titre={adresse.ville} method={handleAddressChange}/>
                     </div>
                     <div className='container'>
                         <div className='row'>
@@ -219,7 +219,7 @@ export default function Profil() {
                             </div>
                         </div>
                     </div>
-                    
+
                     <div>
                         <div className="form-check form-switch">
                             <input className="form-check-input" type="checkbox" role="switch" id="newsletter" checked={client.newsletter} onChange={handleClicCheck} />
