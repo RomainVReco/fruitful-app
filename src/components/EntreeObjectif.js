@@ -14,22 +14,18 @@ function EntreeObjectif({ fruit, objectif }) {
   const imageSrc = images[fruit] || null;
   return (
     <div className="container-md d-flex justify-content-center">
-      <div className="renseignement-container">
-        <div className="tache-logo">
-          <button className="boutonlogo">
+      <div className="renseignement-container row">
+        <div className="col-sm-2">
+          <button className="boutonlogo align-middle">
             {imageSrc && (
-              <img
-                src={imageSrc}
-                alt="icone evt"
-                style={{ height: "42px" }}
-              />
-            )}{" "}
+              <img src={imageSrc} alt="icone evt" style={{ height: "42px" }} />
+            )}
           </button>
         </div>
-        <div className="tache-titre">{objectif}</div>
+        <div className="col-sm-7 align-middle">{objectif}</div>
 
-        <div className="check-tache">
-          <input type="checkbox" style={{ width: "80%", height: "80%" }} />
+        <div className="col-sm-2 align-middle">
+          <input type="checkbox" style={{ width: "20px", height: "20px" }} />
         </div>
       </div>
     </div>

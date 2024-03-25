@@ -21,6 +21,7 @@ import axios from "axios";
 import Renseignement from "./components/Renseignement";
 import Renseignement2 from "./components/Renseignement2";
 import Renseignement3 from "./components/Renseignement3";
+import Renseignement4 from "./components/Renseignement4";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
         <Route path="/renseignement" element={<Renseignement />} />
         <Route path="/renseignement2" element={<Renseignement2 />} />
         <Route path="/renseignement3" element={<Renseignement3 />} />
+        <Route path="/renseignement4" element={<Renseignement4 />} />
       </Routes>
     </Router>
   );

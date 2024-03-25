@@ -30,6 +30,8 @@ function BoutonPrecedent(page) {
         return "/Renseignement2";
       case "6":
         return "/Renseignement3";
+      case "7":
+        return "/Renseignement4";
     }
   }
 
