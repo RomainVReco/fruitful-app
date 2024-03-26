@@ -117,9 +117,18 @@ export default function Profil() {
     const handleAddressChange = (event) => {
         setAdresse(prevState => ({ ...prevState, [event.target.id]: event.target.value }))
         console.log(event.target.value)
+
         if (adresse.adresse.length > 3) {
             getAddressFromAPI()
         }
+    }
+
+    const handleCityPostCode = (event) => {
+        setAdresse(prevState => ({ ...prevState, [event.target.id]: event.target.value }))
+        console.log(event.target.value)
+        Object.entries(adresse).forEach(([key, value]) => {
+            console.log(key, value)
+        })
     }
 
     const getAddressFromAPI = async () => {
@@ -135,7 +144,9 @@ export default function Profil() {
     const selectAddressAPI = (index) => {
         let data = adresseAPI[index]
         console.log("updateAddress : ", data)
-        setAdresse(data)
+        Object.entries(data).forEach(([key, value]) => {
+            setAdresse(prevState => ({ ...prevState, [key]: value }));
+        });
     }
 
     // Enregistrement des modifications des informations de profi
@@ -205,9 +216,9 @@ export default function Profil() {
                             })}
                         </ul>
                     </div>)}
-                    <div className='d-flex col-md-5 col-12'>
-                        <InputProfilText label='codePostal' nomLabel='Code postal' titre={adresse.codePostal} method={handleAddressChange}/>
-                        <InputProfilText label='ville' nomLabel='Ville' titre={adresse.ville} method={handleAddressChange}/>
+                    <div className='d-flex flex-row justify-content-start'>
+                        <InputProfilText label='codePostal' nomLabel='Code postal' titre={adresse.codePostal} method={handleCityPostCode}/>
+                        <InputProfilText label='ville' nomLabel='Ville' titre={adresse.ville} method={handleCityPostCode}/>
                     </div>
                     <div className='container'>
                         <div className='row'>
@@ -222,6 +233,7 @@ export default function Profil() {
                         </div>
                     </div>
 
+                    <div className='container'>
                     <div>
                         <div className="form-check form-switch">
                             <input className="form-check-input" type="checkbox" role="switch" id="newsletter" checked={client.newsletter} onChange={handleClicCheck} />
@@ -231,6 +243,7 @@ export default function Profil() {
                             <input className="form-check-input" type="checkbox" role="switch" id="specialOffer" checked={client.specialOffer} onChange={handleClicCheck} />
                             <label className="form-check-label" htmlFor="specialOffer">Offres spéciales de nos partenaires</label>
                         </div>
+                    </div>
                     </div>
                     <div className='d-flex justify-content-center'>
                         <a className='btn boutonValiderProfil'onClick={handleSubmit} >Enregistrer</a> 
