@@ -8,13 +8,19 @@ import Col from "react-bootstrap/Col";
 import Inscription from "./Inscription";
 import inscription2 from "./Inscription2";
 import inscription3 from "./Inscription3";
-import Renseignement from "./Renseignement";
 
 //Fonction concernant le Bouton d'Acces à l'Entrée En Relation (EER) avec l'utilisateur (questionnaire pour mieux le connaitre)
-function BoutonSuivant(page) {
-  console.log("page :", page.page);
-  console.log("texte :", page.texte);
-  var page2 = page.page;
+function ZoneACocher(numero) {
+  // console.log("page :", page.page);
+  // console.log("texte :", page.texte);
+  // var page2 = page.page;
+
+
+
+
+
+
+  return ;
 
   function adresseDestination(page2) {
     console.log("page :", page);
@@ -25,13 +31,7 @@ function BoutonSuivant(page) {
       case "3":
         return "/Inscription3";
       case "4":
-        return "/Renseignement";
-      case "5":
-        return "/Renseignement2";
-      case "6":
-        return "/Renseignement3";
-      case "7":
-        return "/Renseignement4";
+        return "/Inscription";
     }
   }
 
@@ -50,7 +50,9 @@ function BoutonSuivant(page) {
       <Row>
         <Col className="text-center">
           <Link to={adresseDestination(page2)}>
-            <Button className="btn boutonValiderSuivant">{page.texte}</Button>
+            <Button className="btn boutonValider">
+              {page.texte}
+            </Button>
           </Link>
         </Col>
       </Row>
@@ -58,4 +60,4 @@ function BoutonSuivant(page) {
   );
 }
 
-export default BoutonSuivant;
+export default ZoneACocher;

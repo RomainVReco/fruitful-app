@@ -9,11 +9,10 @@ import InputModalText from "./InputModalText";
 import bebe from "../assets/bebe.png";
 import GenericButton from "./GenericButton";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Inscription2 from "./Inscription2";
 import Inscription3 from "./Inscription3";
 import BoutonSuivant from "./BoutonSuivant";
 
-export default function Inscription() {
+export default function Inscription2() {
   function AffichageImage() {
     return (
       <div>
@@ -37,9 +36,9 @@ export default function Inscription() {
               <AffichageImage />
             </div>
 
-            <div class="row">
-              <div class="col-sm-2"></div>
-              <div class="col-sm-8">
+            <div className="row">
+              <div className="col-sm-2"></div>
+              <div className="col-sm-8">
                 <input
                   className="form-control"
                   rows="1"
@@ -48,13 +47,13 @@ export default function Inscription() {
                   placeholder="Veuillez indiquer votre date de naissance"
                 ></input>
               </div>
-              <div class="col-sm-2"></div>
+              <div className="col-sm-2"></div>
             </div>
-            <br></br>
+            <br />
 
             <BoutonSuivant page="3" texte="Suivant" />
           </div>
-          <div class="col"></div>
+          <div className="col"></div>
         </div>
       </div>
     </>
