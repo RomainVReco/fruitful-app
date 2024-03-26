@@ -3,6 +3,7 @@ import "./App.css";
 import Header from "./components/Header";
 import PageAccueil from "./components/PageAccueil";
 import PageInscriptionPremium from "./components/PageInscriptionPremium";
+import PageInscriptionPremium2 from './components/PageInscriptionPremium2';
 import Base from "./components/Base";
 import CreationTache from "./components/CreationTache";
 import Profil from "./components/Profil";
@@ -36,10 +37,8 @@ function App() {
         <Route path="/pageLandingPage" element={<PageLandingPage />} />
         <Route path="/pageLandingPage2" element={<PageLandingPage2 />} />
         <Route path="/pageLandingPage3" element={<PageLandingPage3 />} />
-        <Route
-          path="/pageInscriptionPremium"
-          element={<PageInscriptionPremium />}
-        />
+        <Route path ="/pageInscriptionPremium" element={<PageInscriptionPremium/>} />
+        <Route path ="/pageInscriptionPremium2" element={<PageInscriptionPremium2/>} />
         <Route path="/" element={<Base />} />
         <Route path="/creationTache" element={<CreationTache />} />
         <Route path="/profil" element={<Profil />} />

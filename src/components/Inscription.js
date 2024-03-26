@@ -13,17 +13,51 @@ import {
   Route,
   Routes,
   unstable_HistoryRouter,
+  useNavigate,
+  Navigate,
 } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Inscription2 from "./Inscription2";
 import BoutonSuivant from "./BoutonSuivant";
 
 export default function Inscription() {
-  var nom = "";
   var dateNaissance = "";
   var email = "";
   var motDePasse = "";
   var motDePasse2 = "";
+  const [nom, setNom] = useState("");
+  const [prenom, setPrenom] = useState("");
+  const [messageErreur, setMessageErreur] = useState("");
+
+  const handleChangeNom = (e) => {
+    setNom(e.target.value); // Mettre à jour le nom dans l'état
+  };
+
+  const handleChangePrenom = (e) => {
+    setPrenom(e.target.value); // Mettre à jour le prénom dans l'état
+  };
+  let url = "../Inscription2";
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    const regex = /^[A-Za-z]+$/;
+    console.log("nom : ", nom);
+    console.log("prénom : ", prenom);
+
+    if (!nom.match(regex) || !prenom.match(regex)) {
+      setMessageErreur(
+        "Le nom et le prénom doivent contenir uniquement des lettres."
+      );
+    } else {
+      setMessageErreur(""); // Effacer le message d'erreur s'il n'y a pas d'erreur
+      sessionStorage.setItem("nom", nom);
+      sessionStorage.setItem("prenom", prenom);
+
+      navigate(url);
+
+      return;
+    }
+  };
 
   function AffichageImage() {
     return (
@@ -37,8 +71,8 @@ export default function Inscription() {
     <>
       <div className="fond-inscription">
         <div className="row">
-          <div className="col"></div>
-          <div className="col corps-inscription">
+          <div className="col-sm-3"></div>
+          <div className="col-sm-6 corps-inscription">
             <div>
               <label for="comment">
                 <h2>Comment pouvons-nous vous appeler ?</h2>
@@ -49,43 +83,50 @@ export default function Inscription() {
             </div>
 
             <div className="row">
-              <div className="col-sm-2"></div>
-              <div className="col-sm-8">
-                <input
-                  className="form-control"
-                  rows="1"
-                  id="prenom"
-                  name="prenom"
-                  placeholder="Veuillez indiquer votre prénom"
-                ></input>
+              <div className="col-sm-3"></div>
+              <div className="col-sm-6">
+                <div>
+                  <input
+                    className="form-control"
+                    rows="1"
+                    id="prenom"
+                    name="prenom"
+                    placeholder="Veuillez indiquer votre prénom"
+                    onChange={handleChangePrenom}
+                  ></input>
+                </div>
+
+                <br />
+
+                <div>
+                  <input
+                    className="form-control"
+                    rows="1"
+                    id="nom"
+                    name="nom"
+                    placeholder="Veuillez indiquer votre nom"
+                    onChange={handleChangeNom}
+                  ></input>
+                </div>
               </div>
-
-              <div className="col-sm-2"></div>
+              <div className="col-sm-3"></div>
             </div>
+
             <br />
-            
-            <div className="row">
-              <div className="col-sm-2"></div>
-            
-            <div className="col-sm-8">
-              <input
-                className="form-control"
-                rows="1"
-                id="nom"
-                name="nom"
-                placeholder="Veuillez indiquer votre nom"
-              ></input>
+            <div>
+              <button
+                className="btn boutonValiderSuivant"
+                onClick={handleClick}
+              >
+                Suivant
+              </button>
+              {/* Affichage du message d'erreur */}
+              {messageErreur && <p>{messageErreur}</p>}
             </div>
-            <div className="col-sm-2"></div>
           </div>
-
-          <br />
-          <div>
-            <BoutonSuivant page="2" texte="Suivant" />
-          </div>
-         
-        </div> <div className="col"></div>
-      </div></div>
+          <div className="col-sm-3"></div>
+        </div>
+      </div>
     </>
   );
 }
