@@ -5,6 +5,7 @@ import rasp from '../assets/logo-rasp.svg'
 import { useState } from 'react'
 import { ReactDOM } from 'react'
 import InputModalText from './InputModalText'
+import axios from 'axios'
 
 
 let isQuotaSelected = false
@@ -34,10 +35,12 @@ const handleClickQuota = () => {
 export default function CreationTache() {
 
 	const [evenements, setEvenements] = useState('')
+	const [icones, setIcones] = useState('')
 
 	useEffect(() => {
 		getTypeEvenements()
-	})
+		getAllIcons()
+	},[])
 
 	const [isOpen, setIsOpen] = useState(false)
 
@@ -50,13 +53,24 @@ export default function CreationTache() {
 	})
 
 	const getTypeEvenements = async () => {
-		try{
+		try {
 			const response = await axios.get('http://localhost:8081/getAllEvenements')
 			Object.entries(response.data).forEach(([key, value]) => {
-				setEvenements(prevState => ({...prevState, [key]:value}))
+				setEvenements(prevState => ({ ...prevState, [key]: value }))
 			})
 		} catch (error) {
 			console.error('Erreur getTypeEvenements : ', error);
+		}
+	}
+
+	const getAllIcons = async () => {
+		try {
+			const response = await axios.get('http://localhsot:8081/getAllIcons')
+			Object.entries(response.data).forEach(([key, value]) => {
+				setIcones(prevState => ({ ...prevState, [key]: value }))
+			})
+		} catch (error) {
+			console.log('Erreur getAllIcons : ', error)
 		}
 	}
 
@@ -100,9 +114,9 @@ export default function CreationTache() {
 
 	const handleSelectorChange = (event) => {
 		let index = event.target.value
-        console.log('Sélecteur : ', index)
+		console.log('Sélecteur : ', index)
 		console.log('Contenu : ', evenements[index])
-    }
+	}
 
 	return (
 		<div className='container'>
@@ -134,23 +148,26 @@ export default function CreationTache() {
 				</select>
 			</div>
 
-					<div className='container' style={{ marginTop: '25px' }}> Type : </div>
-					<div className='container d-flex justify-content-evenly'>
-						<button className='btn btn-outline-primary choix-bouton-type' data-bs-toggle="button" onClick={handleClickToDo}>Fait/ A faire</button>
-						<button className='btn btn-outline-primary choix-bouton-type' data-bs-toggle="button" onClick={handleClickQuota}>Quota à atteindre</button>
-					</div>
+			<div className='container' style={{ marginTop: '25px' }}> Type : </div>
+			<div className='container d-flex justify-content-evenly'>
+				<button className='btn btn-outline-primary choix-bouton-type' data-bs-toggle="button" onClick={handleClickToDo}>Fait/ A faire</button>
+				<button className='btn btn-outline-primary choix-bouton-type' data-bs-toggle="button" onClick={handleClickQuota}>Quota à atteindre</button>
 
-					<div className='container' style={{ height: '30vh' }}>
+			</div>
 
-					</div>
-					<div className='container d-flex justify-content-evenly'>
+			<div className='container' style={{ height: '30vh' }}>
+				<label htmlFor="quota">Sélectionner votre objectifs:</label>
+				<input type="number" id="quota" name="quota" min="0" max="1000" />
 
-						<a href="#" className='btn boutonValiderProfil' onClick={handleSubmit}>Valider</a>
+			</div>
+			<div className='container d-flex justify-content-evenly'>
 
-						<a href="#" className='btn boutonAnnuler'>Annuler</a>
+				<a href="#" className='btn boutonValiderProfil' onClick={handleSubmit}>Valider</a>
 
-						{/* <GenericButton label="Valider" buttonStyle='boutonValider' method={handleSubmit}/> */}
-					</div>
-				</div>
-				)
+				<a href="#" className='btn boutonAnnuler'>Annuler</a>
+
+				{/* <GenericButton label="Valider" buttonStyle='boutonValider' method={handleSubmit}/> */}
+			</div>
+		</div>
+	)
 }
