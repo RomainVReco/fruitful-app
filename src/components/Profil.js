@@ -17,6 +17,7 @@ export default function Profil() {
         3: 'Abonnement'
     }
     const [client, setClient] = useState({
+        idClient:'',
         nom: '',
         prenom: '',
         email: '',
@@ -159,6 +160,7 @@ export default function Profil() {
     }
 
     const updateCurrentAddress = async (adresse) => {
+        console.log("updateCurrentAddress : ", adresse)
         try {
             const response = await axios.put('http://localhost:8081/updateAddress', adresse)
             console.log("Mise à jour d'une adresse existante : ", response.data)
