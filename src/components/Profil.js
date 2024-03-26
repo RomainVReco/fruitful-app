@@ -17,7 +17,7 @@ export default function Profil() {
         3: 'Abonnement'
     }
     const [client, setClient] = useState({
-        idClient:'',
+        idClient: '',
         nom: '',
         prenom: '',
         email: '',
@@ -31,6 +31,7 @@ export default function Profil() {
         adresse: '',
         codePostal: '',
         ville: '',
+        idClient: '',
         label: ''
     })
 
@@ -44,12 +45,18 @@ export default function Profil() {
         console.log('jeton : ', sessionStorage.getItem('jeton'))
         if (gestionConnexion.isLogged()) {
             fetchData(gestionConnexion.getSessionId());
-            if (client.idAdresse !== undefined) {
-                console.log(client.idAdresse)
-                fetchAddress(client.idAdresse)
-            }
+            console.log('client.idAdresse : ', client.idAdresse)
+            console.log('typeof(client.idAdresse) : ', typeof (client.idAdresse))
         }
+
     }, [client.idAdresse]);
+
+    useEffect(() => {
+        if (client.idAdresse.length != 0) {
+            console.log(client.idAdresse)
+            fetchAddress(client.idClient)
+        }
+    }, [adresse.adresse])
 
     // Récupération des données clients et d'adresse
 
@@ -67,10 +74,10 @@ export default function Profil() {
         }
     }
 
-    const fetchAddress = async (idAdresse) => {
-        console.log('fetchAddress : ', idAdresse)
+    const fetchAddress = async (idClient) => {
+        console.log('fetchAddress : ', idClient)
         try {
-            const response = await axios.post(`http://localhost:8081/getAddress/${idAdresse}`)
+            const response = await axios.post(`http://localhost:8081/getAddress/${idClient}`)
             Object.entries(response.data).forEach(([key, value]) => {
                 console.log(key, value)
                 setAdresse(prevAdresse => ({ ...prevAdresse, [key]: value }))
@@ -152,8 +159,11 @@ export default function Profil() {
     // Enregistrement des modifications des informations de profi
 
     const handleSubmit = () => {
+        if (adresse.idClient.length == 0) {
+            adresse['idClient'] = client.idClient
+        }
         console.log("Handle submit profil")
-        if (client.idAdresse === undefined && adresse.adresse !== undefined) {
+        if (client.idAdresse.length == 0 && adresse.adresse.length != 0) {
             createNewAddress(adresse)
         } else if (client.idAdresse !== undefined) {
             updateCurrentAddress(adresse)
@@ -167,6 +177,7 @@ export default function Profil() {
             console.log("Création nouvelle adresse : ", response.data)
         } catch (error) {
             console.log("Erreur lors de l'enregistrement de la création de la nouvelle adresse : ", error)
+            console.log("Status : ", error.status )
         }
     }
 
@@ -175,6 +186,7 @@ export default function Profil() {
         try {
             const response = await axios.put('http://localhost:8081/updateAddress', adresse)
             console.log("Mise à jour d'une adresse existante : ", response.data)
+            console.log("Statut : ", response.status)
         } catch (error) {
             console.log("Erreur lors de la mise à jour de l'adresse : ", error)
         }
@@ -217,8 +229,8 @@ export default function Profil() {
                         </ul>
                     </div>)}
                     <div className='d-flex flex-row justify-content-start'>
-                        <InputProfilText label='codePostal' nomLabel='Code postal' titre={adresse.codePostal} method={handleCityPostCode}/>
-                        <InputProfilText label='ville' nomLabel='Ville' titre={adresse.ville} method={handleCityPostCode}/>
+                        <InputProfilText label='codePostal' nomLabel='Code postal' titre={adresse.codePostal} method={handleCityPostCode} />
+                        <InputProfilText label='ville' nomLabel='Ville' titre={adresse.ville} method={handleCityPostCode} />
                     </div>
                     <div className='container'>
                         <div className='row'>
@@ -234,20 +246,20 @@ export default function Profil() {
                     </div>
 
                     <div className='container'>
-                    <div>
-                        <div className="form-check form-switch">
-                            <input className="form-check-input" type="checkbox" role="switch" id="newsletter" checked={client.newsletter} onChange={handleClicCheck} />
-                            <label className="form-check-label" htmlFor="newsletter">Newsletter</label>
+                        <div>
+                            <div className="form-check form-switch">
+                                <input className="form-check-input" type="checkbox" role="switch" id="newsletter" checked={client.newsletter} onChange={handleClicCheck} />
+                                <label className="form-check-label" htmlFor="newsletter">Newsletter</label>
+                            </div>
+                            <div className="form-check form-switch">
+                                <input className="form-check-input" type="checkbox" role="switch" id="specialOffer" checked={client.specialOffer} onChange={handleClicCheck} />
+                                <label className="form-check-label" htmlFor="specialOffer">Offres spéciales de nos partenaires</label>
+                            </div>
                         </div>
-                        <div className="form-check form-switch">
-                            <input className="form-check-input" type="checkbox" role="switch" id="specialOffer" checked={client.specialOffer} onChange={handleClicCheck} />
-                            <label className="form-check-label" htmlFor="specialOffer">Offres spéciales de nos partenaires</label>
-                        </div>
-                    </div>
                     </div>
                     <div className='d-flex justify-content-center'>
-                        <a className='btn boutonValiderProfil'onClick={handleSubmit} >Enregistrer</a> 
-                       {/* <GenericButton buttonStyle={"boutonValiderProfil"} label={"Enregistrer"} onClick={handleSubmit} /> */}
+                        <a className='btn boutonValiderProfil' onClick={handleSubmit} >Enregistrer</a>
+                        {/* <GenericButton buttonStyle={"boutonValiderProfil"} label={"Enregistrer"} onClick={handleSubmit} /> */}
                     </div>
                 </div>
             </div>
