@@ -146,7 +146,25 @@ app.put('/updateAddress', (req, res) => {
     })
 })
 
+// ************** TÂCHES ****************** //
+/* Méthodes pour la création de tâche */
+app.get('/getAllEvenements', (req, res) => {
+    const sql = "SELECT idTypeEvenement, nomTypeEvenement FROM type_evenement;"
+    db.query(sql, (err, data) => {
+        if (err) {
+            console.log("Erreur lors de la récupération des typdes d'évènements", err);
+            return res.status(500).json({ error: "Erreur lors de l'exécution de la requête de mise à jour de l'adresse.", details: err });
+        }
 
+        if (data.length > 0) {
+            return res.status(200).json({ success: "Adresse mise à jour avec succès.", data: data });
+        } else {
+            console.log(res);
+            return res.status(404).json({ error: "Aucune adresse trouvée avec l'ID spécifié." });
+        }
+    })
+    })
+})
 
 app.listen(PORT, () => {
     console.log("Connected to the server")
