@@ -4,7 +4,7 @@ import axios from 'axios';
 import InputProfilText from './InputProfilText';
 //import BankInfoForm from './a_suppr_BankInfoForm';
 
-export default function PageInscriptionPremium() {
+export default function PageInscriptionPremium1() {
     const headers = {
         'Content-Type': 'application/json'
     }
@@ -61,26 +61,16 @@ export default function PageInscriptionPremium() {
 
     return (
       
-      <div class="container-fluid" className="PageInscriptionPremium">
+      <div class="container-fluid" className="PageInscriptionPremium1">
         <br />
         <h1>Devenez membre Premium et accéder à toute l'étendue de nos services! </h1>
         <br />
-        
         <div className='container d-flex flex-column gap-3 '>
-        <h2>Login</h2>
-        <InputProfilText label='email' nomLabel='Email' method={handleChange} exemple='Email' />
-        <div className='container'>
-        <div className='row'>
-        <div className='col-md-5 col-12'>
-        <label htmlFor='password' className='form-label'>Mot de passe</label>
-        <input type="password" id="password" value={user.password} className='form-control profil-border' onChange={handleChange} />
-        </div>
-        </div>
-        </div>
-        <div>
-        <button type="button" className='btn boutonValiderProfil' onClick={handleSubmit1}>Se connecter</button>
-        </div>
-        {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
+            
+                <div>
+                    <button type="button" className='btn boutonValiderProfil' onClick={handleSubmit1}>Action</button>
+                </div>
+            {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
         </div >
       
 
