@@ -37,7 +37,7 @@ export default function Inscription() {
     setPrenom(e.target.value); // Mettre à jour le prénom dans l'état
   };
   let url = "../Inscription2";
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleClick = () => {
     const regex = /^[A-Za-z]+$/;
@@ -50,10 +50,10 @@ export default function Inscription() {
       );
     } else {
       setMessageErreur(""); // Effacer le message d'erreur s'il n'y a pas d'erreur
-      sessionStorage.setItem("Nom", nom);
-      sessionStorage.setItem("Prénom", prenom);
+      sessionStorage.setItem("nom", nom);
+      sessionStorage.setItem("Prenom", prenom);
 
-      Navigate(url);
+      navigate(url);
 
       return;
     }
