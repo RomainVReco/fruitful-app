@@ -9,11 +9,10 @@ import InputModalText from "./InputModalText";
 import bebe from "../assets/bebe.png";
 import GenericButton from "./GenericButton";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Inscription2 from "./Inscription2";
 import Inscription3 from "./Inscription3";
 import BoutonSuivant from "./BoutonSuivant";
 
-export default function Inscription() {
+export default function Inscription2() {
   function AffichageImage() {
     return (
       <div>
@@ -24,28 +23,37 @@ export default function Inscription() {
 
   return (
     <>
-      <Header />
       <div className="fond-inscription">
-        <div className="row ">
+        <div className="row">
           <div className="col"></div>
           <div className="col corps-inscription">
-            <label for="comment">
-              <h2>Quelle est votre date de naissance ?</h2>
-            </label>
+            <div>
+              <label for="comment">
+                <h2>Quelle est votre date de naissance ?</h2>
+              </label>
+            </div>
+            <div>
+              <AffichageImage />
+            </div>
 
-            <AffichageImage />
-            <p></p>
-            <input
-              className="form-control"
-              rows="1"
-              id="comment"
-              name="text"
-            ></input>
-            <br></br>
+            <div className="row">
+              <div className="col-sm-2"></div>
+              <div className="col-sm-8">
+                <input
+                  className="form-control"
+                  rows="1"
+                  id="dateNaissance"
+                  name="dateNaissance"
+                  placeholder="Veuillez indiquer votre date de naissance"
+                ></input>
+              </div>
+              <div className="col-sm-2"></div>
+            </div>
+            <br />
 
-            <BoutonSuivant page="3"/>
+            <BoutonSuivant page="3" texte="Suivant" />
           </div>
-          <div class="col"></div>
+          <div className="col"></div>
         </div>
       </div>
     </>

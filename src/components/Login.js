@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import InputProfilText from './InputProfilText';
+import { gestionConnexion } from '../_helpers/gestion.connexion';
 
 
 
@@ -27,15 +28,18 @@ export default function Login() {
         console.log("valeur : " + event.target.value)
     }
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-
+    const handleSubmit = async () => {
         try {
             const response = await axios.post('http://localhost:8081/login', user, headers);
-            let idClient = response.data['i_id_utilisateur']
-            sessionStorage.setItem("idClient", idClient)
-            console.log('idClient : '+idClient)
-            {/* navigate("../profil") */}
+            let idClient = response.data['idClient']
+            console.log('idClient : ', idClient)
+            if (!!idClient) {
+                gestionConnexion.saveSessionId(idClient)
+                navigate("../profil")
+            } else {
+                setErrorMessage('Email ou mot de passe invalide')
+            }
+
         } catch (error) {
             console.error('Error:', error);
             setErrorMessage('Failed to login. Please try again.');

@@ -1,29 +1,27 @@
 import React from "react";
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from "react";
 import logoComplet from '../assets/logo-fruit-titre.png'
 import profilIcone from '../assets/person-square.svg'
 import closeIcon from '../assets/x-lg.svg'
 import menu from '../assets/list.svg'
+import { gestionConnexion } from "../_helpers/gestion.connexion";
 
 
 function Header() {
+  
+  let navigate = useNavigate()
 
-  {/* useEffect (()=> {
-    const mediaQuery = window.matchMedia("(max-width:645px")
-    mediaQuery.addListener(handleMediaQueryChange)
-    handleMediaQueryChange(mediaQuery)
-
-    return () => {
-        mediaQuery.removeListener(handleMediaQueryChange)
-    }
-})
-*/}
-
-  const [isConnected, setConnected] = useState(true)
+  const [isConnected, setConnected] = useState(false)
   const [isMenuOpen, setMenuOpen] = useState(false)
   const [menuCloseIcon, setIcon] = useState(menu)
-  const [responsiveDisplay, setResponsiveDisplay] = useState("")
+  const [menuConnexion, setMenuConnexion] = useState('')
+
+  useEffect(() => {
+    if (gestionConnexion.isLogged()) {
+      setConnected(true)
+    } else setConnected(false)
+  },[gestionConnexion.isLogged()])
 
   const handleClickMenu = () => {
     console.log("handleClick", "isMenuOpen : "+isMenuOpen)
@@ -33,7 +31,12 @@ function Header() {
     console.log("handleClick", "isMenuOpen : "+isMenuOpen)
   }
 
+  const handleLogout = () => {
+    gestionConnexion.deconnexion()
+    navigate("../pageAccueil")
 
+
+  }
 
   const blocConnexion = <>
     <div className="wrapper-lienHeader d-flex">
@@ -41,7 +44,7 @@ function Header() {
         <a href="#" className="btn">S'inscrire</a>
       </div>
       <div className="lienHeader">
-        <a href="#" className="btn">Connexion</a>
+        <a href="../login" className="btn">Connexion</a>
       </div>
     </div></>
 
@@ -60,21 +63,12 @@ function Header() {
           <li><a href="#" className="dropdown-item">Mes tâches</a></li>
           <li><a href="#" className="dropdown-item">Abonnement</a></li>
           <li style={{borderBottom:'1px solid #000', width:'100%', marginBottom:'5px', marginUp:'5px'}}></li>
-          <li><a href="#" className="dropdown-item">Déconnexion</a></li>
+          <li><a href="#" className="dropdown-item" onClick={handleLogout}>Déconnexion</a></li>
         </ul>
       </div>
     </div>
   </>
   
-
-  {/* const handleMediaQueryChange = mediaQuery => {
-      if(mediaQuery.matches) {
-        setResponsiveDisplay('none')
-      } else {
-        setResponsiveDisplay('')
-      }
-  }
-*/}
   return (
 
     <nav className="headerTop">

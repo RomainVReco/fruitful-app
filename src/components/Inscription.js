@@ -18,7 +18,6 @@ import { Link } from "react-router-dom";
 import Inscription2 from "./Inscription2";
 import BoutonSuivant from "./BoutonSuivant";
 
-
 export default function Inscription() {
   var nom = "";
   var dateNaissance = "";
@@ -34,31 +33,59 @@ export default function Inscription() {
     );
   }
 
-
   return (
     <>
-      <Header />
       <div className="fond-inscription">
-        <div className="row ">
+        <div className="row">
           <div className="col"></div>
           <div className="col corps-inscription">
-            <label for="comment">
-              <h2>Comment pouvons-nous vous appeler ?</h2>
-            </label>
-            <AffichageImage />
-            <p></p>
-            <input
-              className="form-control"
-              rows="1"
-              id="comment"
-              name="text"
-            ></input>
-            <br></br>
-            <BoutonSuivant page="2" />
+            <div>
+              <label for="comment">
+                <h2>Comment pouvons-nous vous appeler ?</h2>
+              </label>
+            </div>
+            <div>
+              <AffichageImage />
+            </div>
+
+            <div className="row">
+              <div className="col-sm-2"></div>
+              <div className="col-sm-8">
+                <input
+                  className="form-control"
+                  rows="1"
+                  id="prenom"
+                  name="prenom"
+                  placeholder="Veuillez indiquer votre prénom"
+                ></input>
+              </div>
+
+              <div className="col-sm-2"></div>
+            </div>
+            <br />
+            
+            <div className="row">
+              <div className="col-sm-2"></div>
+            
+            <div className="col-sm-8">
+              <input
+                className="form-control"
+                rows="1"
+                id="nom"
+                name="nom"
+                placeholder="Veuillez indiquer votre nom"
+              ></input>
+            </div>
+            <div className="col-sm-2"></div>
           </div>
-          <div class="col"></div>
-        </div>
-      </div>
+
+          <br />
+          <div>
+            <BoutonSuivant page="2" texte="Suivant" />
+          </div>
+         
+        </div> <div className="col"></div>
+      </div></div>
     </>
   );
 }

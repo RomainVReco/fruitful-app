@@ -1,14 +1,14 @@
 import React from "react";
 
 import Header from "./Header";
-import ImageAccueil from "./ImageAccueil";
 import Inscription from "./Inscription";
+import ImageAccueil from "./ImageAccueil";
 import BoutonAccesEER from "./BoutonAccesEER";
-import Carousel from './Carousel'
-import logo1 from '../assets/tournesol.png';
-import logo2 from '../assets/Ciel_Bleu_Mieux_Vivre.png';
-import logo3 from '../assets/fleurs_illustre_mieux_gerer_sa_vie.png';
-import logo4 from '../assets/ciel_nuageux_Mieux_gerer_ses_addictions.png';
+import Carousel from "./Carousel";
+import logo1 from "../assets/tournesol.png";
+import logo2 from "../assets/Ciel_Bleu_Mieux_Vivre.png";
+import logo3 from "../assets/fleurs_illustre_mieux_gerer_sa_vie.png";
+import logo4 from "../assets/ciel_nuageux_Mieux_gerer_ses_addictions.png";
 
 export default function PageAccueil() {
 
