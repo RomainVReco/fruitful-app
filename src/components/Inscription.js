@@ -51,7 +51,7 @@ export default function Inscription() {
     } else {
       setMessageErreur(""); // Effacer le message d'erreur s'il n'y a pas d'erreur
       sessionStorage.setItem("nom", nom);
-      sessionStorage.setItem("Prenom", prenom);
+      sessionStorage.setItem("prenom", prenom);
 
       navigate(url);
 

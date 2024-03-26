@@ -19,7 +19,7 @@ import {
 } from "react-router-dom";
 
 export default function Inscription2() {
-  const [date, setDate] = useState("");
+  const [dateNaissance, setDate] = useState("");
   const [messageErreur, setMessageErreur] = useState("");
 
   const handleChangeDate = (e) => {
@@ -31,16 +31,26 @@ export default function Inscription2() {
 
   const handleClick = () => {
     const regex = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
+    let formatAnnee = 4;
+    let traitementDate = dateNaissance.split("/");
+    if (traitementDate[2].length != 4) formatAnnee = 2;
 
-
-    if (!date.match(regex)) {
+    if (!dateNaissance.match(regex) || formatAnnee != 4) {
       setMessageErreur(
         "La date doit être au format 01/01/1970 et doit être valide."
       );
     } else {
       setMessageErreur(""); // Effacer le message d'erreur s'il n'y a pas d'erreur
-      sessionStorage.setItem("dateNaissance", date);
-      console.log("date :", date);
+
+      let traitementDate = dateNaissance.split("/");
+      if (traitementDate[2].length == 2) {
+        if (Number(traitementDate[2]) > 30) {
+          traitementDate[2] = "19" + traitementDate[2];
+        }
+        else { traitementDate[2] = "20" + traitementDate[2]; };
+      }
+
+      sessionStorage.setItem("dateNaissance", dateNaissance);
 
       navigate(url);
 
@@ -88,13 +98,13 @@ export default function Inscription2() {
             </div>
             <br />
             <button
-                className="btn boutonValiderSuivant"
-                onClick={handleClick}
-              >
-                Suivant
+              className="btn boutonValiderSuivant"
+              onClick={handleClick}
+            >
+              Suivant
             </button>
-              {/* Affichage du message d'erreur */}
-              {messageErreur && <p>{messageErreur}</p>}
+            {/* Affichage du message d'erreur */}
+            {messageErreur && <p>{messageErreur}</p>}
           </div>
           <div className="col"></div>
         </div>
