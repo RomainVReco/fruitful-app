@@ -14,7 +14,7 @@ function EntreeObjectif({ fruit, objectif }) {
   const imageSrc = images[fruit] || null;
   return (
     <div className="container-md d-flex justify-content-center">
-      <div className="renseignement-container row">
+      <div className="renseignement-container row d-flex">
         <div className="col-sm-2">
           <button className="boutonlogo align-middle">
             {imageSrc && (

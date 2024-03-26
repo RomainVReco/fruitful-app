@@ -60,28 +60,32 @@ export default function Inscription() {
                 ></input>
               </div>
 
-              <div className="col-sm-2"></div></div>
-              <div className="row">
-              <div className="col-sm-2"></div></div>
-              <div className="col-sm-8">
-                <input
-                  className="form-control"
-                  rows="1"
-                  id="nom"
-                  name="nom"
-                  placeholder="Veuillez indiquer votre nom"
-                ></input>
-              </div>
-              <div className="col-sm-2"></div></div>
-
-              <br></br>
-              <div>
-                <BoutonSuivant page="2" texte="Suivant" />
-              </div>
-              <div className="col"></div>
-           
+              <div className="col-sm-2"></div>
+            </div>
+            <br />
+            
+            <div className="row">
+              <div className="col-sm-2"></div>
+            
+            <div className="col-sm-8">
+              <input
+                className="form-control"
+                rows="1"
+                id="nom"
+                name="nom"
+                placeholder="Veuillez indiquer votre nom"
+              ></input>
+            </div>
+            <div className="col-sm-2"></div>
           </div>
-        </div>
+
+          <br />
+          <div>
+            <BoutonSuivant page="2" texte="Suivant" />
+          </div>
+         
+        </div> <div className="col"></div>
+      </div></div>
     </>
   );
 }
