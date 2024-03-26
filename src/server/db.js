@@ -29,8 +29,8 @@ app.get('/getAllUsers', (req, res) => {
 app.post('/getUser/:id', (req, res) => {
     const idClient = req.params.id
     console.log('server : ', idClient)
-    const sql = "SELECT idClient, nom, prenom, email, u.idAdresse, newsletter, specialOffer FROM utilisateur as u " +
-        " INNER JOIN adresse as a ON u.idAdresse = a.idAdresse WHERE idClient = ?"
+    const sql = "SELECT idClient, nom, prenom, email, newsletter, specialOffer, idAdresse " +
+        "FROM utilisateur WHERE idClient = ?;"
     db.query(sql, [idClient], (err, data) => {
         if (err) {
             return res.json('Erreur de requête SQL')
@@ -87,10 +87,10 @@ app.put('/updateClient', (req, res) => {
         }
         if (data.affectedRows > 0) {
             console.log("Informations clients mises à jour avec succès.");
-           return res.status(200).json({ success: "Informations clients mises à jour avec succès."});
+            return res.status(200).json({ success: "Informations clients mises à jour avec succès.", data: data });
         } else {
             console.log("Aucun client trouvé avec l'ID spécifié.");
-           return res.status(404).json({ error: "Aucun client trouvé avec l'ID spécifié." });
+            return res.status(404).json({ error: "Aucun client trouvé avec l'ID spécifié." });
         }
     })
 
@@ -113,10 +113,10 @@ app.post('/updateTestUserName/:id', (req, res) => {
 /* Méthode CRUD pour l'adresse */
 
 app.post('/getAddress/:id', (req, res) => {
-    const idAdresse = req.params.id
-    console.log('server : ', idAdresse)
-    const sql = "SELECT idAdresse, adresse, codePostal, ville FROM adresse WHERE idAdresse = ?"
-    db.query(sql, [idAdresse], (err, data) => {
+    const idClient = req.params.id
+    console.log('server : ', idClient)
+    const sql = "SELECT idAdresse, adresse, codePostal, idClient, ville FROM adresse WHERE idClient = ?"
+    db.query(sql, [idClient], (err, data) => {
         if (err) {
             return res.json('Erreur de requête SQL')
         }
@@ -129,15 +129,26 @@ app.post('/getAddress/:id', (req, res) => {
 })
 
 app.post('/createAddress', (req, res) => {
-    const sql = "INSERT INTO adresse (adresse, codePostal, ville) VALUES (?, ?, ?)"
-    console.log("type data : ", typeof(req.body.adresse))
-    db.query(sql, [req.body.adresse, req.body.codePostal, req.body.ville], (err, data) => {
+    const { adresse, codePostal, ville, idClient } = req.body;
+    const sql = "INSERT INTO adresse (adresse, codePostal, ville, idClient) VALUES (?, ?, ?, ?);"
+    console.log("type data : ", typeof (req.body.adresse))
+    db.query(sql, [adresse, codePostal, ville, idClient], (err, data) => {
         if (err) {
             console.log("Erreur lors de l'exécution de la requête de création d'adresse :", err)
-            return res.json("Erreur lors de l'exécution de la requête de création d'adresse :", err)
+            return res.status(999).json({ error: "Erreur lors de l'exécution de la requête de création d'adresse", detail: err })
         }
         if (data.affectedRows > 0) {
-            return res.json(data)
+            const idAdresse = data.insertId;
+            console.log("Id créé : ", idAdresse)
+            const utilisateurSql = "UPDATE utilisateur SET idAdresse = ? WHERE idClient = ?;"
+            db.query(utilisateurSql, [idAdresse, idClient], (utilisateurErr, utilisateurResult) => {
+                if (utilisateurErr) {
+                    console.log("Error updating utilisateur table:", utilisateurErr);
+                    return res.status(500).json({ error: "Error updating utilisateur table", details: utilisateurErr });
+                }
+                return res.status(200).json({ success: "Nouvelle adresse créée en base de données", data: data, idAdresse: idAdresse })
+            }
+            )
         } else {
             return res.json("Comportement inattendu lors de la création de la nouvelle adresse")
         }
@@ -146,17 +157,17 @@ app.post('/createAddress', (req, res) => {
 
 app.put('/updateAddress', (req, res) => {
     console.log("updateAddress")
-    console.log("type adresse : ", typeof(req.body.adresse))
-    console.log("type codePostal : ", typeof(req.body.codePostal))
-    console.log("type ville : ", typeof(req.body.ville))
-    console.log("type idAdresse : ", typeof(req.body.idAdresse))
+    console.log("type adresse : ", typeof (req.body.adresse))
+    console.log("type codePostal : ", typeof (req.body.codePostal))
+    console.log("type ville : ", typeof (req.body.ville))
+    console.log("type idAdresse : ", typeof (req.body.idAdresse))
     const sql = "UPDATE adresse SET adresse = ?, codePostal = ?, ville = ? WHERE idAdresse = ?"
     db.query(sql, [req.body.adresse, req.body.codePostal, req.body.ville, req.body.idAdresse], (err, data) => {
         if (err) {
             console.log("Erreur lors de l'exécution de la requête de mise à jour de l'adresse :", err);
             return res.status(500).json({ error: "Erreur lors de l'exécution de la requête de mise à jour de l'adresse.", details: err });
         }
-        
+
         if (data.affectedRows > 0) {
             return res.status(200).json({ success: "Adresse mise à jour avec succès.", data: data });
         } else {
@@ -166,6 +177,39 @@ app.put('/updateAddress', (req, res) => {
     })
 })
 
+// ************** TÂCHES ****************** //
+/* Méthodes pour la création de tâche */
+app.get('/getAllEvenements', (req, res) => {
+    const sql = "SELECT idTypeEvenement, nomTypeEvenement FROM type_evenement;"
+    db.query(sql, (err, data) => {
+        if (err) {
+            return res.status(500).json({
+                error: "Erreur lors de la récupération des types d'évènements.",
+                details: err
+            });
+        }
+        if (data.length > 0) {
+            return res.status(200).json({ success: "Liste des types d'évènements récupérés.", data: data });
+        } else {
+            return res.status(404).json({ error: "Aucun type d'évènements trouvés en base." });
+        }
+    })
+})
+
+app.get('/getAllIcons', (req, res) => {
+    const sql="SELECT idIcone, nomIcone FROM icone;"
+    db.query(sql, (err, data)=> {
+        if (err) {
+            return res.status(500).json({error:"Erreur lors de la récupération des icones",
+        details:err})
+        }
+        if (data.length>0) {
+            return res.status(200).json({ success:"Liste des icones récupérées", data:data})
+        } else {
+            return res.status(404).json({error:"Aucune icone trouvée en base de données."})
+        }
+    })
+} )
 
 app.listen(PORT, () => {
     console.log("Connected to the server")

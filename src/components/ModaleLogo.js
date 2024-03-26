@@ -2,10 +2,12 @@ import React from 'react'
 import ReactDOM from 'react'
 import { createPortal } from 'react-dom'
 
-const tableauIcones = {"data":[{"image":'Image_1', titre:'Titre_1'}, {"image":'Image_2', titre:'Titre_2'}, {
-  "image":'Image_3', titre:'Titre_3'}]}
 
-export default function ModaleLogo({open, onClose, parentCallback}) {
+
+export default function ModaleLogo({open, onClose, parentCallback, data}) {
+
+  const tableauIcones = data || {"data":[{"image":'Image_1', titre:'Titre_1'}, {"image":'Image_2', titre:'Titre_2'}, {
+    "image":'Image_3', titre:'Titre_3'}]}
 
   const handleClickOnIcon = (index) => {
   console.log('index : '+index)
