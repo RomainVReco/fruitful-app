@@ -9,7 +9,7 @@ export default function InputModalQuantity(props) {
         <label htmlFor="nomTache" className='form-label'>{props.nomLabel}</label>
           <div class="input-group mb-3">
             <span className="input-group-text profil-border">Tous les </span>
-            <input htmlFor type="number" id className="form-control profil-border" aria-label="nombre de jours" onChange={props.method}
+            <input htmlFor type="number" id={props.id} className="form-control profil-border" aria-label="nombre de jours" onChange={props.method}
               placeholder={props.exemple} value={props.titre} min={0} max={7} />
             <span className="input-group-text profil-border">{props.periode}</span>
           </div>

@@ -50,8 +50,8 @@ export default function CreationTache() {
 		nom: '',
 		dateDebut: new Date().toLocaleDateString(),
 		frequence: '',
-		type: '',
-		logo: rasp
+		typeEvenement: '',
+		logo: 'banane.png'
 	})
 
 	const getTypeEvenements = async () => {
@@ -86,25 +86,9 @@ export default function CreationTache() {
 		console.log('handleCallbackLogo : ' + logo)
 	}
 
-	const handleTitleChange = (event) => {
-		var prevState = { ...tache }
-		setTache(prevState => ({...prevState, [event.target.id]:event.target.value}))
-	}
-
-	const handleDateDebutChange = (event) => {
-		var taches = { ...tache }
-		taches.dateDebut = event.target.value
-		console.log(taches)
-		setTache(taches)
-		console.log(taches)
-	}
-
-	const handleFrequenceChange = (event) => {
-		var taches = { ...tache }
-		taches.frequence = event.target.value
-		console.log(taches)
-		setTache(taches)
-		console.log(taches)
+	const handleChange = (event) => {
+        console.log("Handle Change in création tache : ", [event.target.id]+':'+event.target.value)
+		setTache(prevTache => ({...prevTache, [event.target.id]:event.target.value}))
 	}
 
 	const handleSubmit = () => {
@@ -114,17 +98,12 @@ export default function CreationTache() {
 		})
 	}
 
-	const handleSelectorChange = (event) => {
-		let index = event.target.value
-		console.log('Sélecteur : ', index)
-	}
-
 	return (
 		<div className='container d-flex flex-column gap-3'>
 			<h3 style={{ marginBottom: '25px' }}> Créez-vous une nouvelle habitude</h3>
 
-			<InputGenericText nomLabel={'Nommez là !'} titre={tache.nom}
-				method={event => handleTitleChange(event)} exemple='Couche-tôt !' />
+			<InputGenericText nomLabel={"Nommez votre nouvel évènement :"} label='nom' titre={tache.nom}
+				method={handleChange} exemple='Couche-tôt !' />
 
 			<div className='container'>
 				<button className='btn btn-light' onClick={() => setIsOpen(true)}>
@@ -135,18 +114,18 @@ export default function CreationTache() {
 				</ModaleLogo>
 			</div>
 
-			<InputModalText nomLabel={'A partir du : '}
-				method={handleDateDebutChange} exemple={new Date().toLocaleDateString()} onClick={() => console.log('Clic')} />
+			<InputModalText nomLabel='A partir du : ' id='date'
+				method={handleChange} exemple={new Date().toLocaleDateString()} onClick={() => console.log('Clic')} />
 
-			<InputModalQuantity nomLabel={'Fréquence : '} method={handleFrequenceChange}
+			<InputModalQuantity nomLabel={'Fréquence : '} id='frequence'  method={handleChange}
 				periode='jours' />
 
 			<div className='container'>
 				<div className='row'>
 					<div className='col-md-5 col-8'>
-						<label htmlFor="typeEvenement" className='form-label'>Nature d'évènement : </label>
+						<label htmlFor="typeEvenement" className='form-label'>Type d'évènement : </label>
 						<select className="form-select form-control profil-border" id='typeEvenement' aria-label="Default select example"
-							onChange={event => handleSelectorChange(event)} defaultValue="Sélectionner un type d'évènement">
+							onChange={handleChange} defaultValue="Sélectionner un type d'évènement">
 							<option value="0">Tâche</option>
 							<option value="1">Habitude</option>
 							<option value="2">Addiction</option>
@@ -155,7 +134,7 @@ export default function CreationTache() {
 				</div>
 			</div>
 
-			<div className='container' style={{ marginTop: '25px' }}>Type d'évènement</div>
+			<div className='container' style={{ marginTop: '25px' }}>Nature d'évènement</div>
 			<div className='container'>
 				<div className='row'>
 					<div className='col-md-5 col-8'>
