@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le : lun. 25 mars 2024 à 21:17
--- Version du serveur : 10.4.27-MariaDB
--- Version de PHP : 8.2.0
+-- Hôte : localhost
+-- Généré le : mer. 27 mars 2024 à 09:56
+-- Version du serveur : 10.4.28-MariaDB
+-- Version de PHP : 8.2.4
 
 DROP DATABASE IF EXISTS fruitful;
 
@@ -37,20 +37,20 @@ CREATE TABLE `adresse` (
   `idAdresse` int(11) NOT NULL,
   `adresse` varchar(150) DEFAULT NULL,
   `codePostal` varchar(5) DEFAULT NULL,
-  `ville` varchar(50) DEFAULT NULL
+  `ville` varchar(50) DEFAULT NULL,
+  `idClient` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `adresse`
 --
 
-INSERT INTO `adresse` (`idAdresse`, `adresse`, `codePostal`, `ville`) VALUES
-(1, '123 Main St', '12345', 'City1'),
-(2, '456 Elm St', '67890', 'City2'),
-(3, '789 Oak St', '13579', 'City3'),
-(4, '321 Pine St', '24680', 'City4'),
-(5, '654 Maple St', '98765', 'City5'),
-(10, '14 rue des alouettes', '69008', 'Lyon');
+INSERT INTO `adresse` (`idAdresse`, `adresse`, `codePostal`, `ville`, `idClient`) VALUES
+(1, '123 Main St', '12345', 'City1', 0),
+(2, '456 Elm St', '67890', 'City2', 0),
+(3, '789 Oak St', '13579', 'City3', 0),
+(4, '321 Pine St', '24680', 'City4', 0),
+(5, '654 Maple St', '98765', 'City5', 0);
 
 -- --------------------------------------------------------
 
@@ -74,12 +74,12 @@ CREATE TABLE `entree_agenda_evenement` (
 --
 
 CREATE TABLE `evenement` (
-  `i_id_evenement` int(11) NOT NULL,
-  `s_nom_evenement` varchar(20) DEFAULT NULL,
-  `i_id_type_evenement` smallint(6) NOT NULL,
-  `i_id_objectif` int(11) DEFAULT NULL,
-  `i_id_utilisateur` int(11) DEFAULT NULL,
-  `i_id_icone` int(11) DEFAULT NULL
+  `idEvenement` int(11) NOT NULL,
+  `nomEvenement` varchar(20) DEFAULT NULL,
+  `idTypeEvenement` smallint(6) NOT NULL,
+  `idObjectif` int(11) DEFAULT NULL,
+  `idClient` int(11) DEFAULT NULL,
+  `idIcone` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -89,9 +89,23 @@ CREATE TABLE `evenement` (
 --
 
 CREATE TABLE `icone` (
-  `i_id_icone` int(11) NOT NULL,
-  `s_url` varchar(200) DEFAULT NULL
+  `idIcone` int(11) NOT NULL,
+  `nomIcone` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `icone`
+--
+
+INSERT INTO `icone` (`idIcone`, `nomIcone`) VALUES
+(1, 'bicycle.svg'),
+(2, 'binoculars.svg'),
+(3, 'book.svg'),
+(4, 'boombox.svg'),
+(5, 'chat-dots.svg'),
+(6, 'ev-station.svg'),
+(7, 'airplane-engines.svg'),
+(8, 'logo-rasp.svg');
 
 -- --------------------------------------------------------
 
@@ -113,15 +127,15 @@ CREATE TABLE `objectif` (
 --
 
 CREATE TABLE `type_evenement` (
-  `i_id_type_evenement` smallint(6) NOT NULL,
-  `s_nom_type_evenement` varchar(20) DEFAULT NULL
+  `idTypeEvenement` smallint(6) NOT NULL,
+  `nomTypeEvenement` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `type_evenement`
 --
 
-INSERT INTO `type_evenement` (`i_id_type_evenement`, `s_nom_type_evenement`) VALUES
+INSERT INTO `type_evenement` (`idTypeEvenement`, `nomTypeEvenement`) VALUES
 (1, 'Habitude'),
 (2, 'Tâche'),
 (3, 'Addiction');
@@ -133,15 +147,15 @@ INSERT INTO `type_evenement` (`i_id_type_evenement`, `s_nom_type_evenement`) VAL
 --
 
 CREATE TABLE `unite_quantite` (
-  `i_id_unite_quantite` smallint(6) NOT NULL,
-  `s_nom_unite` varchar(20) DEFAULT NULL
+  `idUnite` smallint(6) NOT NULL,
+  `nomUnite` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `unite_quantite`
 --
 
-INSERT INTO `unite_quantite` (`i_id_unite_quantite`, `s_nom_unite`) VALUES
+INSERT INTO `unite_quantite` (`idUnite`, `nomUnite`) VALUES
 (1, 'heures'),
 (2, 'minutes'),
 (3, 'pas'),
@@ -173,12 +187,12 @@ CREATE TABLE `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`idClient`, `email`, `password`, `nom`, `prenom`, `genre`, `dateNaissance`, `idAdresse`, `telephone`, `estAbonne`, `newsletter`, `specialOffer`) VALUES
-(2, 'example1@example.com', 'password123', 'Smith', 'John', 'Male', '1990-01-01', 1, '123-456-7890', 1, NULL, NULL),
-(3, 'example2@example.com', 'password456', 'Johnson', 'Emily', 'Female', '1985-05-15', 2, '987-654-3210', 0, NULL, NULL),
-(4, 'example3@example.com', 'password789', 'Brown', 'Michael', 'Male', '1988-10-20', 3, '555-123-4567', 1, NULL, NULL),
-(5, 'example4@example.com', 'passwordabc', 'Davis', 'Sarah', 'Female', '1995-03-10', 4, '111-222-3333', 1, NULL, NULL),
-(6, 'example5@example.com', 'passwordxyz', 'Miller', 'Christopher', 'Male', '1980-12-25', 5, '999-888-7777', 0, NULL, NULL),
-(7, 'test', 'test', 'LAPOINTE', 'Bobby', NULL, NULL, 10, NULL, NULL, 1, 0);
+(2, 'test', 'password123', 'AYMARRE', 'Jean', 'Male', '1990-01-01', 1, '123-456-7890', 1, 0, 1),
+(3, 'test', 'password456', 'AYMARRE', 'Jean', 'Female', '1985-05-15', 2, '987-654-3210', 0, 0, 1),
+(4, 'test', 'password789', 'AYMARRE', 'Jean', 'Male', '1988-10-20', 3, '555-123-4567', 1, 0, 1),
+(5, 'test', 'passwordabc', 'AYMARRE', 'Jean', 'Female', '1995-03-10', 4, '111-222-3333', 1, 0, 1),
+(6, 'test', 'passwordxyz', 'AYMARRE', 'Jean', 'Male', '1980-12-25', 5, '999-888-7777', 0, 0, 1),
+(7, 'test', 'test', 'BARRE', 'Raymond', NULL, NULL, NULL, NULL, NULL, 0, 1);
 
 --
 -- Index pour les tables déchargées
@@ -201,17 +215,16 @@ ALTER TABLE `entree_agenda_evenement`
 -- Index pour la table `evenement`
 --
 ALTER TABLE `evenement`
-  ADD PRIMARY KEY (`i_id_evenement`),
-  ADD KEY `i_id_type_evenement` (`i_id_type_evenement`),
-  ADD KEY `i_id_objectif` (`i_id_objectif`),
-  ADD KEY `i_id_utilisateur` (`i_id_utilisateur`),
-  ADD KEY `i_id_icone` (`i_id_icone`);
+  ADD PRIMARY KEY (`idEvenement`),
+  ADD KEY `i_id_utilisateur` (`idClient`),
+  ADD KEY `i_id_icone` (`idIcone`),
+  ADD KEY `i_id_type_evenement` (`idTypeEvenement`) USING BTREE;
 
 --
 -- Index pour la table `icone`
 --
 ALTER TABLE `icone`
-  ADD PRIMARY KEY (`i_id_icone`);
+  ADD PRIMARY KEY (`idIcone`);
 
 --
 -- Index pour la table `objectif`
@@ -224,13 +237,13 @@ ALTER TABLE `objectif`
 -- Index pour la table `type_evenement`
 --
 ALTER TABLE `type_evenement`
-  ADD PRIMARY KEY (`i_id_type_evenement`);
+  ADD PRIMARY KEY (`idTypeEvenement`);
 
 --
 -- Index pour la table `unite_quantite`
 --
 ALTER TABLE `unite_quantite`
-  ADD PRIMARY KEY (`i_id_unite_quantite`);
+  ADD PRIMARY KEY (`idUnite`);
 
 --
 -- Index pour la table `utilisateur`
@@ -246,7 +259,7 @@ ALTER TABLE `utilisateur`
 -- AUTO_INCREMENT pour la table `adresse`
 --
 ALTER TABLE `adresse`
-  MODIFY `idAdresse` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idAdresse` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT pour la table `entree_agenda_evenement`
@@ -258,13 +271,13 @@ ALTER TABLE `entree_agenda_evenement`
 -- AUTO_INCREMENT pour la table `evenement`
 --
 ALTER TABLE `evenement`
-  MODIFY `i_id_evenement` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idEvenement` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `icone`
 --
 ALTER TABLE `icone`
-  MODIFY `i_id_icone` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idIcone` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `objectif`
@@ -276,13 +289,13 @@ ALTER TABLE `objectif`
 -- AUTO_INCREMENT pour la table `type_evenement`
 --
 ALTER TABLE `type_evenement`
-  MODIFY `i_id_type_evenement` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idTypeEvenement` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `unite_quantite`
 --
 ALTER TABLE `unite_quantite`
-  MODIFY `i_id_unite_quantite` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idUnite` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Contraintes pour les tables déchargées
@@ -292,22 +305,21 @@ ALTER TABLE `unite_quantite`
 -- Contraintes pour la table `entree_agenda_evenement`
 --
 ALTER TABLE `entree_agenda_evenement`
-  ADD CONSTRAINT `entree_agenda_evenement_ibfk_1` FOREIGN KEY (`i_id_evenement`) REFERENCES `evenement` (`i_id_evenement`);
+  ADD CONSTRAINT `entree_agenda_evenement_ibfk_1` FOREIGN KEY (`i_id_evenement`) REFERENCES `evenement` (`idEvenement`);
 
 --
 -- Contraintes pour la table `evenement`
 --
 ALTER TABLE `evenement`
-  ADD CONSTRAINT `evenement_ibfk_1` FOREIGN KEY (`i_id_type_evenement`) REFERENCES `type_evenement` (`i_id_type_evenement`),
-  ADD CONSTRAINT `evenement_ibfk_2` FOREIGN KEY (`i_id_objectif`) REFERENCES `objectif` (`i_id_objectif`),
-  ADD CONSTRAINT `evenement_ibfk_3` FOREIGN KEY (`i_id_utilisateur`) REFERENCES `utilisateur` (`idClient`),
-  ADD CONSTRAINT `evenement_ibfk_4` FOREIGN KEY (`i_id_icone`) REFERENCES `icone` (`i_id_icone`);
+  ADD CONSTRAINT `evenement_ibfk_1` FOREIGN KEY (`idTypeEvenement`) REFERENCES `type_evenement` (`idTypeEvenement`),
+  ADD CONSTRAINT `evenement_ibfk_3` FOREIGN KEY (`idClient`) REFERENCES `utilisateur` (`idClient`),
+  ADD CONSTRAINT `evenement_ibfk_4` FOREIGN KEY (`idIcone`) REFERENCES `icone` (`idIcone`);
 
 --
 -- Contraintes pour la table `objectif`
 --
 ALTER TABLE `objectif`
-  ADD CONSTRAINT `objectif_ibfk_1` FOREIGN KEY (`i_id_unite_quantite`) REFERENCES `unite_quantite` (`i_id_unite_quantite`);
+  ADD CONSTRAINT `objectif_ibfk_1` FOREIGN KEY (`i_id_unite_quantite`) REFERENCES `unite_quantite` (`idUnite`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { ReactDOM } from 'react'
 import InputModalText from './InputModalText'
 import axios from 'axios'
+import InputModalQuantity from './InputModalQuantity'
 
 
 let isQuotaSelected = false
@@ -137,7 +138,7 @@ export default function CreationTache() {
 			<InputModalText nomLabel={'A partir du : '}
 				method={handleDateDebutChange} exemple={new Date().toLocaleDateString()} onClick={() => console.log('Clic')} />
 
-			<InputModalText nomLabel={'Fréquence : '} method={handleFrequenceChange} exemple='Quotidiennement' />
+			<InputModalQuantity nomLabel={'Fréquence : '} method={handleFrequenceChange} exemple='Quotidiennement'/>
 
 			<div className='container-md wrapper-profil'>
 				<select className="form-select form-control profil-border" aria-label="Default select example"
