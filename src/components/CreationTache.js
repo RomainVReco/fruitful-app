@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import InputGenericText from './InputGenericText'
 import ModaleLogo from './ModaleLogo'
-import rasp from '../assets/logo-rasp.svg'
+import { dataImage } from '../_helpers/data.env'
 import { useState } from 'react'
 import { ReactDOM } from 'react'
 import InputModalText from './InputModalText'
@@ -35,24 +35,26 @@ const handleClickQuota = () => {
 
 export default function CreationTache() {
 
+
+	const [checkErrorMessage, setErrorMessage] = useState('')
 	const [evenements, setEvenements] = useState('')
 	const [icones, setIcones] = useState('')
+	const [dataIcon, setDataIcon] = useState(dataImage)
+	const [singleIcon, setSingleIcon] = useState(dataImage[0])
+	const [isOpen, setIsOpen] = useState(false)
+	const [tache, setTache] = useState({
+		nom: '',
+		dateDebut: '',
+		frequence: '',
+		typeEvenement: '0',
+		logo: '0'
+	})
 
 	useEffect(() => {
 		getTypeEvenements()
-		getAllIcons()
 
-	}, [])
+	}, [singleIcon])
 
-	const [isOpen, setIsOpen] = useState(false)
-
-	const [tache, setTache] = useState({
-		nom: '',
-		dateDebut: new Date().toLocaleDateString(),
-		frequence: '',
-		typeEvenement: '',
-		logo: 'banane.png'
-	})
 
 	const getTypeEvenements = async () => {
 		try {
@@ -84,6 +86,9 @@ export default function CreationTache() {
 	const handleCallbackLogo = (logo) => {
 		var taches = { ...tache }
 		console.log('handleCallbackLogo : ' + logo)
+		setSingleIcon(dataImage[logo])
+		taches.logo=logo
+		setTache(taches)
 	}
 
 	const handleChange = (event) => {
@@ -91,11 +96,17 @@ export default function CreationTache() {
 		setTache(prevTache => ({...prevTache, [event.target.id]:event.target.value}))
 	}
 
-	const handleSubmit = () => {
-		console.log("Submit : " + tache)
+	const handleSubmit = (event) => {
+		event.preventDefault()
 		Object.entries(tache).forEach(([key, value]) => {
-			console.log(key, value)
+			console.log(key+' : '+value+' - '+'typeof : '+
+			typeof(value)+ ' - '+' undefined : '+ (value == undefined))
 		})
+		const checkTacheData = Object.values(tache).some(value => value.length === 0)
+		if (checkTacheData) {
+			setErrorMessage("Il manque une ou plusieurs informations obligatoires")
+
+		} else console.log("Chouette, ça va partie en base de données")
 	}
 
 	return (
@@ -107,14 +118,14 @@ export default function CreationTache() {
 
 			<div className='container'>
 				<button className='btn btn-light' onClick={() => setIsOpen(true)}>
-					<img src={tache.logo} alt="icone evt" style={{ height: '42px', width: '52px' }}></img>
+					<img src={singleIcon} alt="icone evt" style={{ height: '42px', width: '52px' }}></img>
 				</button>
-				<ModaleLogo open={isOpen} onClose={() => setIsOpen(false)} parentCallback={handleCallbackLogo}>
+				<ModaleLogo open={isOpen} onClose={() => setIsOpen(false)} data={dataIcon} parentCallback={handleCallbackLogo}>
 					Coucou
 				</ModaleLogo>
 			</div>
 
-			<InputModalText nomLabel='A partir du : ' id='date'
+			<InputModalText nomLabel='A partir du : ' id='dateDebut'
 				method={handleChange} exemple={new Date().toLocaleDateString()} onClick={() => console.log('Clic')} />
 
 			<InputModalQuantity nomLabel={'Fréquence : '} id='frequence'  method={handleChange}
@@ -125,7 +136,7 @@ export default function CreationTache() {
 					<div className='col-md-5 col-8'>
 						<label htmlFor="typeEvenement" className='form-label'>Type d'évènement : </label>
 						<select className="form-select form-control profil-border" id='typeEvenement' aria-label="Default select example"
-							onChange={handleChange} defaultValue="Sélectionner un type d'évènement">
+							onChange={handleChange} defaultValue='0'>
 							<option value="0">Tâche</option>
 							<option value="1">Habitude</option>
 							<option value="2">Addiction</option>
@@ -151,10 +162,11 @@ export default function CreationTache() {
 			</div>
 
 			<div className='container d-flex flex-start'>
-				<a href="#" className='btn' onClick={handleSubmit}>Valider</a>
-				<a href="#" className='btn boutonAnnuler'>Annuler</a>
+				<a href="" className='btn' onClick={handleSubmit}>Valider</a>
+				<a href="" className='btn boutonAnnuler'>Annuler</a>
 				{/* <GenericButton label="Valider" buttonStyle='boutonValider' method={handleSubmit}/> */}
 			</div>
+			{checkErrorMessage && (<div style={{color:'red'}}>{checkErrorMessage}</div>)}
 		</div>
 	)
 }
