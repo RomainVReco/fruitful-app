@@ -41,7 +41,8 @@ export default function CreationTache() {
 	useEffect(() => {
 		getTypeEvenements()
 		getAllIcons()
-	},[])
+
+	}, [])
 
 	const [isOpen, setIsOpen] = useState(false)
 
@@ -56,9 +57,12 @@ export default function CreationTache() {
 	const getTypeEvenements = async () => {
 		try {
 			const response = await axios.get('http://localhost:8081/getAllEvenements')
+			console.log("Response status getTypeEvenements : ", response.status)
 			Object.entries(response.data).forEach(([key, value]) => {
-				setEvenements(prevState => ({ ...prevState, [key]: value }))
+				console.log('evt value : ', key + ' ' + value['nomTypeEvenement'])
+				setEvenements(prevState => ({ ...prevState, [key]: value['nomTypeEvenement'] }))
 			})
+
 		} catch (error) {
 			console.error('Erreur getTypeEvenements : ', error);
 		}
@@ -66,9 +70,11 @@ export default function CreationTache() {
 
 	const getAllIcons = async () => {
 		try {
-			const response = await axios.get('http://localhsot:8081/getAllIcons')
+			const response = await axios.get('http://localhost:8081/getAllIcons')
+			console.log("Response status getAllIcons : ", response.status)
 			Object.entries(response.data).forEach(([key, value]) => {
-				setIcones(prevState => ({ ...prevState, [key]: value }))
+				console.log('icone value : ', key + ' ' + value['nomIcone'])
+				setIcones(prevState => ({ ...prevState, [key]: value['nomIcone'] }))
 			})
 		} catch (error) {
 			console.log('Erreur getAllIcons : ', error)
@@ -81,12 +87,8 @@ export default function CreationTache() {
 	}
 
 	const handleTitleChange = (event) => {
-		var taches = { ...tache }
-		taches.nom = event.target.value
-		console.log('handleClick création tache')
-		console.log(taches)
-		setTache(taches)
-		console.log(taches)
+		var prevState = { ...tache }
+		setTache(prevState => ({...prevState, [event.target.id]:event.target.value}))
 	}
 
 	const handleDateDebutChange = (event) => {
@@ -110,17 +112,15 @@ export default function CreationTache() {
 		Object.entries(tache).forEach(([key, value]) => {
 			console.log(key, value)
 		})
-
 	}
 
 	const handleSelectorChange = (event) => {
 		let index = event.target.value
 		console.log('Sélecteur : ', index)
-		console.log('Contenu : ', evenements[index])
 	}
 
 	return (
-		<div className='container'>
+		<div className='container d-flex flex-column gap-3'>
 			<h3 style={{ marginBottom: '25px' }}> Créez-vous une nouvelle habitude</h3>
 
 			<InputGenericText nomLabel={'Nommez là !'} titre={tache.nom}
@@ -138,35 +138,42 @@ export default function CreationTache() {
 			<InputModalText nomLabel={'A partir du : '}
 				method={handleDateDebutChange} exemple={new Date().toLocaleDateString()} onClick={() => console.log('Clic')} />
 
-			<InputModalQuantity nomLabel={'Fréquence : '} method={handleFrequenceChange} exemple='Quotidiennement'/>
+			<InputModalQuantity nomLabel={'Fréquence : '} method={handleFrequenceChange}
+				periode='jours' />
 
-			<div className='container-md wrapper-profil'>
-				<select className="form-select form-control profil-border" aria-label="Default select example"
-					onChange={event => handleSelectorChange(event)} defaultValue="Sélectionner un type d'évènement">
-					<option value="0">Tâche</option>
-					<option value="1">Habitude</option>
-					<option value="2">Addiction</option>
-				</select>
+			<div className='container'>
+				<div className='row'>
+					<div className='col-md-5 col-8'>
+						<label htmlFor="typeEvenement" className='form-label'>Nature d'évènement : </label>
+						<select className="form-select form-control profil-border" id='typeEvenement' aria-label="Default select example"
+							onChange={event => handleSelectorChange(event)} defaultValue="Sélectionner un type d'évènement">
+							<option value="0">Tâche</option>
+							<option value="1">Habitude</option>
+							<option value="2">Addiction</option>
+						</select>
+					</div>
+				</div>
 			</div>
 
-			<div className='container' style={{ marginTop: '25px' }}> Type : </div>
-			<div className='container d-flex justify-content-evenly'>
-				<button className='btn btn-outline-primary choix-bouton-type' data-bs-toggle="button" onClick={handleClickToDo}>Fait/ A faire</button>
-				<button className='btn btn-outline-primary choix-bouton-type' data-bs-toggle="button" onClick={handleClickQuota}>Quota à atteindre</button>
-
+			<div className='container' style={{ marginTop: '25px' }}>Type d'évènement</div>
+			<div className='container'>
+				<div className='row'>
+					<div className='col-md-5 col-8'>
+						<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+							<input type="radio" class="btn-check" name="todo" id="todo" autocomplete="off" checked />
+							<label class="btn btn-outline-primary" htmlFor="todo">Fait/ A faire</label>
+						</div>
+					</div>
+				</div>
+				{/*<div className='container' style={{ height: '30vh' }}>
+					<label htmlFor="quota">Sélectionner votre objectifs:</label>
+					<input type="number" id="quota" name="quota" min="0" max="1000" />
+				</div> */}
 			</div>
 
-			<div className='container' style={{ height: '30vh' }}>
-				<label htmlFor="quota">Sélectionner votre objectifs:</label>
-				<input type="number" id="quota" name="quota" min="0" max="1000" />
-
-			</div>
-			<div className='container d-flex justify-content-evenly'>
-
-				<a href="#" className='btn boutonValiderProfil' onClick={handleSubmit}>Valider</a>
-
+			<div className='container d-flex flex-start'>
+				<a href="#" className='btn' onClick={handleSubmit}>Valider</a>
 				<a href="#" className='btn boutonAnnuler'>Annuler</a>
-
 				{/* <GenericButton label="Valider" buttonStyle='boutonValider' method={handleSubmit}/> */}
 			</div>
 		</div>
