@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import InputGenericText from './InputGenericText'
 import ModaleLogo from './ModaleLogo'
-import rasp from '../assets/logo-rasp.svg'
+import { dataImage } from '../_helpers/data.env'
 import { useState } from 'react'
 import { ReactDOM } from 'react'
 import InputModalText from './InputModalText'
@@ -35,30 +35,36 @@ const handleClickQuota = () => {
 
 export default function CreationTache() {
 
+
+	const [checkErrorMessage, setErrorMessage] = useState('')
 	const [evenements, setEvenements] = useState('')
 	const [icones, setIcones] = useState('')
+	const [dataIcon, setDataIcon] = useState(dataImage)
+	const [singleIcon, setSingleIcon] = useState(dataImage[0])
+	const [isOpen, setIsOpen] = useState(false)
+	const [tache, setTache] = useState({
+		nom: '',
+		dateDebut: '',
+		frequence: '',
+		typeEvenement: '0',
+		logo: '0'
+	})
 
 	useEffect(() => {
 		getTypeEvenements()
-		getAllIcons()
-	},[])
 
-	const [isOpen, setIsOpen] = useState(false)
+	}, [singleIcon])
 
-	const [tache, setTache] = useState({
-		nom: '',
-		dateDebut: new Date().toLocaleDateString(),
-		frequence: '',
-		type: '',
-		logo: rasp
-	})
 
 	const getTypeEvenements = async () => {
 		try {
 			const response = await axios.get('http://localhost:8081/getAllEvenements')
+			console.log("Response status getTypeEvenements : ", response.status)
 			Object.entries(response.data).forEach(([key, value]) => {
-				setEvenements(prevState => ({ ...prevState, [key]: value }))
+				console.log('evt value : ', key + ' ' + value['nomTypeEvenement'])
+				setEvenements(prevState => ({ ...prevState, [key]: value['nomTypeEvenement'] }))
 			})
+
 		} catch (error) {
 			console.error('Erreur getTypeEvenements : ', error);
 		}
@@ -66,9 +72,11 @@ export default function CreationTache() {
 
 	const getAllIcons = async () => {
 		try {
-			const response = await axios.get('http://localhsot:8081/getAllIcons')
+			const response = await axios.get('http://localhost:8081/getAllIcons')
+			console.log("Response status getAllIcons : ", response.status)
 			Object.entries(response.data).forEach(([key, value]) => {
-				setIcones(prevState => ({ ...prevState, [key]: value }))
+				console.log('icone value : ', key + ' ' + value['nomIcone'])
+				setIcones(prevState => ({ ...prevState, [key]: value['nomIcone'] }))
 			})
 		} catch (error) {
 			console.log('Erreur getAllIcons : ', error)
@@ -78,97 +86,101 @@ export default function CreationTache() {
 	const handleCallbackLogo = (logo) => {
 		var taches = { ...tache }
 		console.log('handleCallbackLogo : ' + logo)
-	}
-
-	const handleTitleChange = (event) => {
-		var taches = { ...tache }
-		taches.nom = event.target.value
-		console.log('handleClick création tache')
-		console.log(taches)
+		setSingleIcon(dataImage[logo])
+		taches.logo=logo
 		setTache(taches)
-		console.log(taches)
 	}
 
-	const handleDateDebutChange = (event) => {
-		var taches = { ...tache }
-		taches.dateDebut = event.target.value
-		console.log(taches)
-		setTache(taches)
-		console.log(taches)
+	const handleChange = (event) => {
+        console.log("Handle Change in création tache : ", [event.target.id]+':'+event.target.value)
+		setTache(prevTache => ({...prevTache, [event.target.id]:event.target.value}))
 	}
 
-	const handleFrequenceChange = (event) => {
-		var taches = { ...tache }
-		taches.frequence = event.target.value
-		console.log(taches)
-		setTache(taches)
-		console.log(taches)
-	}
-
-	const handleSubmit = () => {
-		console.log("Submit : " + tache)
+	const handleSubmit = (event) => {
+		event.preventDefault()
 		Object.entries(tache).forEach(([key, value]) => {
-			console.log(key, value)
+			console.log(key+' : '+value+' - '+'typeof : '+
+			typeof(value)+ ' - '+' undefined : '+ (value == undefined))
 		})
+		const checkTacheData = Object.values(tache).some(value => value.length === 0)
+		if (checkTacheData) {
+			setErrorMessage("Il manque une ou plusieurs informations obligatoires")
 
+		} else {
+			console.log("Chouette, ça va partie en base de données")
+			createNewTache(tache)
+	}
+}
+
+	const createNewTache = async (tache) =>{
+		try {
+			const response = await axios.post('http://localhost:8081/pouet',tache)
+			console.log(response.status)
+
+		} catch (error) {
+			console.log("Erreur de lors de la création de la nouvelle tâche")
+		}
 	}
 
-	const handleSelectorChange = (event) => {
-		let index = event.target.value
-		console.log('Sélecteur : ', index)
-		console.log('Contenu : ', evenements[index])
-	}
 
 	return (
-		<div className='container'>
+		<div className='container d-flex flex-column gap-3'>
 			<h3 style={{ marginBottom: '25px' }}> Créez-vous une nouvelle habitude</h3>
 
-			<InputGenericText nomLabel={'Nommez là !'} titre={tache.nom}
-				method={event => handleTitleChange(event)} exemple='Couche-tôt !' />
+			<InputGenericText nomLabel={"Nommez votre nouvel évènement :"} label='nom' titre={tache.nom}
+				method={handleChange} exemple='Couche-tôt !' />
 
 			<div className='container'>
 				<button className='btn btn-light' onClick={() => setIsOpen(true)}>
-					<img src={tache.logo} alt="icone evt" style={{ height: '42px', width: '52px' }}></img>
+					<img src={singleIcon} alt="icone evt" style={{ height: '42px', width: '52px' }}></img>
 				</button>
-				<ModaleLogo open={isOpen} onClose={() => setIsOpen(false)} parentCallback={handleCallbackLogo}>
+				<ModaleLogo open={isOpen} onClose={() => setIsOpen(false)} data={dataIcon} parentCallback={handleCallbackLogo}>
 					Coucou
 				</ModaleLogo>
 			</div>
 
-			<InputModalText nomLabel={'A partir du : '}
-				method={handleDateDebutChange} exemple={new Date().toLocaleDateString()} onClick={() => console.log('Clic')} />
+			<InputModalText nomLabel='A partir du : ' id='dateDebut'
+				method={handleChange} exemple={new Date().toLocaleDateString()} onClick={() => console.log('Clic')} />
 
-			<InputModalQuantity nomLabel={'Fréquence : '} method={handleFrequenceChange} exemple='Quotidiennement'/>
+			<InputModalQuantity nomLabel={'Fréquence : '} id='frequence'  method={handleChange}
+				periode='jours' minimum />
 
-			<div className='container-md wrapper-profil'>
-				<select className="form-select form-control profil-border" aria-label="Default select example"
-					onChange={event => handleSelectorChange(event)} defaultValue="Sélectionner un type d'évènement">
-					<option value="0">Tâche</option>
-					<option value="1">Habitude</option>
-					<option value="2">Addiction</option>
-				</select>
+			<div className='container'>
+				<div className='row'>
+					<div className='col-md-5 col-8'>
+						<label htmlFor="typeEvenement" className='form-label'>Type d'évènement : </label>
+						<select className="form-select form-control profil-border" id='typeEvenement' aria-label="Default select example"
+							onChange={handleChange} defaultValue='0'>
+							<option value="0">Tâche</option>
+							<option value="1">Habitude</option>
+							<option value="2">Addiction</option>
+						</select>
+					</div>
+				</div>
 			</div>
 
-			<div className='container' style={{ marginTop: '25px' }}> Type : </div>
-			<div className='container d-flex justify-content-evenly'>
-				<button className='btn btn-outline-primary choix-bouton-type' data-bs-toggle="button" onClick={handleClickToDo}>Fait/ A faire</button>
-				<button className='btn btn-outline-primary choix-bouton-type' data-bs-toggle="button" onClick={handleClickQuota}>Quota à atteindre</button>
-
+			<div className='container' style={{ marginTop: '25px' }}>Nature d'évènement</div>
+			<div className='container'>
+				<div className='row'>
+					<div className='col-md-5 col-8'>
+						<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+							<input type="radio" class="btn-check" name="todo" id="todo" autocomplete="off" checked />
+							<label class="btn btn-outline-primary" htmlFor="todo">Fait/ A faire</label>
+						</div>
+					</div>
+				</div>
+				{/*<div className='container' style={{ height: '30vh' }}>
+					<label htmlFor="quota">Sélectionner votre objectifs:</label>
+					<input type="number" id="quota" name="quota" min="0" max="1000" />
+				</div> */}
 			</div>
 
-			<div className='container' style={{ height: '30vh' }}>
-				<label htmlFor="quota">Sélectionner votre objectifs:</label>
-				<input type="number" id="quota" name="quota" min="0" max="1000" />
-
-			</div>
-			<div className='container d-flex justify-content-evenly'>
-
-				<a href="#" className='btn boutonValiderProfil' onClick={handleSubmit}>Valider</a>
-
-				<a href="#" className='btn boutonAnnuler'>Annuler</a>
-
+			<div className='container d-flex flex-start'>
+				<a href="" className='btn' onClick={handleSubmit}>Valider</a>
+				<a href="" className='btn boutonAnnuler'>Annuler</a>
 				{/* <GenericButton label="Valider" buttonStyle='boutonValider' method={handleSubmit}/> */}
 			</div>
+			{checkErrorMessage && (<div style={{color:'red'}}>{checkErrorMessage}</div>)}
 		</div>
 	)
 }

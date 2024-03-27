@@ -189,7 +189,7 @@ app.put('/updateAddress', (req, res) => {
 // ************** TÂCHES ****************** //
 /* Méthodes pour la création de tâche */
 app.get('/getAllEvenements', (req, res) => {
-    const sql = "SELECT idTypeEvenement, nomTypeEvenement FROM type_evenement;"
+    const sql = "SELECT nomTypeEvenement FROM type_evenement;"
     db.query(sql, (err, data) => {
         if (err) {
             return res.status(500).json({
@@ -197,8 +197,8 @@ app.get('/getAllEvenements', (req, res) => {
                 details: err
             });
         }
-        if (data.length > 0) {
-            return res.status(200).json({ success: "Liste des types d'évènements récupérés.", data: data });
+        if (data && data.length > 0) {
+            return res.status(200).json(data);
         } else {
             return res.status(404).json({ error: "Aucun type d'évènements trouvés en base." });
         }
@@ -206,19 +206,19 @@ app.get('/getAllEvenements', (req, res) => {
 })
 
 app.get('/getAllIcons', (req, res) => {
-    const sql="SELECT idIcone, nomIcone FROM icone;"
+    const sql="SELECT nomIcone FROM icone;"
     db.query(sql, (err, data)=> {
         if (err) {
             return res.status(500).json({error:"Erreur lors de la récupération des icones",
         details:err})
         }
-        if (data.length>0) {
-            return res.status(200).json({ success:"Liste des icones récupérées", data:data})
+        if (data && data.length>0) {
+            return res.status(200).json(data)
         } else {
             return res.status(404).json({error:"Aucune icone trouvée en base de données."})
         }
     })
-} )
+})
 
 app.listen(PORT, () => {
     console.log("Connected to the server")
