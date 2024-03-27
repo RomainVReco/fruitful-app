@@ -98,15 +98,24 @@ app.put('/updateClient', (req, res) => {
 
 app.post('/updateTestUserName/:id', (req, res) => {
     const idClient = req.params.id;
-    const nouveauNom = req.body.nouveauNom; // Nouveau nom à mettre à jour
+    const nouvelEtatAbonne = req.body.estAbonne; // Nouvel état abonné à mettre à jour
+    console.log('Nouvel Etat Abonné : ' + nouvelEtatAbonne);
+    const sql = "UPDATE utilisateur SET estAbonne = ? WHERE idClient = ?";
+    db.query(sql, [nouvelEtatAbonne, idClient], (err, result) => {
+        if (err) {
+            return res.json('Erreur lors de la mise à jour du statut abonné: ' + err);
+        }
+        return res.json('Mise à jour du status abonné réalisée avec succès');
+    });
     
-    const sql = "UPDATE utilisateur SET s_nom = ? WHERE i_id_utilisateur = ?";
+    /*const sql = "UPDATE utilisateur SET s_nom = ? WHERE i_id_utilisateur = ?";
     db.query(sql, [nouveauNom, idClient], (err, result) => {
         if (err) {
             return res.json('Erreur lors de la mise à jour du nom : ' + err);
         }
         return res.json('Nom utilisateur mis à jour avec succès');
     });
+    */
 });
 
 // ************** ADRESSE ****************** //

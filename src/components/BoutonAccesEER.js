@@ -18,7 +18,7 @@ function BoutonAccesEER() {
       <Container fluid className="d-flex justify-content-center align-items-center vh-30">
       <Row>
         <Col className="text-center">
-          <Link to="/pageInscriptionPremium">
+          <Link to="/Inscription">
             <Button variant="warning" style={buttonStyle}>Je rejoins l'aventure!</Button>
           </Link>
         </Col>

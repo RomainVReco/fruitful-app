@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import InputProfilText from './InputProfilText';
-import BankInfoForm from './BankInfoForm';
+//import BankInfoForm from './a_suppr_BankInfoForm';
 
 export default function PageInscriptionPremium() {
     const headers = {
@@ -65,8 +65,6 @@ export default function PageInscriptionPremium() {
         <br />
         <h1>Devenez membre Premium et accéder à toute l'étendue de nos services! </h1>
         <br />
-        <BankInfoForm />
-
         
         <div className='container d-flex flex-column gap-3 '>
         <h2>Login</h2>
