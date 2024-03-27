@@ -98,8 +98,8 @@ app.put('/updateClient', (req, res) => {
 
 app.post('/updateTestUserName/:id', (req, res) => {
     const idClient = req.params.id;
-    const nouvelEtatAbonne = req.body.nouvelEtatAbonne; // Nouvel état abonné à mettre à jour
-    
+    const nouvelEtatAbonne = req.body.estAbonne; // Nouvel état abonné à mettre à jour
+    console.log('Nouvel Etat Abonné : ' + nouvelEtatAbonne);
     const sql = "UPDATE utilisateur SET estAbonne = ? WHERE idClient = ?";
     db.query(sql, [nouvelEtatAbonne, idClient], (err, result) => {
         if (err) {
