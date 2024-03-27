@@ -106,8 +106,22 @@ export default function CreationTache() {
 		if (checkTacheData) {
 			setErrorMessage("Il manque une ou plusieurs informations obligatoires")
 
-		} else console.log("Chouette, ça va partie en base de données")
+		} else {
+			console.log("Chouette, ça va partie en base de données")
+			createNewTache(tache)
 	}
+}
+
+	const createNewTache = async (tache) =>{
+		try {
+			const response = await axios.post('http://localhost:8081/pouet',tache)
+			console.log(response.status)
+
+		} catch (error) {
+			console.log("Erreur de lors de la création de la nouvelle tâche")
+		}
+	}
+
 
 	return (
 		<div className='container d-flex flex-column gap-3'>
@@ -129,7 +143,7 @@ export default function CreationTache() {
 				method={handleChange} exemple={new Date().toLocaleDateString()} onClick={() => console.log('Clic')} />
 
 			<InputModalQuantity nomLabel={'Fréquence : '} id='frequence'  method={handleChange}
-				periode='jours' />
+				periode='jours' minimum />
 
 			<div className='container'>
 				<div className='row'>
