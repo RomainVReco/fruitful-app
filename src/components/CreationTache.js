@@ -3,10 +3,10 @@ import InputGenericText from './InputGenericText'
 import ModaleLogo from './ModaleLogo'
 import { dataImage } from '../_helpers/data.env'
 import { useState } from 'react'
-import { ReactDOM } from 'react'
 import InputModalText from './InputModalText'
 import axios from 'axios'
 import InputModalQuantity from './InputModalQuantity'
+import { Link } from 'react-router-dom'
 
 
 export default function CreationTache() {
@@ -23,10 +23,10 @@ export default function CreationTache() {
 	const [tache, setTache] = useState({
 		nom: '',
 		dateDebut: '',
-		frequence: '',
+		frequence: '1',
 		typeEvenement: '1',
-		idClient:7, 
-		logo: '0'
+		idClient: 7,
+		logo: '0',
 	})
 
 	useEffect(() => {
@@ -66,20 +66,20 @@ export default function CreationTache() {
 		var taches = { ...tache }
 		console.log('handleCallbackLogo : ' + logo)
 		setSingleIcon(dataImage[logo])
-		taches.logo=logo
+		taches.logo = logo
 		setTache(taches)
 	}
 
 	const handleChange = (event) => {
-        console.log("Handle Change in création tache : ", [event.target.id]+':'+event.target.value)
-		setTache(prevTache => ({...prevTache, [event.target.id]:event.target.value}))
+		console.log("Handle Change in création tache : ", [event.target.id] + ':' + event.target.value)
+		setTache(prevTache => ({ ...prevTache, [event.target.id]: event.target.value }))
 	}
 
 	const handleSubmit = (event) => {
 		event.preventDefault()
 		Object.entries(tache).forEach(([key, value]) => {
-			console.log(key+' : '+value+' - '+'typeof : '+
-			typeof(value)+ ' - '+' undefined : '+ (value == undefined))
+			console.log(key + ' : ' + value + ' - ' + 'typeof : ' +
+				typeof (value) + ' - ' + ' undefined : ' + (value == undefined))
 		})
 		const checkTacheData = Object.values(tache).some(value => value.length === 0)
 		if (checkTacheData) {
@@ -88,12 +88,12 @@ export default function CreationTache() {
 		} else {
 			console.log("Chouette, ça va partir en base de données")
 			createNewTache(tache)
+		}
 	}
-}
 
-	const createNewTache = async (tache) =>{
+	const createNewTache = async (tache) => {
 		try {
-			const response = await axios.post('http://localhost:8081/createNewEvent',tache)
+			const response = await axios.post('http://localhost:8081/createNewEvent', tache)
 			console.log(response.status)
 
 		} catch (error) {
@@ -121,8 +121,8 @@ export default function CreationTache() {
 			<InputModalText nomLabel='A partir du : ' id='dateDebut'
 				method={handleChange} exemple={new Date().toLocaleDateString()} onClick={() => console.log('Clic')} />
 
-			<InputModalQuantity nomLabel={'Fréquence : '} id='frequence'  method={handleChange}
-				periode='jours' minimum />
+			<InputModalQuantity nomLabel={'Fréquence : '} id='frequence' method={handleChange}
+				titre={tache.frequence} periode='jours' minimum />
 
 			<div className='container'>
 				<div className='row'>
@@ -130,9 +130,9 @@ export default function CreationTache() {
 						<label htmlFor="typeEvenement" className='form-label'>Type d'évènement : </label>
 						<select className="form-select form-control profil-border" id='typeEvenement' aria-label="Default select example"
 							onChange={handleChange} defaultValue='0'>
-							<option value="1">Tâche</option>
-							<option value="2">Habitude</option>
-							<option value="3">Addiction</option>
+							<option value="0">Tâche</option>
+							<option value="1">Habitude</option>
+							<option value="2">Addiction</option>
 						</select>
 					</div>
 				</div>
@@ -156,10 +156,12 @@ export default function CreationTache() {
 
 			<div className='container d-flex flex-start'>
 				<a href="" className='btn' onClick={handleSubmit}>Valider</a>
-				<a href="" className='btn boutonAnnuler'>Annuler</a>
+				<a href="" className='btn boutonAnnuler'>
+					<Link to='/listeTaches'>Annuler</Link>
+				</a>
 				{/* <GenericButton label="Valider" buttonStyle='boutonValider' method={handleSubmit}/> */}
 			</div>
-			{checkErrorMessage && (<div style={{color:'red'}}>{checkErrorMessage}</div>)}
+			{checkErrorMessage && (<div style={{ color: 'red' }}>{checkErrorMessage}</div>)}
 		</div>
 	)
 }

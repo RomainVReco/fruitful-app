@@ -40,8 +40,7 @@ function App() {
         <Route path ="/pageInscriptionPremium" element={<PageInscriptionPremium/>} />
         <Route path ="/pageInscriptionPremium1" element={<PageInscriptionPremium1/>} />
         <Route path ="/pageInscriptionPremium2" element={<PageInscriptionPremium2/>} />
-        <Route path="/" element={<Base />} />
-        <Route path="/creationTache" element={<CreationTache />} />
+        <Route path="/listeTaches" element={<Base />} />
         <Route path="/modifierTache" element={<ModifierTache/>} />
         <Route path="/profil" element={<Profil />} />
         <Route path="/login" element={<Login />} />
