@@ -54,7 +54,7 @@ export default function CreationTache() {
 		nom: '',
 		dateDebut: '',
 		frequence: '',
-		typeEvenement: '0',
+		typeEvenement: '1',
 		idClient:7, 
 		logo: '0'
 	})
@@ -123,7 +123,7 @@ export default function CreationTache() {
 
 	const createNewTache = async (tache) =>{
 		try {
-			const response = await axios.post('http://localhost:8081/createNewEvent',tache, headers)
+			const response = await axios.post('http://localhost:8081/createNewEvent',tache)
 			console.log(response.status)
 
 		} catch (error) {
@@ -160,9 +160,9 @@ export default function CreationTache() {
 						<label htmlFor="typeEvenement" className='form-label'>Type d'évènement : </label>
 						<select className="form-select form-control profil-border" id='typeEvenement' aria-label="Default select example"
 							onChange={handleChange} defaultValue='0'>
-							<option value="0">Tâche</option>
-							<option value="1">Habitude</option>
-							<option value="2">Addiction</option>
+							<option value="1">Tâche</option>
+							<option value="2">Habitude</option>
+							<option value="3">Addiction</option>
 						</select>
 					</div>
 				</div>
@@ -174,7 +174,7 @@ export default function CreationTache() {
 					<div className='col-md-5 col-8'>
 						<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
 							<input type="radio" class="btn-check" name="todo" id="todo" autocomplete="off" checked />
-							<label class="btn btn-outline-primary" htmlFor="todo">Fait/ A faire</label>
+							<label class="btn btn-outline-primary" htmlFor="todo">Fait / A faire</label>
 						</div>
 					</div>
 				</div>
