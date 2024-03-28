@@ -20,17 +20,17 @@ export default function ModifierTache() {
 
     // attention à bien ajouter la récupération du jeton
     const [tache, setTache] = useState({
-        idEvenement:'',
+        idEvenement: '2',
         nom: 'Nom local',
         dateDebut: '01/01/1970',
         frequence: '3',
         typeEvenement: '2',
         idClient: 7,
         logo: '5',
-        estActif:'1'
+        estActif: '1'
     })
 
-    const [suppressionTache, setSuppressionTache] = useState()
+    const [suppressionTache, setSuppressionTache] = useState('')
 
     const [singleIcon, setSingleIcon] = useState(dataIcon[tache.logo])
     useEffect(() => {
@@ -94,15 +94,15 @@ export default function ModifierTache() {
         }
     }
 
-    const handleDelete = async (event) => {
+    const handleDelete = async (event, idEvenement) => {
         event.preventDefault()
         try {
-            const response = await axios.put('http://localhost:8081/updateEventStatus/:id')
+            const response = await axios.put(`http://localhost:8081/updateEventStatus/${idEvenement}`)
+            console.log('updateEventStatus : ', response.status)
+            console.log('updateEventStatus : ', response.data)
+        } catch (error) {
+            console.log("Erreur lors de la désactivation d'une tâche", error)
         }
-
-
-
-
     }
 
 
@@ -165,7 +165,7 @@ export default function ModifierTache() {
                 <a href="" className='btn boutonAnnuler'>
                     <Link to='/listeTaches'>Annuler</Link>
                 </a>
-                <a href="" className='btn boutonAnnuler' onClick={handleDelete}>Supprimer</a>
+                <a href="" className='btn boutonAnnuler' onClick={(event) => handleDelete(event, tache.idEvenement)}>Supprimer</a>
                 {/* <GenericButton label="Valider" buttonStyle='boutonValider' method={handleSubmit}/> */}
             </div>
             {checkErrorMessage && (<div style={{ color: 'red' }}>{checkErrorMessage}</div>)}

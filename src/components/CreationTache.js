@@ -98,6 +98,8 @@ export default function CreationTache() {
 
 		} catch (error) {
 			console.log("Erreur de lors de la création de la nouvelle tâche")
+			console.log(error)
+			console.log('##################################################')
 		}
 	}
 
