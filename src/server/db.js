@@ -60,11 +60,11 @@ app.post('/login', (req, res) => {
 })
 
 app.post('/logintest1', (req, res) => {
-    console.log("req.body :"+req.body.email)
-    console.log("req.body :"+req.body.password)
+    console.log("req.body :" + req.body.email)
+    console.log("req.body :" + req.body.password)
 
-    const sql = "SELECT s_nom FROM utilisateur WHERE "+
-    "s_email= ?  AND s_mot_de_passe = ?"
+    const sql = "SELECT s_nom FROM utilisateur WHERE " +
+        "s_email= ?  AND s_mot_de_passe = ?"
     db.query(sql, [req.body.email, req.body.password], (err, data) => {
         if (err) {
             console.log('login error : ', err)
@@ -98,6 +98,7 @@ app.put('/updateClient', (req, res) => {
 
 app.post('/updateTestUserName/:id', (req, res) => {
     const idClient = req.params.id;
+
     const nouvelEtatAbonne = req.body.estAbonne; // Nouvel état abonné à mettre à jour
     console.log('Nouvel Etat Abonné : ' + nouvelEtatAbonne);
     const sql = "UPDATE utilisateur SET estAbonne = ? WHERE idClient = ?";
@@ -109,6 +110,7 @@ app.post('/updateTestUserName/:id', (req, res) => {
     });
     
     /*const sql = "UPDATE utilisateur SET s_nom = ? WHERE i_id_utilisateur = ?";
+
     db.query(sql, [nouveauNom, idClient], (err, result) => {
         if (err) {
             return res.json('Erreur lors de la mise à jour du nom : ' + err);
@@ -206,19 +208,26 @@ app.get('/getAllEvenements', (req, res) => {
 })
 
 app.get('/getAllIcons', (req, res) => {
+
     const sql="SELECT nomIcone FROM icone;"
     db.query(sql, (err, data)=> {
+
         if (err) {
-            return res.status(500).json({error:"Erreur lors de la récupération des icones",
-        details:err})
+            return res.status(500).json({
+                error: "Erreur lors de la récupération des icones",
+                details: err
+            })
         }
+
         if (data && data.length>0) {
             return res.status(200).json(data)
+
         } else {
-            return res.status(404).json({error:"Aucune icone trouvée en base de données."})
+            return res.status(404).json({ error: "Aucune icone trouvée en base de données." })
         }
     })
 })
+
 
 app.post('/createNewEvent', (req, res) => {
     const {nom, dateDebut, frequence, typeEvenement, idClient, logo} = req.body
@@ -263,6 +272,49 @@ app.put('/updateEvent', (req, res) => {
     res.status(200).json("/updateEvent ==> ça marche buddy")
 })
 
+
 app.listen(PORT, () => {
     console.log("Connected to the server")
+})
+
+// ************** INSCRIPTION ****************** //
+/* Méthodes CRUD pour l'inscription */
+
+
+
+app.post('/checkEmail', (req, res) => {
+
+    const email = req
+    console.log("email ds db ", email.email)
+    const sql = "SELECT COUNT(*) AS count FROM users WHERE email = ?"
+    db.query(sql, [email], (error, data) => {
+
+        const email = req.body.email
+        console.log('server : ', email)
+        const sql = "SELECT COUNT(*) AS count FROM users WHERE email = ?"
+        db.query(sql, [email], (error, data) => {
+            if (error) {
+                console.log("err : ", error);
+                //     return res.status(500).json({error:"Erreur lors de la récupération des icones",
+                // details:err})
+                // }
+                // if (data.length>0) {
+                //     return res.status(200).json({ success:"Liste des icones récupérées", data:data})
+                // } else {
+                //     return res.status(404).json({error:"Aucune icone trouvée en base de données."})
+                // }
+                return res.json('Erreur de requête SQL');
+            }
+            console.log("DATA :", data,)
+            if (data.length > 0) {
+                console.log("data : ", data)
+                return res.json("ok")
+            } else {
+                console.log("data : ", data)
+                return res.json("Aucune information client trouvée")
+            }
+
+
+        })
+    })
 })
