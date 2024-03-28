@@ -1,16 +1,14 @@
 import React, { useEffect } from 'react'
-import InputGenericText from './InputGenericText'
-import ModaleLogo from './ModaleLogo'
+import InputGenericText from '../components/InputGenericText'
+import ModaleLogo from '../components/ModaleLogo'
 import { dataImage } from '../_helpers/data.env'
 import { useState } from 'react'
-import { ReactDOM } from 'react'
-import InputModalText from './InputModalText'
+import InputModalText from '../components/InputModalText'
 import axios from 'axios'
-import InputModalQuantity from './InputModalQuantity'
+import InputModalQuantity from '../components/InputModalQuantity'
 
 
-export default function CreationTache() {
-
+export default function ModifierTache() {
 
 	const [checkErrorMessage, setErrorMessage] = useState('')
 	const [evenements, setEvenements] = useState('')
@@ -104,10 +102,10 @@ export default function CreationTache() {
 
 	return (
 		<div className='container d-flex flex-column gap-3'>
-			<h3 style={{ marginBottom: '25px' }}> Créez-vous une nouvelle habitude</h3>
+			<h3 style={{ marginBottom: '25px' }}> Modifier votre évènement </h3>
 
-			<InputGenericText nomLabel={"Nommez votre nouvel évènement :"} label='nom' titre={tache.nom}
-				method={handleChange} exemple='Couche-tôt !' />
+			<InputGenericText nomLabel={`Nom de votre ${evenements[tache['typeEvenement']]} : `} label='nom' titre={tache.nom}
+				method={handleChange} value={tache.nom} />
 
 			<div className='container'>
 				<button className='btn btn-light' onClick={() => setIsOpen(true)}>
@@ -155,8 +153,9 @@ export default function CreationTache() {
 			</div>
 
 			<div className='container d-flex flex-start'>
-				<a href="" className='btn' onClick={handleSubmit}>Valider</a>
+				<a href="" className='btn' onClick={handleSubmit}>Modifier</a>
 				<a href="" className='btn boutonAnnuler'>Annuler</a>
+                <a href="" className='btn boutonAnnuler'>Supprimer</a>
 				{/* <GenericButton label="Valider" buttonStyle='boutonValider' method={handleSubmit}/> */}
 			</div>
 			{checkErrorMessage && (<div style={{color:'red'}}>{checkErrorMessage}</div>)}
