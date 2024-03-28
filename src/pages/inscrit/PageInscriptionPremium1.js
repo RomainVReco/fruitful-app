@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { gestionConnexion } from '../_helpers/gestion.connexion';
+import { gestionConnexion } from '../../_helpers/gestion.connexion';
 import axios from 'axios';
 
 export default function PageInscriptionPremium1() {

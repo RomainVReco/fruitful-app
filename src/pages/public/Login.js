@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import InputProfilText from './InputProfilText';
-import { gestionConnexion } from '../_helpers/gestion.connexion';
+import InputProfilText from '../../components/InputProfilText';
+import { gestionConnexion } from '../../_helpers/gestion.connexion';
 
 
 

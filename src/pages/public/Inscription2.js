@@ -1,14 +1,6 @@
 import React from "react";
-import Header from "./Header";
-import InputTache from "./InputGenericText";
-import InputGenericText from "./InputGenericText";
-import ModaleLogo from "./ModaleLogo";
 import { useState } from "react";
-import { ReactDOM } from "react";
-import InputModalText from "./InputModalText";
-import bebe from "../assets/bebe.png";
-import GenericButton from "./GenericButton";
-import Inscription3 from "./Inscription3";
+import bebe from '../../assets/bebe.png'
 import {
   BrowserRouter as Router,
   Route,

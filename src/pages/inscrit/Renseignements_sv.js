@@ -1,17 +1,17 @@
 import React from "react";
-import Header from "./Header";
-import InputTache from "./InputGenericText";
-import InputGenericText from "./InputGenericText";
-import ModaleLogo from "./ModaleLogo";
+import Header from "../../components/Header";
+import InputTache from "../../components/InputGenericText";
+import InputGenericText from "../../components/InputGenericText";
+import ModaleLogo from "../../components/ModaleLogo";
 import { useState } from "react";
 import { ReactDOM } from "react";
-import InputModalText from "./InputModalText";
+import InputModalText from "../../components/InputModalText";
 import bebe from "../assets/bebe.png";
-import GenericButton from "./GenericButton";
+import GenericButton from "../../components/GenericButton";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Inscription2 from "./Inscription2";
-import Inscription3 from "./Inscription3";
-import BoutonSuivant from "./BoutonSuivant";
+import Inscription2 from "../public/Inscription2";
+import Inscription3 from "../public/Inscription3";
+import BoutonSuivant from "../../components/BoutonSuivant";
 
 
   class CaseACocher extends Component {

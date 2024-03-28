@@ -1,7 +1,6 @@
 import React from "react";
-import GenericButton from './GenericButton'
-import Tache from './Tache';
-import ActionBar from "./ActionBar";
+import GenericButton from '../../components/GenericButton'
+import Tache from '../../components/Tache';
 
 const handleSubmit = (event) => {
     event.preventDefault()
@@ -19,7 +18,6 @@ export default function Base () {
         <GenericButton label={'Valider'} buttonStyle={'boutonValider'} method={handleSubmit}/>
         <GenericButton label={'Annuler'} buttonStyle={'boutonAnnuler'} method={handleSubmit}/>
         </>
-      <ActionBar />
     </div>
     )
 }

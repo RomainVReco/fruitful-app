@@ -1,13 +1,13 @@
 import React from "react";
-import Header from "./Header";
-import InputTache from "./InputGenericText";
-import InputGenericText from "./InputGenericText";
-import ModaleLogo from "./ModaleLogo";
+import Header from "../../components/Header";
+import InputTache from "../../components/InputGenericText";
+import InputGenericText from "../../components/InputGenericText";
+import ModaleLogo from "../../components/ModaleLogo";
 import { useState } from "react";
 import { ReactDOM } from "react";
-import InputModalText from "./InputModalText";
+import InputModalText from "../../components/InputModalText";
 import velo from "../assets/velo.png";
-import GenericButton from "./GenericButton";
+import GenericButton from "../../components/GenericButton";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 export default function Inscription() {

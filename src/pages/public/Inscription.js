@@ -1,13 +1,6 @@
 import React from "react";
-import Header from "./Header";
-import InputTache from "./InputGenericText";
-import InputGenericText from "./InputGenericText";
-import ModaleLogo from "./ModaleLogo";
 import { useState } from "react";
-import { ReactDOM } from "react";
-import InputModalText from "./InputModalText";
-import velo from "../assets/velo.png";
-import GenericButton from "./GenericButton";
+import velo from "../../assets/velo.png";
 import {
   BrowserRouter as Router,
   Route,
@@ -16,9 +9,6 @@ import {
   useNavigate,
   Navigate,
 } from "react-router-dom";
-import { Link } from "react-router-dom";
-import Inscription2 from "./Inscription2";
-import BoutonSuivant from "./BoutonSuivant";
 
 export default function Inscription() {
   var dateNaissance = "";

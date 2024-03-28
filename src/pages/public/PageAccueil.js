@@ -1,14 +1,12 @@
 import React from "react";
 
-import Header from "./Header";
-import Inscription from "./Inscription";
-import ImageAccueil from "./ImageAccueil";
-import BoutonAccesEER from "./BoutonAccesEER";
-import Carousel from "./Carousel";
-import image1 from "../assets/tournesol.png";
-import image2 from "../assets/Ciel_Bleu_Mieux_Vivre.png";
-import image3 from "../assets/fleurs_illustre_mieux_gerer_sa_vie.png";
-import image4 from "../assets/ciel_nuageux_Mieux_gerer_ses_addictions.png";
+import ImageAccueil from "../../components/ImageAccueil";
+import BoutonAccesEER from "../../components/BoutonAccesEER";
+import Carousel from "../../components/Carousel";
+import image1 from "../../assets/tournesol.png";
+import image2 from "../../assets/Ciel_Bleu_Mieux_Vivre.png";
+import image3 from "../../assets/fleurs_illustre_mieux_gerer_sa_vie.png";
+import image4 from "../../assets/ciel_nuageux_Mieux_gerer_ses_addictions.png";
 
 export default function PageAccueil() {
 

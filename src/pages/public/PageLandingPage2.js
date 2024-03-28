@@ -1,17 +1,9 @@
 import React from "react";
+import ImageAccueil from '../../components/ImageAccueil'
+import image1 from '../../assets/fleurs_illustre_mieux_gerer_sa_vie.png';
+import image2 from '../../assets/tableau_bord.png';
 
-
-import ImageAccueil from './ImageAccueil'
-import image1 from '../assets/fleurs_illustre_mieux_gerer_sa_vie.png';
-import image2 from '../assets/tableau_bord.png';
-import Button from 'react-bootstrap/Button';
-
-import { Link } from 'react-router-dom';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-
-import BoutonAccesEER from './BoutonAccesEER';
+import BoutonAccesEER from '../../components/BoutonAccesEER';
 
 export default function PageLandingPage2 () {
     

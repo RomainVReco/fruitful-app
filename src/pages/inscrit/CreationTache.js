@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
-import InputGenericText from './InputGenericText'
-import ModaleLogo from './ModaleLogo'
-import { dataImage } from '../_helpers/data.env'
+import InputGenericText from '../../components/InputGenericText'
+import ModaleLogo from '../../components/ModaleLogo'
+import { dataImage } from '../../_helpers/data.env'
 import { useState } from 'react'
-import InputModalText from './InputModalText'
+import InputModalText from '../../components/InputModalText'
 import axios from 'axios'
-import InputModalQuantity from './InputModalQuantity'
+import InputModalQuantity from '../../components/InputModalQuantity'
 import { Link } from 'react-router-dom'
 
 

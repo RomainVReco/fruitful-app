@@ -1,13 +1,5 @@
 import React, { Component } from "react";
-import Header from "./Header";
-import InputTache from "./InputGenericText";
-import InputGenericText from "./InputGenericText";
-import ModaleLogo from "./ModaleLogo";
 import { useState } from "react";
-import { ReactDOM } from "react";
-import InputModalText from "./InputModalText";
-import bebe from "../assets/bebe.png";
-import GenericButton from "./GenericButton";
 import {
   BrowserRouter as Router,
   Route,
@@ -16,8 +8,7 @@ import {
   useNavigate,
   Navigate,
 } from "react-router-dom";
-import Inscription2 from "./Inscription2";
-import contact from "../assets/contact.png";
+import contact from "../../assets/contact.png";
 
 export default function Inscription3() {
   const [email, setEmail] = useState("");

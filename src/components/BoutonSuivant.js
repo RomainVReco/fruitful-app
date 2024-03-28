@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Inscription from "./Inscription";
-import inscription2 from "./Inscription2";
-import inscription3 from "./Inscription3";
-import Renseignement from "./Renseignement";
+import Inscription from "../pages/public/Inscription";
+import inscription2 from "../pages/public/Inscription2";
+import inscription3 from "../pages/public/Inscription3";
+import Renseignement from "../pages/inscrit/Renseignement";
 
 //Fonction concernant le Bouton d'Acces à l'Entrée En Relation (EER) avec l'utilisateur (questionnaire pour mieux le connaitre)
 function BoutonSuivant(page) {
