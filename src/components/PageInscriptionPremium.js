@@ -1,9 +1,16 @@
-import React, { useEffect } from 'react';
+import '../App.css';
+
+import React, { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 const InscriptionPremium = () => {
+  const [modalShow, setModalShow] = useState(false);
+  const [transactionMessage, setTransactionMessage] = useState('');
+
   useEffect(() => {
     const script = document.createElement('script');
     script.src = 'https://www.paypal.com/sdk/js?client-id=AUc9A_Q4BlFKrhLXmVpRkDP4DChqyk3mXCqw_v23Kluwo891aTJRXDhuzLWkAdM6042ih1aGG37s9Kwu'; // Remplacez YOUR_CLIENT_ID par votre propre identifiant client PayPal
@@ -24,7 +31,8 @@ const InscriptionPremium = () => {
         onApprove: function(data, actions) {
           return actions.order.capture().then(function(details) {
             const message = `Transaction réalisée par ${details.payer.name.given_name} via PayPal.`;
-            displayTransactionMessage(message); // Appeler la fonction pour afficher le message de transaction
+            setTransactionMessage(message); // Mettre à jour le message de transaction
+            setModalShow(true); // Ouvrir la modale
           });
         },
         onError: function(err) {
@@ -46,9 +54,8 @@ const InscriptionPremium = () => {
     };
   }, []);
 
-  const displayTransactionMessage = (message) => {
-    // Mettre à jour l'état de votre composant ou effectuer d'autres actions pour afficher le message de transaction
-    alert(message); // Exemple : affichage d'une boîte de dialogue avec le message
+  const handleCloseModal = () => {
+    setModalShow(false);
   };
 
   return (
@@ -64,6 +71,19 @@ const InscriptionPremium = () => {
           </Col>
         </Row>
       </Container>
+
+      {/* Modale pour afficher le message de transaction */}
+      <Modal show={modalShow} onHide={handleCloseModal}  className="modale-abonnement-paye">
+        <Modal.Header closeButton>
+          <Modal.Title>Message de transaction</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{transactionMessage}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Fermer
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
