@@ -101,7 +101,18 @@ export default function ModifierTache() {
             console.log('updateEventStatus : ', response.status)
             console.log('updateEventStatus : ', response.data)
         } catch (error) {
-            console.log("Erreur lors de la désactivation d'une tâche", error)
+            console.log("Erreur lors de la mise à jour d'un évènement", error)
+        }
+    }
+
+    const handleModification = async (event) => {
+        event.preventDefault()
+        try {
+            const response = await axios.put('http://localhost:8081/updateEvent', tache)
+            console.log('updateEvent : ', response.status)
+            console.log('updateEvent : ', response.data)
+        } catch (error) {
+            console.log("Erreur lors de la mise à jour d'un évènement", error)
         }
     }
 
@@ -161,7 +172,7 @@ export default function ModifierTache() {
             </div>
 
             <div className='container d-flex flex-start'>
-                <a href="" className='btn' onClick={handleSubmit}>Modifier</a>
+                <a href="" className='btn' onClick={handleModification}>Modifier</a>
                 <a href="" className='btn boutonAnnuler'>
                     <Link to='/listeTaches'>Annuler</Link>
                 </a>

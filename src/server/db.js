@@ -257,6 +257,12 @@ app.put('/updateEventStatus/:idEvenement', (req, res) => {
     })
 }) 
 
+app.put('/updateEvent', (req, res) => {
+    const {idEvenement, nom, dateDebut, frequence, typeEvenement, logo} = req.body
+    console.log(idEvenement, nom, dateDebut, frequence, typeEvenement, logo)
+    res.status(200).json("/updateEvent ==> ça marche buddy")
+})
+
 app.listen(PORT, () => {
     console.log("Connected to the server")
 })
