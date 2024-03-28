@@ -174,7 +174,7 @@ export default function ModifierTache() {
             <div className='container d-flex flex-start'>
                 <a href="" className='btn' onClick={handleModification}>Modifier</a>
                 <a href="" className='btn boutonAnnuler'>
-                    <Link to='/listeTaches'>Annuler</Link>
+                    <Link to='/estConnecte/listeTaches'>Annuler</Link>
                 </a>
                 <a href="" className='btn boutonAnnuler' onClick={(event) => handleDelete(event, tache.idEvenement)}>Supprimer</a>
                 {/* <GenericButton label="Valider" buttonStyle='boutonValider' method={handleSubmit}/> */}

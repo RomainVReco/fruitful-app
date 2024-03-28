@@ -21,13 +21,13 @@ function BoutonPrecedent(page) {
       case "3":
         return "/Inscription3";
       case "4":
-        return "/Renseignement";
+        return "/estConnecte/Renseignement";
       case "5":
-        return "/Renseignement2";
+        return "/estConnecte/Renseignement2";
       case "6":
-        return "/Renseignement3";
+        return "/estConnecte/Renseignement3";
       case "7":
-        return "/Renseignement4";
+        return "/estConnecte/Renseignement4";
     }
   }
 

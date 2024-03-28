@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import chevron from '../assets/chevron-down.svg'
-import InputProfilText from './InputProfilText'
-import GenericButton from './GenericButton'
+import InputProfilText from '../../components/InputProfilText'
 import axios from 'axios'
-import { gestionConnexion } from '../_helpers/gestion.connexion'
-import { gestionRetourAdresseAPI } from '../_helpers/gestion.retour.api'
+import { gestionConnexion } from '../../_helpers/gestion.connexion'
+import { gestionRetourAdresseAPI } from '../../_helpers/gestion.retour.api'
 
 export default function Profil() {
 

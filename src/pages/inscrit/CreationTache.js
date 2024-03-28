@@ -159,7 +159,7 @@ export default function CreationTache() {
 			<div className='container d-flex flex-start'>
 				<a href="" className='btn' onClick={handleSubmit}>Valider</a>
 				<a href="" className='btn boutonAnnuler'>
-					<Link to='/listeTaches'>Annuler</Link>
+					<Link to='/estConnecte/listeTaches'>Annuler</Link>
 				</a>
 				{/* <GenericButton label="Valider" buttonStyle='boutonValider' method={handleSubmit}/> */}
 			</div>

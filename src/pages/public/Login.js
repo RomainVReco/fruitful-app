@@ -36,7 +36,7 @@ export default function Login() {
             console.log('idClient : ', idClient)
             if (!!idClient) {
                 gestionConnexion.saveSessionId(idClient)
-                navigate("../profil")
+                navigate("../../estConnecte/listeTaches")
             } else {
                 setErrorMessage('Email ou mot de passe invalide')
             }
