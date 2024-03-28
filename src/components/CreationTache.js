@@ -42,12 +42,14 @@ export default function CreationTache() {
 	const [dataIcon, setDataIcon] = useState(dataImage)
 	const [singleIcon, setSingleIcon] = useState(dataImage[0])
 	const [isOpen, setIsOpen] = useState(false)
+
+	// attention à bien ajouter la récupération du jeton
 	const [tache, setTache] = useState({
 		nom: '',
 		dateDebut: '',
 		frequence: '',
 		typeEvenement: '0',
-		idClient:sessionStorage.getItem('jeton'),
+		idClient:7, 
 		logo: '0'
 	})
 
@@ -108,7 +110,7 @@ export default function CreationTache() {
 			setErrorMessage("Il manque une ou plusieurs informations obligatoires")
 
 		} else {
-			console.log("Chouette, ça va partie en base de données")
+			console.log("Chouette, ça va partir en base de données")
 			createNewTache(tache)
 	}
 }
