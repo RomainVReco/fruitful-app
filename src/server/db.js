@@ -220,6 +220,23 @@ app.get('/getAllIcons', (req, res) => {
     })
 })
 
+app.post('/createNewEvent', (req, res) => {
+    const {nom, dateDebut, frequence, typeEvenement, idClient, logo} = req.body
+    const sql ="INSERT INTO evenement (nomEvenement, dateDebut, frequence, idTypeEvenement, idClient, idIcone) "+
+    "VALUES (?, ?, ?, ?, ?, ?);"
+    db.query(sql, [nom, dateDebut, frequence, typeEvenement, idClient, logo], (err, data) => {
+        if (err) {
+            return res.status(500).json({error:"Erreur lors de la création d'une nouvelle tâche",
+        details:err})
+        }
+        if (data && data.affectedRows > 0) {
+            return res.status(200).json({success:"Nouvel évènement créé avec succès.", resultat:data})
+        } else {
+            return res.status(404).json({failure:"Statut de création de la nouvelle tâche inconnue", info:err})
+        }
+    })
+})
+
 app.listen(PORT, () => {
     console.log("Connected to the server")
 })
