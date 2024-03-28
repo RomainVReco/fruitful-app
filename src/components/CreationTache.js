@@ -47,6 +47,7 @@ export default function CreationTache() {
 		dateDebut: '',
 		frequence: '',
 		typeEvenement: '0',
+		idClient:sessionStorage.getItem('jeton'),
 		logo: '0'
 	})
 
@@ -114,7 +115,7 @@ export default function CreationTache() {
 
 	const createNewTache = async (tache) =>{
 		try {
-			const response = await axios.post('http://localhost:8081/createNewTache',tache)
+			const response = await axios.post('http://localhost:8081/createNewEvent',tache)
 			console.log(response.status)
 
 		} catch (error) {
