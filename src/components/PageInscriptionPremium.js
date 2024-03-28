@@ -1,5 +1,4 @@
 import '../App.css';
-
 import React, { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -8,7 +7,8 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
 const InscriptionPremium = () => {
-  const [modalShow, setModalShow] = useState(false);
+  const [firstModalShow, setFirstModalShow] = useState(false);
+  const [secondModalShow, setSecondModalShow] = useState(false);
   const [transactionMessage, setTransactionMessage] = useState('');
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const InscriptionPremium = () => {
           return actions.order.capture().then(function(details) {
             const message = `Bravo ${details.payer.name.given_name}! Transaction validée par PayPal. Accès Fruitful Premium accordé`;
             setTransactionMessage(message); // Mettre à jour le message de transaction
-            setModalShow(true); // Ouvrir la modale
+            setFirstModalShow(true); // Ouvrir la première modale
           });
         },
         onError: function(err) {
@@ -54,8 +54,14 @@ const InscriptionPremium = () => {
     };
   }, []);
 
-  const handleCloseModal = () => {
-    setModalShow(false);
+  const handleCloseFirstModal = () => {
+    setFirstModalShow(false);
+    // Afficher la deuxième modale après avoir fermé la première
+    setSecondModalShow(true);
+  };
+
+  const handleCloseSecondModal = () => {
+    setSecondModalShow(false);
   };
 
   const handleApproveTransaction = () => {
@@ -68,7 +74,7 @@ const InscriptionPremium = () => {
     };
     const message = `Paypal: transaction validée. Bravo ${simulatedDetails.payer.name.given_name}! Bienvenue dans Fruitful Premium!`;
     setTransactionMessage(message); // Mettre à jour le message de transaction
-    setModalShow(true); // Ouvrir la modale
+    setFirstModalShow(true); // Ouvrir la première modale
   };
 
   return (
@@ -88,18 +94,33 @@ const InscriptionPremium = () => {
         </Row>
       </Container>
 
-      {/* Modale pour afficher le message de transaction */}
-      <Modal show={modalShow} onHide={handleCloseModal}>
-        <Modal.Header closeButton className="modale-abonnement-paye-header">
-            <Modal.Title>Résultat transaction</Modal.Title>
-            </Modal.Header>
-            <Modal.Body className="modale-abonnement-paye-body">{transactionMessage}</Modal.Body>
-            <Modal.Footer className="modale-abonnement-paye-footer">
-                <Button variant="secondary" onClick={handleCloseModal}>
-                Fermer
-                </Button>
-            </Modal.Footer>
-        </Modal>
+      {/* Première modale */}
+      <Modal show={firstModalShow} onHide={handleCloseFirstModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Résultat transaction</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{transactionMessage}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseFirstModal}>
+            Fermer
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* Deuxième modale */}
+      <Modal show={secondModalShow} onHide={handleCloseSecondModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Bienvenue en Premium</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Félicitations pour votre inscription en Premium ! Vous pouvez maintenant profiter de tous les avantages.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseSecondModal}>
+            Fermer
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
