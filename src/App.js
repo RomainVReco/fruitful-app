@@ -16,14 +16,13 @@ import Inscription3 from "./components/Inscription3";
 import PageLandingPage from "./components/PageLandingPage";
 import PageLandingPage2 from "./components/PageLandingPage2";
 import PageLandingPage3 from "./components/PageLandingPage3";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
-
-import axios from "axios";
 import Renseignement from "./components/Renseignement";
 import Renseignement2 from "./components/Renseignement2";
 import Renseignement3 from "./components/Renseignement3";
 import Renseignement4 from "./components/Renseignement4";
+import ModifierTache from "./pages/ModifierTache";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 function App() {
   return (
@@ -41,8 +40,8 @@ function App() {
         <Route path ="/pageInscriptionPremium" element={<PageInscriptionPremium/>} />
         <Route path ="/pageInscriptionPremium1" element={<PageInscriptionPremium1/>} />
         <Route path ="/pageInscriptionPremium2" element={<PageInscriptionPremium2/>} />
-        <Route path="/" element={<Base />} />
-        <Route path="/creationTache" element={<CreationTache />} />
+        <Route path="/listeTaches" element={<Base />} />
+        <Route path="/modifierTache" element={<ModifierTache/>} />
         <Route path="/profil" element={<Profil />} />
         <Route path="/login" element={<Login />} />
         <Route path="/renseignement" element={<Renseignement />} />

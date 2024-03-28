@@ -144,7 +144,7 @@ app.post('/createAddress', (req, res) => {
     db.query(sql, [adresse, codePostal, ville, idClient], (err, data) => {
         if (err) {
             console.log("Erreur lors de l'exécution de la requête de création d'adresse :", err)
-            return res.status(999).json({ error: "Erreur lors de l'exécution de la requête de création d'adresse", detail: err })
+            return res.status(500).json({ error: "Erreur lors de l'exécution de la requête de création d'adresse", detail: err })
         }
         if (data.affectedRows > 0) {
             const idAdresse = data.insertId;
@@ -177,7 +177,7 @@ app.put('/updateAddress', (req, res) => {
             return res.status(500).json({ error: "Erreur lors de l'exécution de la requête de mise à jour de l'adresse.", details: err });
         }
 
-        if (data.affectedRows > 0) {
+        if (data && data.affectedRows > 0) {
             return res.status(200).json({ success: "Adresse mise à jour avec succès.", data: data });
         } else {
             console.log(res);
@@ -235,6 +235,32 @@ app.post('/createNewEvent', (req, res) => {
             return res.status(404).json({failure:"Statut de création de la nouvelle tâche inconnue", info:err})
         }
     })
+})
+
+app.put('/updateEventStatus/:idEvenement', (req, res) => {
+    const idEvenement = req.params.idEvenement
+    const estActif = 0
+    console.log('idEvenement : ', idEvenement)
+    console.log('estActif : ', estActif)
+
+    const sql = "UPDATE evenement SET estActif = ? WHERE idEvenement = ?;"
+    db.query(sql, [estActif, idEvenement], (err, data) => {
+        if (err) {
+            return res.status(500).json({error:"Erreur lors de la désactivation d'un évènement",
+            details:err})
+        }
+        if (data && data.affectedRows>0) {
+            return res.status(200).json({success:`Evenement ${idEvenement} désactivé avec succès`, resultat:data})
+        } else {
+            return res.status(404).json({failure:`Evenement ${idEvenement} introuvable en BDD`, resultat:data})
+        }
+    })
+}) 
+
+app.put('/updateEvent', (req, res) => {
+    const {idEvenement, nom, dateDebut, frequence, typeEvenement, logo} = req.body
+    console.log(idEvenement, nom, dateDebut, frequence, typeEvenement, logo)
+    res.status(200).json("/updateEvent ==> ça marche buddy")
 })
 
 app.listen(PORT, () => {

@@ -81,7 +81,7 @@ function Header() {
         <div ><img src={menuCloseIcon} className="menu-burger" onClick={handleClickMenu}></img></div>
         <ul className="listeMenu show-content">
           <li className="liensNav">
-            <Link className='lien' to="/">Tâches</Link></li>
+            <Link className='lien' to="/listeTaches">Tâches</Link></li>
           <li className="liensNav">
             <Link className='lien' to="/creationTache">Nouveau</Link>
           </li>
