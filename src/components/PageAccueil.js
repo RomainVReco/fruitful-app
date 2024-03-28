@@ -5,17 +5,17 @@ import Inscription from "./Inscription";
 import ImageAccueil from "./ImageAccueil";
 import BoutonAccesEER from "./BoutonAccesEER";
 import Carousel from "./Carousel";
-import logo1 from "../assets/tournesol.png";
-import logo2 from "../assets/Ciel_Bleu_Mieux_Vivre.png";
-import logo3 from "../assets/fleurs_illustre_mieux_gerer_sa_vie.png";
-import logo4 from "../assets/ciel_nuageux_Mieux_gerer_ses_addictions.png";
+import image1 from "../assets/tournesol.png";
+import image2 from "../assets/Ciel_Bleu_Mieux_Vivre.png";
+import image3 from "../assets/fleurs_illustre_mieux_gerer_sa_vie.png";
+import image4 from "../assets/ciel_nuageux_Mieux_gerer_ses_addictions.png";
 
 export default function PageAccueil() {
 
   return (
   <div className="container-fluid PageAccueil">
     <ImageAccueil
-      src={logo1}
+      src={image1}
       alt="image avec un tournesol"
       brandText=""
       paragraphText="Apprenez à faire rayonner votre vie! Fruitful, Votre coach, est là pour vous aider!"
@@ -35,15 +35,15 @@ export default function PageAccueil() {
     <br />
     <br />
 
-    <ImageAccueil src={logo2} alt="image du ciel bleu" brandText="" paragraphText="Mieux être" link="/PageLandingPage" />
+    <ImageAccueil src={image2} alt="image du ciel bleu" brandText="" paragraphText="Mieux être" link="/PageLandingPage" />
 
     <br />
 
-    <ImageAccueil src={logo3} alt="image de fleurs" brandText="" paragraphText="Mieux gérer sa vie" link="/PageLandingPage2" />
+    <ImageAccueil src={image3} alt="image de fleurs" brandText="" paragraphText="Mieux gérer sa vie" link="/PageLandingPage2" />
 
     <br />
 
-    <ImageAccueil src={logo4} alt="image de fleurs" brandText="" paragraphText="Se libérer de ses addictions" link="/PageLandingPage3" />
+    <ImageAccueil src={image4} alt="image de fleurs" brandText="" paragraphText="Se libérer de ses addictions" link="/PageLandingPage3" />
 
     <br />
     <br />

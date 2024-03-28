@@ -98,15 +98,26 @@ app.put('/updateClient', (req, res) => {
 
 app.post('/updateTestUserName/:id', (req, res) => {
     const idClient = req.params.id;
-    const nouveauNom = req.body.nouveauNom; // Nouveau nom à mettre à jour
 
-    const sql = "UPDATE utilisateur SET s_nom = ? WHERE i_id_utilisateur = ?";
+    const nouvelEtatAbonne = req.body.estAbonne; // Nouvel état abonné à mettre à jour
+    console.log('Nouvel Etat Abonné : ' + nouvelEtatAbonne);
+    const sql = "UPDATE utilisateur SET estAbonne = ? WHERE idClient = ?";
+    db.query(sql, [nouvelEtatAbonne, idClient], (err, result) => {
+        if (err) {
+            return res.json('Erreur lors de la mise à jour du statut abonné: ' + err);
+        }
+        return res.json('Mise à jour du status abonné réalisée avec succès');
+    });
+    
+    /*const sql = "UPDATE utilisateur SET s_nom = ? WHERE i_id_utilisateur = ?";
+
     db.query(sql, [nouveauNom, idClient], (err, result) => {
         if (err) {
             return res.json('Erreur lors de la mise à jour du nom : ' + err);
         }
         return res.json('Nom utilisateur mis à jour avec succès');
     });
+    */
 });
 
 // ************** ADRESSE ****************** //
@@ -135,7 +146,7 @@ app.post('/createAddress', (req, res) => {
     db.query(sql, [adresse, codePostal, ville, idClient], (err, data) => {
         if (err) {
             console.log("Erreur lors de l'exécution de la requête de création d'adresse :", err)
-            return res.status(999).json({ error: "Erreur lors de l'exécution de la requête de création d'adresse", detail: err })
+            return res.status(500).json({ error: "Erreur lors de l'exécution de la requête de création d'adresse", detail: err })
         }
         if (data.affectedRows > 0) {
             const idAdresse = data.insertId;
@@ -168,7 +179,7 @@ app.put('/updateAddress', (req, res) => {
             return res.status(500).json({ error: "Erreur lors de l'exécution de la requête de mise à jour de l'adresse.", details: err });
         }
 
-        if (data.affectedRows > 0) {
+        if (data && data.affectedRows > 0) {
             return res.status(200).json({ success: "Adresse mise à jour avec succès.", data: data });
         } else {
             console.log(res);
@@ -180,7 +191,7 @@ app.put('/updateAddress', (req, res) => {
 // ************** TÂCHES ****************** //
 /* Méthodes pour la création de tâche */
 app.get('/getAllEvenements', (req, res) => {
-    const sql = "SELECT idTypeEvenement, nomTypeEvenement FROM type_evenement;"
+    const sql = "SELECT nomTypeEvenement FROM type_evenement;"
     db.query(sql, (err, data) => {
         if (err) {
             return res.status(500).json({
@@ -188,8 +199,8 @@ app.get('/getAllEvenements', (req, res) => {
                 details: err
             });
         }
-        if (data.length > 0) {
-            return res.status(200).json({ success: "Liste des types d'évènements récupérés.", data: data });
+        if (data && data.length > 0) {
+            return res.status(200).json(data);
         } else {
             return res.status(404).json({ error: "Aucun type d'évènements trouvés en base." });
         }
@@ -197,21 +208,70 @@ app.get('/getAllEvenements', (req, res) => {
 })
 
 app.get('/getAllIcons', (req, res) => {
-    const sql = "SELECT idIcone, nomIcone FROM icone;"
-    db.query(sql, (err, data) => {
+
+    const sql="SELECT nomIcone FROM icone;"
+    db.query(sql, (err, data)=> {
+
         if (err) {
             return res.status(500).json({
                 error: "Erreur lors de la récupération des icones",
                 details: err
             })
         }
-        if (data.length > 0) {
-            return res.status(200).json({ success: "Liste des icones récupérées", data: data })
+
+        if (data && data.length>0) {
+            return res.status(200).json(data)
+
         } else {
             return res.status(404).json({ error: "Aucune icone trouvée en base de données." })
         }
     })
 })
+
+
+app.post('/createNewEvent', (req, res) => {
+    const {nom, dateDebut, frequence, typeEvenement, idClient, logo} = req.body
+    const sql ="INSERT INTO evenement (nomEvenement, dateDebut, frequence, idTypeEvenement, idClient, idIcone) "+
+    "VALUES (?, ?, ?, ?, ?, ?);"
+    db.query(sql, [nom, dateDebut, frequence, typeEvenement, idClient, logo], (err, data) => {
+        if (err) {
+            return res.status(500).json({error:"Erreur lors de la création d'une nouvelle tâche",
+        details:err})
+        }
+        if (data && data.affectedRows > 0) {
+            return res.status(200).json({success:"Nouvel évènement créé avec succès.", resultat:data})
+        } else {
+            return res.status(404).json({failure:"Statut de création de la nouvelle tâche inconnue", info:err})
+        }
+    })
+})
+
+app.put('/updateEventStatus/:idEvenement', (req, res) => {
+    const idEvenement = req.params.idEvenement
+    const estActif = 0
+    console.log('idEvenement : ', idEvenement)
+    console.log('estActif : ', estActif)
+
+    const sql = "UPDATE evenement SET estActif = ? WHERE idEvenement = ?;"
+    db.query(sql, [estActif, idEvenement], (err, data) => {
+        if (err) {
+            return res.status(500).json({error:"Erreur lors de la désactivation d'un évènement",
+            details:err})
+        }
+        if (data && data.affectedRows>0) {
+            return res.status(200).json({success:`Evenement ${idEvenement} désactivé avec succès`, resultat:data})
+        } else {
+            return res.status(404).json({failure:`Evenement ${idEvenement} introuvable en BDD`, resultat:data})
+        }
+    })
+}) 
+
+app.put('/updateEvent', (req, res) => {
+    const {idEvenement, nom, dateDebut, frequence, typeEvenement, logo} = req.body
+    console.log(idEvenement, nom, dateDebut, frequence, typeEvenement, logo)
+    res.status(200).json("/updateEvent ==> ça marche buddy")
+})
+
 
 app.listen(PORT, () => {
     console.log("Connected to the server")
