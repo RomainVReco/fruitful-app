@@ -35,6 +35,12 @@ const handleClickQuota = () => {
 
 export default function CreationTache() {
 
+	const headers = {
+        'Content-Type': 'application/json',
+		'Access-Control-Allow-Origin': '*',
+		'Access-Control-Allow-Headers':'Origin, X-Requested-With, Content-Type, Accept'
+    }
+
 
 	const [checkErrorMessage, setErrorMessage] = useState('')
 	const [evenements, setEvenements] = useState('')
@@ -117,7 +123,7 @@ export default function CreationTache() {
 
 	const createNewTache = async (tache) =>{
 		try {
-			const response = await axios.post('http://localhost:8081/createNewEvent',tache)
+			const response = await axios.post('http://localhost:8081/createNewEvent',tache, headers)
 			console.log(response.status)
 
 		} catch (error) {
