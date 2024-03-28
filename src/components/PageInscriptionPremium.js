@@ -13,7 +13,7 @@ const InscriptionPremium = () => {
 
   useEffect(() => {
     const script = document.createElement('script');
-    script.src = 'https://www.paypal.com/sdk/js?client-id=AUc9A_Q4BlFKrhLXmVpRkDP4DChqyk3mXCqw_v23Kluwo891aTJRXDhuzLWkAdM6042ih1aGG37s9Kwu'; // Remplacez YOUR_CLIENT_ID par votre propre identifiant client PayPal
+    script.src = 'https://www.paypal.com/sdk/js?client-id=AUc9A_Q4BlFKrhLXmVpRkDP4DChqyk3mXCqw_v23Kluwo891aTJRXDhuzLWkAdM6042ih1aGG37s9Kwu'; //votre propre identifiant client PayPal
     script.addEventListener('load', () => {
       // Le script PayPal est chargé, nous pouvons maintenant utiliser ses fonctionnalités
       window.paypal.Buttons({
@@ -30,7 +30,7 @@ const InscriptionPremium = () => {
         },
         onApprove: function(data, actions) {
           return actions.order.capture().then(function(details) {
-            const message = `Transaction réalisée par ${details.payer.name.given_name} via PayPal.`;
+            const message = `Bravo ${details.payer.name.given_name}! Transaction validée par PayPal. Accès Fruitful Premium accordé`;
             setTransactionMessage(message); // Mettre à jour le message de transaction
             setModalShow(true); // Ouvrir la modale
           });
@@ -58,6 +58,19 @@ const InscriptionPremium = () => {
     setModalShow(false);
   };
 
+  const handleApproveTransaction = () => {
+    const simulatedDetails = {
+      payer: {
+        name: {
+          given_name: "John" // Simulez les données du payer
+        }
+      }
+    };
+    const message = `Paypal: transaction validée. Bravo ${simulatedDetails.payer.name.given_name}! Bienvenue dans Fruitful Premium!`;
+    setTransactionMessage(message); // Mettre à jour le message de transaction
+    setModalShow(true); // Ouvrir la modale
+  };
+
   return (
     <div>
       <title>Inscription Premium</title>
@@ -67,23 +80,26 @@ const InscriptionPremium = () => {
       <Container>
         <Row className="justify-content-center">
           <Col xs={12} sm={6} md={4}>
-            <div id="paypal-button-container"></div>
+            <div id="paypal-button-container">
+              {/* Ajout bouton pour simuler l'événement onApprove */}
+              <Button onClick={handleApproveTransaction}>Simuler Transaction</Button>
+            </div>
           </Col>
         </Row>
       </Container>
 
       {/* Modale pour afficher le message de transaction */}
-      <Modal show={modalShow} onHide={handleCloseModal}  className="modale-abonnement-paye">
-        <Modal.Header closeButton>
-          <Modal.Title>Message de transaction</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>{transactionMessage}</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
-            Fermer
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <Modal show={modalShow} onHide={handleCloseModal}>
+        <Modal.Header closeButton className="modale-abonnement-paye-header">
+            <Modal.Title>Résultat transaction</Modal.Title>
+            </Modal.Header>
+            <Modal.Body className="modale-abonnement-paye-body">{transactionMessage}</Modal.Body>
+            <Modal.Footer className="modale-abonnement-paye-footer">
+                <Button variant="secondary" onClick={handleCloseModal}>
+                Fermer
+                </Button>
+            </Modal.Footer>
+        </Modal>
     </div>
   );
 };

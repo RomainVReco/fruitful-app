@@ -230,6 +230,14 @@ body {
   z-index: 1000;
 }
 
+.modale-abonnement-paye-header {
+  background-color: rgb(58, 144, 241);
+}
+
+.modale-abonnement-paye-footer {
+  background-color: pink;
+}
+
 /** PROFIL **/
 
 .wrapper-profil {
