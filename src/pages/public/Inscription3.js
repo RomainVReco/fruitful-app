@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { useState } from "react";
+import { useEffect } from "react";
+import { ReactDOM } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -9,14 +11,20 @@ import {
   Navigate,
 } from "react-router-dom";
 import contact from "../../assets/contact.png";
+import axios from "axios";
+
 
 export default function Inscription3() {
-  const [email, setEmail] = useState("");
+  const headers = {
+    'Content-Type': 'application/json'
+  }
+  const [errorMessage, setErrorMessage] = useState('');
+  const [email, setEmail] = useState({ email: "" });
   const [motDePasse, setMotDePasse] = useState("");
   const [motDePasse2, setMotDePasse2] = useState("");
   const [messageErreur, setMessageErreur] = useState("");
   const handleChangeEmail = (e) => {
-    setEmail(e.target.value); // Mettre à jour l'email dans l'état
+    setEmail(prevState => ({ ...prevState, [e.target.id]: e.target.value })); // Mettre à jour l'email dans l'état
   };
   const handleChangeMotDepasse = (e) => {
     setMotDePasse(e.target.value); // Mettre à jour le premier mot de passe dans l'état
@@ -24,16 +32,38 @@ export default function Inscription3() {
   const handleChangeMotDePasse2 = (e) => {
     setMotDePasse2(e.target.value); // Mettre à jour le second mot de passe dans l'état
   };
+  const checkEmail = async (email) => {
+    console.log("email avant try :", email);
+    try {
+      const response = await axios.post('http://localhost:8081/checkEmail', email);
+      console.log("response : ", response);
+      if (response == "ok") {
+        setMessageErreur('Cet e-mail est déjà utilisé. Veuillez vous connecter.');
+        console.log("erreur email déjà présent");
+      } else {
+        // Continue with registration process
+        console.log("email non présent en base");
+        // navigate(url);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setMessageErreur('Erreur lors de la vérification de l\'e-mail. Veuillez réessayer.');
+    }
+
+
+  }
 
   let url = "../Renseignement";
   const navigate = useNavigate();
-
-  const handleClick = () => {
+  //----------------------------------------------------------------------------------------------------------------
+  const handleClick = (event) => {
+    event.preventDefault();
     const regexEmail = /^[^\.\s][\w\-]+(\.[\w\-]+)*@([\w-]+\.)+[\w-]{2,}$/gm;
     const regexMotDePasse = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+    //---------------tests
 
     let erreur = "";
-    if (!email.match(regexEmail)) {
+    if (!email["email"].match(regexEmail)) {
       erreur = "L'email entré est invalide, merci de l'entrer à nouveau.\n";
       console.log(erreur);
     };
@@ -47,13 +77,16 @@ export default function Inscription3() {
     setMessageErreur(erreur);
 
     if (erreur == "") {
-      setMessageErreur(""); // Effacer le message d'erreur s'il n'y a pas d'erreur    
+      console.log(email, motDePasse);
       sessionStorage.setItem("email", email);
       sessionStorage.setItem("motDePasse", motDePasse);
-      navigate(url);
+      console.log("affichage 2 :", email, motDePasse);
 
+      checkEmail(email);
       return;
-    }
+    };
+
+
   };
 
   function AffichageImage() {
@@ -95,6 +128,7 @@ export default function Inscription3() {
 
                 <p></p>
                 <input
+                  type="password"
                   className="form-control"
                   rows="1"
                   id="motDePasse"
@@ -107,6 +141,7 @@ export default function Inscription3() {
 
                 <p></p>
                 <input
+                  type="password"
                   className="form-control"
                   rows="1"
                   id="motDePasse2"
