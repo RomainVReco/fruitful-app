@@ -6,8 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
 const InscriptionPremium = () => {
-  const [firstModalShow, setFirstModalShow] = useState(false);
-  const [secondModalShow, setSecondModalShow] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
   const [transactionMessage, setTransactionMessage] = useState('');
 
   useEffect(() => {
@@ -32,7 +31,7 @@ const InscriptionPremium = () => {
             return actions.order.capture().then(function(details) {
               const message = `Bravo ${details.payer.name.given_name}! Transaction validée par PayPal. Accès Fruitful Premium accordé`;
               setTransactionMessage(message); // Mettre à jour le message de transaction
-              setFirstModalShow(true); // Ouvrir la première modale
+              setModalShow(true); // Ouvrir la modale
             });
           },
           onError: function(err) {
@@ -52,20 +51,15 @@ const InscriptionPremium = () => {
         // Nettoyer le script lors du démontage du composant
         document.body.removeChild(script);
       };
+      
     } catch (error) {
       console.error("Erreur lors de l'appel à l'API PayPal :", error);
       alert("Une erreur est survenue lors de la communication avec PayPal.");
     }
   }, []);
 
-  const handleCloseFirstModal = () => {
-    setFirstModalShow(false);
-    // Afficher la deuxième modale après avoir fermé la première
-    setSecondModalShow(true);
-  };
-
-  const handleCloseSecondModal = () => {
-    setSecondModalShow(false);
+  const handleCloseModal = () => {
+    setModalShow(false);
   };
 
   const handleApproveTransaction = () => {
@@ -78,7 +72,7 @@ const InscriptionPremium = () => {
     };
     const message = `Paypal: transaction validée. Bravo ${simulatedDetails.payer.name.given_name}! Bienvenue dans Fruitful Premium!`;
     setTransactionMessage(message); // Mettre à jour le message de transaction
-    setFirstModalShow(true); // Ouvrir la première modale
+    setModalShow(true); // Ouvrir la modale
   };
 
   return (
@@ -98,29 +92,14 @@ const InscriptionPremium = () => {
         </Row>
       </Container>
 
-      {/* Première modale */}
-      <Modal show={firstModalShow} onHide={handleCloseFirstModal}>
+      {/* Modale pour afficher le message de transaction */}
+      <Modal show={modalShow} onHide={handleCloseModal}>
         <Modal.Header closeButton>
           <Modal.Title>Résultat transaction</Modal.Title>
         </Modal.Header>
         <Modal.Body>{transactionMessage}</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseFirstModal}>
-            Fermer
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
-      {/* Deuxième modale */}
-      <Modal show={secondModalShow} onHide={handleCloseSecondModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Bienvenue en Premium</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          Félicitations pour votre inscription en Premium ! Vous pouvez maintenant profiter de tous les avantages.
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseSecondModal}>
+          <Button variant="secondary" onClick={handleCloseModal}>
             Fermer
           </Button>
         </Modal.Footer>
