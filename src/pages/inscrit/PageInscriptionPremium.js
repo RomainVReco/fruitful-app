@@ -117,9 +117,9 @@ import axios from 'axios';
       <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet" />
       <link rel="stylesheet" href="PageInscriptionPremium.css" type="text/css" />
 
-      <Container>
+      <Container style={{ borderRadius: '10px' }}>
         <Row className="justify-content-center">
-          <Col xs={12} sm={6} md={4} className="text-center">
+          <Col xs={12} sm={6} md={4} className="text-center" style={{backgroundColor: '#CEE26B', borderRadius: '10px'}}>
             <div>
               <br />
               <h2>
