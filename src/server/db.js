@@ -265,6 +265,26 @@ app.put('/updateEvent', (req, res) => {
     })
 })
 
+app.get('/getAllUserEvents/:idClient', (req, res) => {
+    const idClient = req.params.idClient
+    console.log("getAllUserEvents : ", idClient)
+    const sql = "SELECT idEvenement, nomEvenement, dateDebut, frequence, eve.idTypeEvenement, t_e.nomTypeEvenement, idIcone "+
+    "FROM evenement as eve INNER JOIN type_evenement as t_e ON eve.idTypeEvenement = t_e.idTypeEvenement "+
+    "WHERE eve.idClient = ? AND eve.estActif = 1;"
+    db.query(sql, [idClient], (err, data) => {
+        if (err) {
+            return res.status(500).json({
+                error: "Erreur lors de la récupération des évènements du client",
+                details: err
+            })
+        }
+        if (data && data.length> 0) {
+            return res.status(200).json({ success: "Liste des évènements récupérés", resultat: data })
+        } else {
+            return res.status(404).json({ failure: "Aucun évènement trouvé pour ce client", resultat: data })
+        }
+    })
+})
 
 app.listen(PORT, () => {
     console.log("Connected to the server")
