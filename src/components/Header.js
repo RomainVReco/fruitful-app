@@ -34,8 +34,6 @@ function Header() {
   const handleLogout = () => {
     gestionConnexion.deconnexion()
     navigate("../pageAccueil")
-
-
   }
 
   const blocConnexion = <>
