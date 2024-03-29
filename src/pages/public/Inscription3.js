@@ -12,17 +12,21 @@ import {
 } from "react-router-dom";
 import contact from "../../assets/contact.png";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 
 export default function Inscription3() {
   const headers = {
     'Content-Type': 'application/json'
   }
+
   const [errorMessage, setErrorMessage] = useState('');
   const [email, setEmail] = useState({ email: "" });
   const [motDePasse, setMotDePasse] = useState("");
   const [motDePasse2, setMotDePasse2] = useState("");
   const [messageErreur, setMessageErreur] = useState("");
+  const [emailExiste, setEmailExiste] = useState(false);
+  
   const handleChangeEmail = (e) => {
     setEmail(prevState => ({ ...prevState, [e.target.id]: e.target.value })); // Mettre à jour l'email dans l'état
   };
@@ -36,21 +40,20 @@ export default function Inscription3() {
     console.log("email avant try :", email);
     try {
       const response = await axios.post('http://localhost:8081/checkEmail', email);
-      console.log("response : ", response);
-      if (response == "ok") {
-        setMessageErreur('Cet e-mail est déjà utilisé. Veuillez vous connecter.');
+      console.log("response : ", response.data.success);
+      if (response.data.success=="success") {
+        setEmailExiste(true);
+        setMessageErreur("Cet e-mail est déjà utilisé. Veuillez vous connecter ici :");
         console.log("erreur email déjà présent");
       } else {
         // Continue with registration process
-        console.log("email non présent en base");
+        console.log("Email non présent en base");
         // navigate(url);
-      }
+      } 
     } catch (error) {
       console.error('Error:', error);
       setMessageErreur('Erreur lors de la vérification de l\'e-mail. Veuillez réessayer.');
     }
-
-
   }
 
   let url = "../Renseignement";
@@ -163,6 +166,7 @@ export default function Inscription3() {
             </button>
             {/* Affichage du message d'erreur */}
             {messageErreur && <p>{messageErreur}</p>}
+            {emailExiste && <Link to="/login">Login</Link>}
           </div>
           <div class="col"></div>
         </div>
