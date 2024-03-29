@@ -7,7 +7,7 @@ import Renseignement2 from "../inscrit/Renseignement2";
 import Renseignement3 from "../inscrit/Renseignement3";
 import Renseignement4 from "../inscrit/Renseignement4";
 import ModifierTache from "../inscrit/ModifierTache";
-import Base from '../inscrit/Base';
+import ListeTaches from '../inscrit/ListeTaches';
 import PageInscriptionPremium from '../inscrit/PageInscriptionPremium'
 import PageInscriptionPremium1 from '../inscrit/PageInscriptionPremium1'
 import PageInscriptionPremium2 from '../inscrit/PageInscriptionPremium2'
@@ -20,7 +20,7 @@ const PagesInscrits = () => {
         <Routes>
             <Route element={<Layout />}>
                 <Route path="/creationTache" element={<CreationTache />} />
-                <Route path="/listeTaches" element={<Base />} />
+                <Route path="/listeTaches" element={<ListeTaches />} />
                 <Route path="/modifierTache" element={<ModifierTache />} />
                 <Route path="/profil" element={<Profil />} />
                 <Route path="/renseignement" element={<Renseignement />} />
