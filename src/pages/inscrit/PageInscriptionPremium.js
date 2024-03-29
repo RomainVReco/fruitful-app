@@ -34,7 +34,6 @@ import axios from 'axios';
         
         console.log(response.data); // Affichage de la réponse du serveur
         
-        // Mettre à jour localement si nécessaire
     } catch (error) {
         console.error('Error:', error);
         setErrorMessage('Failed to update subscription. Please try again.');
@@ -64,6 +63,8 @@ import axios from 'axios';
               const message = `Bravo ${details.payer.name.given_name}! Transaction validée par PayPal. Accès Fruitful Premium accordé`;
               setTransactionMessage(message); // Mettre à jour le message de transaction
               setModalShow(true); // Ouvrir la modale
+              // Réalisation update dans la base de données pour valider inscription Premium
+              handleInscription();
             });
           },
           onError: function(err) {
@@ -95,6 +96,7 @@ import axios from 'axios';
   };
 
   const handleApproveTransaction = () => {
+    handleInscription();
     const simulatedDetails = {
       payer: {
         name: {
@@ -136,12 +138,6 @@ import axios from 'axios';
           </Button>
         </Modal.Footer>
       </Modal>
-      <div>
-            <h1>Page Premium</h1>
-            <p>Votre idClient actuel : {idClient}</p>
-            <button onClick={handleInscription}>Inscription</button>
-            {errorMessage && <p>{errorMessage}</p>}
-        </div>
     </div>
     
   );
