@@ -119,7 +119,13 @@ import axios from 'axios';
 
       <Container>
         <Row className="justify-content-center">
-          <Col xs={12} sm={6} md={4}>
+          <Col xs={12} sm={6} md={4} className="text-center">
+            <div>
+              <br />
+              <h2>
+                Passez à la vitesse supérieure en souscrivant à la formule Premium!
+              </h2>
+            </div>
             <div id="paypal-button-container">
               <br />
               <br />
