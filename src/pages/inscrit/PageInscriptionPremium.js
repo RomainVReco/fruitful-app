@@ -52,7 +52,7 @@ import axios from 'axios';
               purchase_units: [
                 {
                   amount: {
-                    value: '0.01' // Montant de la transaction
+                    value: '12.00' // Montant de la transaction
                   }
                 }
               ]
@@ -104,7 +104,9 @@ import axios from 'axios';
         }
       }
     };
-    const message = `Paypal: transaction validée. Bravo ${simulatedDetails.payer.name.given_name}! Bienvenue dans Fruitful Premium!`;
+    const firstLine = "Paypal: transaction validée.";
+    const secondLine = `Bravo ${simulatedDetails.payer.name.given_name}! Bienvenue dans Fruitful Premium!`;
+    const message = `${firstLine}\n${secondLine}`; // Concaténer les deux lignes avec une balise <br>
     setTransactionMessage(message); // Mettre à jour le message de transaction
     setModalShow(true); // Ouvrir la modale
   };
