@@ -6,13 +6,15 @@ import { useState } from 'react'
 import InputModalText from '../../components/InputModalText'
 import axios from 'axios'
 import InputModalQuantity from '../../components/InputModalQuantity'
-import { Link, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import ModaleConfirmation from '../../components/ModaleConfirmation'
 
 
 export default function ModifierTache() {
 
     var navigate = useNavigate()
+
+    var {idEvenement} = useParams()
 
     const [checkErrorMessage, setErrorMessage] = useState('')
     const [evenements, setEvenements] = useState('')
@@ -46,7 +48,7 @@ export default function ModifierTache() {
 
     useEffect(() => {
         getTypeEvenements()
-
+        getEventToModify(idEvenement)
     }, [])
 
     const getTypeEvenements = async () => {
@@ -60,6 +62,17 @@ export default function ModifierTache() {
 
         } catch (error) {
             console.error('Erreur getTypeEvenements : ', error);
+        }
+    }
+
+    const getEventToModify = async (idEvenement) => {
+        console.log('getEventToModify : ', idEvenement) 
+        try {
+            const response = await axios.get(`http://localhost:8081/getEvent/${idEvenement}`)
+            console.log('updateEventStatus : ', response.status)
+            console.log('updateEventStatus : ', response.data)
+        } catch (error) {
+            console.log("Erreur lors de la récupération de l'évènement à modifier")
         }
     }
 

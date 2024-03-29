@@ -21,3 +21,9 @@ export const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers':'Origin, X-Requested-With, Content-Type, Accept'
 }
+
+export const couleurTypeEvenement = {
+    0:"#4c9cda", // bleu clair Tâche
+    1:"#2ea44f", // turquoise Habitude
+    2:"#dfaf2c" // ocre Addiction
+}

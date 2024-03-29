@@ -21,7 +21,7 @@ const PagesInscrits = () => {
             <Route element={<Layout />}>
                 <Route path="/creationTache" element={<CreationTache />} />
                 <Route path="/listeTaches" element={<ListeTaches />} />
-                <Route path="/modifierTache" element={<ModifierTache />} />
+                <Route path="/modifierTache/:idEvenement" element={<ModifierTache />} />
                 <Route path="/profil" element={<Profil />} />
                 <Route path="/renseignement" element={<Renseignement />} />
                 <Route path="/renseignement2" element={<Renseignement2 />} />

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Tache from '../../components/Tache';
 import axios from "axios";
+import { dataImage } from '../../_helpers/data.env'
+import { useNavigate } from "react-router-dom";
 
 const handleSubmit = (event) => {
   event.preventDefault()
@@ -9,8 +11,10 @@ const handleSubmit = (event) => {
 
 export default function ListeTaches() {
 
-  const [listeTaches, setListeTaches] = useState('')
+  var navigate = useNavigate()
+  const [listeTaches, setListeTaches] = useState([])
   const [idClient, setIdClient] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
 
   /* Récupération du jeton de connexion */
   useEffect(() => {
@@ -22,7 +26,7 @@ export default function ListeTaches() {
   }, [])
 
   /* Requête pour récupérer la liste des tâches*/
-  useEffect (() => {
+  useEffect(() => {
     if (idClient.length !== 0) {
       getAllUserEvents()
     }
@@ -33,23 +37,31 @@ export default function ListeTaches() {
     try {
       const response = await axios.get(`http://localhost:8081/getAllUserEvents/${idClient}`)
       console.log('getAllUserEvents : ', response.status)
-      console.log('getAllUserEvents : ', response.data)
-
+      console.log('getAllUserEvents : ', response.data.resultat)
+      if (response.status === 200) {
+        setListeTaches(response.data.resultat)
+      }
     } catch (error) {
       console.log("Erreur lors de la récupération des évènements du client ", error)
+      setErrorMessage("Aucune donnée trouvée")
     }
-
   }
 
-
-
-
+  const handleClickEvent = (idEvenement) => {
+    console.log("Clic tache : ", idEvenement)
+    navigate('../../estConnecte/modifierTache/'+idEvenement)
+  }
 
   return (
-    <div className="">
+    <div className="container">
+      {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
+      {listeTaches.map((element, index) => {
+        return <div key={index}><Tache nomHabitude={element.nomEvenement} frequence={element.frequence} 
+        dateDebut={element.dateDebut} typeEvenement={element.nomTypeEvenement} idTypeEvenement={element.idTypeEvenement}
+        method={() => handleClickEvent(element.idEvenement)}/>
+        </div>
+      })}
       <Tache nomHabitude="Lire un livre" quota='20' quantiteQuota='pages' heure='10h30' />
-      <Tache nomHabitude="Courir" quota='5' quantiteQuota='km' heure='19h30' />
-      <Tache nomHabitude="Dire un mot doux à ma femme" quota='' quantiteQuota='' heure='18h50' />
     </div>
   )
 }
