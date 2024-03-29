@@ -290,7 +290,7 @@ app.post('/checkEmail', (req, res) => {
 
     const email = req.body.email
     console.log('server : ', email)
-    const sql = "SELECT COUNT(*) AS count FROM users WHERE email = ?"
+    const sql = "SELECT COUNT(*) AS count FROM utilisateur WHERE email = ?"
     db.query(sql, [email], (error, data) => {
         if (error) {
             console.log("err : ", error);
@@ -302,7 +302,8 @@ app.post('/checkEmail', (req, res) => {
             // } else {
             //     return res.status(404).json({error:"Aucune icone trouvée en base de données."})
             // }
-            return res.json('Erreur de requête SQL');
+            let a="err req SQL"+error;
+            return res.json(a);
         }
         console.log("DATA :", data,)
         if (data.length > 0) {
@@ -315,5 +316,4 @@ app.post('/checkEmail', (req, res) => {
 
 
     })
-})
 })
