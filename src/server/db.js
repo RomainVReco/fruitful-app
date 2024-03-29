@@ -60,25 +60,6 @@ app.post('/login', (req, res) => {
     })
 })
 
-app.post('/logintest1', (req, res) => {
-    console.log("req.body :" + req.body.email)
-    console.log("req.body :" + req.body.password)
-
-    const sql = "SELECT s_nom FROM utilisateur WHERE " +
-        "s_email= ?  AND s_mot_de_passe = ?"
-    db.query(sql, [req.body.email, req.body.password], (err, data) => {
-        if (err) {
-            console.log('login error : ', err)
-            return res.status(500).json('Erreur de la tentative de login : ' + err)
-        }
-        if (data.length > 0) {
-            return res.json(data[0])
-        } else {
-            return res.json("Identifiant ou mot de passe incorrect")
-        }
-    })
-})
-
 app.put('/updateClient', (req, res) => {
     const sql = "UPDATE utilisateur SET nom = ?, prenom = ?, email = ?, newsletter = ?, specialOffer = ? WHERE idClient = ? ;"
     db.query(sql, [req.body.nom, req.body.prenom, req.body.email, req.body.newsletter, req.body.specialOffer, req.body.idClient], (err, data) => {
@@ -97,7 +78,10 @@ app.put('/updateClient', (req, res) => {
 
 })
 
-app.post('/updateTestUserName/:id', (req, res) => {
+// ************** SOUSCRIPTION ****************** //
+/* Méthodes pour souscription (abonnement Premium) */
+
+app.post('/updateSubscription/:id', (req, res) => {
     const idClient = req.params.id;
 
     const nouvelEtatAbonne = req.body.estAbonne; // Nouvel état abonné à mettre à jour
@@ -109,16 +93,6 @@ app.post('/updateTestUserName/:id', (req, res) => {
         }
         return res.json('Mise à jour du status abonné réalisée avec succès');
     });
-
-    /*const sql = "UPDATE utilisateur SET s_nom = ? WHERE i_id_utilisateur = ?";
-
-    db.query(sql, [nouveauNom, idClient], (err, result) => {
-        if (err) {
-            return res.json('Erreur lors de la mise à jour du nom : ' + err);
-        }
-        return res.json('Nom utilisateur mis à jour avec succès');
-    });
-    */
 });
 
 // ************** ADRESSE ****************** //
