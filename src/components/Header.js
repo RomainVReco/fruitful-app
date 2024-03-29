@@ -84,7 +84,7 @@ function Header() {
             <Link className='lien' to="/estConnecte/creationTache">Nouveau</Link>
           </li>
           <li className="liensNav" >
-            <Link className='lien'>Planning</Link>
+            <Link className='lien' style={{color:"grey"}} >Planning</Link>
           </li>
         </ul>
         {isConnected ? estConnecte : blocConnexion}

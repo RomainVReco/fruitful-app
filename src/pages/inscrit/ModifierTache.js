@@ -6,10 +6,13 @@ import { useState } from 'react'
 import InputModalText from '../../components/InputModalText'
 import axios from 'axios'
 import InputModalQuantity from '../../components/InputModalQuantity'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import ModaleConfirmation from '../../components/ModaleConfirmation'
 
 
 export default function ModifierTache() {
+
+    var navigate = useNavigate()
 
     const [checkErrorMessage, setErrorMessage] = useState('')
     const [evenements, setEvenements] = useState('')
@@ -17,6 +20,11 @@ export default function ModifierTache() {
     const [dataIcon, setDataIcon] = useState(dataImage)
 
     const [isOpen, setIsOpen] = useState(false)
+    const [isModaleOpen, setModaleOpen] = useState(false)
+    const [lignes, setLignes] = useState(
+        ["L'évènement a bien été supprimé et n'apparaitra plus dans la liste de vos tâches.",
+        'Les statistiques de cette tâche resteront consultables dans la rubrique "Mon bilan".'
+    ])
 
     // attention à bien ajouter la récupération du jeton
     const [tache, setTache] = useState({
@@ -100,6 +108,9 @@ export default function ModifierTache() {
             const response = await axios.put(`http://localhost:8081/updateEventStatus/${idEvenement}`)
             console.log('updateEventStatus : ', response.status)
             console.log('updateEventStatus : ', response.data)
+            if (response.status === 200) {
+                setModaleOpen(true)
+            }
         } catch (error) {
             console.log("Erreur lors de la mise à jour d'un évènement", error)
         }
@@ -114,6 +125,12 @@ export default function ModifierTache() {
         } catch (error) {
             console.log("Erreur lors de la mise à jour d'un évènement", error)
         }
+    }
+
+    const onClose = () => {
+        setModaleOpen(false)
+        navigate("../../estConnecte/listeTaches/")
+
     }
 
 
@@ -173,10 +190,10 @@ export default function ModifierTache() {
 
             <div className='container d-flex flex-start'>
                 <a href="" className='btn' onClick={handleModification}>Modifier</a>
-                <a href="" className='btn boutonAnnuler'>
-                    <Link to='/estConnecte/listeTaches'>Annuler</Link>
-                </a>
                 <a href="" className='btn boutonAnnuler' onClick={(event) => handleDelete(event, tache.idEvenement)}>Supprimer</a>
+                <ModaleConfirmation open={isModaleOpen} method={onClose} 
+                lignes={lignes} titre={"Résultat"}/>
+                <a href="../estConnecte/listeTaches" className='btn boutonAnnuler'style={{marginLeft:'50px'}}>Annuler</a>
                 {/* <GenericButton label="Valider" buttonStyle='boutonValider' method={handleSubmit}/> */}
             </div>
             {checkErrorMessage && (<div style={{ color: 'red' }}>{checkErrorMessage}</div>)}

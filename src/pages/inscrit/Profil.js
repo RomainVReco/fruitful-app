@@ -103,7 +103,7 @@ export default function Profil() {
         console.log("initiatePasswordChange")
     }
 
-    const handleClicCheck = (event) => {
+    const handleClickCheck = (event) => {
         var temp = { ...client }
         console.log("cible du clic : ", event.target.id)
         let hasBeenChecked = Number(event.target.checked)
@@ -246,11 +246,11 @@ export default function Profil() {
                     <div className='container'>
                         <div>
                             <div className="form-check form-switch">
-                                <input className="form-check-input" type="checkbox" role="switch" id="newsletter" checked={client.newsletter} onChange={handleClicCheck} />
+                                <input className="form-check-input" type="checkbox" role="switch" id="newsletter" checked={client.newsletter} onChange={handleClickCheck} />
                                 <label className="form-check-label" htmlFor="newsletter">Newsletter</label>
                             </div>
                             <div className="form-check form-switch">
-                                <input className="form-check-input" type="checkbox" role="switch" id="specialOffer" checked={client.specialOffer} onChange={handleClicCheck} />
+                                <input className="form-check-input" type="checkbox" role="switch" id="specialOffer" checked={client.specialOffer} onChange={handleClickCheck} />
                                 <label className="form-check-label" htmlFor="specialOffer">Offres spéciales de nos partenaires</label>
                             </div>
                         </div>
