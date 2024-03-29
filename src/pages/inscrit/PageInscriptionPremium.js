@@ -121,8 +121,12 @@ import axios from 'axios';
         <Row className="justify-content-center">
           <Col xs={12} sm={6} md={4}>
             <div id="paypal-button-container">
+              <br />
+              <br />
+              <br />
+              <br />
               {/* Ajout bouton pour simuler l'événement onApprove */}
-              <Button onClick={handleApproveTransaction}>Simuler Transaction</Button>
+              {/*<Button onClick={handleApproveTransaction}>Simuler Transaction</Button>*/}
             </div>
           </Col>
         </Row>
