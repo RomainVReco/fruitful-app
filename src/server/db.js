@@ -96,7 +96,7 @@ app.put('/updateClient', (req, res) => {
 
 })
 
-app.post('/updateTestUserName/:id', (req, res) => {
+app.post('/updateSubscription/:id', (req, res) => {
     const idClient = req.params.id;
 
     const nouvelEtatAbonne = req.body.estAbonne; // Nouvel état abonné à mettre à jour

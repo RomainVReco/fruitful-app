@@ -21,7 +21,7 @@ export default function PageInscriptionPremium1() {
             const idClient = gestionConnexion.getSessionId();
             
             // Envoyer une requête pour mettre à jour le champ estAbonne
-            const response = await axios.post(`http://localhost:8081/updateTestUserName/${idClient}`, { estAbonne: 1 }, { headers });
+            const response = await axios.post(`http://localhost:8081/updateSubscription/${idClient}`, { estAbonne: 1 }, { headers });
             
             console.log(response.data); // Affichage de la réponse du serveur
             
