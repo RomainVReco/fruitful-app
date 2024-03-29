@@ -12,6 +12,7 @@ import PageInscriptionPremium from '../inscrit/PageInscriptionPremium'
 import PageInscriptionPremium1 from '../inscrit/PageInscriptionPremium1'
 import PageInscriptionPremium2 from '../inscrit/PageInscriptionPremium2'
 import Layout from '../public/Layout';
+import Erreur from "../public/Erreur";
 
 
 const PagesInscrits = () => {
@@ -29,6 +30,7 @@ const PagesInscrits = () => {
                 <Route path="/pageInscriptionPremium" element={<PageInscriptionPremium />} />
                 <Route path="/pageInscriptionPremium1" element={<PageInscriptionPremium1 />} />
                 <Route path="/pageInscriptionPremium2" element={<PageInscriptionPremium2 />} />
+                <Route path="*" element={<Erreur />} />
             </Route>
         </Routes>
     )

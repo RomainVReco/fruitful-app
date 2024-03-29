@@ -9,6 +9,7 @@ import Inscription2 from '../public/Inscription2';
 import Inscription3 from '../public/Inscription3';
 import Login from '../public/Login';
 import Layout from './Layout';
+import Erreur from './Erreur';
 
 
 const PagesPubliques = () => {
@@ -23,6 +24,7 @@ const PagesPubliques = () => {
                 <Route path="/inscription2" element={<Inscription2 />} />
                 <Route path="/inscription3" element={<Inscription3 />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="*" element={<Erreur />} />
             </Route>
         </Routes>
     )
