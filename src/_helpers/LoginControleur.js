@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 export default function LoginControleur({children}) {
     let isLogged = false
 
-    if (sessionStorage.getItem('jeton') !==null ) {
+    if (sessionStorage.getItem('jeton') !== null ) {
         console.log('Contenu sessionStorage : ', sessionStorage.getItem('jeton'))
         isLogged = true
         console.log('Login controleur : ', isLogged)

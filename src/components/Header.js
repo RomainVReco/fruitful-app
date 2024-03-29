@@ -56,10 +56,10 @@ function Header() {
           </svg>
         </a>
         <ul className="dropdown-menu">
-          <li><a href="#" className="dropdown-item">Mon profil</a></li>
-          <li><a href="#" className="dropdown-item">Mon bilan</a></li>
-          <li><a href="#" className="dropdown-item">Mes tâches</a></li>
-          <li><a href="#" className="dropdown-item">Abonnement</a></li>
+          <li><Link className="dropdown-item" to='/estConnecte/profil'>Mon profil</Link></li>
+          <li><Link className="dropdown-item" to='/estConnecte/bilan'>Mon bilan</Link></li>
+          <li><Link className="dropdown-item" to='/estConnecte/mesTaches'>Mes tâches</Link></li>
+          <li><Link className="dropdown-item" to='/estConnecte/abonnement'>Abonnement</Link></li>
           <li style={{borderBottom:'1px solid #000', width:'100%', marginBottom:'5px', marginUp:'5px'}}></li>
           <li><a href="#" className="dropdown-item" onClick={handleLogout}>Déconnexion</a></li>
         </ul>

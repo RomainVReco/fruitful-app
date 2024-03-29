@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost
--- Généré le : mer. 27 mars 2024 à 09:56
--- Version du serveur : 10.4.28-MariaDB
--- Version de PHP : 8.2.4
+-- Hôte : 127.0.0.1
+-- Généré le : ven. 29 mars 2024 à 10:00
+-- Version du serveur : 10.4.27-MariaDB
+-- Version de PHP : 8.2.0
 
 DROP DATABASE IF EXISTS fruitful;
 
@@ -76,11 +76,24 @@ CREATE TABLE `entree_agenda_evenement` (
 CREATE TABLE `evenement` (
   `idEvenement` int(11) NOT NULL,
   `nomEvenement` varchar(20) DEFAULT NULL,
+  `dateDebut` varchar(20) NOT NULL,
+  `frequence` int(11) NOT NULL,
   `idTypeEvenement` smallint(6) NOT NULL,
   `idObjectif` int(11) DEFAULT NULL,
   `idClient` int(11) DEFAULT NULL,
-  `idIcone` int(11) DEFAULT NULL
+  `idIcone` int(11) DEFAULT NULL,
+  `estActif` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `evenement`
+--
+
+INSERT INTO `evenement` (`idEvenement`, `nomEvenement`, `dateDebut`, `frequence`, `idTypeEvenement`, `idObjectif`, `idClient`, `idIcone`, `estActif`) VALUES
+(2, 'Test_1', '28/03/2024', 2, 0, NULL, 7, 2, 0),
+(3, 'Test_2', '05/05/2024', 3, 1, NULL, 7, 6, 1),
+(4, 'Test_3', '28/03/2024', 7, 2, NULL, 7, 5, 1),
+(7, 'Test_4', '30/12/2025', 3, 0, NULL, 7, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -98,14 +111,14 @@ CREATE TABLE `icone` (
 --
 
 INSERT INTO `icone` (`idIcone`, `nomIcone`) VALUES
+(0, 'logo-rasp.svg'),
 (1, 'bicycle.svg'),
 (2, 'binoculars.svg'),
 (3, 'book.svg'),
 (4, 'boombox.svg'),
 (5, 'chat-dots.svg'),
 (6, 'ev-station.svg'),
-(7, 'airplane-engines.svg'),
-(8, 'logo-rasp.svg');
+(7, 'airplane-engines.svg');
 
 -- --------------------------------------------------------
 
@@ -136,9 +149,9 @@ CREATE TABLE `type_evenement` (
 --
 
 INSERT INTO `type_evenement` (`idTypeEvenement`, `nomTypeEvenement`) VALUES
+(0, 'Tâche'),
 (1, 'Habitude'),
-(2, 'Tâche'),
-(3, 'Addiction');
+(2, 'Addiction');
 
 -- --------------------------------------------------------
 
@@ -271,7 +284,7 @@ ALTER TABLE `entree_agenda_evenement`
 -- AUTO_INCREMENT pour la table `evenement`
 --
 ALTER TABLE `evenement`
-  MODIFY `idEvenement` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idEvenement` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pour la table `icone`
@@ -289,7 +302,7 @@ ALTER TABLE `objectif`
 -- AUTO_INCREMENT pour la table `type_evenement`
 --
 ALTER TABLE `type_evenement`
-  MODIFY `idTypeEvenement` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idTypeEvenement` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `unite_quantite`
