@@ -16,7 +16,8 @@ const PagesPubliques = () => {
     return (
         <Routes>
             <Route element={<Layout />}>
-                <Route path="/pageAccueil" element={<PageAccueil />} />
+                <Route index path="/" element={<PageAccueil />} />
+                <Route index path="/pageAccueil" element={<PageAccueil />} />
                 <Route path="/pageLandingPage" element={<PageLandingPage />} />
                 <Route path="/pageLandingPage2" element={<PageLandingPage2 />} />
                 <Route path="/pageLandingPage3" element={<PageLandingPage3 />} />

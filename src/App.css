@@ -43,6 +43,18 @@ body {
 
 .liensNav {
   list-style-type: none;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80%;
+  width:80%;
+  border-radius: 1rem;
+}
+
+.liensNav:hover {
+  background-color: #C282A0;
+
 }
 
 .lienHeader {
@@ -50,13 +62,21 @@ body {
   text-align: center;
   align-self: center;
   margin-right: 5px;
+  border-radius: 1rem;
+}
+
+.lienHeader:hover {
+  /* S'inscrire et connexion */
+  background-color: #C282A0;
 }
 
 .lien {
   cursor: pointer;
   text-decoration: none;
   color: #f1f1f1;
+  list-style-type: none;
 }
+
 
 .dropdown-toggle::after {
   content: none !important;
@@ -89,9 +109,8 @@ body {
   }
 
   .wrapper-lienHeader{
-    display: flex;
-    flex-direction: column;
     padding: 0.5rem;
+    width: 100%;
   }
 
   .icon-media {
@@ -123,6 +142,11 @@ body {
 .boutonAnnuler {
   border-color: #c12a71 !important;
   color: #c12a71 !important;
+}
+
+.boutonAnnuler:active {
+  background-color: #c12a71 !important;
+  color: #FFF !important;
 }
 
 /* COMPOSANTS TACHES */
@@ -283,7 +307,6 @@ body {
   border-radius: 50px !important;
   display: block;
   width: 200px;
-
 }
 
 {/*

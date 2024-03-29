@@ -37,9 +37,9 @@ function Header() {
   }
 
   const blocConnexion = <>
-    <div className="wrapper-lienHeader d-flex">
+    <div className="wrapper-lienHeader d-flex" >
       <div className="lienHeader">
-        <a href="#" className="btn">S'inscrire</a>
+        <a href="../inscription" className="btn">S'inscrire</a>
       </div>
       <div className="lienHeader">
         <a href="../login" className="btn">Connexion</a>
@@ -59,9 +59,9 @@ function Header() {
           <li><Link className="dropdown-item" to='/estConnecte/profil'>Mon profil</Link></li>
           <li><Link className="dropdown-item" to='/estConnecte/bilan'>Mon bilan</Link></li>
           <li><Link className="dropdown-item" to='/estConnecte/mesTaches'>Mes tâches</Link></li>
-          <li><Link className="dropdown-item" to='/estConnecte/abonnement'>Abonnement</Link></li>
+          <li><Link className="dropdown-item" to='/estConnecte/pageInscriptionPremium'>Abonnement</Link></li>
           <li style={{borderBottom:'1px solid #000', width:'100%', marginBottom:'5px', marginUp:'5px'}}></li>
-          <li><a href="#" className="dropdown-item" onClick={handleLogout}>Déconnexion</a></li>
+          <li><button href="#" className="dropdown-item" onClick={handleLogout}>Déconnexion</button></li>
         </ul>
       </div>
     </div>
@@ -78,16 +78,13 @@ function Header() {
         </div>
         <div ><img src={menuCloseIcon} className="menu-burger" onClick={handleClickMenu}></img></div>
         <ul className="listeMenu show-content">
-          <li className="liensNav">
-            <Link className='lien' to="/estConnecte/listeTaches">Tâches</Link></li>
+        <Link className='liensNav' to="/estConnecte/listeTaches"><li className="lien">
+            Tâches</li></Link>
           <li className="liensNav">
             <Link className='lien' to="/estConnecte/creationTache">Nouveau</Link>
           </li>
-          <li className="liensNav">
-            <Link className='lien' to='/estConnecte/planning'>Planning</Link>
-          </li>
-          <li className="liensNav">
-            <Link className='lien' to='/inscription'>Inscription</Link>
+          <li className="liensNav" >
+            <Link className='lien' style={{color:"grey"}} >Planning</Link>
           </li>
         </ul>
         {isConnected ? estConnecte : blocConnexion}

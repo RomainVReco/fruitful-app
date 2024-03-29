@@ -35,7 +35,7 @@ export default function ModaleLogo({ open, onClose, parentCallback, data }) {
         </div>
 
 
-        <button className='btn boutonValider' onClick={onClose}>Fermer</button>
+        <button className='btn boutonValiderProfil' onClick={onClose}>Fermer</button>
       </div>
     </>
   )
