@@ -108,7 +108,7 @@ app.post('/updateTestUserName/:id', (req, res) => {
         }
         return res.json('Mise à jour du status abonné réalisée avec succès');
     });
-    
+
     /*const sql = "UPDATE utilisateur SET s_nom = ? WHERE i_id_utilisateur = ?";
 
     db.query(sql, [nouveauNom, idClient], (err, result) => {
@@ -209,8 +209,8 @@ app.get('/getAllEvenements', (req, res) => {
 
 app.get('/getAllIcons', (req, res) => {
 
-    const sql="SELECT nomIcone FROM icone;"
-    db.query(sql, (err, data)=> {
+    const sql = "SELECT nomIcone FROM icone;"
+    db.query(sql, (err, data) => {
 
         if (err) {
             return res.status(500).json({
@@ -219,7 +219,7 @@ app.get('/getAllIcons', (req, res) => {
             })
         }
 
-        if (data && data.length>0) {
+        if (data && data.length > 0) {
             return res.status(200).json(data)
 
         } else {
@@ -230,18 +230,20 @@ app.get('/getAllIcons', (req, res) => {
 
 
 app.post('/createNewEvent', (req, res) => {
-    const {nom, dateDebut, frequence, typeEvenement, idClient, logo} = req.body
-    const sql ="INSERT INTO evenement (nomEvenement, dateDebut, frequence, idTypeEvenement, idClient, idIcone) "+
-    "VALUES (?, ?, ?, ?, ?, ?);"
+    const { nom, dateDebut, frequence, typeEvenement, idClient, logo } = req.body
+    const sql = "INSERT INTO evenement (nomEvenement, dateDebut, frequence, idTypeEvenement, idClient, idIcone) " +
+        "VALUES (?, ?, ?, ?, ?, ?);"
     db.query(sql, [nom, dateDebut, frequence, typeEvenement, idClient, logo], (err, data) => {
         if (err) {
-            return res.status(500).json({error:"Erreur lors de la création d'une nouvelle tâche",
-        details:err})
+            return res.status(500).json({
+                error: "Erreur lors de la création d'une nouvelle tâche",
+                details: err
+            })
         }
         if (data && data.affectedRows > 0) {
-            return res.status(200).json({success:"Nouvel évènement créé avec succès.", resultat:data})
+            return res.status(200).json({ success: "Nouvel évènement créé avec succès.", resultat: data })
         } else {
-            return res.status(404).json({failure:"Statut de création de la nouvelle tâche inconnue", info:err})
+            return res.status(404).json({ failure: "Statut de création de la nouvelle tâche inconnue", info: err })
         }
     })
 })
@@ -255,19 +257,21 @@ app.put('/updateEventStatus/:idEvenement', (req, res) => {
     const sql = "UPDATE evenement SET estActif = ? WHERE idEvenement = ?;"
     db.query(sql, [estActif, idEvenement], (err, data) => {
         if (err) {
-            return res.status(500).json({error:"Erreur lors de la désactivation d'un évènement",
-            details:err})
+            return res.status(500).json({
+                error: "Erreur lors de la désactivation d'un évènement",
+                details: err
+            })
         }
-        if (data && data.affectedRows>0) {
-            return res.status(200).json({success:`Evenement ${idEvenement} désactivé avec succès`, resultat:data})
+        if (data && data.affectedRows > 0) {
+            return res.status(200).json({ success: `Evenement ${idEvenement} désactivé avec succès`, resultat: data })
         } else {
-            return res.status(404).json({failure:`Evenement ${idEvenement} introuvable en BDD`, resultat:data})
+            return res.status(404).json({ failure: `Evenement ${idEvenement} introuvable en BDD`, resultat: data })
         }
     })
-}) 
+})
 
 app.put('/updateEvent', (req, res) => {
-    const {idEvenement, nom, dateDebut, frequence, typeEvenement, logo} = req.body
+    const { idEvenement, nom, dateDebut, frequence, typeEvenement, logo } = req.body
     console.log(idEvenement, nom, dateDebut, frequence, typeEvenement, logo)
     res.status(200).json("/updateEvent ==> ça marche buddy")
 })
@@ -284,37 +288,32 @@ app.listen(PORT, () => {
 
 app.post('/checkEmail', (req, res) => {
 
-    const email = req
-    console.log("email ds db ", email.email)
+    const email = req.body.email
+    console.log('server : ', email)
     const sql = "SELECT COUNT(*) AS count FROM users WHERE email = ?"
     db.query(sql, [email], (error, data) => {
-
-        const email = req.body.email
-        console.log('server : ', email)
-        const sql = "SELECT COUNT(*) AS count FROM users WHERE email = ?"
-        db.query(sql, [email], (error, data) => {
-            if (error) {
-                console.log("err : ", error);
-                //     return res.status(500).json({error:"Erreur lors de la récupération des icones",
-                // details:err})
-                // }
-                // if (data.length>0) {
-                //     return res.status(200).json({ success:"Liste des icones récupérées", data:data})
-                // } else {
-                //     return res.status(404).json({error:"Aucune icone trouvée en base de données."})
-                // }
-                return res.json('Erreur de requête SQL');
-            }
-            console.log("DATA :", data,)
-            if (data.length > 0) {
-                console.log("data : ", data)
-                return res.json("ok")
-            } else {
-                console.log("data : ", data)
-                return res.json("Aucune information client trouvée")
-            }
+        if (error) {
+            console.log("err : ", error);
+            //     return res.status(500).json({error:"Erreur lors de la récupération des icones",
+            // details:err})
+            // }
+            // if (data.length>0) {
+            //     return res.status(200).json({ success:"Liste des icones récupérées", data:data})
+            // } else {
+            //     return res.status(404).json({error:"Aucune icone trouvée en base de données."})
+            // }
+            return res.json('Erreur de requête SQL');
+        }
+        console.log("DATA :", data,)
+        if (data.length > 0) {
+            console.log("data : ", data)
+            return res.json("ok")
+        } else {
+            console.log("data : ", data)
+            return res.json("Aucune information client trouvée")
+        }
 
 
-        })
     })
+})
 })
