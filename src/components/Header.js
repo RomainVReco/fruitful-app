@@ -34,8 +34,6 @@ function Header() {
   const handleLogout = () => {
     gestionConnexion.deconnexion()
     navigate("../pageAccueil")
-
-
   }
 
   const blocConnexion = <>
@@ -81,12 +79,12 @@ function Header() {
         <div ><img src={menuCloseIcon} className="menu-burger" onClick={handleClickMenu}></img></div>
         <ul className="listeMenu show-content">
           <li className="liensNav">
-            <Link className='lien' to="/listeTaches">Tâches</Link></li>
+            <Link className='lien' to="/estConnecte/listeTaches">Tâches</Link></li>
           <li className="liensNav">
-            <Link className='lien' to="/creationTache">Nouveau</Link>
+            <Link className='lien' to="/estConnecte/creationTache">Nouveau</Link>
           </li>
           <li className="liensNav">
-            <Link className='lien' to='/planning'>Planning</Link>
+            <Link className='lien' to='/estConnecte/planning'>Planning</Link>
           </li>
           <li className="liensNav">
             <Link className='lien' to='/inscription'>Inscription</Link>
