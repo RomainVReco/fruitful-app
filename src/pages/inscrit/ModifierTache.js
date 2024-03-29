@@ -47,8 +47,7 @@ export default function ModifierTache() {
     useEffect(() => {
         getTypeEvenements()
 
-    }, [singleIcon])
-
+    }, [])
 
     const getTypeEvenements = async () => {
         try {
