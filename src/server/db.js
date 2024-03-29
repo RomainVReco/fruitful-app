@@ -9,9 +9,10 @@ app.use(cors())
 app.use(express.json())
 
 const db = mysql.createConnection({
+    port: "3306",
     host: "localhost",
     user: "root",
-    password: '',
+    password: "",
     database: "fruitful"
 })
 
@@ -304,29 +305,28 @@ app.post('/checkEmail', (req, res) => {
 
     const email = req.body.email
     console.log('server : ', email)
-    const sql = "SELECT COUNT(*) AS count FROM utilisateur WHERE email = ?"
+    const sql = "SELECT idClient FROM utilisateur WHERE email = ?"
     db.query(sql, [email], (error, data) => {
         if (error) {
             console.log("err : ", error);
-            //     return res.status(500).json({error:"Erreur lors de la récupération des icones",
-            // details:err})
-            // }
-            // if (data.length>0) {
-            //     return res.status(200).json({ success:"Liste des icones récupérées", data:data})
-            // } else {
-            //     return res.status(404).json({error:"Aucune icone trouvée en base de données."})
-            // }
-            let a="err req SQL"+error;
-            return res.json(a);
+ 
         }
-        console.log("DATA :", data,)
+        console.log("data.length > 0 ",data.length > 0)
         if (data.length > 0) {
-            console.log("data : ", data)
-            return res.json("ok")
+            console.log("data >0: ", data)
+            return res.status(200).json({ success: `success`, resultat: data })
         } else {
-            console.log("data : ", data)
-            return res.json("Aucune information client trouvée")
+            console.log("data=0 : ", data)
+            return res.status(404).json({ success: `echec`, resultat: data })
         }
+        // console.log("DATA :", data,)
+        // if (data.length > 0) {
+        //     console.log("data : ", data)
+        //     return res.json("ok")
+        // } else {
+        //     console.log("data : ", data)
+        //     return res.json("Aucune information client trouvée")
+        // }
 
 
     })
