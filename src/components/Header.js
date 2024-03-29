@@ -59,7 +59,7 @@ function Header() {
           <li><Link className="dropdown-item" to='/estConnecte/profil'>Mon profil</Link></li>
           <li><Link className="dropdown-item" to='/estConnecte/bilan'>Mon bilan</Link></li>
           <li><Link className="dropdown-item" to='/estConnecte/mesTaches'>Mes tâches</Link></li>
-          <li><Link className="dropdown-item" to='/estConnecte/abonnement'>Abonnement</Link></li>
+          <li><Link className="dropdown-item" to='/estConnecte/pageInscriptionPremium'>Abonnement</Link></li>
           <li style={{borderBottom:'1px solid #000', width:'100%', marginBottom:'5px', marginUp:'5px'}}></li>
           <li><a href="#" className="dropdown-item" onClick={handleLogout}>Déconnexion</a></li>
         </ul>
@@ -85,9 +85,6 @@ function Header() {
           </li>
           <li className="liensNav">
             <Link className='lien' to='/estConnecte/planning'>Planning</Link>
-          </li>
-          <li className="liensNav">
-            <Link className='lien' to='/inscription'>Inscription</Link>
           </li>
         </ul>
         {isConnected ? estConnecte : blocConnexion}
