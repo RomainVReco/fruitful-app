@@ -3,6 +3,7 @@ import Tache from '../../components/Tache';
 import axios from "axios";
 import { dataImage } from '../../_helpers/data.env'
 import { useNavigate } from "react-router-dom";
+import { ReactComponent as AjoutTache} from '../../assets/add-icon.svg'
 
 const handleSubmit = (event) => {
   event.preventDefault()
@@ -53,6 +54,11 @@ export default function ListeTaches() {
     navigate('../../estConnecte/modifierTache/'+idEvenement)
   }
 
+  const handleNewTask = () => {
+    console.log("Clic handleNewTask")
+    navigate('../../estConnecte/creationTache')
+  }
+
   return (
     <div className="container">
       {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
@@ -62,7 +68,8 @@ export default function ListeTaches() {
         image={dataIcon[element.idIcone]}method={() => handleClickEvent(element.idEvenement)}/>
         </div>
       })}
-      <Tache nomHabitude="Lire un livre" quota='20' quantiteQuota='pages' heure='10h30' />
+
+      <div className="d-flex justify-content-start" onClick={handleNewTask}><AjoutTache fill="#FFF"/></div>
     </div>
   )
 }
