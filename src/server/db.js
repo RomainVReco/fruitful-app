@@ -165,7 +165,7 @@ app.put('/updateAddress', (req, res) => {
 
 // ************** TÂCHES ****************** //
 /* Méthodes pour la création de tâche */
-app.get('/getAllEvenements', (req, res) => {
+app.get('/getAllEventTypes', (req, res) => {
     const sql = "SELECT nomTypeEvenement FROM type_evenement;"
     db.query(sql, (err, data) => {
         if (err) {
@@ -226,8 +226,8 @@ app.post('/createNewEvent', (req, res) => {
 app.put('/updateEventStatus/:idEvenement', (req, res) => {
     const idEvenement = req.params.idEvenement
     const estActif = 0
-    console.log('idEvenement : ', idEvenement)
-    console.log('estActif : ', estActif)
+    console.log('updateEventStatus idEvenement : ', idEvenement)
+    console.log('updateEventStatus estActif : ', estActif)
 
     const sql = "UPDATE evenement SET estActif = ? WHERE idEvenement = ?;"
     db.query(sql, [estActif, idEvenement], (err, data) => {
@@ -282,6 +282,26 @@ app.get('/getAllUserEvents/:idClient', (req, res) => {
             return res.status(200).json({ success: "Liste des évènements récupérés", resultat: data })
         } else {
             return res.status(404).json({ failure: "Aucun évènement trouvé pour ce client", resultat: data })
+        }
+    })
+})
+
+app.get('/getEvent/:idEvenement', (req, res) => {
+    const idEvenement = req.params.idEvenement
+    console.log('getEvent idEvenement : ', idEvenement)
+    const sql = "SELECT idEvenement, nomEvenement as nom, dateDebut, frequence, idTypeEvenement as typeEvenement, "+
+    "idIcone as logo FROM evenement WHERE idEvenement = ?;"
+    db.query(sql, [idEvenement], (err, data) => {
+        if (err) {
+            return res.status(500).json({
+                error: "Erreur lors de la récupération de l'évènement à modifier",
+                details: err
+            })
+        }
+        if (data && data.length> 0) {
+            return res.status(200).json({ success: `Evenement ${idEvenement} récupéré avec succès`, resultat: data })
+        } else {
+            return res.status(404).json({ failure: "Aucun évènement trouvé", resultat: data })
         }
     })
 })
