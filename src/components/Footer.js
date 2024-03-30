@@ -77,7 +77,7 @@ function Footer() {
           </Link>
         </div>
         <div>
-            <Link className='lien'>Qui sommes nous?</Link>
+            <Link className='lien' to="/PageQuiSommesNous">Qui sommes nous? </Link>
         </div>
       </div>
     </nav>

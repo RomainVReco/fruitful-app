@@ -1,6 +1,5 @@
 import React from "react";
 
-import Footer from "../../components/Footer";
 import ImageAccueil from "../../components/ImageAccueil";
 import BoutonAccesEER from "../../components/BoutonAccesEER";
 import Carousel from "../../components/Carousel";
@@ -47,6 +46,7 @@ export default function PageAccueil() {
     <br />
     <br />
 
+    {/*Bouton Acces à l'Entrée En Relation: c'est à dire Questionnaire */}
     <BoutonAccesEER/>
 
     <br />
