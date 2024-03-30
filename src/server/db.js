@@ -293,6 +293,7 @@ app.listen(PORT, () => {
 // ************** INSCRIPTION ****************** //
 /* Méthodes CRUD pour l'inscription */
 
+// Vérification si l'e-mail existe en BDD ou pas
 app.post('/checkEmail', (req, res) => {
 
     const email = req.body.email
@@ -313,6 +314,7 @@ app.post('/checkEmail', (req, res) => {
     })
 })
 
+// On écrit en base les renseignements fournis lors des 3 pages d'inscription.
 app.put('/enregistrementInscription', (req, res) => {
     const { nom, prenom, dateNaissance, email, password } = req.body
     console.log("inscrit : ", nom, prenom, dateNaissance, email, password)

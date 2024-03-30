@@ -26,6 +26,9 @@ export default function Inscription3() {
   const [motDePasse2, setMotDePasse2] = useState("");
   const [messageErreur, setMessageErreur] = useState("");
   const [emailExiste, setEmailExiste] = useState(false);
+  
+  // On récupère les éléments écrits en sessionStorage des 3 pages d'inscription
+  // et on les regroupe dans un objet que m'on passera à la fonction enregistrementInscription
   const [inscrit, setTache] = useState({
     nom: sessionStorage.getItem('nom'),
     prenom: sessionStorage.getItem('prenom'),
@@ -59,7 +62,8 @@ export default function Inscription3() {
         setMessageErreur("Email non présent en base");
         console.log("Email non présent en base");
         enregistrementInscription(inscrit);
-        // navigate(url);
+        // On se déplace dans les pages renseignement
+        navigate(url);
       }
     } catch (error) {
       console.error('Error:', error, " email :", email);
@@ -68,28 +72,22 @@ export default function Inscription3() {
     }
   }
 
+  // Enregistre le nouvel utilisateur en BDD
   const enregistrementInscription = async (email) => {
     console.log("email avant try :", email);
     try {
       const response = await axios.put('http://localhost:8081/enregistrementInscription', inscrit);
       console.log("response : ", response.data.success);
-      if (response.data.success == "success") {
-        setEmailExiste(true);
-        setMessageErreur("Cet e-mail est déjà utilisé. Veuillez vous connecter ici :");
-      } else {
-        // Continue with registration process
-        console.log("Email non présent en base");
 
+      setMessageErreur(response.data);
 
-        // navigate(url);
-      }
     } catch (error) {
       console.error('Error:', error);
       setMessageErreur('Erreur lors de la vérification de l\'e-mail. Veuillez réessayer.');
     }
   }
 
-  let url = "../Renseignement";
+  var url = "../inscrit/Renseignement";
   const navigate = useNavigate();
   //----------------------------------------------------------------------------------------------------------------
   const handleClick = (event) => {
@@ -113,17 +111,16 @@ export default function Inscription3() {
     setMessageErreur(erreur);
 
     if (erreur == "") {
+      // S'il n'y a pas d'erreur on enregistre l'email en sessionStorage
       console.log(email, motDePasse);
       sessionStorage.setItem("email", email.email);
-      sessionStorage.setItem("email", email.email);
+      // sessionStorage.setItem("email", email.email);
       sessionStorage.setItem("motDePasse", motDePasse);
       console.log("affichage 2 :", email, motDePasse);
 
       checkEmail(email);
       return;
     };
-
-
 
   };
 
