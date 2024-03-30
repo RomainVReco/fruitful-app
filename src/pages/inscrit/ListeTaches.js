@@ -15,6 +15,7 @@ export default function ListeTaches() {
   const [listeTaches, setListeTaches] = useState([])
   const [idClient, setIdClient] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
+  const [dataIcon, setDataIcon] = useState(dataImage)
 
   /* Récupération du jeton de connexion */
   useEffect(() => {
@@ -58,7 +59,7 @@ export default function ListeTaches() {
       {listeTaches.map((element, index) => {
         return <div key={index}><Tache nomHabitude={element.nomEvenement} frequence={element.frequence} 
         dateDebut={element.dateDebut} typeEvenement={element.nomTypeEvenement} idTypeEvenement={element.idTypeEvenement}
-        method={() => handleClickEvent(element.idEvenement)}/>
+        image={dataIcon[element.idIcone]}method={() => handleClickEvent(element.idEvenement)}/>
         </div>
       })}
       <Tache nomHabitude="Lire un livre" quota='20' quantiteQuota='pages' heure='10h30' />
