@@ -45,7 +45,6 @@ export default function ListeTaches() {
       }
     } catch (error) {
       console.log("Erreur lors de la récupération des évènements du client ", error)
-      setErrorMessage("Aucune donnée trouvée")
     }
   }
 
@@ -62,12 +61,16 @@ export default function ListeTaches() {
   return (
     <div className="container">
       {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
-      {listeTaches.map((element, index) => {
-        return <div key={index}><Tache nomHabitude={element.nomEvenement} frequence={element.frequence} 
-        dateDebut={element.dateDebut} typeEvenement={element.nomTypeEvenement} idTypeEvenement={element.idTypeEvenement}
-        image={dataIcon[element.idIcone]}method={() => handleClickEvent(element.idEvenement)}/>
-        </div>
-      })}
+      { listeTaches.length > 0 ? (listeTaches.map((element, index) => {
+          return <div key={index}><Tache nomHabitude={element.nomEvenement} frequence={element.frequence} 
+          dateDebut={element.dateDebut} typeEvenement={element.nomTypeEvenement} idTypeEvenement={element.idTypeEvenement}
+          image={dataIcon[element.idIcone]}method={() => handleClickEvent(element.idEvenement)}/>
+          </div>
+        })) : (<div> <p>Vous n'avez aucun évènement.</p>
+              <p>Démarrer sans attendre et créez en dès à présent</p>
+              </div>)
+      } 
+        
 
       <div className="d-flex justify-content-start" onClick={handleNewTask}><AjoutTache fill="#FFF"/></div>
     </div>
