@@ -3,6 +3,7 @@ import Tache from '../../components/Tache';
 import axios from "axios";
 import { dataImage } from '../../_helpers/data.env'
 import { useNavigate } from "react-router-dom";
+import { ReactComponent as AjoutTache} from '../../assets/add-icon.svg'
 
 const handleSubmit = (event) => {
   event.preventDefault()
@@ -15,6 +16,7 @@ export default function ListeTaches() {
   const [listeTaches, setListeTaches] = useState([])
   const [idClient, setIdClient] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
+  const [dataIcon, setDataIcon] = useState(dataImage)
 
   /* Récupération du jeton de connexion */
   useEffect(() => {
@@ -52,16 +54,22 @@ export default function ListeTaches() {
     navigate('../../estConnecte/modifierTache/'+idEvenement)
   }
 
+  const handleNewTask = () => {
+    console.log("Clic handleNewTask")
+    navigate('../../estConnecte/creationTache')
+  }
+
   return (
     <div className="container">
       {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
       {listeTaches.map((element, index) => {
         return <div key={index}><Tache nomHabitude={element.nomEvenement} frequence={element.frequence} 
         dateDebut={element.dateDebut} typeEvenement={element.nomTypeEvenement} idTypeEvenement={element.idTypeEvenement}
-        method={() => handleClickEvent(element.idEvenement)}/>
+        image={dataIcon[element.idIcone]}method={() => handleClickEvent(element.idEvenement)}/>
         </div>
       })}
-      <Tache nomHabitude="Lire un livre" quota='20' quantiteQuota='pages' heure='10h30' />
+
+      <div className="d-flex justify-content-start" onClick={handleNewTask}><AjoutTache fill="#FFF"/></div>
     </div>
   )
 }

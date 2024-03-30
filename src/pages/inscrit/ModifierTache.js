@@ -33,13 +33,12 @@ export default function ModifierTache() {
 
     // attention à bien ajouter la récupération du jeton
     const [tache, setTache] = useState({
-        idEvenement: '2',
-        nom: 'Nom local',
-        dateDebut: '01/01/1970',
-        frequence: '3',
-        typeEvenement: '2',
-        idClient: 7,
-        logo: '5',
+        idEvenement: '',
+        nom: '',
+        dateDebut: '',
+        frequence: '',
+        typeEvenement: '',
+        logo: '',
         estActif: '1'
     })
 
@@ -47,21 +46,24 @@ export default function ModifierTache() {
     const [singleIcon, setSingleIcon] = useState(dataIcon[tache.logo])
 
     useEffect(() => {
-        getTypeEvenements()
-        getEventToModify(idEvenement)
+        getEventTypes()
     }, [])
 
-    const getTypeEvenements = async () => {
+    useEffect(() => {
+        getEventToModify(idEvenement)
+    },[])
+
+    const getEventTypes = async () => {
         try {
-            const response = await axios.get('http://localhost:8081/getAllEvenements')
-            console.log("Response status getTypeEvenements : ", response.status)
+            const response = await axios.get('http://localhost:8081/getAllEventTypes')
+            console.log("Response status getEventTypes : ", response.status)
             Object.entries(response.data).forEach(([key, value]) => {
                 console.log('evt value : ', key + ' ' + value['nomTypeEvenement'])
                 setEvenements(prevState => ({ ...prevState, [key]: value['nomTypeEvenement'] }))
             })
 
         } catch (error) {
-            console.error('Erreur getTypeEvenements : ', error);
+            console.error('Erreur getEventTypes : ', error);
         }
     }
 
@@ -69,8 +71,13 @@ export default function ModifierTache() {
         console.log('getEventToModify : ', idEvenement) 
         try {
             const response = await axios.get(`http://localhost:8081/getEvent/${idEvenement}`)
-            console.log('updateEventStatus : ', response.status)
-            console.log('updateEventStatus : ', response.data)
+            console.log('getEventToModify : ', response.status)
+            console.log('getEventToModify : ', response.data['resultat'])
+            Object.entries(response.data['resultat'][0]).forEach(([key, value]) => {
+                console.log('tache : ', key + ' ' + value)
+                setTache(prevState => ({ ...prevState, [key]: value }))
+            })
+            
         } catch (error) {
             console.log("Erreur lors de la récupération de l'évènement à modifier")
         }
@@ -98,25 +105,9 @@ export default function ModifierTache() {
     }
 
     const handleChange = (event) => {
-        console.log("Handle Change in création tache : ", [event.target.id] + ':' + event.target.value)
+        console.log("HandleChange dans ModifierTache : ", [event.target.id] + ':' + event.target.value)
         setTache(prevTache => ({ ...prevTache, [event.target.id]: event.target.value }))
     }
-
-    {/*const handleSubmit = (event) => {
-        event.preventDefault()
-        Object.entries(tache).forEach(([key, value]) => {
-            console.log(key + ' : ' + value + ' - ' + 'typeof : ' +
-                typeof (value) + ' - ' + ' undefined : ' + (value == undefined))
-        })
-        const checkTacheData = Object.values(tache).some(value => value.length === 0)
-        if (checkTacheData) {
-            setErrorMessage("Il manque une ou plusieurs informations obligatoires")
-
-        } else {
-            console.log("Chouette, ça va partir en base de données")
-        }
-    }
-    */}
 
     const handleDelete = async (event, idEvenement) => {
         event.preventDefault()
@@ -177,7 +168,7 @@ export default function ModifierTache() {
 
             <div className='container'>
                 <button className='btn btn-light' onClick={() => setIsOpen(true)}>
-                    <img src={singleIcon} alt="icone evt" style={{ height: '42px', width: '52px' }}></img>
+                    <img src={dataIcon[tache.logo]} alt="icone evt" style={{ height: '42px', width: '52px' }}></img>
                 </button>
                 <ModaleLogo open={isOpen} onClose={() => setIsOpen(false)} data={dataIcon} parentCallback={handleCallbackLogo}>
                     Coucou
@@ -195,10 +186,10 @@ export default function ModifierTache() {
                     <div className='col-md-5 col-8'>
                         <label htmlFor="typeEvenement" className='form-label'>Type d'évènement : </label>
                         <select className="form-select form-control profil-border" id='typeEvenement' aria-label="Default select example"
-                            onChange={handleChange} defaultValue={tache.typeEvenement}>
-                            <option value="0">Tâche</option>
-                            <option value="1">Habitude</option>
-                            <option value="2">Addiction</option>
+                            onChange={handleChange} value={tache.typeEvenement}>
+                            <option value="0">{evenements[0]}</option>
+                            <option value="1">{evenements[1]}</option>
+                            <option value="2">{evenements[2]}</option>
                         </select>
                     </div>
                 </div>
@@ -227,7 +218,7 @@ export default function ModifierTache() {
                 <a href="" className='btn boutonAnnuler' onClick={(event) => handleDelete(event, tache.idEvenement)}>Supprimer</a>
                 <ModaleConfirmation open={isModaleSuppressionOpen} method={onCloseSuppression}
                     lignes={infoSuppression} titre={"Résultat"} />
-                <a href="../estConnecte/listeTaches" className='btn boutonAnnuler' style={{ marginLeft: '50px' }}>Annuler</a>
+                <a href="../listeTaches" className='btn boutonAnnuler' style={{ marginLeft: '50px' }}>Annuler</a>
                 {/* <GenericButton label="Valider" buttonStyle='boutonValider' method={handleSubmit}/> */}
             </div>
             {checkErrorMessage && (<div style={{ color: 'red' }}>{checkErrorMessage}</div>)}

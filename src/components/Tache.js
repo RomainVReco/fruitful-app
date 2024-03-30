@@ -5,14 +5,14 @@ import { couleurTypeEvenement } from '../_helpers/data.env'
 
 
 // les props sont placés en attendant la récupération des données 
-function Tache ({nomHabitude, frequence, idTypeEvenement, typeEvenement, dateDebut, method}) {
+function Tache ({nomHabitude, frequence, idTypeEvenement, typeEvenement, dateDebut, method, image}) {
 
     return (
         <div className="container-md d-flex justify-content-center">
         <div className="tache-container col-md-6 col-12" onClick={method}>
             <div className="tache-logo" >
                 <div className="boutonlogo d-flex justify-content-evenly">
-                    <img src={rasp} alt="icone evt" style={{height:'42px', width:'52px'}}></img>
+                    <img src={image} alt="icone evt" style={{height:'42px', width:'52px'}}></img>
                 </div>
             </div>
             <div className="tache-titre">

@@ -6,15 +6,18 @@ import book from '../assets/book.svg'
 import boombox from '../assets/boombox.svg'
 import chat from '../assets/chat-dots.svg'
 import ev from '../assets/ev-station.svg'
+import banane from '../assets/banane.png'
 
-export const dataImage = [    rasp,
+
+export const dataImage = [rasp,
     plane,
     bike,
     bino,
     book,
     boombox,
     chat,
-    ev]
+    ev,
+    banane]
 
 export const headers = {
     'Content-Type': 'application/json',
