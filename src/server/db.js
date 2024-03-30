@@ -248,8 +248,8 @@ app.put('/updateEventStatus/:idEvenement', (req, res) => {
 app.put('/updateEvent', (req, res) => {
     const { idEvenement, nom, dateDebut, frequence, typeEvenement, logo } = req.body
     console.log("updateEvent : ", idEvenement, nom, dateDebut, frequence, typeEvenement, logo)
-    const sql = "UPDATE evenement SET nomEvenement = ?, dateDebut = ?, frequence = ?, "+
-    "idTypeEvenement = ?, idIcone = ? WHERE idEvenement = ?;"
+    const sql = "UPDATE evenement SET nomEvenement = ?, dateDebut = ?, frequence = ?, " +
+        "idTypeEvenement = ?, idIcone = ? WHERE idEvenement = ?;"
     db.query(sql, [nom, dateDebut, frequence, typeEvenement, logo, idEvenement], (err, data) => {
         if (err) {
             return res.status(500).json({
@@ -293,8 +293,6 @@ app.listen(PORT, () => {
 // ************** INSCRIPTION ****************** //
 /* Méthodes CRUD pour l'inscription */
 
-
-
 app.post('/checkEmail', (req, res) => {
 
     const email = req.body.email
@@ -303,25 +301,33 @@ app.post('/checkEmail', (req, res) => {
     db.query(sql, [email], (error, data) => {
         if (error) {
             console.log("err : ", error);
- 
         }
-        console.log("data.length > 0 ",data.length > 0)
+        console.log("data.length > 0 ", data.length > 0)
         if (data.length > 0) {
             console.log("data >0: ", data)
             return res.status(200).json({ success: `success`, resultat: data })
         } else {
             console.log("data=0 : ", data)
-            return res.status(404).json({ success: `echec`, resultat: data })
+            return res.json({ success: `echec`, resultat: data })
         }
-        // console.log("DATA :", data,)
-        // if (data.length > 0) {
-        //     console.log("data : ", data)
-        //     return res.json("ok")
-        // } else {
-        //     console.log("data : ", data)
-        //     return res.json("Aucune information client trouvée")
-        // }
+    })
+})
 
-
+app.put('/enregistrementInscription', (req, res) => {
+    const { nom, prenom, dateNaissance, email, password } = req.body
+    console.log("inscrit : ", nom, prenom, dateNaissance, email, password)
+    const sql = "INSERT INTO utilisateur (nom, prenom, dateNaissance, email, password) VALUES (?, ?, ?, ?, ?);"
+    db.query(sql, [nom, prenom, dateNaissance, email, password], (err, data) => {
+        if (err) {
+            return res.status(500).json({
+                error: "Erreur lors de l'enregistrement d'un nouvel utilisateur.",
+                details: err
+            })
+        }
+        if (data && data.affectedRows > 0) {
+            return res.status(200).json({ success: `Utilisateur ${nom} ajouté à la base avec succès`, resultat: data })
+        } else {
+            return res.json({ failure: `Utilisateur ${nom} non ajouté à la base`, resultat: data })
+        }
     })
 })

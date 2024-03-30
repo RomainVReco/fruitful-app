@@ -26,7 +26,15 @@ export default function Inscription3() {
   const [motDePasse2, setMotDePasse2] = useState("");
   const [messageErreur, setMessageErreur] = useState("");
   const [emailExiste, setEmailExiste] = useState(false);
-  
+  const [inscrit, setTache] = useState({
+    nom: sessionStorage.getItem('nom'),
+    prenom: sessionStorage.getItem('prenom'),
+    dateNaissance: sessionStorage.getItem('dateNaissance'),
+    email: sessionStorage.getItem('email'),
+    password: sessionStorage.getItem('motDePasse'),
+  })
+
+
   const handleChangeEmail = (e) => {
     setEmail(prevState => ({ ...prevState, [e.target.id]: e.target.value })); // Mettre à jour l'email dans l'état
   };
@@ -36,20 +44,45 @@ export default function Inscription3() {
   const handleChangeMotDePasse2 = (e) => {
     setMotDePasse2(e.target.value); // Mettre à jour le second mot de passe dans l'état
   };
+
   const checkEmail = async (email) => {
     console.log("email avant try :", email);
     try {
       const response = await axios.post('http://localhost:8081/checkEmail', email);
       console.log("response : ", response.data.success);
-      if (response.data.success=="success") {
+      if (response.data.success == "success") {
         setEmailExiste(true);
         setMessageErreur("Cet e-mail est déjà utilisé. Veuillez vous connecter ici :");
-        console.log("erreur email déjà présent");
+      } else {
+        // On poursuit le processus d'enregistrement
+        setEmailExiste(false);
+        setMessageErreur("Email non présent en base");
+        console.log("Email non présent en base");
+        enregistrementInscription(inscrit);
+        // navigate(url);
+      }
+    } catch (error) {
+      console.error('Error:', error, " email :", email);
+
+      setMessageErreur('Erreur lors de la vérification de l\'e-mail. Veuillez réessayer.');
+    }
+  }
+
+  const enregistrementInscription = async (email) => {
+    console.log("email avant try :", email);
+    try {
+      const response = await axios.put('http://localhost:8081/enregistrementInscription', inscrit);
+      console.log("response : ", response.data.success);
+      if (response.data.success == "success") {
+        setEmailExiste(true);
+        setMessageErreur("Cet e-mail est déjà utilisé. Veuillez vous connecter ici :");
       } else {
         // Continue with registration process
         console.log("Email non présent en base");
+
+
         // navigate(url);
-      } 
+      }
     } catch (error) {
       console.error('Error:', error);
       setMessageErreur('Erreur lors de la vérification de l\'e-mail. Veuillez réessayer.');
@@ -81,13 +114,15 @@ export default function Inscription3() {
 
     if (erreur == "") {
       console.log(email, motDePasse);
-      sessionStorage.setItem("email", email);
+      sessionStorage.setItem("email", email.email);
+      sessionStorage.setItem("email", email.email);
       sessionStorage.setItem("motDePasse", motDePasse);
       console.log("affichage 2 :", email, motDePasse);
 
       checkEmail(email);
       return;
     };
+
 
 
   };
