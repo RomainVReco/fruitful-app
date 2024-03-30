@@ -24,6 +24,7 @@ export default function ModifierTache() {
     const [isOpen, setIsOpen] = useState(false)
     const [isModaleSuppressionOpen, setModaleSuppressionOpen] = useState(false)
     const [isModaleModificationOpen, setModaleModificationOpen] = useState(false)
+    const [checkIntegrity, setCheckIntegrity] = useState(false)
     const [infoSuppression, setInfoSuppression] = useState(
         ["L'évènement a bien été supprimé et n'apparaitra plus dans la liste de vos tâches.",
             'Les statistiques de cette tâche resteront consultables dans la rubrique "Mon bilan".'
@@ -105,6 +106,7 @@ export default function ModifierTache() {
     }
 
     const handleChange = (event) => {
+        checkIntegrity(false)
         console.log("HandleChange dans ModifierTache : ", [event.target.id] + ':' + event.target.value)
         setTache(prevTache => ({ ...prevTache, [event.target.id]: event.target.value }))
     }
@@ -127,6 +129,7 @@ export default function ModifierTache() {
         event.preventDefault()
         const checkTacheData = Object.values(tache).some(value => value.length === 0)
         if (checkTacheData) {
+            checkIntegrity(true)
             setErrorMessage("Il manque une ou plusieurs informations obligatoires")
 
         } else {
@@ -221,7 +224,7 @@ export default function ModifierTache() {
                 <a href="../listeTaches" className='btn boutonAnnuler' style={{ marginLeft: '50px' }}>Annuler</a>
                 {/* <GenericButton label="Valider" buttonStyle='boutonValider' method={handleSubmit}/> */}
             </div>
-            {checkErrorMessage && (<div style={{ color: 'red' }}>{checkErrorMessage}</div>)}
+            {checkErrorMessage && checkIntegrity && (<div style={{ color: 'red' }}>{checkErrorMessage}</div>)}
         </div>
     )
 }
