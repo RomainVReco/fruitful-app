@@ -1,5 +1,6 @@
 import React from "react";
 
+import Footer from "../../components/Footer";
 import ImageAccueil from "../../components/ImageAccueil";
 import BoutonAccesEER from "../../components/BoutonAccesEER";
 import Carousel from "../../components/Carousel";
