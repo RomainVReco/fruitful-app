@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 
 export default function Inscription2() {
+  // On modifie le format de la date de naissance pour correspondre au format SQL (YYYY-MM-DD)
   function formatDate(date) {
     const [jour, mois, annee] = date.split('/');
     return `${annee}-${mois}-${jour}`;
@@ -38,7 +39,8 @@ export default function Inscription2() {
       );
     } else {
       setMessageErreur(""); // Effacer le message d'erreur s'il n'y a pas d'erreur    
-      // Fonction pour reformater la date au format YYYY-MM-DD
+      // Appel de fonction pour reformater la date au format SQL (YYYY-MM-DD)
+      // En effet cette variable de sessionStorage est récupérée en fin de parcours d'inscrition pour être éventuellement écrite en BDD
       let dateNaissanceFormatSQL = formatDate(dateNaissance);
       sessionStorage.setItem("dateNaissance", dateNaissanceFormatSQL);
       navigate(url);
