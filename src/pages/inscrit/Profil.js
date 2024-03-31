@@ -15,7 +15,7 @@ export default function Profil() {
         3: 'Abonnement'
     }
     const [client, setClient] = useState({
-        idClient: '',
+        idUtilisateur: '',
         nom: '',
         prenom: '',
         email: '',
@@ -29,7 +29,7 @@ export default function Profil() {
         adresse: '',
         codePostal: '',
         ville: '',
-        idClient: '',
+        idUtilisateur: '',
         label: ''
     })
 
@@ -52,16 +52,16 @@ export default function Profil() {
     useEffect(() => {
         if (client.idAdresse.length != 0) {
             console.log(client.idAdresse)
-            fetchAddress(client.idClient)
+            fetchAddress(client.idUtilisateur)
         }
     }, [adresse.adresse])
 
     // Récupération des données clients et d'adresse
 
-    const fetchData = async (idClient) => {
-        console.log('fetchData : ', idClient)
+    const fetchData = async (idUtilisateur) => {
+        console.log('fetchData : ', idUtilisateur)
         try {
-            const response = await axios.post(`http://localhost:8081/getUser/${idClient}`);
+            const response = await axios.post(`http://localhost:8081/getUser/${idUtilisateur}`);
             console.log("Fetchdata profil : ", response.data);
             Object.entries(response.data).forEach(([key, value]) => {
                 console.log(key, value)
@@ -72,10 +72,10 @@ export default function Profil() {
         }
     }
 
-    const fetchAddress = async (idClient) => {
-        console.log('fetchAddress : ', idClient)
+    const fetchAddress = async (idUtilisateur) => {
+        console.log('fetchAddress : ', idUtilisateur)
         try {
-            const response = await axios.post(`http://localhost:8081/getAddress/${idClient}`)
+            const response = await axios.post(`http://localhost:8081/getAddress/${idUtilisateur}`)
             Object.entries(response.data).forEach(([key, value]) => {
                 console.log(key, value)
                 setAdresse(prevAdresse => ({ ...prevAdresse, [key]: value }))
@@ -157,8 +157,8 @@ export default function Profil() {
     // Enregistrement des modifications des informations de profi
 
     const handleSubmit = () => {
-        if (adresse.idClient.length == 0) {
-            adresse['idClient'] = client.idClient
+        if (adresse.idUtilisateur.length == 0) {
+            adresse['idUtilisateur'] = client.idUtilisateur
         }
         console.log("Handle submit profil")
         if (client.idAdresse.length == 0 && adresse.adresse.length != 0) {

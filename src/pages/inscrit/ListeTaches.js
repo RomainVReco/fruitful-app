@@ -14,30 +14,30 @@ export default function ListeTaches() {
 
   var navigate = useNavigate()
   const [listeTaches, setListeTaches] = useState([])
-  const [idClient, setIdClient] = useState('')
+  const [idUtilisateur, setidUtilisateur] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
   const [dataIcon, setDataIcon] = useState(dataImage)
 
   /* Récupération du jeton de connexion */
   useEffect(() => {
     if (sessionStorage.getItem('jeton') == null) {
-      setIdClient(7)
+      setidUtilisateur(7)
     } else {
-      setIdClient(sessionStorage.getItem('jeton'))
+      setidUtilisateur(sessionStorage.getItem('jeton'))
     }
   }, [])
 
   /* Requête pour récupérer la liste des tâches*/
   useEffect(() => {
-    if (idClient.length !== 0) {
+    if (idUtilisateur.length !== 0) {
       getAllUserEvents()
     }
-  }, [idClient])
+  }, [idUtilisateur])
 
   const getAllUserEvents = async () => {
     console.log('getAllUserEvents')
     try {
-      const response = await axios.get(`http://localhost:8081/getAllUserEvents/${idClient}`)
+      const response = await axios.get(`http://localhost:8081/getAllUserEvents/${idUtilisateur}`)
       console.log('getAllUserEvents : ', response.status)
       console.log('getAllUserEvents : ', response.data.resultat)
       if (response.status === 200) {

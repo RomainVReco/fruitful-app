@@ -25,13 +25,13 @@ export default function CreationTache() {
 		dateDebut: '',
 		frequence: '1',
 		typeEvenement: '0',
-		idClient: '',
+		idUtilisateur: '',
 		logo: '8',
 	})
 
 	useEffect(() => {
 		getEventTypes()
-		tache['idClient'] = sessionStorage.getItem('jeton')
+		tache['idUtilisateur'] = sessionStorage.getItem('jeton')
 
 	}, [])
 
