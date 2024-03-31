@@ -5,10 +5,14 @@ import { Outlet } from "react-router-dom";
 
 export default function Layout() {
     return (
-        <>
-        <Header />
-        <Outlet />
-        <Footer />
-        </>
+        <div className="layout-container">
+            <div className="footer-content-container">
+                <Header />
+                <Outlet />
+            </div>
+            <footer className="footer--pin">
+                <Footer />
+            </footer>
+        </div>
     )
 }

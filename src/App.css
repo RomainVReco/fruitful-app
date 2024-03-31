@@ -89,6 +89,34 @@ body {
   right:1rem;
 }
 
+/* FOOTER */
+.footerBottom {
+  background-color: #C12A71;
+  /*height: 65px;*/
+  width: 100%;
+  z-index: 1000;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.image-footer {
+  padding: 5px;
+  height: 50px;
+}
+
+.footer-content-container {
+  min-height: calc(100vh - 34px); /* Ajustez la hauteur selon vos besoins */
+}
+
+.footer--pin {
+  position: relative;
+  left: 0;
+  bottom: 0;
+}
+
 @media (max-width: 645px) {
 
   .listeMenu {
