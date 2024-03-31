@@ -28,11 +28,11 @@
     })
 
     app.post('/getUser/:id', (req, res) => {
-        const idClient = req.params.id
-        console.log('server : ', idClient)
-        const sql = "SELECT idClient, nom, prenom, email, newsletter, specialOffer, idAdresse " +
-            "FROM utilisateur WHERE idClient = ?;"
-        db.query(sql, [idClient], (err, data) => {
+        const idUtilisateur = req.params.id
+        console.log('server : ', idUtilisateur)
+        const sql = "SELECT idUtilisateur, nom, prenom, email, newsletter, specialOffer, idAdresse " +
+            "FROM utilisateur WHERE idUtilisateur = ?;"
+        db.query(sql, [idUtilisateur], (err, data) => {
             if (err) {
                 return res.json('Erreur de requête SQL')
             }
@@ -45,7 +45,7 @@
     })
 
     app.post('/login', (req, res) => {
-        const sql = "SELECT idClient FROM utilisateur WHERE " +
+        const sql = "SELECT idUtilisateur FROM utilisateur WHERE " +
             "email = ?  AND password = ?"
         db.query(sql, [req.body.email, req.body.password], (err, data) => {
             if (err) {
@@ -61,8 +61,8 @@
     })
 
     app.put('/updateClient', (req, res) => {
-        const sql = "UPDATE utilisateur SET nom = ?, prenom = ?, email = ?, newsletter = ?, specialOffer = ? WHERE idClient = ? ;"
-        db.query(sql, [req.body.nom, req.body.prenom, req.body.email, req.body.newsletter, req.body.specialOffer, req.body.idClient], (err, data) => {
+        const sql = "UPDATE utilisateur SET nom = ?, prenom = ?, email = ?, newsletter = ?, specialOffer = ? WHERE idUtilisateur = ? ;"
+        db.query(sql, [req.body.nom, req.body.prenom, req.body.email, req.body.newsletter, req.body.specialOffer, req.body.idUtilisateur], (err, data) => {
             if (err) {
                 console.log("Echec de l'exécution de la requête de mise à jours des informations clients : ", err)
                 return res.status(500).json("Echec de l'exécution de la requête de mise à jours des informations clients : " + err)
@@ -82,12 +82,12 @@
     /* Méthodes pour souscription (abonnement Premium) */
 
     app.post('/updateSubscription/:id', (req, res) => {
-        const idClient = req.params.id;
+        const idUtilisateur = req.params.id;
 
         const nouvelEtatAbonne = req.body.estAbonne; // Nouvel état abonné à mettre à jour
         console.log('Nouvel Etat Abonné : ' + nouvelEtatAbonne);
-        const sql = "UPDATE utilisateur SET estAbonne = ? WHERE idClient = ?";
-        db.query(sql, [nouvelEtatAbonne, idClient], (err, result) => {
+        const sql = "UPDATE utilisateur SET estAbonne = ? WHERE idUtilisateur = ?";
+        db.query(sql, [nouvelEtatAbonne, idUtilisateur], (err, result) => {
             if (err) {
                 return res.json('Erreur lors de la mise à jour du statut abonné: ' + err);
             }
@@ -99,10 +99,10 @@
     /* Méthode CRUD pour l'adresse */
 
     app.post('/getAddress/:id', (req, res) => {
-        const idClient = req.params.id
-        console.log('server : ', idClient)
-        const sql = "SELECT idAdresse, adresse, codePostal, idClient, ville FROM adresse WHERE idClient = ?"
-        db.query(sql, [idClient], (err, data) => {
+        const idUtilisateur = req.params.id
+        console.log('server : ', idUtilisateur)
+        const sql = "SELECT idAdresse, adresse, codePostal, idUtilisateur, ville FROM adresse WHERE idUtilisateur = ?"
+        db.query(sql, [idUtilisateur], (err, data) => {
             if (err) {
                 return res.json('Erreur de requête SQL')
             }
@@ -115,10 +115,10 @@
     })
 
     app.post('/createAddress', (req, res) => {
-        const { adresse, codePostal, ville, idClient } = req.body;
-        const sql = "INSERT INTO adresse (adresse, codePostal, ville, idClient) VALUES (?, ?, ?, ?);"
+        const { adresse, codePostal, ville, idUtilisateur } = req.body;
+        const sql = "INSERT INTO adresse (adresse, codePostal, ville, idUtilisateur) VALUES (?, ?, ?, ?);"
         console.log("type data : ", typeof (req.body.adresse))
-        db.query(sql, [adresse, codePostal, ville, idClient], (err, data) => {
+        db.query(sql, [adresse, codePostal, ville, idUtilisateur], (err, data) => {
             if (err) {
                 console.log("Erreur lors de l'exécution de la requête de création d'adresse :", err)
                 return res.status(500).json({ error: "Erreur lors de l'exécution de la requête de création d'adresse", detail: err })
@@ -126,8 +126,8 @@
             if (data.affectedRows > 0) {
                 const idAdresse = data.insertId;
                 console.log("Id créé : ", idAdresse)
-                const utilisateurSql = "UPDATE utilisateur SET idAdresse = ? WHERE idClient = ?;"
-                db.query(utilisateurSql, [idAdresse, idClient], (utilisateurErr, utilisateurResult) => {
+                const utilisateurSql = "UPDATE utilisateur SET idAdresse = ? WHERE idUtilisateur = ?;"
+                db.query(utilisateurSql, [idAdresse, idUtilisateur], (utilisateurErr, utilisateurResult) => {
                     if (utilisateurErr) {
                         console.log("Error updating utilisateur table:", utilisateurErr);
                         return res.status(500).json({ error: "Error updating utilisateur table", details: utilisateurErr });
@@ -205,10 +205,10 @@
 
 
     app.post('/createNewEvent', (req, res) => {
-        const { nom, dateDebut, frequence, typeEvenement, idClient, logo } = req.body
-        const sql = "INSERT INTO evenement (nomEvenement, dateDebut, frequence, idTypeEvenement, idClient, idIcone) " +
+        const { nom, dateDebut, frequence, typeEvenement, idUtilisateur, logo } = req.body
+        const sql = "INSERT INTO evenement (nomEvenement, dateDebut, frequence, idTypeEvenement, idUtilisateur, idIcone) " +
             "VALUES (?, ?, ?, ?, ?, ?);"
-        db.query(sql, [nom, dateDebut, frequence, typeEvenement, idClient, logo], (err, data) => {
+        db.query(sql, [nom, dateDebut, frequence, typeEvenement, idUtilisateur, logo], (err, data) => {
             if (err) {
                 return res.status(500).json({
                     error: "Erreur lors de la création d'une nouvelle tâche",
@@ -265,13 +265,13 @@
         })
     })
 
-    app.get('/getAllUserEvents/:idClient', (req, res) => {
-        const idClient = req.params.idClient
-        console.log("getAllUserEvents : ", idClient)
+    app.get('/getAllUserEvents/:idUtilisateur', (req, res) => {
+        const idUtilisateur = req.params.idUtilisateur
+        console.log("getAllUserEvents : ", idUtilisateur)
         const sql = "SELECT idEvenement, nomEvenement, dateDebut, frequence, eve.idTypeEvenement, t_e.nomTypeEvenement, idIcone "+
         "FROM evenement as eve INNER JOIN type_evenement as t_e ON eve.idTypeEvenement = t_e.idTypeEvenement "+
-        "WHERE eve.idClient = ? AND eve.estActif = 1;"
-        db.query(sql, [idClient], (err, data) => {
+        "WHERE eve.idUtilisateur = ? AND eve.estActif = 1;"
+        db.query(sql, [idUtilisateur], (err, data) => {
             if (err) {
                 return res.status(500).json({
                     error: "Erreur lors de la récupération des évènements du client",
@@ -298,7 +298,7 @@
 
         const email = req.body.email
         console.log('server : ', email)
-        const sql = "SELECT idClient FROM utilisateur WHERE email = ?"
+        const sql = "SELECT idUtilisateur FROM utilisateur WHERE email = ?"
         db.query(sql, [email], (error, data) => {
             if (error) {
                 console.log("err : ", error);
