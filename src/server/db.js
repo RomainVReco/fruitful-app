@@ -267,28 +267,28 @@ app.put('/updateEventStatus/:idEvenement', (req, res) => {
         }
 
     })
-
-    app.put('/updateEvent', (req, res) => {
-        const { idEvenement, nom, dateDebut, frequence, typeEvenement, logo } = req.body
-        console.log("updateEvent : ", idEvenement, nom, dateDebut, frequence, typeEvenement, logo)
-        const sql = "UPDATE evenement SET nomEvenement = ?, dateDebut = ?, frequence = ?, " +
-            "idTypeEvenement = ?, idIcone = ? WHERE idEvenement = ?;"
-        db.query(sql, [nom, dateDebut, frequence, typeEvenement, logo, idEvenement], (err, data) => {
-            if (err) {
-                return res.status(500).json({
-                    error: "Erreur lors de la mise à jour d'un évènement",
-                    details: err
-                })
-            }
-            if (data && data.affectedRows > 0) {
-                return res.status(200).json({ success: `Evenement ${idEvenement} mis à jour avec succès`, resultat: data })
-            } else {
-                return res.status(404).json({ failure: `Evenement ${idEvenement} introuvable en BDD`, resultat: data })
-            }
-        })
-    })
-
 })
+
+app.put('/updateEvent', (req, res) => {
+    const { idEvenement, nom, dateDebut, frequence, typeEvenement, logo } = req.body
+    console.log("updateEvent : ", idEvenement, nom, dateDebut, frequence, typeEvenement, logo)
+    const sql = "UPDATE evenement SET nomEvenement = ?, dateDebut = ?, frequence = ?, " +
+        "idTypeEvenement = ?, idIcone = ? WHERE idEvenement = ?;"
+    db.query(sql, [nom, dateDebut, frequence, typeEvenement, logo, idEvenement], (err, data) => {
+        if (err) {
+            return res.status(500).json({
+                error: "Erreur lors de la mise à jour d'un évènement",
+                details: err
+            })
+        }
+        if (data && data.affectedRows > 0) {
+            return res.status(200).json({ success: `Evenement ${idEvenement} mis à jour avec succès`, resultat: data })
+        } else {
+            return res.status(404).json({ failure: `Evenement ${idEvenement} introuvable en BDD`, resultat: data })
+        }
+    })
+})
+
 
 app.get('/getAllUserEvents/:idUtilisateur', (req, res) => {
     const idUtilisateur = req.params.idUtilisateur

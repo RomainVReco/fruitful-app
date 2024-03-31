@@ -106,7 +106,7 @@ export default function ModifierTache() {
     }
 
     const handleChange = (event) => {
-        checkIntegrity(false)
+        setCheckIntegrity(false)
         console.log("HandleChange dans ModifierTache : ", [event.target.id] + ':' + event.target.value)
         setTache(prevTache => ({ ...prevTache, [event.target.id]: event.target.value }))
     }
@@ -129,7 +129,7 @@ export default function ModifierTache() {
         event.preventDefault()
         const checkTacheData = Object.values(tache).some(value => value.length === 0)
         if (checkTacheData) {
-            checkIntegrity(true)
+            setCheckIntegrity(true)
             setErrorMessage("Il manque une ou plusieurs informations obligatoires")
 
         } else {
