@@ -13,7 +13,7 @@ import axios from 'axios';
     'Content-Type': 'application/json'
   }
 
-  const [idClient, setIdClient] = useState('');
+  const [idUtilisateur, setidUtilisateur] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   const [modalShow, setModalShow] = useState(false);
@@ -21,16 +21,16 @@ import axios from 'axios';
 
   useEffect(() => {
       const id = gestionConnexion.getSessionId();
-      setIdClient(id);
+      setidUtilisateur(id);
   }, []);
 
   const handleInscription = async () => {
     try {
         // Récupération de l'ID de l'utilisateur connecté en utilisant getSessionId()
-        const idClient = gestionConnexion.getSessionId();
+        const idUtilisateur = gestionConnexion.getSessionId();
         
         // Envoyer une requête pour mettre à jour le champ estAbonne
-        const response = await axios.post(`http://localhost:8081/updateSubscription/${idClient}`, { estAbonne: 1 }, { headers });
+        const response = await axios.post(`http://localhost:8081/updateSubscription/${idUtilisateur}`, { estAbonne: 1 }, { headers });
         
         console.log(response.data); // Affichage de la réponse du serveur
         

@@ -32,14 +32,14 @@ CREATE TABLE `adresse` (
   `adresse` varchar(150) DEFAULT NULL,
   `codePostal` varchar(5) DEFAULT NULL,
   `ville` varchar(50) DEFAULT NULL,
-  `idClient` int(11) NOT NULL
+  `idUtilisateur` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `adresse`
 --
 
-INSERT INTO `adresse` (`idAdresse`, `adresse`, `codePostal`, `ville`, `idClient`) VALUES
+INSERT INTO `adresse` (`idAdresse`, `adresse`, `codePostal`, `ville`, `idUtilisateur`) VALUES
 (1, '123 Main St', '12345', 'City1', 0),
 (2, '456 Elm St', '67890', 'City2', 0),
 (3, '789 Oak St', '13579', 'City3', 0),
@@ -74,7 +74,7 @@ CREATE TABLE `evenement` (
   `frequence` int(11) NOT NULL,
   `idTypeEvenement` smallint(6) NOT NULL,
   `idObjectif` int(11) DEFAULT NULL,
-  `idClient` int(11) DEFAULT NULL,
+  `idUtilisateur` int(11) DEFAULT NULL,
   `idIcone` int(11) DEFAULT NULL,
   `estActif` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -83,7 +83,7 @@ CREATE TABLE `evenement` (
 -- Déchargement des données de la table `evenement`
 --
 
-INSERT INTO `evenement` (`idEvenement`, `nomEvenement`, `dateDebut`, `frequence`, `idTypeEvenement`, `idObjectif`, `idClient`, `idIcone`, `estActif`) VALUES
+INSERT INTO `evenement` (`idEvenement`, `nomEvenement`, `dateDebut`, `frequence`, `idTypeEvenement`, `idObjectif`, `idUtilisateur`, `idIcone`, `estActif`) VALUES
 (2, 'Test_1', '28/03/2024', 2, 0, NULL, 7, 2, 0),
 (3, 'Test_2', '05/05/2024', 3, 1, NULL, 7, 6, 1),
 (4, 'Test_3', '28/03/2024', 7, 2, NULL, 7, 5, 1),
@@ -175,7 +175,7 @@ INSERT INTO `unite_quantite` (`idUnite`, `nomUnite`) VALUES
 --
 
 CREATE TABLE `utilisateur` (
-  `idClient` int(11) NOT NULL,
+  `idUtilisateur` int(11) NOT NULL,
   `email` varchar(50) DEFAULT NULL,
   `password` varchar(30) DEFAULT NULL,
   `nom` varchar(30) DEFAULT NULL,
@@ -193,7 +193,7 @@ CREATE TABLE `utilisateur` (
 -- Déchargement des données de la table `utilisateur`
 --
 
-INSERT INTO `utilisateur` (`idClient`, `email`, `password`, `nom`, `prenom`, `genre`, `dateNaissance`, `idAdresse`, `telephone`, `estAbonne`, `newsletter`, `specialOffer`) VALUES
+INSERT INTO `utilisateur` (`idUtilisateur`, `email`, `password`, `nom`, `prenom`, `genre`, `dateNaissance`, `idAdresse`, `telephone`, `estAbonne`, `newsletter`, `specialOffer`) VALUES
 (2, 'test@gmail.com', 'password123', 'AYMARRE', 'Jean', 'Male', '1990-01-01', 1, '123-456-7890', 1, 0, 1),
 (3, 'test', 'password456', 'AYMARRE', 'Jean', 'Female', '1985-05-15', 2, '987-654-3210', 0, 0, 1),
 (4, 'test', 'password789', 'AYMARRE', 'Jean', 'Male', '1988-10-20', 3, '555-123-4567', 1, 0, 1),
@@ -224,7 +224,7 @@ ALTER TABLE `entree_agenda_evenement`
 --
 ALTER TABLE `evenement`
   ADD PRIMARY KEY (`idEvenement`),
-  ADD KEY `i_id_utilisateur` (`idClient`),
+  ADD KEY `i_id_utilisateur` (`idUtilisateur`),
   ADD KEY `i_id_icone` (`idIcone`),
   ADD KEY `i_id_type_evenement` (`idTypeEvenement`) USING BTREE;
 
@@ -257,7 +257,7 @@ ALTER TABLE `unite_quantite`
 -- Index pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  ADD PRIMARY KEY (`idClient`);
+  ADD PRIMARY KEY (`idUtilisateur`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -309,7 +309,7 @@ ALTER TABLE `unite_quantite`
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `idClient` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idUtilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Contraintes pour les tables déchargées
@@ -326,7 +326,7 @@ ALTER TABLE `entree_agenda_evenement`
 --
 ALTER TABLE `evenement`
   ADD CONSTRAINT `evenement_ibfk_1` FOREIGN KEY (`idTypeEvenement`) REFERENCES `type_evenement` (`idTypeEvenement`),
-  ADD CONSTRAINT `evenement_ibfk_3` FOREIGN KEY (`idClient`) REFERENCES `utilisateur` (`idClient`),
+  ADD CONSTRAINT `evenement_ibfk_3` FOREIGN KEY (`idUtilisateur`) REFERENCES `utilisateur` (`idUtilisateur`),
   ADD CONSTRAINT `evenement_ibfk_4` FOREIGN KEY (`idIcone`) REFERENCES `icone` (`idIcone`);
 
 --
