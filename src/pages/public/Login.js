@@ -32,10 +32,10 @@ export default function Login() {
     const handleSubmit = async () => {
         try {
             const response = await axios.post('http://localhost:8081/login', user, headers);
-            let idClient = response.data['idClient']
-            console.log('idClient : ', idClient)
-            if (!!idClient) {
-                gestionConnexion.saveSessionId(idClient)
+            let idUtilisateur = response.data['idUtilisateur']
+            console.log('idUtilisateur : ', idUtilisateur)
+            if (!!idUtilisateur) {
+                gestionConnexion.saveSessionId(idUtilisateur)
                 navigate("../../estConnecte/listeTaches")
             } else {
                 setErrorMessage('Email ou mot de passe invalide')

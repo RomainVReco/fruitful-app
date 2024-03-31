@@ -3,6 +3,7 @@ import Tache from '../../components/Tache';
 import axios from "axios";
 import { dataImage } from '../../_helpers/data.env'
 import { useNavigate } from "react-router-dom";
+import { ReactComponent as AjoutTache} from '../../assets/add-icon.svg'
 
 const handleSubmit = (event) => {
   event.preventDefault()
@@ -13,29 +14,30 @@ export default function ListeTaches() {
 
   var navigate = useNavigate()
   const [listeTaches, setListeTaches] = useState([])
-  const [idClient, setIdClient] = useState('')
+  const [idUtilisateur, setidUtilisateur] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
+  const [dataIcon, setDataIcon] = useState(dataImage)
 
   /* Récupération du jeton de connexion */
   useEffect(() => {
     if (sessionStorage.getItem('jeton') == null) {
-      setIdClient(7)
+      setidUtilisateur(7)
     } else {
-      setIdClient(sessionStorage.getItem('jeton'))
+      setidUtilisateur(sessionStorage.getItem('jeton'))
     }
   }, [])
 
   /* Requête pour récupérer la liste des tâches*/
   useEffect(() => {
-    if (idClient.length !== 0) {
+    if (idUtilisateur.length !== 0) {
       getAllUserEvents()
     }
-  }, [idClient])
+  }, [idUtilisateur])
 
   const getAllUserEvents = async () => {
     console.log('getAllUserEvents')
     try {
-      const response = await axios.get(`http://localhost:8081/getAllUserEvents/${idClient}`)
+      const response = await axios.get(`http://localhost:8081/getAllUserEvents/${idUtilisateur}`)
       console.log('getAllUserEvents : ', response.status)
       console.log('getAllUserEvents : ', response.data.resultat)
       if (response.status === 200) {
@@ -43,7 +45,6 @@ export default function ListeTaches() {
       }
     } catch (error) {
       console.log("Erreur lors de la récupération des évènements du client ", error)
-      setErrorMessage("Aucune donnée trouvée")
     }
   }
 
@@ -52,16 +53,26 @@ export default function ListeTaches() {
     navigate('../../estConnecte/modifierTache/'+idEvenement)
   }
 
+  const handleNewTask = () => {
+    console.log("Clic handleNewTask")
+    navigate('../../estConnecte/creationTache')
+  }
+
   return (
     <div className="container">
       {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
-      {listeTaches.map((element, index) => {
-        return <div key={index}><Tache nomHabitude={element.nomEvenement} frequence={element.frequence} 
-        dateDebut={element.dateDebut} typeEvenement={element.nomTypeEvenement} idTypeEvenement={element.idTypeEvenement}
-        method={() => handleClickEvent(element.idEvenement)}/>
-        </div>
-      })}
-      <Tache nomHabitude="Lire un livre" quota='20' quantiteQuota='pages' heure='10h30' />
+      { listeTaches.length > 0 ? (listeTaches.map((element, index) => {
+          return <div key={index}><Tache nomHabitude={element.nomEvenement} frequence={element.frequence} 
+          dateDebut={element.dateDebut} typeEvenement={element.nomTypeEvenement} idTypeEvenement={element.idTypeEvenement}
+          image={dataIcon[element.idIcone]}method={() => handleClickEvent(element.idEvenement)}/>
+          </div>
+        })) : (<div> <p>Vous n'avez aucun évènement.</p>
+              <p>Démarrer sans attendre et créez en dès à présent</p>
+              </div>)
+      } 
+        
+
+      <div className="d-flex justify-content-start" onClick={handleNewTask}><AjoutTache fill="#FFF"/></div>
     </div>
   )
 }

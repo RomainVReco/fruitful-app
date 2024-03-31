@@ -16,29 +16,30 @@ export default function CreationTache() {
 	const [evenements, setEvenements] = useState('')
 	const [icones, setIcones] = useState('')
 	const [dataIcon, setDataIcon] = useState(dataImage)
-	const [singleIcon, setSingleIcon] = useState(dataImage[0])
 	const [isOpen, setIsOpen] = useState(false)
+	const [checkIntegrity, setCheckIntegrity] = useState(false)
 
 	// attention à bien ajouter la récupération du jeton
 	const [tache, setTache] = useState({
 		nom: '',
 		dateDebut: '',
 		frequence: '1',
-		typeEvenement: '1',
-		idClient: 7,
-		logo: '0',
+		typeEvenement: '0',
+		idUtilisateur: '',
+		logo: '8',
 	})
 
 	useEffect(() => {
-		getTypeEvenements()
+		getEventTypes()
+		tache['idUtilisateur'] = sessionStorage.getItem('jeton')
 
-	}, [singleIcon])
+	}, [])
 
 
-	const getTypeEvenements = async () => {
+	const getEventTypes = async () => {
 		try {
-			const response = await axios.get('http://localhost:8081/getAllEvenements')
-			console.log("Response status getTypeEvenements : ", response.status)
+			const response = await axios.get('http://localhost:8081/getAllEventTypes')
+			console.log("Response status getEventTypes : ", response.status)
 			Object.entries(response.data).forEach(([key, value]) => {
 				console.log('evt value : ', key + ' ' + value['nomTypeEvenement'])
 				setEvenements(prevState => ({ ...prevState, [key]: value['nomTypeEvenement'] }))
@@ -65,12 +66,12 @@ export default function CreationTache() {
 	const handleCallbackLogo = (logo) => {
 		var taches = { ...tache }
 		console.log('handleCallbackLogo : ' + logo)
-		setSingleIcon(dataImage[logo])
 		taches.logo = logo
 		setTache(taches)
 	}
 
 	const handleChange = (event) => {
+		setCheckIntegrity(false)
 		console.log("Handle Change in création tache : ", [event.target.id] + ':' + event.target.value)
 		setTache(prevTache => ({ ...prevTache, [event.target.id]: event.target.value }))
 	}
@@ -83,6 +84,7 @@ export default function CreationTache() {
 		})
 		const checkTacheData = Object.values(tache).some(value => value.length === 0)
 		if (checkTacheData) {
+			setCheckIntegrity(true)
 			setErrorMessage("Il manque une ou plusieurs informations obligatoires")
 
 		} else {
@@ -95,7 +97,6 @@ export default function CreationTache() {
 		try {
 			const response = await axios.post('http://localhost:8081/createNewEvent', tache)
 			console.log(response.status)
-
 		} catch (error) {
 			console.log("Erreur de lors de la création de la nouvelle tâche")
 			console.log(error)
@@ -113,7 +114,7 @@ export default function CreationTache() {
 
 			<div className='container'>
 				<button className='btn btn-light' onClick={() => setIsOpen(true)}>
-					<img src={singleIcon} alt="icone evt" style={{ height: '42px', width: '52px' }}></img>
+					<img src={dataIcon[tache.logo]} alt="icone evt" style={{ height: '42px', width: '52px' }}></img>
 				</button>
 				<ModaleLogo open={isOpen} onClose={() => setIsOpen(false)} data={dataIcon} parentCallback={handleCallbackLogo}>
 					Coucou
@@ -131,7 +132,7 @@ export default function CreationTache() {
 					<div className='col-md-5 col-8'>
 						<label htmlFor="typeEvenement" className='form-label'>Type d'évènement : </label>
 						<select className="form-select form-control profil-border" id='typeEvenement' aria-label="Default select example"
-							onChange={handleChange} defaultValue='0'>
+							onChange={handleChange} value={tache.typeEvenement}>
 							<option value="0">Tâche</option>
 							<option value="1">Habitude</option>
 							<option value="2">Addiction</option>
@@ -157,13 +158,14 @@ export default function CreationTache() {
 			</div>
 
 			<div className='container d-flex flex-start'>
-				<a href="" className='btn' onClick={handleSubmit}>Valider</a>
-				<a href="" className='btn boutonAnnuler'>
-					<Link to='/estConnecte/listeTaches'>Annuler</Link>
+				<a href="" className='btn boutonValiderProfil' onClick={handleSubmit}>Valider</a>
+				<a href="" className=''>
+					<Link className='btn boutonAnnuler' to='/estConnecte/listeTaches'>Annuler</Link>
 				</a>
 				{/* <GenericButton label="Valider" buttonStyle='boutonValider' method={handleSubmit}/> */}
 			</div>
-			{checkErrorMessage && (<div style={{ color: 'red' }}>{checkErrorMessage}</div>)}
+			<div style={{height:'50px'}}>{checkErrorMessage && checkIntegrity && (<div style={{ color: 'red' }}>{checkErrorMessage}</div>)}</div>
+			
 		</div>
 	)
 }
