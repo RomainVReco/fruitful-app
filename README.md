@@ -1,70 +1,50 @@
-# Getting Started with Create React App
+# FRUITFUL  
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Fruiful est un site Web centré sur le bien-être et vise à aider les personnes à améliorer leur quotidien en leur permettant de définir leurs propres objectifs.    
 
-## Available Scripts
+Que ce soit pour se créer une nouvelle habitude, en perdre une mauvaise ou accomplir une tâche spécifique, Fruitful donne la main à ses utilisateurs pour réussir leur changement.   
 
-In the project directory, you can run:
+Le développement du site, son interface et ses fonctionnalités ont d’abord été pensés dans une optique mobile first.   
 
-### `npm start`
+Le projet a été réalisé en React.JS pour le frontend et Express.JS pour le backend. La base de données a été réalisée avec MySQL (MariaDB).  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Contenu   
 
-### `npm test`
+Afin d'accéder à l'application, il convient de cloner le repository dans un premier temp à l'aide de la commande `git clone` dans Git Bash ou de télécharger les fichiers compressés. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+### Mise en place de la base de données   
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+L'installation de la base de données est la première étape à effectuer pour faire tourner correctement le site.   
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Une fois le dossier fruitful-app installé localement, la base de données fruitful.sql peut être récupérée dans le répertoire BDD. Elle doit être installée dans votre propre système de gestion de base de données. Le fichier contient l'ensemble des commandes nécessaires à la création de la base et de ses différentes tables, ainsi que quelques données de test.  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Si vous utilisez un système différent de MySQL, des ajustements peuvent être nécessaires. 
 
-### `npm run eject`
+Assurez-vous que le serveur contenant la base de données est opérationnel.  
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Lancement du frontend   
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Pour commencer à naviguer sur le site, il faut installer les dépendances du projet. A partir d'un terminal en ligne de commande, rendez-vous à la racine du projet ~/fruitful-app, puis utiliser la commande `npm install`.  
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Une fois l'installation des librairies indispensables terminées, lancer le serveur de développement du front à l'aide de la commande `npm start`  
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Lancement du backend   
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Via un terminal en ligne de commande, rendez-vous dans le répertoire "server" : ~/fruitful-app/src/server.  
 
-### Code Splitting
+Commencer par configurer la connexion à la base de données en modifiant les informations présentes dans le fichier db.js. En effet, par défaut le port du serveur backend est le 8081 et le port de la BDD est le 3036, tandis que le 'host' est configuré en localhost.  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+A partir de cet emplacement, utiliser la commande `npm install` pour télécharger les dépendances nécessaires au fonctionnement du backend.   
 
-### Analyzing the Bundle Size
+Une fois fait, utiliser la commande `npm start` pour lancer le serveur.  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+## Profit  
+ 
+Le site web Fruitful est désormais opérationnel à 100 %.  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Pour signaler un bug ou proposer une évolution, utiliser le système d'issue de Github.  
