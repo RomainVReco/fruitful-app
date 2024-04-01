@@ -1,5 +1,4 @@
 import React from "react";
-import rasp from '../assets/logo-rasp.svg'
 import TypeTache from './TypeTache'
 import { couleurTypeEvenement } from '../_helpers/data.env'
 

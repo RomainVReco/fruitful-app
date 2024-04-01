@@ -1,7 +1,7 @@
 import React from "react";
 import ImageAccueil from '../../components/ImageAccueil'
-import image1 from '../../assets/fleurs_illustre_mieux_gerer_sa_vie.png';
-import image2 from '../../assets/tableau_bord.png';
+import image1 from '../../assets/accueil/fleurs_illustre_mieux_gerer_sa_vie.png';
+import image2 from '../../assets/accueil/tableau_bord.png';
 
 import BoutonAccesEER from '../../components/BoutonAccesEER';
 
