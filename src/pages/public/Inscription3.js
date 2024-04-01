@@ -127,7 +127,7 @@ export default function Inscription3() {
   function AffichageImage() {
     return (
       <div>
-        <img src={contact} alt="Contact" style={{ height: 400, padding: 50 }} />
+        <img src={contact} alt="Contact" style={{ height: 350, padding: 30 }} />
       </div>
     );
   }
