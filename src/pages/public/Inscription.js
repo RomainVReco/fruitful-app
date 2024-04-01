@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import velo from "../../assets/velo.png";
+import velo from "../../assets/inscription/velo.png";
 import {
   BrowserRouter as Router,
   Route,

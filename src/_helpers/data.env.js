@@ -1,12 +1,12 @@
-import rasp from '../assets/logo-rasp.svg'
-import plane from '../assets/airplane-engines.svg'
-import bike from '../assets/bicycle.svg'
-import bino from '../assets/binoculars.svg'
-import book from '../assets/book.svg'
-import boombox from '../assets/boombox.svg'
-import chat from '../assets/chat-dots.svg'
-import ev from '../assets/ev-station.svg'
-import banane from '../assets/banane.png'
+import rasp from '../assets/modale_logo/logo-rasp.svg'
+import plane from '../assets/modale_logo/airplane-engines.svg'
+import bike from '../assets/modale_logo/bicycle.svg'
+import bino from '../assets/modale_logo/binoculars.svg'
+import book from '../assets/modale_logo/book.svg'
+import boombox from '../assets/modale_logo/boombox.svg'
+import chat from '../assets/modale_logo/chat-dots.svg'
+import ev from '../assets/modale_logo/ev-station.svg'
+import banane from '../assets/renseignement/banane.png'
 
 
 export const dataImage = [rasp,

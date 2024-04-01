@@ -1,10 +1,9 @@
 import React from "react";
 import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from "react";
-import logoComplet from '../assets/logo-fruit-titre.png'
-import profilIcone from '../assets/person-square.svg'
-import closeIcon from '../assets/x-lg.svg'
-import menu from '../assets/list.svg'
+import logoComplet from '../assets/header/logo-fruit-titre.png'
+import closeIcon from '../assets/header/x-lg.svg'
+import menu from '../assets/header/list.svg'
 import { gestionConnexion } from "../_helpers/gestion.connexion";
 
 

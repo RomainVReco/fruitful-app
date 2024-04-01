@@ -3,7 +3,7 @@ import Tache from '../../components/Tache';
 import axios from "axios";
 import { dataImage } from '../../_helpers/data.env'
 import { useNavigate } from "react-router-dom";
-import { ReactComponent as AjoutTache} from '../../assets/add-icon.svg'
+import { ReactComponent as AjoutTache} from '../../assets/tache/add-icon.svg'
 
 const handleSubmit = (event) => {
   event.preventDefault()

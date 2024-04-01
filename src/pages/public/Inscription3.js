@@ -10,7 +10,7 @@ import {
   useNavigate,
   Navigate,
 } from "react-router-dom";
-import contact from "../../assets/contact.png";
+import contact from "../../assets/inscription/contact.png";
 import axios from "axios";
 import { Link } from "react-router-dom";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import bebe from '../../assets/bebe.png'
+import bebe from '../../assets/inscription/bebe.png'
 import {
   BrowserRouter as Router,
   Route,
