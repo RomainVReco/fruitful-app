@@ -117,13 +117,29 @@ import axios from 'axios';
       <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet" />
       <link rel="stylesheet" href="PageInscriptionPremium.css" type="text/css" />
 
-      <Container>
+      <br />
+      <br />
+
+      <Container style={{ borderRadius: '10px' }}>
         <Row className="justify-content-center">
-          <Col xs={12} sm={6} md={4}>
+          <Col xs={12} sm={6} md={4} className="text-center" style={{backgroundColor: '#F4F269', borderRadius: '10px'}}>
+            <div>
+              <br />
+              <h2>
+                Envie d'un coaching encore meilleur? Passer en classe Premium!
+              </h2>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+
+      <br />
+      <br />
+
+      <Container style={{ borderRadius: '10px' }}>
+        <Row className="justify-content-center">
+          <Col xs={12} sm={6} md={4} className="text-center" style={{borderRadius: '10px'}}>
             <div id="paypal-button-container">
-              <br />
-              <br />
-              <br />
               <br />
               {/* Ajout bouton pour simuler l'événement onApprove */}
               {/*<Button onClick={handleApproveTransaction}>Simuler Transaction</Button>*/}

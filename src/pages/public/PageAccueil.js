@@ -46,6 +46,7 @@ export default function PageAccueil() {
     <br />
     <br />
 
+    {/*Bouton Acces à l'Entrée En Relation: c'est à dire Questionnaire */}
     <BoutonAccesEER/>
 
     <br />
