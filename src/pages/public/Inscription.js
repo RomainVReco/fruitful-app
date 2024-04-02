@@ -30,7 +30,7 @@ export default function Inscription() {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    const regex = /^[A-Za-z]+$/;
+    const regex = /^[a-zÀ-ÿA-Z]+$/;
     console.log("nom : ", nom);
     console.log("prénom : ", prenom);
 
