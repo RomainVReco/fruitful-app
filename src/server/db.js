@@ -160,22 +160,15 @@ app.post('/createAddress', (req, res) => {
     console.log("type data : ", typeof (req.body.adresse))
     db.query(sql, [adresse, codePostal, ville, idUtilisateur], (err, data) => {
         if (err) {
-            console.log("Erreur lors de l'exécution de la requête de création d'adresse :", err)
-            return res.status(500).json({ error: "Erreur lors de l'exécution de la requête de création d'adresse", detail: err })
+            console.log("Erreur lors de la création de la nouvelle adresse :", err)
+            return res.status(500).json({ error: "Erreur lors de la création de la nouvelle adresse :", detail: err })
         }
         if (data.affectedRows > 0) {
-            const idAdresse = data.insertId;
-            console.log("Id créé : ", idAdresse)
-            const utilisateurSql = "UPDATE utilisateur SET idAdresse = ? WHERE idUtilisateur = ?;"
-            db.query(utilisateurSql, [idAdresse, idUtilisateur], (utilisateurErr, utilisateurResult) => {
-                if (utilisateurErr) {
-                    console.log("Error updating utilisateur table:", utilisateurErr);
-                    return res.status(500).json({ error: "Error updating utilisateur table", details: utilisateurErr });
-                }
-                else {
-                    return res.json("Comportement inattendu lors de la création de la nouvelle adresse")
-                }
-            })
+            console.log("Nouvelle adresse créée avec succès : ", data);
+            return res.status(200).json({ success: "La nouvelle adresse a bien été créée", data: data, idAdresse: data.insertId })
+        } else {
+            console.log("Erreur lors de la création de la nouvelle adresse : ", data);
+            return res.status(404).json({ failure: "Comportement inattendu lors de la création de la nouvelle adresse", data: data })
         }
     })
 })
@@ -367,7 +360,7 @@ app.get('/getEventUserCount/:jeton', (req, res) => {
             return res.status(404).json({ failure: "Aucun évènement trouvé", resultat: data })
         }
     })
-    })
+})
 
 
 app.listen(PORT, () => {

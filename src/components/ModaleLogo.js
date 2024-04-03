@@ -1,8 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react'
-import { createPortal } from 'react-dom'
-import { dataImage } from '../_helpers/data.env'
-
 
 
 export default function ModaleLogo({ open, onClose, parentCallback, data }) {
