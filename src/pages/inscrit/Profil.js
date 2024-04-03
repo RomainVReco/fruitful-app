@@ -175,7 +175,7 @@ export default function Profil() {
             console.log("Création nouvelle adresse : ", response.data)
         } catch (error) {
             console.log("Erreur lors de l'enregistrement de la création de la nouvelle adresse : ", error)
-            console.log("Status : ", error.status )
+            console.log("Status : ", error.status)
         }
     }
 
@@ -200,8 +200,8 @@ export default function Profil() {
     }
 
     return (
-        <div className='container-md wrapper-profil'>
-            <select className="form-select form-control profil-border" aria-label="Default select example"
+        <div className='d-flex flex-column align-items-center m-3'>
+            <select className="form-select form-control selecteur-profil" aria-label="Default select example"
                 onChange={event => handleSelectorChange(event)} defaultValue={profil[0]}>
                 <option value="0" >{profil[0]}</option>
                 <option value="1">{profil[1]}</option>
@@ -210,14 +210,14 @@ export default function Profil() {
             </select>
             <div>
                 <h6 className='profil-h6'>Mes informations</h6>
-                <div className='diviseur'></div>
+                <hr></hr>
                 <div className='render-info'>
                     <InputProfilText label='nom' nomLabel='Nom' titre={client.nom} method={handleChange} />
                     <InputProfilText label='prenom' nomLabel='Prénom' titre={client.prenom} method={handleChange} />
                     <InputProfilText label='email' nomLabel='Email' titre={client.email} method={handleChange} />
                     <InputProfilText label='adresse' nomLabel='Adresse' titre={adresse.adresse} method={handleAddressChange} />
                     {adresseAPI && (<div className='container d-flex flex-column resultat-recherche '>
-                        <div className='diviseur'></div>
+                        <hr></hr>
                         <ul className='liste-resultat-recherche'>
                             {adresseAPI.map((element, index) => {
                                 return <li key={index} pos={index} className='liste-resultat-recherche-item'
@@ -230,17 +230,13 @@ export default function Profil() {
                         <InputProfilText label='codePostal' nomLabel='Code postal' titre={adresse.codePostal} method={handleCityPostCode} />
                         <InputProfilText label='ville' nomLabel='Ville' titre={adresse.ville} method={handleCityPostCode} />
                     </div>
-                    <div className='container'>
-                        <div className='row'>
-                            <div className='col-md-5 col-12'>
-                                <form>
-                                    <label htmlFor="password" className='form-label'>Mot de passe</label>
-                                    <input type="text" id="password" className='form-control profil-border' onChange={handlePasswordChange}
-                                        value="*********" disabled></input>
-                                    <a href="#modifierPassword" id="modifierPassword" className="lien-label" onClick={initiatePasswordChange}>Modifier mon mot de passe </a>
-                                </form>
-                            </div>
-                        </div>
+                    <div className='w-100'>
+                        <form>
+                            <label htmlFor="password" className='form-label'>Mot de passe</label>
+                            <input type="text" id="password" className='form-control profil-border' onChange={handlePasswordChange}
+                                value="*********" disabled></input>
+                            <a href="#modifierPassword" id="modifierPassword" className="lien-label" onClick={initiatePasswordChange}>Modifier mon mot de passe </a>
+                        </form>
                     </div>
 
                     <div className='container'>
@@ -272,4 +268,3 @@ export default function Profil() {
 
     )
 }
-
