@@ -4,6 +4,7 @@ import axios from "axios";
 import { dataImage } from '../../_helpers/data.env'
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as AjoutTache} from '../../assets/tache/add-icon.svg'
+import { gestionConnexion } from '../../_helpers/gestion.connexion'
 
 const handleSubmit = (event) => {
   event.preventDefault()
@@ -17,6 +18,7 @@ export default function ListeTaches() {
   const [idUtilisateur, setidUtilisateur] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
   const [dataIcon, setDataIcon] = useState(dataImage)
+  const [isDisabled, setDisabled] = useState('')
 
   /* Récupération du jeton de connexion */
   useEffect(() => {
@@ -25,14 +27,25 @@ export default function ListeTaches() {
     } else {
       setidUtilisateur(sessionStorage.getItem('jeton'))
     }
+
   }, [])
 
-  /* Requête pour récupérer la liste des tâches*/
+  /* Hook pour charger la liste des tâches et pour contrôle de l'atteinte du capping  */
   useEffect(() => {
     if (idUtilisateur.length !== 0) {
       getAllUserEvents()
+      fetchCapReachedStatus();
     }
   }, [idUtilisateur])
+
+  const fetchCapReachedStatus = async () => {
+    try {
+      const isCapReached = await gestionConnexion.checkCapIsReached(idUtilisateur);
+      setDisabled(isCapReached);
+    } catch (error) {
+      console.error("Erreur useEffect:", error);
+    }
+  };
 
   const getAllUserEvents = async () => {
     console.log('getAllUserEvents')
@@ -73,6 +86,7 @@ export default function ListeTaches() {
         
 
       <div className="d-flex justify-content-start" onClick={handleNewTask}><AjoutTache fill="#FFF"/></div>
+      <button href="" className='btn boutonValiderProfil' disabled={isDisabled}>Valider</button>
     </div>
   )
 }

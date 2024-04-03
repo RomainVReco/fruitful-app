@@ -32,24 +32,19 @@ export default function CreationTache() {
 	})
 
 	useEffect(() => {
-		const fetchCapReachedStatus = async () => {
-			try {
-				await getEventTypes();
-				tache['idUtilisateur'] = sessionStorage.getItem('jeton');
-				const isCapReached = await gestionConnexion.checkCapIsReached(2);
-				setDisabled(isCapReached);
-			} catch (error) {
-				console.error("Error in useEffect:", error);
-				// Handle error if needed
-			}
-		};
-	
+		getEventTypes();
+		tache['idUtilisateur'] = sessionStorage.getItem('jeton');
 		fetchCapReachedStatus();
 	}, [isDisabled]);
 
-	useEffect(() => {
-console.log("isDisabled : ", isDisabled)
-	}, [isDisabled])
+	const fetchCapReachedStatus = async () => {
+		try {
+			const isCapReached = await gestionConnexion.checkCapIsReached(tache.idUtilisateur);
+			setDisabled(isCapReached);
+		} catch (error) {
+			console.error("Erreur useEffect:", error);
+		}
+	};
 
 	const getEventTypes = async () => {
 		try {
