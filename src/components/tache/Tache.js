@@ -1,6 +1,6 @@
 import React from "react";
 import TypeTache from './TypeTache'
-import { couleurTypeEvenement } from '../_helpers/data.env'
+import { couleurTypeEvenement } from '../../_helpers/data.env'
 
 
 // les props sont placés en attendant la récupération des données 

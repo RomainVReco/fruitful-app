@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Tache from '../../components/Tache';
+import Tache from '../../components/tache/Tache';
 import axios from "axios";
 import { dataImage } from '../../_helpers/data.env'
 import { useNavigate } from "react-router-dom";
-import { ReactComponent as AjoutTache} from '../../assets/tache/add-icon.svg'
+import { ReactComponent as AjoutTache } from '../../assets/tache/add-icon.svg'
 import { gestionConnexion } from '../../_helpers/gestion.connexion'
+import '../../components/tache/custom-add-icon.css'
 
 const handleSubmit = (event) => {
   event.preventDefault()
@@ -19,6 +20,7 @@ export default function ListeTaches() {
   const [errorMessage, setErrorMessage] = useState('')
   const [dataIcon, setDataIcon] = useState(dataImage)
   const [isDisabled, setDisabled] = useState('')
+  const [isActive, setActive] = useState(false)
 
   /* Récupération du jeton de connexion */
   useEffect(() => {
@@ -63,31 +65,41 @@ export default function ListeTaches() {
 
   const handleClickEvent = (idEvenement) => {
     console.log("Clic tache : ", idEvenement)
-    navigate('../../estConnecte/modifierTache/'+idEvenement)
+    navigate('../../estConnecte/modifierTache/' + idEvenement)
   }
 
   const handleNewTask = () => {
+    setActive(!isActive)
     console.log("Clic handleNewTask")
     navigate('../../estConnecte/creationTache')
   }
 
   return (
-    <div className="container bg-light">
-      {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
-      <div className="d-flex flex-wrap">
-      { listeTaches.length > 0 ? (listeTaches.map((element, index) => {
-          return <Tache key={index} nomHabitude={element.nomEvenement} frequence={element.frequence} 
-          dateDebut={element.dateDebut} typeEvenement={element.nomTypeEvenement} idTypeEvenement={element.idTypeEvenement}
-          image={dataIcon[element.idIcone]}method={() => handleClickEvent(element.idEvenement)}/>
-        })) : (<div> <p>Vous n'avez aucun évènement.</p>
-              <p>Démarrer sans attendre et créez en dès à présent</p>
-              </div>)
-      }
-      </div> 
-        
+    <>
+      <div className="container bg-light d-flex justify-content-center">
+        {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
+        <div className="d-flex flex-wrap">
+          {listeTaches.length > 0 ? (listeTaches.map((element, index) => {
+            return <Tache key={index} nomHabitude={element.nomEvenement} frequence={element.frequence}
+              dateDebut={element.dateDebut} typeEvenement={element.nomTypeEvenement} idTypeEvenement={element.idTypeEvenement}
+              image={dataIcon[element.idIcone]} method={() => handleClickEvent(element.idEvenement)} />
+          })) : (<div> <p>Vous n'avez aucun évènement.</p>
+            <p>Démarrer sans attendre et créez en dès à présent</p>
+          </div>)
+          }
+        </div>
+      </div>
 
-      <div className="d-flex justify-content-start" onClick={handleNewTask}><AjoutTache fill="#FFF"/></div>
-      <button href="" className='btn boutonValiderProfil' disabled={isDisabled}>Valider</button>
-    </div>
+      <div className="container bg-light">
+        <div className={`circle ${isActive ? 'turquoise' : 'blanc'}`} onClick={handleNewTask} disabled={isDisabled}>
+            <div class="cross">
+              <div className={`line ${isActive ? 'blanc' : 'turquoise'}`}></div>
+              <div className={`line ${isActive ? 'blanc' : 'turquoise'}`}></div>
+          </div>
+        </div>
+
+        {/*} <div className="d-flex justify-content-start" onClick={handleNewTask}><AjoutTache fill="#FFF"/></div> */}
+      </div>
+    </>
   )
 }
