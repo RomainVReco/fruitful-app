@@ -7,7 +7,7 @@ function Footer() {
 
   return (
 
-    <nav className="footerBottom">
+    <footer className="footerBottom">
       <div className="footer-container" >
         <div>
           <Link className="" to='/'>
@@ -18,7 +18,7 @@ function Footer() {
             <Link className='lien' to="/PageQuiSommesNous">Qui sommes nous? </Link>
         </div>
       </div>
-    </nav>
+    </footer>
   );
 }
 
