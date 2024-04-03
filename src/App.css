@@ -117,6 +117,16 @@ body {
   bottom: 0;
 }
 
+.vertical-footer-centrage {
+  display: flex;
+  align-items: center; /* Centrer verticalement */
+}
+
+.horizontal-footer-links {
+  display: flex;
+  justify-content: space-around; /* ou une autre valeur selon votre préférence */
+}
+
 @media (max-width: 645px) {
 
   .listeMenu {
