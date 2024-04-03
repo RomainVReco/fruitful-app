@@ -17,10 +17,12 @@ function Footer() {
           </Link>
         </div>
         <div className="horizontal-footer-links">
-            <Link className='lien' to="/PageQuiSommesNous">Contactez-nous</Link>
+            <Link className='lien' to="/contactezNous">Contactez-nous</Link>
             <Link className='lien' to="/PageQuiSommesNous">Qui sommes nous?</Link>
-            <Link className='lien' to="/PageQuiSommesNous">Mentions légales</Link>
-            <Link className='lien' to="/PageQuiSommesNous">Copyright 2024</Link>
+            <Link className='lien' to="/PageMentionsLegales">Mentions légales</Link>
+            <div>
+              <p>&copy; {new Date().getFullYear()} Fruitful Coaching Numérique SARL. Tous droits réservés.</p>
+            </div>
         </div>
       </div>
     </footer>
