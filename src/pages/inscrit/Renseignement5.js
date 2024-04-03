@@ -21,18 +21,21 @@ export default function Renseignement5() {
     med3: "plus de 6 fois"
   }
 
-  var habitudesAuto = new Array(  );
+  var habitudesAuto = new Array();
 
   function recupererStorage(domaine) {
     try {
       let domaine2 = sessionStorage.getItem(domaine);
 
       switch (domaine2) {
-        case "som1" || "som3": habitudesAuto.push("Dormir 8 heures par nuit");
+        case 'som1':
+        case 'som3': habitudesAuto.push("Dormir 8 heures par nuit");
           break;
-        case "spo1" || "spo2": habitudesAuto.push("Plus de 6 séances de sport par mois");
+        case 'spo1':
+        case 'spo2': habitudesAuto.push("Plus de 6 séances de sport par mois");
           break;
-        case "med1" || "med2": habitudesAuto.push("Méditer plus de 6 fois par mois");
+        case 'med1':
+        case 'med2': habitudesAuto.push("Méditer plus de 6 fois par mois");
           break;
       }
 
