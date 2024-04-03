@@ -98,6 +98,26 @@ app.put('/updateClient', (req, res) => {
 
 })
 
+app.get('/getIsAbonne/:jeton', (req, res) => {
+    const idUtilisateur = req.params.jeton
+    console.log('getIsAbonne - id : ', idUtilisateur)
+    const sql = "SELECT estAbonne FROM utilisateur WHERE idUtilisateur = ?;"
+    db.query(sql, [idUtilisateur], (err, data) => {
+        if (err) {
+            console.log("Echec de la récupération du statut abonné : ", err)
+            return res.status(500).json("Echec de la récupération du statut abonné : " + err)
+        }
+        if (data.length > 0) {
+            console.log("Statut d'abonnement utilisateur trouvé");
+            return res.status(200).json({ success: "Statut d'abonnement utilisateur trouvé.", data: data });
+        } else {
+            console.log("Statut abonné introuvable.");
+            return res.status(404).json({ error: "Statut abonné introuvable." });
+        }
+    })
+})
+
+
 // ************** SOUSCRIPTION ****************** //
 /* Méthodes pour souscription (abonnement Premium) */
 
@@ -181,7 +201,6 @@ app.put('/updateAddress', (req, res) => {
         }
     })
 })
-
 
 
 // ************** TÂCHES ****************** //
@@ -314,7 +333,7 @@ app.get('/getAllUserEvents/:idUtilisateur', (req, res) => {
 app.get('/getEvent/:idEvenement', (req, res) => {
     const idEvenement = req.params.idEvenement
     console.log('getEvent idEvenement : ', idEvenement)
-    const sql = "SELECT idEvenement, nomEvenement as nom, dateDebut, frequence, idTypeEvenement as typeEvenement, " +
+    const sql = "SELECT idEvenement, nomEvenement as nom, dateDebut, frequence, idTypeEvenement as typeEvenement, idUtilisateur, " +
         "idIcone as logo FROM evenement WHERE idEvenement = ?;"
     db.query(sql, [idEvenement], (err, data) => {
         if (err) {
@@ -330,6 +349,26 @@ app.get('/getEvent/:idEvenement', (req, res) => {
         }
     })
 })
+
+app.get('/getEventUserCount/:jeton', (req, res) => {
+    const idUtilisateur = req.params.jeton
+    console.log('getEventUserCount jeton : ', idUtilisateur)
+    const sql = "SELECT COUNT(idUtilisateur) as numEvents FROM evenement WHERE idUtilisateur = ? ;"
+    db.query(sql, [idUtilisateur], (err, data) => {
+        if (err) {
+            return res.status(500).json({
+                error: "Erreur lors de la récupération du nombre d'évènements de l'utilisateur",
+                details: err
+            })
+        }
+        if (data && data.length > 0) {
+            return res.status(200).json({ success: `Nombre d'évènements récupéré avec succès`, resultat: data })
+        } else {
+            return res.status(404).json({ failure: "Aucun évènement trouvé", resultat: data })
+        }
+    })
+    })
+
 
 app.listen(PORT, () => {
     console.log("Connected to the server")

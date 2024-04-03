@@ -7,6 +7,7 @@ import InputModalText from '../../components/InputModalText'
 import axios from 'axios'
 import InputModalQuantity from '../../components/InputModalQuantity'
 import { Link } from 'react-router-dom'
+import { gestionConnexion } from '../../_helpers/gestion.connexion'
 
 
 export default function CreationTache() {
@@ -18,6 +19,7 @@ export default function CreationTache() {
 	const [dataIcon, setDataIcon] = useState(dataImage)
 	const [isOpen, setIsOpen] = useState(false)
 	const [checkIntegrity, setCheckIntegrity] = useState(false)
+	const [isDisabled, setDisabled] = useState('')
 
 	// attention à bien ajouter la récupération du jeton
 	const [tache, setTache] = useState({
@@ -30,11 +32,24 @@ export default function CreationTache() {
 	})
 
 	useEffect(() => {
-		getEventTypes()
-		tache['idUtilisateur'] = sessionStorage.getItem('jeton')
+		const fetchCapReachedStatus = async () => {
+			try {
+				await getEventTypes();
+				tache['idUtilisateur'] = sessionStorage.getItem('jeton');
+				const isCapReached = await gestionConnexion.checkCapIsReached(2);
+				setDisabled(isCapReached);
+			} catch (error) {
+				console.error("Error in useEffect:", error);
+				// Handle error if needed
+			}
+		};
+	
+		fetchCapReachedStatus();
+	}, [isDisabled]);
 
-	}, [])
-
+	useEffect(() => {
+console.log("isDisabled : ", isDisabled)
+	}, [isDisabled])
 
 	const getEventTypes = async () => {
 		try {
@@ -158,7 +173,7 @@ export default function CreationTache() {
 			</div>
 
 			<div className='container d-flex flex-start'>
-				<a href="" className='btn boutonValiderProfil' onClick={handleSubmit}>Valider</a>
+				<button href="" className='btn boutonValiderProfil' onClick={handleSubmit} disabled={isDisabled}>Valider</button>
 				<a href="" className=''>
 					<Link className='btn boutonAnnuler' to='/estConnecte/listeTaches'>Annuler</Link>
 				</a>
