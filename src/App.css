@@ -119,14 +119,21 @@ body {
 
 @media (max-width: 645px) {
 
+  .column {
+    flex-direction: column ;
+  }
+  .card {
+    width: 40% !important;
+  }
+
   .listeMenu {
     flex-direction: column;
     justify-content: center ;
     width: 100%;
     gap: 0.5rem;
     height: 100%;
-    display: none;
   }
+
   .header-container {
     display: block;
     text-align: center;
@@ -148,6 +155,10 @@ body {
 
   .menu-burger{
     display: flex;
+  }
+
+  .text-overlay {
+    font-size: 14px;
   }
 }
 
@@ -180,16 +191,15 @@ body {
 
 /* COMPOSANTS TACHES */
 
-.tache-container {
-  width: 370px;
-  height: 70px;
-  margin: 30px 0.5em;
-  border: solid black 1px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  grid-auto-rows: repeat(2, auto);
+.card {
+  width: 30%;
   box-shadow: 15px 15px 7px -3px rgba(0, 0, 0, 0.3);
+}
+
+.card:hover {
+  background-color: #eee;
+  cursor: pointer;
+  transform: scale(1.02);
 }
 
 .example {
@@ -223,26 +233,11 @@ body {
   place-self: center;
 }
 
-.check-tache {
-  grid-column: 4/5;
-  grid-row: 1/3;
-  place-self: center;
-  width: 48px;
-  height: 32px;
-  text-align: right;
-  z-index: 1000;
-}
 
 .type-tache {
-  width: 114px;
-  height: 27px;
-  flex-shrink: 0;
   border-radius: 25px;
   color: #fff;
   text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .choix-bouton-type {
@@ -326,6 +321,7 @@ body {
   font-size: smaller;
   padding-left:0.25rem;
 }
+
 .lien-label:hover{
   text-decoration:underline;
   color: #C282A0;
@@ -343,20 +339,6 @@ body {
   background-color: #f0519b !important;
 }
 
-{/*
-.selecteur-bouton{
-  display: flex;
-  flex-direction: column;
-  border-top: solid 1px rgba(76, 156, 218, 1) !important;
-  border-left: solid 1px rgba(76, 156, 218, 1) !important;
-  border-right: solid 1px rgba(76, 156, 218, 1) !important;
-  border-bottom: solid 5px rgba(76, 156, 218, 1) !important;;
-  color: rgba(76, 156, 218, 1) !important;
-  border-radius: 50px;
-  background: var(--Blanc, #FFF);
-  padding-left: 2rem;;
-}
-*/}
 
 .diviseur {
   border-bottom: 1px solid #000;
@@ -414,7 +396,7 @@ label {
   margin: 30px 0.5em;
   border: solid black 1px;
   display: row;
-  grid-template-columns: repeat(4,1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 10px;
   /* grid-auto-rows: repeat(2, auto); */
   border-radius: 15px;
@@ -431,45 +413,6 @@ label {
   height: 32px;
   text-align: right;
 }
-
-/* 
-.example {
-  background-color: black;
-}
-
-.tache-logo {
-  grid-column: 1/2;
-  grid-row: 1/3;
-  place-self: center;
-  border-right: solid black 1px;
-  display: flex;
-  width: 87px;
-  height: 69px;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-}
-
-.boutonlogo {
-  border: none;
-  background: none;
-  padding: 0;
-  outline: none;
-}
-
-
-
-
-
-.choix-bouton-type {
-  border-color: #c12a71 !important;
-  color: #c12a71 !important;
-}
-
-.choix-bouton-type:hover {
-  color: #ffffff !important;
-  background-color: #c12a71 !important;
-} */
 
 /* CAROUSEL PAGE ACCUEIL */
 
