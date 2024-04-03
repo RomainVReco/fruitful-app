@@ -414,6 +414,16 @@ label {
   text-align: right;
 }
 
+.btn-rejoindre {
+  color: rgb(0, 0, 0) !important;
+  background-color: #ffc107 !important;
+  border: 3px transparent solid !important;
+}
+
+.btn-rejoindre:hover {
+  border: 3px #000 solid !important;
+}
+
 /* CAROUSEL PAGE ACCUEIL */
 
 .carousel-container {
