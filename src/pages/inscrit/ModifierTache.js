@@ -10,6 +10,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import ModaleConfirmation from '../../components/ModaleConfirmation'
 
 
+
 export default function ModifierTache() {
 
     var navigate = useNavigate()
@@ -40,6 +41,7 @@ export default function ModifierTache() {
         frequence: '',
         typeEvenement: '',
         logo: '',
+        idUtilisateur:'',
         estActif: '1'
     })
 
@@ -47,12 +49,15 @@ export default function ModifierTache() {
     const [singleIcon, setSingleIcon] = useState(dataIcon[tache.logo])
 
     useEffect(() => {
-        getEventTypes()
-    }, [])
-
-    useEffect(() => {
         getEventToModify(idEvenement)
     },[])
+   
+    useEffect(() => {
+        getEventTypes()
+
+    }, [])
+
+
 
     const getEventTypes = async () => {
         try {
@@ -215,9 +220,9 @@ export default function ModifierTache() {
             </div>
 
             <div className='container d-flex flex-start'>
-                <a href="" className='btn' onClick={handleModification}>Modifier</a>
+                <button href="" className='btn' onClick={handleModification}>Modifier</button>
                 <ModaleConfirmation open={isModaleModificationOpen} method={onCloseModification}
-                    lignes={infoModification} titre={"Résultat"} />
+                    lignes={infoModification} titre={"Résultat"}/>
                 <a href="" className='btn boutonAnnuler' onClick={(event) => handleDelete(event, tache.idEvenement)}>Supprimer</a>
                 <ModaleConfirmation open={isModaleSuppressionOpen} method={onCloseSuppression}
                     lignes={infoSuppression} titre={"Résultat"} />
