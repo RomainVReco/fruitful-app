@@ -9,7 +9,7 @@ const images = {
   pomme: pomme,
 };
 // les props sont placés en attendant la récupération des données
-function EntreeObjectif({ fruit, objectif }) {
+function EntreeObjectif({ fruit, objectif, idObjectif, handleCheckBoxChange, isSelected}) {
   // Vérifier si le nom du fruit existe dans l'objet images
   const imageSrc = images[fruit] || null;
   return (
@@ -25,7 +25,8 @@ function EntreeObjectif({ fruit, objectif }) {
         <div className="col-sm-7 align-middle">{objectif}</div>
 
         <div className="col-sm-2 align-middle">
-          <input type="checkbox" style={{ width: "20px", height: "20px" }} />
+          <input type="checkbox" style={{ width: "20px", height: "20px" }} id={idObjectif} onClick={() => handleCheckBoxChange(idObjectif)}
+            checked={isSelected}/>
         </div>
       </div>
     </div>
