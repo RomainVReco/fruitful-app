@@ -160,6 +160,11 @@ body {
   .text-overlay {
     font-size: 14px;
   }
+
+  .selecteur-profil {
+    width: 100% !important;
+    color:black !important;
+  }
 }
 
 

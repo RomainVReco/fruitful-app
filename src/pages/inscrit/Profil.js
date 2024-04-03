@@ -39,22 +39,17 @@ export default function Profil() {
     const [adresseAPI, setAdresseAPI] = useState('')
 
     useEffect(() => {
-        console.log("useEffect profil");
-        console.log('jeton : ', sessionStorage.getItem('jeton'))
         if (gestionConnexion.isLogged()) {
             fetchData(gestionConnexion.getSessionId());
-            console.log('client.idAdresse : ', client.idAdresse)
-            console.log('typeof(client.idAdresse) : ', typeof (client.idAdresse))
         }
-
     }, [client.idAdresse]);
 
     useEffect(() => {
-        if (client.idAdresse.length != 0) {
-            console.log(client.idAdresse)
+        if (client.idAdresse) {
+            console.log("useEffect fetchAddress : ",client.idAdresse)
             fetchAddress(client.idUtilisateur)
         }
-    }, [adresse.adresse])
+    }, [client.idAdresse])
 
     // Récupération des données clients et d'adresse
 
@@ -123,7 +118,7 @@ export default function Profil() {
         setAdresse(prevState => ({ ...prevState, [event.target.id]: event.target.value }))
         console.log(event.target.value)
 
-        if (adresse.adresse.length > 3) {
+        if (adresse.adresse && adresse.adresse.length > 3) {
             getAddressFromAPI()
         }
     }
@@ -157,13 +152,15 @@ export default function Profil() {
     // Enregistrement des modifications des informations de profi
 
     const handleSubmit = () => {
+        console.log("handleSubmit monProfil")
         if (adresse.idUtilisateur.length == 0) {
             adresse['idUtilisateur'] = client.idUtilisateur
         }
-        console.log("Handle submit profil")
-        if (client.idAdresse.length == 0 && adresse.adresse.length != 0) {
+        console.log("handleSubmit adresse.adresse :", adresse.adresse)
+
+        if (!client.idAdresse) {
             createNewAddress(adresse)
-        } else if (client.idAdresse !== undefined) {
+        } else if (client.idAdresse) {
             updateCurrentAddress(adresse)
         }
         updateUserInfo(client)
@@ -173,9 +170,11 @@ export default function Profil() {
         try {
             const response = await axios.post('http://localhost:8081/createAddress', adresse)
             console.log("Création nouvelle adresse : ", response.data)
+            adresse.idAdresse = response.data.idAdresse;
+            client.idAdresse = response.data.idAdresse;
+            console.log("create adress : ", client.idAdresse)
         } catch (error) {
-            console.log("Erreur lors de l'enregistrement de la création de la nouvelle adresse : ", error)
-            console.log("Status : ", error.status)
+            console.log("Echec de la création de la nouvelle adresse : ", error)
         }
     }
 
@@ -184,7 +183,6 @@ export default function Profil() {
         try {
             const response = await axios.put('http://localhost:8081/updateAddress', adresse)
             console.log("Mise à jour d'une adresse existante : ", response.data)
-            console.log("Statut : ", response.status)
         } catch (error) {
             console.log("Erreur lors de la mise à jour de l'adresse : ", error)
         }
