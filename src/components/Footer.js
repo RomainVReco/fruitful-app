@@ -1,8 +1,7 @@
 import React from "react";
 import {Link} from 'react-router-dom'
-import logoComplet from '../assets/logo-fruit-titre.png'
+import logoComplet from '../assets/header/logo-fruit-titre.png'
 import '../App.css'
-
 
 
 function Footer() {

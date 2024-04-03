@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import velo from "../../assets/velo.png";
+import velo from "../../assets/inscription/velo.png";
 import {
   BrowserRouter as Router,
   Route,
@@ -30,7 +30,7 @@ export default function Inscription() {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    const regex = /^[A-Za-z]+$/;
+    const regex = /^[a-zÀ-ÿA-Z]+$/;
     console.log("nom : ", nom);
     console.log("prénom : ", prenom);
 
@@ -48,14 +48,15 @@ export default function Inscription() {
       return;
     }
   };
-
+  //*********************************************************************************************************************************** */
   function AffichageImage() {
     return (
       <div>
-        <img src={velo} alt="Vélo" style={{ height: 400, padding: 50 }} />
+        <img src={velo} alt="Vélo" style={{ height: 350, padding: 30 }} />
       </div>
     );
   }
+  //*********************************************************************************************************************************** */
 
   return (
     <>

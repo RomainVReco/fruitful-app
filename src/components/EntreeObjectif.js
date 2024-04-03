@@ -1,7 +1,7 @@
 import React from "react";
-import banane from "../assets/banane.png";
-import raisin from "../assets/raisin.png";
-import pomme from "../assets/pomme.png";
+import banane from "../assets/renseignement/banane.png";
+import raisin from "../assets/renseignement/raisin.png";
+import pomme from "../assets/renseignement/pomme.png";
 
 const images = {
   banane: banane,

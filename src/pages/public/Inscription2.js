@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import bebe from '../../assets/bebe.png'
+import bebe from '../../assets/inscription/bebe.png'
 import {
   BrowserRouter as Router,
   Route,
@@ -52,7 +52,7 @@ export default function Inscription2() {
   function AffichageImage() {
     return (
       <div>
-        <img src={bebe} alt="Bébé" style={{ height: 400, padding: 50 }} />
+        <img src={bebe} alt="Bébé" style={{ height: 350, padding: 30 }} />
       </div>
     );
   }

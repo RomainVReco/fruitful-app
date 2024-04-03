@@ -10,7 +10,7 @@ import {
   useNavigate,
   Navigate,
 } from "react-router-dom";
-import contact from "../../assets/contact.png";
+import contact from "../../assets/inscription/contact.png";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -127,7 +127,7 @@ export default function Inscription3() {
   function AffichageImage() {
     return (
       <div>
-        <img src={contact} alt="Contact" style={{ height: 400, padding: 50 }} />
+        <img src={contact} alt="Contact" style={{ height: 350, padding: 30 }} />
       </div>
     );
   }
