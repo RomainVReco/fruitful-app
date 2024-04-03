@@ -2,8 +2,18 @@ import React from "react";
 import BoutonSuivant from "../../components/BoutonSuivant";
 import BoutonPrecedent from "../../components/BoutonPrecedent";
 import EntreeObjectif from "../../components/EntreeObjectif";
+import { useState } from "react";
 
-export default function Renseignement3() {
+export default function Renseignement4() {
+
+  const [selectedId, setSelectedId] = useState(null);
+
+  const handleCheckBoxChange = (id) => {
+    let sommeil = "";
+    sessionStorage.setItem("meditation", id);
+    setSelectedId(id);
+  }
+
   return (
     <>
       <div className="fond-inscription">
@@ -17,9 +27,12 @@ export default function Renseignement3() {
               </label>
             </div>
 
-            <EntreeObjectif fruit="banane" objectif="Entre 0 et 2 fois" />
-            <EntreeObjectif fruit="banane" objectif="Entre 3 et 5 fois" />
-            <EntreeObjectif fruit="banane" objectif="6 fois et plus" />
+            <EntreeObjectif fruit="banane" objectif="Entre 0 et 2 fois" idObjectif="med1" handleCheckBoxChange={handleCheckBoxChange}
+              isSelected={selectedId === "med1"} />
+            <EntreeObjectif fruit="banane" objectif="Entre 3 et 5 fois" idObjectif="med2" handleCheckBoxChange={handleCheckBoxChange}
+              isSelected={selectedId === "med2"} />
+            <EntreeObjectif fruit="banane" objectif="6 fois et plus" idObjectif="med3" handleCheckBoxChange={handleCheckBoxChange}
+              isSelected={selectedId === "med3"} />
 
             <br />
             <div class="row container-fluid m-auto">
@@ -28,7 +41,7 @@ export default function Renseignement3() {
               </div>
 
               <div class="col">
-                <BoutonSuivant page="4" texte="Suivant" />
+                <BoutonSuivant page="8" texte="Suivant" />
               </div>
             </div>
           </div>

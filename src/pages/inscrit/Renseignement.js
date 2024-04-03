@@ -2,8 +2,16 @@ import React from "react";
 import BoutonSuivant from "../../components/BoutonSuivant";
 import BoutonPrecedent from "../../components/BoutonPrecedent";
 import EntreeObjectif from "../../components/EntreeObjectif";
+import { useState } from "react";
 
 export default function Renseignement() {
+  const [selectedId, setSelectedId] = useState(null);
+  const handleCheckBoxChange = (id) => {
+    let motivation ="";
+    sessionStorage.setItem("motivation", id);
+        setSelectedId(id);
+  }
+
   return (
     <>
       <div className="fond-inscription">
@@ -16,9 +24,12 @@ export default function Renseignement() {
               </label>
             </div>
 
-            <EntreeObjectif fruit="banane" objectif="Se sentir mieux" />
-            <EntreeObjectif fruit="raisin" objectif="Mieux gérer sa vie" />
-            <EntreeObjectif fruit="pomme" objectif="Me détoxifier" />
+            <EntreeObjectif fruit="banane" objectif="Se sentir mieux" idObjectif="mot1" handleCheckBoxChange={handleCheckBoxChange}
+        isSelected={selectedId === "mot1"}/>
+            <EntreeObjectif fruit="raisin" objectif="Mieux gérer sa vie" idObjectif="mot2" handleCheckBoxChange={handleCheckBoxChange}
+        isSelected={selectedId === "mot2"} />
+            <EntreeObjectif fruit="pomme" objectif="Me détoxifier" idObjectif="mot3" handleCheckBoxChange={handleCheckBoxChange}
+        isSelected={selectedId === "mot3"} />
 
             <br />
             <div class="row container-fluid m-auto">
