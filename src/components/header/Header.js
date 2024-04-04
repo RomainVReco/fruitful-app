@@ -69,7 +69,7 @@ function Header() {
   
   return (
 
-    <nav className="headerTop">
+    <nav className="headerTop d-flex align-items-center">
       <div className="header-container" >
         <div>
           <Link className="" to='/'>

@@ -123,7 +123,7 @@ export default function CreationTache() {
 	return (
 		<div className='container d-flex flex-column align-items-center gap-3 mt-5'>
 			<h3 className='titre-h3-modifier-creer-tache'> Créez un nouvel évènement</h3>
-			<div className='d-flex flex-column align-items-start gap-3'>
+			<div className='d-flex flex-column align-items-start gap-2'>
 				<InputGenericText nomLabel={"Nommez votre nouvel évènement :"} label='nom' titre={tache.nom}
 					method={handleChange} exemple='Couche-tôt !' />
 				<button className='btn btn-light' onClick={() => setIsOpen(true)}>
