@@ -8,12 +8,10 @@ import Col from "react-bootstrap/Col";
 
 //Fonction concernant le Bouton d'Acces à l'Entrée En Relation (EER) avec l'utilisateur (questionnaire pour mieux le connaitre)
 function BoutonSuivant(page) {
-  console.log("page :", page.page);
-  console.log("texte :", page.texte);
+
   var page2 = page.page;
 
   function adresseDestination(page2) {
-    console.log("page :", page);
 
     switch (page2) {
       case "2":
@@ -30,8 +28,8 @@ function BoutonSuivant(page) {
         return "/estConnecte/Renseignement4";
       case "8":
         return "/estConnecte/Renseignement5";
-        case "9":
-          return "/estConnecte/ListeTaches";
+      case "9":
+        return "/estConnecte/ListeTaches";
     }
   }
 
