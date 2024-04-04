@@ -112,7 +112,7 @@ body {
 .right-column {
   flex: 1; /* Fait en sorte que la colonne prenne l'espace disponible */
   display: flex;
-  justify-content: flex-end; /* Aligner le contenu à droite */
+  align-items: center;
 }
 
 .image-footer {
@@ -147,6 +147,10 @@ body {
 
 .vertical-footer-links .lien {
   margin-bottom: 10px; /* Espacement entre les liens */
+}
+
+.mentions-legales-bordure {
+  padding: 100px;
 }
 
 @media (max-width: 645px) {

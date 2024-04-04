@@ -25,8 +25,8 @@ function Footer() {
           </div>
         </div>
         <div className="right-column">
-          <div>
-            <p>&copy; {new Date().getFullYear()} Fruitful Coaching Numérique SARL. Tous droits réservés.</p>
+          <div className="copyright">
+            <p>&copy; {new Date().getFullYear()} Fruitful Coaching Numérique SARL.<br />Tous droits réservés.</p>
           </div>
         </div>
       </div>
