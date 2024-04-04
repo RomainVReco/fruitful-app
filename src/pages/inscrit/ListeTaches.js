@@ -24,7 +24,7 @@ export default function ListeTaches() {
 
   /* Récupération du jeton de connexion */
   useEffect(() => {
-      setidUtilisateur(sessionStorage.getItem('jeton'))
+    setidUtilisateur(sessionStorage.getItem('jeton'))
   }, [])
 
   /* Hook pour charger la liste des tâches et pour contrôle de l'atteinte du capping  */
@@ -83,16 +83,15 @@ export default function ListeTaches() {
           }
         </div>
       </div>
-
-      <div className="container bg-light d-flex justify-content-between mt-5">
-        <div className={`circle ${isActive ? 'turquoise' : 'blanc'} d-flex flex-wrap `} onClick={handleNewTask} disabled={isDisabled}>
-            <div class="cross">
+      <div className="d-flex flex-wrap">
+        <div className="container bg-light d-flex justify-content-between mt-5">
+          <div className={`circle ${isActive ? 'turquoise' : 'blanc'} d-flex flex-wrap `} onClick={handleNewTask} disabled={isDisabled}>
+            <div className="cross">
               <div className={`line ${isActive ? 'blanc' : 'turquoise'}`}></div>
               <div className={`line ${isActive ? 'blanc' : 'turquoise'}`}></div>
+            </div>
           </div>
         </div>
-
-        {/*} <div className="d-flex justify-content-start" onClick={handleNewTask}><AjoutTache fill="#FFF"/></div> */}
       </div>
     </>
   )
