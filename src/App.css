@@ -95,6 +95,7 @@ body {
   /*height: 65px;*/
   width: 100%;
   z-index: 1000;
+  margin-top: 1.5rem;
 }
 
 .footer-container {
@@ -218,6 +219,15 @@ body {
 .bouton-modale-icone{
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+}
+
+.boutonSupprimer {
+  width: 45%;
+  border-radius: 50px !important;
+  text-decoration: none !important;
+  color: #FFFFFF !important;
+  background-color:red !important;
+  display: block;
 }
 
 /* COMPOSANTS TACHES */

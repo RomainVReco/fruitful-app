@@ -166,6 +166,11 @@ export default function ModifierTache() {
         navigate("../../estConnecte/listeTaches/")
     }
 
+    const handleClickCancel = (event) => {
+		event.preventDefault()
+		navigate('../listeTaches#')
+	}
+
 
     return (
         <div className='container d-flex flex-column align-items-center gap-3 mt-5'>
@@ -212,14 +217,16 @@ export default function ModifierTache() {
                 </div>
 
                 <div className='d-flex justify-content-between mt-4 w-100'>
-                    <button className='btn' onClick={handleModification}>Modifier</button>
+                    <button className='btn boutonValiderProfil' onClick={handleModification}>Modifier</button>
                     <ModaleConfirmation open={isModaleModificationOpen} method={onCloseModification}
                         lignes={infoModification} titre={"Résultat"} />
-                    <a href="" className='btn boutonAnnuler' onClick={(event) => handleDelete(event, tache.idEvenement)}>Supprimer</a>
+                    <button className='btn boutonAnnuler' onClick={handleClickCancel}>Annuler</button>
+                    {/* <GenericButton label="Valider" buttonStyle='boutonValider' method={handleSubmit}/> */}
+                </div>
+                <div className='d-flex justify-content-end mt-1 w-100'>
+                <button className='btn boutonSupprimer' onClick={(event) => handleDelete(event, tache.idEvenement)}>Supprimer</button>
                     <ModaleConfirmation open={isModaleSuppressionOpen} method={onCloseSuppression}
                         lignes={infoSuppression} titre={"Résultat"} />
-                    <a href="../listeTaches" className='btn boutonAnnuler' style={{ marginLeft: '50px' }}>Annuler</a>
-                    {/* <GenericButton label="Valider" buttonStyle='boutonValider' method={handleSubmit}/> */}
                 </div>
                 {checkErrorMessage && checkIntegrity && (<div style={{ color: 'red' }}>{checkErrorMessage}</div>)}
             </div>

@@ -84,7 +84,7 @@ export default function ListeTaches() {
         </div>
       </div>
 
-      <div className="container bg-light d-flex justify-content- mt-5">
+      <div className="container bg-light d-flex justify-content-between mt-5">
         <div className={`circle ${isActive ? 'turquoise' : 'blanc'} d-flex flex-wrap `} onClick={handleNewTask} disabled={isDisabled}>
             <div class="cross">
               <div className={`line ${isActive ? 'blanc' : 'turquoise'}`}></div>
