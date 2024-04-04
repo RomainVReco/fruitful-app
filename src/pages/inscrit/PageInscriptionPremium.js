@@ -146,7 +146,7 @@ const InscriptionPremium = () => {
             <div>
               <br />
               <h2>
-                Envie d'un coaching encore meilleur? Passer en classe Premium!
+                Envie d'un coaching encore meilleur? <br /> Passez en classe Premium!
               </h2>
             </div>
           </Col>
