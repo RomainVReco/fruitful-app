@@ -122,8 +122,8 @@ export default function CreationTache() {
 
 	return (
 		<div className='container d-flex flex-column align-items-center gap-3 mt-5'>
-			<h3 style={{ marginBottom: '25px' }}> Créez-vous une nouvelle habitude</h3>
-			<div>
+			<h3 className='titre-h3-modifier-creer-tache'> Créez un nouvel évènement</h3>
+			<div className='d-flex flex-column align-items-start gap-3'>
 				<InputGenericText nomLabel={"Nommez votre nouvel évènement :"} label='nom' titre={tache.nom}
 					method={handleChange} exemple='Couche-tôt !' />
 				<button className='btn btn-light' onClick={() => setIsOpen(true)}>
@@ -154,7 +154,7 @@ export default function CreationTache() {
 					</div>
 				</div>
 
-				<div className='container' style={{ marginTop: '15px' }}>Nature d'évènement</div>
+				<div className='container'>Nature d'évènement</div>
 				<div className='container'>
 					<div className='row'>
 						<div className='col-md-12 col-8'>
@@ -166,7 +166,7 @@ export default function CreationTache() {
 					</div>
 				</div>
 
-				<div className='container d-flex justify-content-between mt-5'>
+				<div className='d-flex justify-content-between mt-4 w-100'>
 					<button href="" className='btn boutonValiderProfil' onClick={handleSubmit} disabled={isDisabled}>Valider</button>
 					<button href="" className='btn boutonAnnuler' onClick={handleClickCancel}>Annuler</button>
 					{/* <GenericButton label="Valider" buttonStyle='boutonValider' method={handleSubmit}/> */}

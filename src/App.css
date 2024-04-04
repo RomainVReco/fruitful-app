@@ -207,9 +207,17 @@ body {
   color: #FFF !important;
 }
 
-.boutonAnnuler:active {
-  background-color: #c12a71 !important;
-  color: #FFF !important;
+.boutonAnnuler:hover {
+  background-color: #f5e8ee !important;
+}
+
+.titre-h3-modifier-creer-tache {
+  margin-bottom: 17px;
+}
+
+.bouton-modale-icone{
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 /* COMPOSANTS TACHES */
