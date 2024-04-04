@@ -9,7 +9,7 @@ export default function PageQuiSommesNous() {
   <div className="container-fluid PageAccueil">
    <br />
 
-    <ImageAccueil src={imageFondateurs} alt="photo des fondateurs" brandText="" paragraphText="Une passion commune pour le survitaminé!" style={{ width: '100%' }} />
+    <ImageAccueil src={imageFondateurs} alt="photo des fondateurs" brandText="" paragraphText="Une passion commune pour le coaching survitaminé!" style={{ width: '100%' }} />
 
     <br />
  
