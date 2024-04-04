@@ -64,7 +64,8 @@ const InscriptionPremium = () => {
     };
     const firstLine = "Paypal: transaction validée.";
     const secondLine = `Bravo ${simulatedDetails.payer.name.given_name}! Bienvenue dans Fruitful Premium!`;
-    const message = `${firstLine}\n${secondLine}`; // Concaténer les deux lignes avec une balise <br>
+    const thirdLine = `Bienvenue dans Fruitful Premium!`;
+    const message = `${firstLine}\n${secondLine}\n${thirdLine}}`; // Concaténer les lignes avec saut de ligne
     setTransactionMessage(message); // Mettre à jour le message de transaction
     setModalShow(true); // Ouvrir la modale
   };
@@ -83,6 +84,8 @@ const InscriptionPremium = () => {
           {
             sku: "1blwyeo8",
             quantity: 2,
+            //currency_code: "EUR", 
+            value: "6.90", // Montant fixe de 6.90 euros
           },
         ],
       }),
@@ -106,7 +109,13 @@ const InscriptionPremium = () => {
     })
       .then((response) => response.json())
       .then((orderData) => {
-        const message = `Bravo ${orderData.payer.name.given_name}! Transaction validée par PayPal. Accès Fruitful Premium accordé`;
+        handleApproveTransaction();
+        
+        //const message = `Bravo ${orderData.payer.name.given_name}! Transaction validée par PayPal. <br /> Accès Fruitful Premium accordé!`;
+        const firstLine = "Paypal: transaction validée.";
+        const secondLine = `Bravo ${orderData.payer.name.given_name}!`;
+        const thirdLine = `Bienvenue dans Fruitful Premium!`;
+        const message = `${firstLine}\n${secondLine}\n${thirdLine}`; // Concaténer les lignes avec saut de ligne
         setTransactionMessage(message); // Mettre à jour le message de transaction
         setModalShow(true); // Ouvrir la modale
       });
@@ -146,7 +155,7 @@ const InscriptionPremium = () => {
             <div>
               <br />
               <h2>
-                Envie d'un coaching encore meilleur? Passer en classe Premium!
+                Envie d'un coaching encore meilleur? <br /> <br /> Passez en classe Premium <br/> pour 6.90 euros!
               </h2>
             </div>
           </Col>
@@ -164,17 +173,17 @@ const InscriptionPremium = () => {
                 <ButtonWrapper showSpinner={false} />
               </PayPalScriptProvider>
             </div>
-            <Modal show={modalShow} onHide={handleCloseModal}>
-              <Modal.Header closeButton>
-                <Modal.Title>Résultat transaction</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>{transactionMessage}</Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={handleCloseModal}>
-                  Fermer
-                </Button>
-              </Modal.Footer>
-            </Modal>
+              <Modal show={modalShow} onHide={handleCloseModal}>
+                <Modal.Header closeButton className="modale-abonnement-paye-header">
+                  <Modal.Title>Résultat transaction</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{transactionMessage}</Modal.Body>
+                <Modal.Footer className="modale-abonnement-paye-footer">
+                  <Button variant="secondary" onClick={handleCloseModal}>
+                    Fermer
+                  </Button>
+                </Modal.Footer>
+              </Modal>
           </Col>
         </Row>
       </Container>
