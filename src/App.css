@@ -105,8 +105,14 @@ body {
   flex: 1; /* Fait en sorte que la colonne prenne l'espace disponible */
 }
 
+.center-column {
+  flex: 1; /* Fait en sorte que la colonne prenne l'espace disponible */
+}
+
 .right-column {
   flex: 1; /* Fait en sorte que la colonne prenne l'espace disponible */
+  display: flex;
+  justify-content: flex-end; /* Aligner le contenu à droite */
 }
 
 .image-footer {
