@@ -24,12 +24,7 @@ export default function ListeTaches() {
 
   /* Récupération du jeton de connexion */
   useEffect(() => {
-    if (sessionStorage.getItem('jeton') == null) {
-      setidUtilisateur(7)
-    } else {
-      setidUtilisateur(sessionStorage.getItem('jeton'))
-    }
-
+    setidUtilisateur(sessionStorage.getItem('jeton'))
   }, [])
 
   /* Hook pour charger la liste des tâches et pour contrôle de l'atteinte du capping  */
@@ -76,29 +71,29 @@ export default function ListeTaches() {
 
   return (
     <>
+          <div className={`circle ${isActive ? 'turquoise' : 'blanc'} sticky`} onClick={handleNewTask} disabled={isDisabled}>
+            <div className="cross">
+              <div className={`line ${isActive ? 'blanc' : 'turquoise'}`}></div>
+              <div className={`line ${isActive ? 'blanc' : 'turquoise'}`}></div>
+            </div>
+          </div>
       <div className="container bg-light d-flex justify-content-center">
-        {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
-        <div className="d-flex flex-wrap">
+
+        <div className="d-flex flex-wrap ">
           {listeTaches.length > 0 ? (listeTaches.map((element, index) => {
             return <Tache key={index} nomHabitude={element.nomEvenement} frequence={element.frequence}
               dateDebut={element.dateDebut} typeEvenement={element.nomTypeEvenement} idTypeEvenement={element.idTypeEvenement}
               image={dataIcon[element.idIcone]} method={() => handleClickEvent(element.idEvenement)} />
-          })) : (<div> <p>Vous n'avez aucun évènement.</p>
+          })) : (<div className="mt-2"> <p>Vous n'avez aucun évènement.</p>
             <p>Démarrer sans attendre et créez en dès à présent</p>
           </div>)
           }
         </div>
       </div>
+      <div className="d-flex flex-wrap">
+        <div className="container bg-light d-flex justify-content-between mt-5">
 
-      <div className="container bg-light">
-        <div className={`circle ${isActive ? 'turquoise' : 'blanc'}`} onClick={handleNewTask} disabled={isDisabled}>
-            <div class="cross">
-              <div className={`line ${isActive ? 'blanc' : 'turquoise'}`}></div>
-              <div className={`line ${isActive ? 'blanc' : 'turquoise'}`}></div>
-          </div>
         </div>
-
-        {/*} <div className="d-flex justify-content-start" onClick={handleNewTask}><AjoutTache fill="#FFF"/></div> */}
       </div>
     </>
   )

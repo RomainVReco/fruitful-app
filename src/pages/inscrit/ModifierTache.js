@@ -15,7 +15,7 @@ export default function ModifierTache() {
 
     var navigate = useNavigate()
 
-    var {idEvenement} = useParams()
+    var { idEvenement } = useParams()
 
     const [checkErrorMessage, setErrorMessage] = useState('')
     const [evenements, setEvenements] = useState('')
@@ -41,7 +41,7 @@ export default function ModifierTache() {
         frequence: '',
         typeEvenement: '',
         logo: '',
-        idUtilisateur:'',
+        idUtilisateur: '',
         estActif: '1'
     })
 
@@ -50,8 +50,8 @@ export default function ModifierTache() {
 
     useEffect(() => {
         getEventToModify(idEvenement)
-    },[])
-   
+    }, [])
+
     useEffect(() => {
         getEventTypes()
 
@@ -74,7 +74,7 @@ export default function ModifierTache() {
     }
 
     const getEventToModify = async (idEvenement) => {
-        console.log('getEventToModify : ', idEvenement) 
+        console.log('getEventToModify : ', idEvenement)
         try {
             const response = await axios.get(`http://localhost:8081/getEvent/${idEvenement}`)
             console.log('getEventToModify : ', response.status)
@@ -83,7 +83,7 @@ export default function ModifierTache() {
                 console.log('tache : ', key + ' ' + value)
                 setTache(prevState => ({ ...prevState, [key]: value }))
             })
-            
+
         } catch (error) {
             console.log("Erreur lors de la récupération de l'évènement à modifier")
         }
@@ -166,70 +166,70 @@ export default function ModifierTache() {
         navigate("../../estConnecte/listeTaches/")
     }
 
+    const handleClickCancel = (event) => {
+		event.preventDefault()
+		navigate('../listeTaches#')
+	}
+
 
     return (
-        <div className='container d-flex flex-column gap-3'>
-            <h3 style={{ marginBottom: '25px' }}> Modifier votre évènement </h3>
-
-            <InputGenericText nomLabel={`Nom de votre ${evenements[tache['typeEvenement']]} : `} label='nom' titre={tache.nom}
-                method={handleChange} value={tache.nom} />
-
-            <div className='container'>
-                <button className='btn btn-light' onClick={() => setIsOpen(true)}>
+        <div className='container d-flex flex-column align-items-center gap-3 mt-5'>
+            <h3 className='titre-h3-modifier-creer-tache'> Modifier votre évènement </h3>
+            <div className='d-flex flex-column align-items-start gap-3'>
+                <InputGenericText nomLabel={`Nom de votre ${evenements[tache['typeEvenement']]} : `} label='nom' titre={tache.nom}
+                    method={handleChange} value={tache.nom} />
+                <button className='btn btn-light ' onClick={() => setIsOpen(true)}>
                     <img src={dataIcon[tache.logo]} alt="icone evt" style={{ height: '42px', width: '52px' }}></img>
                 </button>
                 <ModaleLogo open={isOpen} onClose={() => setIsOpen(false)} data={dataIcon} parentCallback={handleCallbackLogo}>
                     Coucou
                 </ModaleLogo>
-            </div>
+                <InputModalText nomLabel='A partir du : ' id='dateDebut'
+                    method={handleChange} onClick={() => console.log('Clic')} titre={tache.dateDebut} />
 
-            <InputModalText nomLabel='A partir du : ' id='dateDebut'
-                method={handleChange} onClick={() => console.log('Clic')} titre={tache.dateDebut} />
+                <InputModalQuantity nomLabel={'Fréquence : '} id='frequence' titre={tache.frequence} method={handleChange}
+                    periode='jours' mini='1' max='7' />
 
-            <InputModalQuantity nomLabel={'Fréquence : '} id='frequence' titre={tache.frequence} method={handleChange}
-                periode='jours' mini='1' max='7' />
-
-            <div className='container'>
-                <div className='row'>
-                    <div className='col-md-5 col-8'>
-                        <label htmlFor="typeEvenement" className='form-label'>Type d'évènement : </label>
-                        <select className="form-select form-control profil-border" id='typeEvenement' aria-label="Default select example"
-                            onChange={handleChange} value={tache.typeEvenement}>
-                            <option value="0">{evenements[0]}</option>
-                            <option value="1">{evenements[1]}</option>
-                            <option value="2">{evenements[2]}</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div className='container' style={{ marginTop: '25px' }}>Nature d'évènement</div>
-            <div className='container'>
-                <div className='row'>
-                    <div className='col-md-5 col-8'>
-                        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                            <input type="radio" class="btn-check" name="todo" id="todo" autocomplete="off" checked />
-                            <label class="btn btn-outline-primary" htmlFor="todo">Fait / A faire</label>
+                <div className='container'>
+                    <div className='row'>
+                        <div className=''>
+                            <label htmlFor="typeEvenement" className='form-label'>Type d'évènement : </label>
+                            <select className="form-select form-control profil-border" id='typeEvenement' aria-label="Default select example"
+                                onChange={handleChange} value={tache.typeEvenement}>
+                                <option value="0">{evenements[0]}</option>
+                                <option value="1">{evenements[1]}</option>
+                                <option value="2">{evenements[2]}</option>
+                            </select>
                         </div>
                     </div>
                 </div>
-                {/*<div className='container' style={{ height: '30vh' }}>
-					<label htmlFor="quota">Sélectionner votre objectifs:</label>
-					<input type="number" id="quota" name="quota" min="0" max="1000" />
-				</div> */}
-            </div>
 
-            <div className='container d-flex flex-start'>
-                <button href="" className='btn' onClick={handleModification}>Modifier</button>
-                <ModaleConfirmation open={isModaleModificationOpen} method={onCloseModification}
-                    lignes={infoModification} titre={"Résultat"}/>
-                <a href="" className='btn boutonAnnuler' onClick={(event) => handleDelete(event, tache.idEvenement)}>Supprimer</a>
-                <ModaleConfirmation open={isModaleSuppressionOpen} method={onCloseSuppression}
-                    lignes={infoSuppression} titre={"Résultat"} />
-                <a href="../listeTaches" className='btn boutonAnnuler' style={{ marginLeft: '50px' }}>Annuler</a>
-                {/* <GenericButton label="Valider" buttonStyle='boutonValider' method={handleSubmit}/> */}
+                <div className='container'>Nature d'évènement</div>
+                <div className='container'>
+                    <div className='row'>
+                        <div className=''>
+                            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                <input type="radio" class="btn-check" name="todo" id="todo" autocomplete="off" checked />
+                                <label class="btn btn-outline-primary" htmlFor="todo">Fait / A faire</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className='d-flex justify-content-between mt-4 w-100'>
+                    <button className='btn boutonValiderProfil' onClick={handleModification}>Modifier</button>
+                    <ModaleConfirmation open={isModaleModificationOpen} method={onCloseModification}
+                        lignes={infoModification} titre={"Résultat"} />
+                    <button className='btn boutonAnnuler' onClick={handleClickCancel}>Annuler</button>
+                    {/* <GenericButton label="Valider" buttonStyle='boutonValider' method={handleSubmit}/> */}
+                </div>
+                <div className='d-flex justify-content-end mt-1 w-100'>
+                <button className='btn boutonSupprimer' onClick={(event) => handleDelete(event, tache.idEvenement)}>Supprimer</button>
+                    <ModaleConfirmation open={isModaleSuppressionOpen} method={onCloseSuppression}
+                        lignes={infoSuppression} titre={"Résultat"} />
+                </div>
+                {checkErrorMessage && checkIntegrity && (<div style={{ color: 'red' }}>{checkErrorMessage}</div>)}
             </div>
-            {checkErrorMessage && checkIntegrity && (<div style={{ color: 'red' }}>{checkErrorMessage}</div>)}
         </div>
     )
 }

@@ -40,6 +40,17 @@ let checkCapIsReached = async (jeton) => {
     }
  }
 
+ let checkIsAbonne = async (jeton) => {
+    try {
+        console.log('checkIsAbonne : ', jeton)
+        const responseIsAbonne = await axios.get(`http://localhost:8081/getIsAbonne/${jeton}`)
+        console.log('checkIsAbonne : ', responseIsAbonne.data)
+        return !!responseIsAbonne.data.data[0].estAbonne
+    } catch (error) {
+        console.log("Echec du contrôle du statut de l'utilisateur", error)
+    }
+ }
+
 export const gestionConnexion = {
-    saveSessionId, deconnexion, isLogged, getSessionId, checkCapIsReached
+    saveSessionId, deconnexion, isLogged, getSessionId, checkCapIsReached, checkIsAbonne
 } 

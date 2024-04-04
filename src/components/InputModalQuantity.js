@@ -5,7 +5,7 @@ export default function InputModalQuantity(props) {
   return (
     <div className='container'>
       <div className='row'>
-        <div className='col-md-5 col-12'>
+        <div className='col-md-12'>
         <label htmlFor="nomTache" className='form-label'>{props.nomLabel}</label>
           <div class="input-group mb-3">
             <span className="input-group-text profil-border">Tous les </span>

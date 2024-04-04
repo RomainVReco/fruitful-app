@@ -1,10 +1,11 @@
 import React from "react";
 import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from "react";
-import logoComplet from '../assets/header/logo-fruit-titre.png'
-import closeIcon from '../assets/header/x-lg.svg'
-import menu from '../assets/header/list.svg'
-import { gestionConnexion } from "../_helpers/gestion.connexion";
+import logoComplet from '../../assets/header/logo-fruit-titre.png'
+import closeIcon from '../../assets/header/x-lg.svg'
+import menu from '../../assets/header/list.svg'
+import { gestionConnexion } from "../../_helpers/gestion.connexion";
+import '../../components/header/header-css.css'
 
 
 function Header() {
@@ -68,7 +69,7 @@ function Header() {
   
   return (
 
-    <nav className="headerTop">
+    <nav className="headerTop d-flex align-items-center">
       <div className="header-container" >
         <div>
           <Link className="" to='/'>
