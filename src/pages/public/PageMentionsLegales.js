@@ -2,8 +2,11 @@ import React from 'react';
 
 function MentionsLegales() {
   return (
-    <div>
+    <div className="mentions-legales-bordure">
       <h1>Mentions Légales</h1>
+
+      <br />
+      <br />
 
       <h2>Informations sur l'entreprise</h2>
       <p>
@@ -17,6 +20,9 @@ function MentionsLegales() {
         <strong>Numéro de TVA intracommunautaire :</strong> FR123456789
       </p>
 
+      <br />
+      <br />
+
       <h2>Responsable de la publication</h2>
       <p>
         <strong>Nom du responsable :</strong> Jean Dupont<br />
@@ -24,6 +30,9 @@ function MentionsLegales() {
         <strong>Téléphone :</strong> +33 1 23 45 67 89<br />
         <strong>E-mail :</strong> jean.dupont@fruitfulcoaching.com
       </p>
+
+      <br />
+      <br />
 
       <h2>Hébergement</h2>
       <p>
@@ -33,25 +42,40 @@ function MentionsLegales() {
         <strong>E-mail :</strong> contact@xyzhosting.com
       </p>
 
+      <br />
+      <br />
+
       <h2>Propriété intellectuelle</h2>
       <p>
         Le site web et son contenu sont la propriété exclusive de Fruitful Coaching Numérique SARL et/ou de ses partenaires. Toute reproduction ou utilisation sans autorisation préalable est strictement interdite.
       </p>
+
+      <br />
+      <br />
 
       <h2>Protection des données personnelles</h2>
       <p>
         [Inclure ici les informations sur la collecte et le traitement des données personnelles conformément aux réglementations en vigueur, telles que le RGPD en Europe.]
       </p>
 
+      <br />
+      <br />
+
       <h2>Liens externes</h2>
       <p>
         Le site peut contenir des liens vers des sites externes sur lesquels Fruitful Coaching Numérique SARL n'a aucun contrôle. Par conséquent, Fruitful Coaching Numérique SARL décline toute responsabilité quant au contenu de ces sites externes.
       </p>
 
+      <br />
+      <br />
+
       <h2>Limitation de responsabilité</h2>
       <p>
         Fruitful Coaching Numérique SARL s'efforce de fournir des informations précises et à jour sur son site web, mais ne peut garantir l'exactitude et l'exhaustivité de ces informations. En conséquence, Fruitful Coaching Numérique SARL ne pourra être tenu responsable des éventuelles erreurs ou omissions dans les informations fournies sur son site.
       </p>
+
+      <br />
+      <br />
 
       <h2>Modification des mentions légales</h2>
       <p>

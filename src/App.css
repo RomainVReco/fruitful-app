@@ -99,7 +99,20 @@ body {
 
 .footer-container {
   display: flex;
-  justify-content: space-evenly;
+}
+
+.left-column {
+  flex: 1; /* Fait en sorte que la colonne prenne l'espace disponible */
+}
+
+.center-column {
+  flex: 1; /* Fait en sorte que la colonne prenne l'espace disponible */
+}
+
+.right-column {
+  flex: 1; /* Fait en sorte que la colonne prenne l'espace disponible */
+  display: flex;
+  align-items: center;
 }
 
 .image-footer {
@@ -125,6 +138,19 @@ body {
 .horizontal-footer-links {
   display: flex;
   justify-content: space-around; /* ou une autre valeur selon votre préférence */
+}
+
+.vertical-footer-links {
+  display: flex;
+  flex-direction: column;
+}
+
+.vertical-footer-links .lien {
+  margin-bottom: 10px; /* Espacement entre les liens */
+}
+
+.mentions-legales-bordure {
+  padding: 100px;
 }
 
 @media (max-width: 645px) {
