@@ -15,7 +15,7 @@ export default function ModifierTache() {
 
     var navigate = useNavigate()
 
-    var {idEvenement} = useParams()
+    var { idEvenement } = useParams()
 
     const [checkErrorMessage, setErrorMessage] = useState('')
     const [evenements, setEvenements] = useState('')
@@ -41,7 +41,7 @@ export default function ModifierTache() {
         frequence: '',
         typeEvenement: '',
         logo: '',
-        idUtilisateur:'',
+        idUtilisateur: '',
         estActif: '1'
     })
 
@@ -50,8 +50,8 @@ export default function ModifierTache() {
 
     useEffect(() => {
         getEventToModify(idEvenement)
-    },[])
-   
+    }, [])
+
     useEffect(() => {
         getEventTypes()
 
@@ -74,7 +74,7 @@ export default function ModifierTache() {
     }
 
     const getEventToModify = async (idEvenement) => {
-        console.log('getEventToModify : ', idEvenement) 
+        console.log('getEventToModify : ', idEvenement)
         try {
             const response = await axios.get(`http://localhost:8081/getEvent/${idEvenement}`)
             console.log('getEventToModify : ', response.status)
@@ -83,7 +83,7 @@ export default function ModifierTache() {
                 console.log('tache : ', key + ' ' + value)
                 setTache(prevState => ({ ...prevState, [key]: value }))
             })
-            
+
         } catch (error) {
             console.log("Erreur lors de la récupération de l'évènement à modifier")
         }
@@ -168,21 +168,17 @@ export default function ModifierTache() {
 
 
     return (
-        <div className='container d-flex flex-column gap-3'>
+        <div className='d-flex flex-column gap-3 align-items-center'>
             <h3 style={{ marginBottom: '25px' }}> Modifier votre évènement </h3>
 
             <InputGenericText nomLabel={`Nom de votre ${evenements[tache['typeEvenement']]} : `} label='nom' titre={tache.nom}
                 method={handleChange} value={tache.nom} />
-
-            <div className='container'>
-                <button className='btn btn-light' onClick={() => setIsOpen(true)}>
-                    <img src={dataIcon[tache.logo]} alt="icone evt" style={{ height: '42px', width: '52px' }}></img>
-                </button>
-                <ModaleLogo open={isOpen} onClose={() => setIsOpen(false)} data={dataIcon} parentCallback={handleCallbackLogo}>
-                    Coucou
-                </ModaleLogo>
-            </div>
-
+            <button className='btn btn-light' onClick={() => setIsOpen(true)}>
+                <img src={dataIcon[tache.logo]} alt="icone evt" style={{ height: '42px', width: '52px' }}></img>
+            </button>
+            <ModaleLogo open={isOpen} onClose={() => setIsOpen(false)} data={dataIcon} parentCallback={handleCallbackLogo}>
+                Coucou
+            </ModaleLogo>
             <InputModalText nomLabel='A partir du : ' id='dateDebut'
                 method={handleChange} onClick={() => console.log('Clic')} titre={tache.dateDebut} />
 
@@ -222,7 +218,7 @@ export default function ModifierTache() {
             <div className='container d-flex flex-start'>
                 <button href="" className='btn' onClick={handleModification}>Modifier</button>
                 <ModaleConfirmation open={isModaleModificationOpen} method={onCloseModification}
-                    lignes={infoModification} titre={"Résultat"}/>
+                    lignes={infoModification} titre={"Résultat"} />
                 <a href="" className='btn boutonAnnuler' onClick={(event) => handleDelete(event, tache.idEvenement)}>Supprimer</a>
                 <ModaleConfirmation open={isModaleSuppressionOpen} method={onCloseSuppression}
                     lignes={infoSuppression} titre={"Résultat"} />

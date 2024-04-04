@@ -6,13 +6,13 @@ import { useState } from 'react'
 import InputModalText from '../../components/InputModalText'
 import axios from 'axios'
 import InputModalQuantity from '../../components/InputModalQuantity'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { gestionConnexion } from '../../_helpers/gestion.connexion'
 
 
 export default function CreationTache() {
 
-
+	let navigate = useNavigate()
 	const [checkErrorMessage, setErrorMessage] = useState('')
 	const [evenements, setEvenements] = useState('')
 	const [icones, setIcones] = useState('')
@@ -114,68 +114,65 @@ export default function CreationTache() {
 		}
 	}
 
+	const handleClickCancel = (event) => {
+		event.preventDefault()
+		navigate('../listeTaches#')
+	}
+
 
 	return (
-		<div className='container d-flex flex-column gap-3'>
+		<div className='container d-flex flex-column align-items-center gap-3 mt-5'>
 			<h3 style={{ marginBottom: '25px' }}> Créez-vous une nouvelle habitude</h3>
-
-			<InputGenericText nomLabel={"Nommez votre nouvel évènement :"} label='nom' titre={tache.nom}
-				method={handleChange} exemple='Couche-tôt !' />
-
-			<div className='container'>
+			<div>
+				<InputGenericText nomLabel={"Nommez votre nouvel évènement :"} label='nom' titre={tache.nom}
+					method={handleChange} exemple='Couche-tôt !' />
 				<button className='btn btn-light' onClick={() => setIsOpen(true)}>
 					<img src={dataIcon[tache.logo]} alt="icone evt" style={{ height: '42px', width: '52px' }}></img>
 				</button>
 				<ModaleLogo open={isOpen} onClose={() => setIsOpen(false)} data={dataIcon} parentCallback={handleCallbackLogo}>
 					Coucou
 				</ModaleLogo>
-			</div>
 
-			<InputModalText nomLabel='A partir du : ' id='dateDebut'
-				method={handleChange} exemple={new Date().toLocaleDateString()} onClick={() => console.log('Clic')} />
 
-			<InputModalQuantity nomLabel={'Fréquence : '} id='frequence' method={handleChange}
-				titre={tache.frequence} periode='jours' minimum />
+				<InputModalText nomLabel='A partir du : ' id='dateDebut'
+					method={handleChange} exemple={new Date().toLocaleDateString()} onClick={() => console.log('Clic')} />
 
-			<div className='container'>
-				<div className='row'>
-					<div className='col-md-5 col-8'>
-						<label htmlFor="typeEvenement" className='form-label'>Type d'évènement : </label>
-						<select className="form-select form-control profil-border" id='typeEvenement' aria-label="Default select example"
-							onChange={handleChange} value={tache.typeEvenement}>
-							<option value="0">Tâche</option>
-							<option value="1">Habitude</option>
-							<option value="2">Addiction</option>
-						</select>
-					</div>
-				</div>
-			</div>
+				<InputModalQuantity nomLabel={'Fréquence : '} id='frequence' method={handleChange}
+					titre={tache.frequence} periode='jours' minimum />
 
-			<div className='container' style={{ marginTop: '25px' }}>Nature d'évènement</div>
-			<div className='container'>
-				<div className='row'>
-					<div className='col-md-5 col-8'>
-						<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-							<input type="radio" class="btn-check" name="todo" id="todo" autocomplete="off" checked />
-							<label class="btn btn-outline-primary" htmlFor="todo">Fait / A faire</label>
+				<div className='container'>
+					<div className='row'>
+						<div className=''>
+							<label htmlFor="typeEvenement" className='form-label'>Type d'évènement : </label>
+							<select className="form-select form-control profil-border" id='typeEvenement' aria-label="Default select example"
+								onChange={handleChange} value={tache.typeEvenement}>
+								<option value="0">Tâche</option>
+								<option value="1">Habitude</option>
+								<option value="2">Addiction</option>
+							</select>
 						</div>
 					</div>
 				</div>
-				{/*<div className='container' style={{ height: '30vh' }}>
-					<label htmlFor="quota">Sélectionner votre objectifs:</label>
-					<input type="number" id="quota" name="quota" min="0" max="1000" />
-				</div> */}
-			</div>
 
-			<div className='container d-flex flex-start'>
-				<button href="" className='btn boutonValiderProfil' onClick={handleSubmit} disabled={isDisabled}>Valider</button>
-				<a href="" className=''>
-					<Link className='btn boutonAnnuler' to='/estConnecte/listeTaches'>Annuler</Link>
-				</a>
-				{/* <GenericButton label="Valider" buttonStyle='boutonValider' method={handleSubmit}/> */}
+				<div className='container' style={{ marginTop: '15px' }}>Nature d'évènement</div>
+				<div className='container'>
+					<div className='row'>
+						<div className='col-md-12 col-8'>
+							<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+								<input type="radio" class="btn-check" name="todo" id="todo" autocomplete="off" checked />
+								<label class="btn btn-outline-primary" htmlFor="todo">Fait / A faire</label>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div className='container d-flex justify-content-between mt-5'>
+					<button href="" className='btn boutonValiderProfil' onClick={handleSubmit} disabled={isDisabled}>Valider</button>
+					<button href="" className='btn boutonAnnuler' onClick={handleClickCancel}>Annuler</button>
+					{/* <GenericButton label="Valider" buttonStyle='boutonValider' method={handleSubmit}/> */}
+				</div>
+				<div style={{ height: '50px' }}>{checkErrorMessage && checkIntegrity && (<div style={{ color: 'red' }}>{checkErrorMessage}</div>)}</div>
 			</div>
-			<div style={{height:'50px'}}>{checkErrorMessage && checkIntegrity && (<div style={{ color: 'red' }}>{checkErrorMessage}</div>)}</div>
-			
 		</div>
 	)
 }

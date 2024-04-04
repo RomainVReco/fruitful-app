@@ -197,6 +197,14 @@ body {
   border-color: #c12a71 !important;
   color: #c12a71 !important;
   text-decoration: none !important;
+  border-radius: 50px !important;
+  display: block;
+  width: 45%;
+}
+
+.boutonAnnuler:active {
+  background-color: #c12a71 !important;
+  color: #FFF !important;
 }
 
 .boutonAnnuler:active {
@@ -357,7 +365,7 @@ body {
   background-color: #C12A71 !important;
   border-radius: 50px !important;
   display: block;
-  width: 200px;
+  width: 45%;
 }
 
 .boutonValiderProfil:hover {

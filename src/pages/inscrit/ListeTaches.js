@@ -71,7 +71,7 @@ export default function ListeTaches() {
 
   return (
     <>
-      <div className="container bg-light d-flex justify-content-center mt-2">
+      <div className="container bg-light d-flex justify-content-center mt-5">
         <div className="d-flex flex-wrap ">
           {listeTaches.length > 0 ? (listeTaches.map((element, index) => {
             return <Tache key={index} nomHabitude={element.nomEvenement} frequence={element.frequence}
@@ -84,8 +84,8 @@ export default function ListeTaches() {
         </div>
       </div>
 
-      <div className="container bg-light d-flex justify-content-start">
-        <div className={`circle ${isActive ? 'turquoise' : 'blanc'}`} onClick={handleNewTask} disabled={isDisabled}>
+      <div className="container bg-light d-flex justify-content- mt-5">
+        <div className={`circle ${isActive ? 'turquoise' : 'blanc'} d-flex flex-wrap `} onClick={handleNewTask} disabled={isDisabled}>
             <div class="cross">
               <div className={`line ${isActive ? 'blanc' : 'turquoise'}`}></div>
               <div className={`line ${isActive ? 'blanc' : 'turquoise'}`}></div>
