@@ -106,7 +106,8 @@ const InscriptionPremium = () => {
     })
       .then((response) => response.json())
       .then((orderData) => {
-        const message = `Bravo ${orderData.payer.name.given_name}! Transaction validée par PayPal. Accès Fruitful Premium accordé`;
+        handleApproveTransaction();
+        const message = `Bravo ${orderData.payer.name.given_name}! Transaction validée par PayPal. <br /> Accès Fruitful Premium accordé`;
         setTransactionMessage(message); // Mettre à jour le message de transaction
         setModalShow(true); // Ouvrir la modale
       });
