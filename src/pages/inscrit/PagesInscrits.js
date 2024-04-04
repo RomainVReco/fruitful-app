@@ -10,6 +10,7 @@ import Renseignement5 from "../inscrit/Renseignement5";
 import ModifierTache from "../inscrit/ModifierTache";
 import ListeTaches from '../inscrit/ListeTaches';
 import PageInscriptionPremium from '../inscrit/PageInscriptionPremium'
+import Test from '../inscrit/Test'
 import Layout from '../public/Layout';
 import Erreur from "../public/Erreur";
 
@@ -28,6 +29,7 @@ const PagesInscrits = () => {
                 <Route path="/renseignement4" element={<Renseignement4 />} />
                 <Route path="/renseignement5" element={<Renseignement5 />} />
                 <Route path="/pageInscriptionPremium" element={<PageInscriptionPremium />} />
+                <Route path="/test" element={<Test />}/>
                 <Route path="*" element={<Erreur />} />
             </Route>
         </Routes>
