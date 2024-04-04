@@ -84,6 +84,8 @@ const InscriptionPremium = () => {
           {
             sku: "1blwyeo8",
             quantity: 2,
+            //currency_code: "EUR", 
+            value: "6.90", // Montant fixe de 6.90 euros
           },
         ],
       }),
@@ -113,7 +115,7 @@ const InscriptionPremium = () => {
         const firstLine = "Paypal: transaction validée.";
         const secondLine = `Bravo ${orderData.payer.name.given_name}!`;
         const thirdLine = `Bienvenue dans Fruitful Premium!`;
-        const message = `${firstLine}\n${secondLine}\n${thirdLine}}`; // Concaténer les lignes avec saut de ligne
+        const message = `${firstLine}\n${secondLine}\n${thirdLine}`; // Concaténer les lignes avec saut de ligne
         setTransactionMessage(message); // Mettre à jour le message de transaction
         setModalShow(true); // Ouvrir la modale
       });
@@ -167,7 +169,7 @@ const InscriptionPremium = () => {
         <Row className="justify-content-center">
           <Col xs={12} sm={6} md={4} className="text-center" style={{ borderRadius: '10px' }}>
             <div style={{ maxWidth: "750px", minHeight: "200px" }}>
-              <PayPalScriptProvider options={{ clientId: PAYPAL_ID, components: "buttons", currency: "EUR" }}>
+              <PayPalScriptProvider options={{ clientId: PAYPAL_ID, components: "buttons", currency: "USD" }}>
                 <ButtonWrapper showSpinner={false} />
               </PayPalScriptProvider>
             </div>
