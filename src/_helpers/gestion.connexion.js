@@ -52,5 +52,5 @@ let checkCapIsReached = async (jeton) => {
  }
 
 export const gestionConnexion = {
-    saveSessionId, deconnexion, isLogged, getSessionId, checkCapIsReached
+    saveSessionId, deconnexion, isLogged, getSessionId, checkCapIsReached, checkIsAbonne
 } 
