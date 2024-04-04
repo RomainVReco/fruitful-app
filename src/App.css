@@ -13,88 +13,6 @@ body {
   font-family: sans-serif;
 }
 
-/* HEADER */
-.headerTop {
-  background-color: #C12A71;
- /* height: 65px; */
-  width: 100%;
-  z-index: 1000;
-  position: sticky;
-  top: 0;
-  left: 0;
-  height: 15vh;
-  align-items: center;
-}
-
-.header-container {
-  display: flex;
-  justify-content: space-evenly;
-
-}
-
-.image-header {
-  padding: 5px;
-  height: 50px;
-}
-
-.listeMenu {
-  height: 65px;
-  display: flex;
-  align-items: center;
-  width: 50%;
-  justify-content: space-evenly;
-  margin: 0;
-  padding: 0;
-}
-
-.liensNav {
-  list-style-type: none;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 80%;
-  width:80%;
-  border-radius: 1rem;
-}
-
-.liensNav:hover {
-  background-color: #C282A0;
-
-}
-
-.lienHeader {
-  /* S'inscrire et connexion */
-  text-align: center;
-  align-self: center;
-  margin-right: 5px;
-  border-radius: 1rem;
-}
-
-.lienHeader:hover {
-  /* S'inscrire et connexion */
-  background-color: #C282A0;
-}
-
-.lien {
-  cursor: pointer;
-  text-decoration: none;
-  color: #f1f1f1;
-  list-style-type: none;
-}
-
-
-.dropdown-toggle::after {
-  content: none !important;
-}
-
-.menu-burger{
-  position: fixed;
-  display: none;
-  top:1.25rem;
-  right:1rem;
-}
-
 /* FOOTER */
 .footerBottom {
   background-color: #C12A71;
@@ -136,42 +54,15 @@ body {
 
 @media (max-width: 645px) {
 
+  .sticky{
+    left:0px;
+  }
+
   .column {
     flex-direction: column ;
   }
   .card {
     width: 100% !important;
-  }
-
-  .listeMenu {
-    flex-direction: column;
-    justify-content: center ;
-    width: 100%;
-    gap: 0.5rem;
-    height: 100%;
-  }
-
-  .header-container {
-    display: block;
-    text-align: center;
-  }
-
-  .image-header{
-    margin-bottom: 1rem;
-  }
-
-  .wrapper-lienHeader{
-    padding: 0.5rem;
-    width: 100%;
-  }
-
-  .icon-media {
-    padding: 1rem;
-    display: none;
-  }
-
-  .menu-burger{
-    display: flex;
   }
 
   .text-overlay {
@@ -183,7 +74,6 @@ body {
     color:black !important;
   }
 }
-
 
 /* COMPOSANTS GENERIQUES */ 
 
@@ -234,6 +124,13 @@ body {
   color: #FFFFFF !important;
   background-color:red !important;
   display: block;
+}
+
+.sticky {
+  position: sticky;
+  top:300px;
+  left:40px;
+  z-index: 10;
 }
 
 /* COMPOSANTS TACHES */
@@ -446,7 +343,6 @@ label {
   background-size: cover;
 }
 
-
 .renseignement-container {
   width: 450px;
   height: 70px;
@@ -461,8 +357,8 @@ label {
 
 .renseignement-titre {
   place-self: center;
-
 }
+
 .check-Renseignement {
   grid-column: 4/5;
   grid-row: 1/3;
