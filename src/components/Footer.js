@@ -15,7 +15,7 @@ function Footer() {
             <img src={logoComplet} alt="logo fruitful" className="image-footer"></img>
           </Link>
         </div>
-        <div className="horizontal-footer-links">
+        <div className="vertical-footer-links">
             <Link className='lien' to="/contactezNous">Contactez-nous</Link>
             <Link className='lien' to="/PageQuiSommesNous">Qui sommes nous?</Link>
             <Link className='lien' to="/PageMentionsLegales">Mentions légales</Link>

@@ -127,6 +127,15 @@ body {
   justify-content: space-around; /* ou une autre valeur selon votre préférence */
 }
 
+.vertical-footer-links {
+  display: flex;
+  flex-direction: column;
+}
+
+.vertical-footer-links .lien {
+  margin-bottom: 10px; /* Espacement entre les liens */
+}
+
 @media (max-width: 645px) {
 
   .listeMenu {
