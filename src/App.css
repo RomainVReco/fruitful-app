@@ -99,7 +99,14 @@ body {
 
 .footer-container {
   display: flex;
-  justify-content: space-evenly;
+}
+
+.left-column {
+  flex: 1; /* Fait en sorte que la colonne prenne l'espace disponible */
+}
+
+.right-column {
+  flex: 1; /* Fait en sorte que la colonne prenne l'espace disponible */
 }
 
 .image-footer {

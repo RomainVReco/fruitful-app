@@ -10,18 +10,22 @@ function Footer() {
 
     <footer className="footerBottom">
       <div className="footer-container" >
-        <div>
-          <Link className="" to='/'>
-            <img src={logoComplet} alt="logo fruitful" className="image-footer"></img>
-          </Link>
+      <div className="left-column">
+          <div>
+            <Link className="" to='/'>
+              <img src={logoComplet} alt="logo fruitful" className="image-footer" />
+            </Link>
+          </div>
+          <div>
+            <p>&copy; {new Date().getFullYear()} Fruitful Coaching Numérique SARL. Tous droits réservés.</p>
+          </div>
         </div>
-        <div className="vertical-footer-links">
+        <div className="right-column">
+          <div className="vertical-footer-links">
             <Link className='lien' to="/contactezNous">Contactez-nous</Link>
             <Link className='lien' to="/PageQuiSommesNous">Qui sommes nous?</Link>
             <Link className='lien' to="/PageMentionsLegales">Mentions légales</Link>
-            <div>
-              <p>&copy; {new Date().getFullYear()} Fruitful Coaching Numérique SARL. Tous droits réservés.</p>
-            </div>
+          </div>
         </div>
       </div>
     </footer>
