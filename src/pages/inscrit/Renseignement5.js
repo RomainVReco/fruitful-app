@@ -4,6 +4,7 @@ import BoutonPrecedent from "../../components/BoutonPrecedent";
 import EntreeObjectif from "../../components/EntreeObjectif";
 import { useState } from "react";
 import axios from "axios";
+import { format } from "date-fns";
 
 export default function Renseignement5() {
   const donneesRenseignees = {
@@ -20,8 +21,16 @@ export default function Renseignement5() {
     med2: "entre 3 et 5 fois",
     med3: "plus de 6 fois"
   }
+  const tacheAuto = {
+    nom: '',
+    dateDebut: '',
+    frequence: '',
+    typeEvenement: '',
+    idUtilisateur: sessionStorage.getItem("jeton"),
+    logo: '',
+  }
 
-  var habitudesAuto = new Array();
+  var habitudesAuto = [];
 
   function recupererStorage(domaine) {
     try {
@@ -30,17 +39,36 @@ export default function Renseignement5() {
       switch (domaine2) {
         case 'som1':
         case 'som3': habitudesAuto.push("Dormir 8 heures par nuit");
+          habitudesAuto.push("1"); // intervalle de jours entre chaque occurrence de l'evenement
+          habitudesAuto.push("0"); // type d'événement
+          habitudesAuto.push("0"); // n° de logo de l'événement
           break;
         case 'spo1':
         case 'spo2': habitudesAuto.push("Plus de 6 séances de sport par mois");
+          habitudesAuto.push("5"); // intervalle de jours entre chaque occurrence de l'evenement
+          habitudesAuto.push("0"); // type d'événement
+          habitudesAuto.push("0"); // n° de logo de l'événement
           break;
         case 'med1':
         case 'med2': habitudesAuto.push("Méditer plus de 6 fois par mois");
+          habitudesAuto.push("5"); // intervalle de jours entre chaque occurrence de l'evenement
+          habitudesAuto.push("0"); // type d'événement
+          habitudesAuto.push("0"); // n° de logo de l'événement
           break;
       }
 
       console.log("motivation :", domaine2);
       console.log(habitudesAuto);
+
+      for (let i = 0; i < (habitudesAuto.length / 4 + 1); i = i + 4) {
+        tacheAuto.nom = habitudesAuto[i];
+        tacheAuto.dateDebut = format(new Date(), 'dd/MM/yyyy');
+        tacheAuto.frequence = habitudesAuto[i+1];
+        tacheAuto.typeEvenement = habitudesAuto[i+2];
+        tacheAuto.logo=habitudesAuto[i+3];
+        console.log("tache Auto :", tacheAuto);
+        enregistrementHabitude(tacheAuto);
+      }
       return donneesRenseignees[domaine2];
     }
     catch (e) {
@@ -48,26 +76,26 @@ export default function Renseignement5() {
     }
   }
 
+
   function afficherNouvellesTaches(habitudesAuto) {
-    return habitudesAuto.map((line, index) => (
+    const intitulesHabitudesAuto = habitudesAuto.filter((_, index) => index % 4 === 0);
+
+    return intitulesHabitudesAuto.map((line, index) => (
       <p key={index}>{line}</p>
     ));
   }
-  //   for (let i=0; i<3; i++){
-  // enregistrementHabitude()
-  //   }
-  //   const enregistrementHabitude = async (inscrit) => {
-  //     console.log("inscrit avant try :", inscrit);
-  //     try {
-  //       const response = await axios.put('http://localhost:8081/enregistrementInscription', inscrit);
-  //       console.log("response : ", response.data.success);
+  //************************************************************************************************************** */
+  const enregistrementHabitude = async (tacheAuto) => {
+    console.log("tacheAuto avant try :", tacheAuto);
+    try {
+      const response = await axios.put('http://localhost:8081/createNewEvent', tacheAuto);
+      console.log("response : ", response.data.success);
 
-  //     } catch (error) {
-  //       console.error('Error:', error);
-  //       setMessageErreur('Erreur lors de la vérification de l\'e-mail. Veuillez réessayer.');
-  //     }
-  //   }
-
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+  //************************************************************************************************************** */
   return (
     <>
       <div className="fond-inscription">
