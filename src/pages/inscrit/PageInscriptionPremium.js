@@ -64,7 +64,8 @@ const InscriptionPremium = () => {
     };
     const firstLine = "Paypal: transaction validée.";
     const secondLine = `Bravo ${simulatedDetails.payer.name.given_name}! Bienvenue dans Fruitful Premium!`;
-    const message = `${firstLine}\n${secondLine}`; // Concaténer les deux lignes avec une balise <br>
+    const thirdLine = `Bienvenue dans Fruitful Premium!`;
+    const message = `${firstLine}\n${secondLine}\n${thirdLine}}`; // Concaténer les lignes avec saut de ligne
     setTransactionMessage(message); // Mettre à jour le message de transaction
     setModalShow(true); // Ouvrir la modale
   };
@@ -107,7 +108,12 @@ const InscriptionPremium = () => {
       .then((response) => response.json())
       .then((orderData) => {
         handleApproveTransaction();
-        const message = `Bravo ${orderData.payer.name.given_name}! Transaction validée par PayPal. <br /> Accès Fruitful Premium accordé`;
+        
+        //const message = `Bravo ${orderData.payer.name.given_name}! Transaction validée par PayPal. <br /> Accès Fruitful Premium accordé!`;
+        const firstLine = "Paypal: transaction validée.";
+        const secondLine = `Bravo ${orderData.payer.name.given_name}!`;
+        const thirdLine = `Bienvenue dans Fruitful Premium!`;
+        const message = `${firstLine}\n${secondLine}\n${thirdLine}}`; // Concaténer les lignes avec saut de ligne
         setTransactionMessage(message); // Mettre à jour le message de transaction
         setModalShow(true); // Ouvrir la modale
       });
@@ -147,7 +153,7 @@ const InscriptionPremium = () => {
             <div>
               <br />
               <h2>
-                Envie d'un coaching encore meilleur? <br /> Passez en classe Premium!
+                Envie d'un coaching encore meilleur? <br /> <br /> Passez en classe Premium <br/> pour 6.90 euros!
               </h2>
             </div>
           </Col>
@@ -161,21 +167,21 @@ const InscriptionPremium = () => {
         <Row className="justify-content-center">
           <Col xs={12} sm={6} md={4} className="text-center" style={{ borderRadius: '10px' }}>
             <div style={{ maxWidth: "750px", minHeight: "200px" }}>
-              <PayPalScriptProvider options={{ clientId: PAYPAL_ID, components: "buttons", currency: "USD" }}>
+              <PayPalScriptProvider options={{ clientId: PAYPAL_ID, components: "buttons", currency: "EUR" }}>
                 <ButtonWrapper showSpinner={false} />
               </PayPalScriptProvider>
             </div>
-            <Modal show={modalShow} onHide={handleCloseModal}>
-              <Modal.Header closeButton>
-                <Modal.Title>Résultat transaction</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>{transactionMessage}</Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={handleCloseModal}>
-                  Fermer
-                </Button>
-              </Modal.Footer>
-            </Modal>
+              <Modal show={modalShow} onHide={handleCloseModal}>
+                <Modal.Header closeButton className="modale-abonnement-paye-header">
+                  <Modal.Title>Résultat transaction</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{transactionMessage}</Modal.Body>
+                <Modal.Footer className="modale-abonnement-paye-footer">
+                  <Button variant="secondary" onClick={handleCloseModal}>
+                    Fermer
+                  </Button>
+                </Modal.Footer>
+              </Modal>
           </Col>
         </Row>
       </Container>
