@@ -34,6 +34,7 @@ body {
     width: 100% !important;
     color:black !important;
   }
+
 }
 
 /* COMPOSANTS GENERIQUES */ 
@@ -284,6 +285,10 @@ body {
   color: #c12a71;
   opacity: 1;
   text-align: center;
+}
+
+.image-velo {
+  max-width:70%;
 }
 
 .centre{
