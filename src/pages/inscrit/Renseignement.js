@@ -34,7 +34,7 @@ export default function Renseignement() {
             <br />
             <div class="row container-fluid m-auto">
               <div class="col">
-                <BoutonPrecedent page="3" texte="Répondre plus tard" />
+                <BoutonPrecedent page="9" texte="Répondre plus tard" />
               </div>
 
               <div class="col">

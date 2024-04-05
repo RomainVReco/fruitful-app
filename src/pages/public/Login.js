@@ -37,7 +37,7 @@ export default function Login() {
             console.log('idUtilisateur : ', idUtilisateur)
             if (!!idUtilisateur) {
                 gestionConnexion.saveSessionId(idUtilisateur)
-                navigate("../../estConnecte/listeTaches")
+                navigate("/estConnecte/AtterrissageConnexion")
             } else {
                 setErrorMessage('Email ou mot de passe invalide')
             }
