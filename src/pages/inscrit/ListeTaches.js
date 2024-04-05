@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Tache from '../../components/tache/Tache';
 import axios from "axios";
-import { dataImage } from '../../_helpers/data.env'
-import { useNavigate } from "react-router-dom";
-import { ReactComponent as AjoutTache } from '../../assets/tache/add-icon.svg'
+import { dataImage, CAP_EVENTS } from '../../_helpers/data.env'
+import { useNavigate, Link } from "react-router-dom";
 import { gestionConnexion } from '../../_helpers/gestion.connexion'
+import ModaleConfirmation from '../../components/ModaleConfirmation'
 import '../../components/tache/custom-add-icon.css'
 
-const handleSubmit = (event) => {
-  event.preventDefault()
-  console.log('Bouton cliqué')
-}
 
 export default function ListeTaches() {
 
@@ -21,6 +17,9 @@ export default function ListeTaches() {
   const [dataIcon, setDataIcon] = useState(dataImage)
   const [isDisabled, setDisabled] = useState('')
   const [isActive, setActive] = useState(false)
+  const [isModaleConfirmationOpen, setModaleConfirmationOpen] = useState(false)
+  const [infoConfirmation, setinfoConfirmation] = useState([`Vous avez atteint le nombre maximum d'évènements déjà actifs pour un compte standard : ${CAP_EVENTS}.`,
+  `Rendez-vous sur la page Abonnement pour passer sur un compte Premium.`])
 
   /* Récupération du jeton de connexion */
   useEffect(() => {
@@ -69,14 +68,18 @@ export default function ListeTaches() {
     navigate('../../estConnecte/creationTache')
   }
 
+  const onCloseConfirmation = () => {
+    setModaleConfirmationOpen(false)
+  }
+
   return (
     <>
-          <div className={`circle ${isActive ? 'turquoise' : 'blanc'} sticky`} onClick={handleNewTask} disabled={isDisabled}>
-            <div className="cross">
-              <div className={`line ${isActive ? 'blanc' : 'turquoise'}`}></div>
-              <div className={`line ${isActive ? 'blanc' : 'turquoise'}`}></div>
-            </div>
-          </div>
+      <div className={`circle ${isActive ? 'turquoise' : 'blanc'} sticky`} onClick={isDisabled ? ()=>setModaleConfirmationOpen(true) : handleNewTask} disabled={isDisabled}>
+        <div className="cross">
+          <div className={`line ${isActive ? 'blanc' : 'turquoise'}`}></div>
+          <div className={`line ${isActive ? 'blanc' : 'turquoise'}`}></div>
+        </div>
+      </div>
       <div className="container bg-light d-flex justify-content-center">
 
         <div className="d-flex flex-wrap ">
@@ -90,9 +93,10 @@ export default function ListeTaches() {
           }
         </div>
       </div>
+      <ModaleConfirmation open={isModaleConfirmationOpen} method={onCloseConfirmation}
+        lignes={infoConfirmation} titre={"La limite d'évènements actifs a été atteinte"} />
       <div className="d-flex flex-wrap">
         <div className="container bg-light d-flex justify-content-between mt-5">
-
         </div>
       </div>
     </>

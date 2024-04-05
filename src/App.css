@@ -35,6 +35,10 @@ body {
     color:black !important;
   }
 
+  .modale-basique {
+    width: 100%;
+  }
+
 }
 
 /* COMPOSANTS GENERIQUES */ 
@@ -90,7 +94,7 @@ body {
 
 .sticky {
   position: sticky;
-  top:300px;
+  top:60%;
   left:40px;
   z-index: 10;
 }
