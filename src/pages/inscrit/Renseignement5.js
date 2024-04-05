@@ -145,7 +145,7 @@ export default function Renseignement5() {
 
 
               <div class="col">
-                <BoutonSuivant page="9" texte="Liste tâches" />
+                <BoutonSuivant page="9" texte="J'accepte les " />
               </div>
             </div>
           </div>

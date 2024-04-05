@@ -21,8 +21,8 @@ export default function Inscription3() {
 
   const [errorMessage, setErrorMessage] = useState('');
   const [email, setEmail] = useState({ email: "" });
-  const [motDePasse, setMotDePasse] = useState("");
-  const [motDePasse2, setMotDePasse2] = useState("");
+  const [motDePasse, setMotDePasse] = useState({motDePasse:""});
+  const [motDePasse2, setMotDePasse2] = useState({motDePasse2:""});
   const [messageErreur, setMessageErreur] = useState("");
   const [emailExiste, setEmailExiste] = useState(false);
 
@@ -39,7 +39,7 @@ export default function Inscription3() {
   const handleChangeEmail = (e) => {
     setEmail(prevState => ({ ...prevState, [e.target.id]: e.target.value })); // Mettre à jour l'email dans l'état
   };
-  const handleChangeMotDepasse = (e) => {
+  const handleChangeMotDePasse = (e) => {
     setMotDePasse(e.target.value); // Mettre à jour le premier mot de passe dans l'état
   };
   const handleChangeMotDePasse2 = (e) => {
@@ -93,13 +93,13 @@ export default function Inscription3() {
     const regexEmail = /^[^\.\s][\w\-]+(\.[\w\-]+)*@([\w-]+\.)+[\w-]{2,}$/gm;
     const regexMotDePasse = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
     //---------------tests
-
+console.log("mot de passe avant regex", email, motDePasse);
     let erreur = "";
     if (!email["email"].match(regexEmail)) {
       erreur = "L'email entré est invalide, merci de l'entrer à nouveau.\n";
       console.log(erreur);
     };
-    if (!motDePasse.match(regexMotDePasse) || !motDePasse2.match(regexMotDePasse)) {
+    if ((!motDePasse.match(regexMotDePasse)) || (!motDePasse2.match(regexMotDePasse))) {
       erreur += "Le mot de passe doit avoir plus de 8 caractères et comporter au moins une majuscule, une minuscule, un chiffre et un caractère spécial.\n";
     };
     if (motDePasse != motDePasse2) {
@@ -110,13 +110,13 @@ export default function Inscription3() {
 
     if (erreur == "") {
       // S'il n'y a pas d'erreur on enregistre l'email en sessionStorage
-      console.log(email, motDePasse);
+      console.log("avant sessionStorage :",email, motDePasse);
       sessionStorage.setItem("email", email.email);
       sessionStorage.setItem("motDePasse", motDePasse);
       inscrit.email = email.email;
-      inscrit.motDePasse = motDePasse;
+      inscrit.password = motDePasse;
 
-      console.log("email :", email, motDePasse, " inscrit : ", inscrit);
+      console.log("email :", inscrit.email, inscrit.motDePasse, " inscrit : ", inscrit);
 
       checkEmail(email, inscrit);
       return;
@@ -170,7 +170,7 @@ export default function Inscription3() {
                   id="motDePasse"
                   name="motDePasse"
                   placeholder="Veuillez indiquer votre mot de passe"
-                  onChange={handleChangeMotDepasse}
+                  onChange={handleChangeMotDePasse}
 
                 ></input>
                 <br></br>

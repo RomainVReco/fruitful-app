@@ -30,9 +30,12 @@ export default function Inscription() {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    const regex = /^[a-zÀ-ÿA-Z]+$/;
-    console.log("nom : ", nom);
-    console.log("prénom : ", prenom);
+    // On autorise les lettres majuscules, minuscules, accentuées, les espaces et les apostrophes :
+    const regex = /^[a-zÀ-ÿA-Z'\s]+$/;
+    
+    // On retire les espaces avant et après les caractères du nom et du prénom :
+    let nomTraite=nom.replace(/^\s+|\s+$/g, ''); //
+    let prenomTraite=prenom.replace(/^\s+|\s+$/g, '');
 
     if (!nom.match(regex) || !prenom.match(regex)) {
       setMessageErreur(
@@ -40,8 +43,8 @@ export default function Inscription() {
       );
     } else {
       setMessageErreur(""); // Effacer le message d'erreur s'il n'y a pas d'erreur
-      sessionStorage.setItem("nom", nom);
-      sessionStorage.setItem("prenom", prenom);
+      sessionStorage.setItem("nom", nomTraite);
+      sessionStorage.setItem("prenom", prenomTraite);
 
       navigate(url);
 
