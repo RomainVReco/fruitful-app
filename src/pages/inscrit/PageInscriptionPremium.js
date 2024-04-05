@@ -25,12 +25,18 @@ const InscriptionPremium = () => {
   const [transactionMessage, setTransactionMessage] = useState('');
   const [payPalScript, setPayPalScript] = useState(document.createElement('script'))
   const [loadingScript, setLoadingScript] = useState(payPalScript['src'] = 'https://www.paypal.com/sdk/js?client-id=AUc9A_Q4BlFKrhLXmVpRkDP4DChqyk3mXCqw_v23Kluwo891aTJRXDhuzLWkAdM6042ih1aGG37s9Kwu')
+  const [subscriptionStatus, setSubscriptionStatus] = useState(false);
 
   useEffect(() => {
     const id = gestionConnexion.getSessionId();
     setidUtilisateur(id)
+    checkSubscription();
   }, []);
 
+  const checkSubscription = async () => {
+    const isAbonne = await gestionConnexion.checkIsAbonne(6);
+    setSubscriptionStatus(isAbonne);
+  }
 
   const handleInscription = async () => {
     try {
@@ -85,7 +91,7 @@ const InscriptionPremium = () => {
             sku: "1blwyeo8",
             quantity: 2,
             //currency_code: "EUR", 
-            value: "6.90", // Montant fixe de 6.90 euros
+            //value: "6.90", // Montant fixe de 6.90 euros
           },
         ],
       }),
@@ -169,9 +175,13 @@ const InscriptionPremium = () => {
         <Row className="justify-content-center">
           <Col xs={12} sm={6} md={4} className="text-center" style={{ borderRadius: '10px' }}>
             <div style={{ maxWidth: "750px", minHeight: "200px" }}>
+            {subscriptionStatus ? (
+                <p>Vous êtes déjà abonné en Premium</p>
+              ) : (
               <PayPalScriptProvider options={{ clientId: PAYPAL_ID, components: "buttons", currency: "USD" }}>
                 <ButtonWrapper showSpinner={false} />
               </PayPalScriptProvider>
+            )}
             </div>
               <Modal show={modalShow} onHide={handleCloseModal}>
                 <Modal.Header closeButton className="modale-abonnement-paye-header">
