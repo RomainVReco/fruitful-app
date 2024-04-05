@@ -52,7 +52,7 @@ export default function Inscription() {
   function AffichageImage() {
     return (
       <div>
-        <img src={velo} alt="Vélo" style={{ height: 350, padding: 30 }} />
+        <img src={velo} alt="Vélo" style={{ height: 330, padding: 20 }} />
       </div>
     );
   }
@@ -63,7 +63,7 @@ export default function Inscription() {
       <div className="fond-inscription">
         <div className="row">
           <div className="col-sm-3"></div>
-          <div className="col-sm-6 corps-inscription">
+          <div className="col-sm-6 corps-inscription centre">
             <div>
               <label for="comment">
                 <h2>Comment pouvons-nous vous appeler ?</h2>
