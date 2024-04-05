@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react'
 import InputGenericText from '../../components/InputGenericText'
 import ModaleLogo from '../../components/ModaleLogo'
-import { dataImage } from '../../_helpers/data.env'
+import { CAP_EVENTS, dataImage } from '../../_helpers/data.env'
 import { useState } from 'react'
 import InputModalText from '../../components/InputModalText'
 import axios from 'axios'
 import InputModalQuantity from '../../components/InputModalQuantity'
 import { Link, useNavigate } from 'react-router-dom'
 import { gestionConnexion } from '../../_helpers/gestion.connexion'
+import ModaleConfirmation from '../../components/ModaleConfirmation'
 
 
 export default function CreationTache() {
@@ -20,6 +21,14 @@ export default function CreationTache() {
 	const [isOpen, setIsOpen] = useState(false)
 	const [checkIntegrity, setCheckIntegrity] = useState(false)
 	const [isDisabled, setDisabled] = useState('')
+	const [isModaleConfirmationOpen, setModaleConfirmationOpen] = useState(false)
+	const [infoConfirmation, setInfoConfirmation] = useState(['Votre nouvel évènement a bien été créé. Il est disponible dans la liste des évènements'])
+	const [capErrorMessage, setCapErrorMessage] = useState(<><div style={{ height: '50px', marginBottom:'2rem', marginTop:'0.5rem' }}>
+		<p>Vous avez atteint le nombre maximum d'évènements déjà actifs pour un compte standard : {CAP_EVENTS}.</p>
+		<p>Rendez-vous sur la page <Link to="/pageInscriptionPremium">Abonnement</Link> pour passer sur un compte Premium.</p>
+		</div>
+		</>
+	)
 
 	// attention à bien ajouter la récupération du jeton
 	const [tache, setTache] = useState({
@@ -99,7 +108,9 @@ export default function CreationTache() {
 
 		} else {
 			console.log("Chouette, ça va partir en base de données")
-			createNewTache(tache)
+			if (createNewTache(tache)) {
+				setModaleConfirmationOpen(true)
+			}
 		}
 	}
 
@@ -107,6 +118,7 @@ export default function CreationTache() {
 		try {
 			const response = await axios.post('http://localhost:8081/createNewEvent', tache)
 			console.log(response.status)
+			return !!response.data.resultat.insertId
 		} catch (error) {
 			console.log("Erreur de lors de la création de la nouvelle tâche")
 			console.log(error)
@@ -120,7 +132,7 @@ export default function CreationTache() {
 	}
 
 	const onCloseConfirmation = () => {
-        setModaleSuppressionOpen(false)
+        setModaleConfirmationOpen(false)
         navigate("../../estConnecte/listeTaches/")
     }
 
@@ -173,12 +185,15 @@ export default function CreationTache() {
 
 				<div className='d-flex justify-content-between mt-4 w-100'>
 					<button href="" className='btn boutonValiderProfil' onClick={handleSubmit} disabled={isDisabled}>Valider</button>
+					
 					<ModaleConfirmation open={isModaleConfirmationOpen} method={onCloseConfirmation}
                         lignes={infoConfirmation} titre={"Une nouvelle tâche a été créée"} />
 					<button href="" className='btn boutonAnnuler' onClick={handleClickCancel}>Annuler</button>
 					{/* <GenericButton label="Valider" buttonStyle='boutonValider' method={handleSubmit}/> */}
 				</div>
+				{capErrorMessage && isDisabled && (<div style={{ color: 'red' }}>{capErrorMessage}</div>)}
 				<div style={{ height: '50px' }}>{checkErrorMessage && checkIntegrity && (<div style={{ color: 'red' }}>{checkErrorMessage}</div>)}</div>
+
 			</div>
 		</div>
 	)
