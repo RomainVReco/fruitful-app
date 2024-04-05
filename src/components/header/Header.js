@@ -43,57 +43,63 @@ function Header() {
 
   return (
     <div>
-<nav class="navbar navbar-expand-lg headerTop ">
-  <div class="container d-flex align-items-center justify-content-evenly">
-    <a class="navbar-brand mx-auto" href="/">
-      <img src={logoComplet} alt="logo fruitful" class="image-header"/>
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul className={`listeMenu show-content`}>
-          <Link className='liensNav' to="/estConnecte/listeTaches"><li className="lien">
-            Tâches</li></Link>
-          <Link className='liensNav' to="/estConnecte/creationTache"><li className="lien">
-            Nouveau</li></Link>
-          <Link className='liensNav' style={{ color: "grey" }} ><li className="lien" >
-            Planning</li></Link>
-            {isConnected ? <Link className='liensNav' to="/estConnecte/profil"><li className="lien">
-            Mon compte</li></Link> : <Link className='liensNav' to="/inscription" ><li className="lien" >
-            Inscription</li></Link>}
-          
+      <nav className="navbar navbar-expand-lg headerTop ">
+        <div className="container d-flex align-items-center justify-content-evenly">
+          <div className="d-flex align-items-center">
+            <Link className="" to='/'>
+              <img src={logoComplet} alt="logo fruitful" className="image-header"></img>
+            </Link>
+          </div>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className={`listeMenu show-content`}>
+              <Link className='liensNav' to="/estConnecte/listeTaches"><li className="lien">
+                Évènements</li></Link>
+              <Link className='liensNav' to="/estConnecte/creationTache"><li className="lien">
+                Nouveau</li></Link>
+              <Link className='liensNav' style={{ color: "grey" }} ><li className="lien" >
+                Planning</li></Link>
+              {isConnected ? <Link className='liensNav' to="/estConnecte/profil"><li className="lien">
+                Mon compte</li></Link> :
+                <>
+                  <Link className='liensNav' to="/inscription" ><li className="lien" >
+                    Inscription</li></Link>
+                  <Link className='liensNav' to="/estConnecte/profil"><li className="lien">
+                    Connexion</li></Link></>}
 
-        </ul>
-    </div>
-  </div>
-</nav>
 
-  </div>
-/*
-    <nav className="headerTop d-flex align-items-center">
-      <div className="header-container" >
-        <div>
-          <Link className="" to='/'>
-            <img src={logoComplet} alt="logo fruitful" className="image-header"></img>
-          </Link>
+            </ul>
+          </div>
         </div>
-        <div ><img src={menuCloseIcon} className="menu-burger" onClick={handleClickMenu}></img></div>
-        <ul className={`listeMenu show-content`}>
-          <Link className='liensNav' to="/estConnecte/listeTaches"><li className="lien">
-            Tâches</li></Link>
-          <Link className='liensNav' to="/estConnecte/creationTache"><li className="lien">
-            Nouveau</li></Link>
-          <Link className='liensNav' style={{ color: "grey" }} ><li className="lien" >
-            Planning</li></Link>
-          <Link className={`liensNav ${isConnected ? 'd-none' : ''}`} to="/inscription" ><li className="lien" >
-            Inscription</li></Link>
-          <li className="liensNav"> {isConnected ? estConnecte : <a href="../login" className="lien line-connexion">Connexion</a>}</li>
-        </ul>
-      
-      </div>
-    </nav>
-    */
+      </nav>
+
+    </div>
+    /*
+        <nav className="headerTop d-flex align-items-center">
+          <div className="header-container" >
+            <div>
+              <Link className="" to='/'>
+                <img src={logoComplet} alt="logo fruitful" className="image-header"></img>
+              </Link>
+            </div>
+            <div ><img src={menuCloseIcon} className="menu-burger" onClick={handleClickMenu}></img></div>
+            <ul className={`listeMenu show-content`}>
+              <Link className='liensNav' to="/estConnecte/listeTaches"><li className="lien">
+                Tâches</li></Link>
+              <Link className='liensNav' to="/estConnecte/creationTache"><li className="lien">
+                Nouveau</li></Link>
+              <Link className='liensNav' style={{ color: "grey" }} ><li className="lien" >
+                Planning</li></Link>
+              <Link className={`liensNav ${isConnected ? 'd-none' : ''}`} to="/inscription" ><li className="lien" >
+                Inscription</li></Link>
+              <li className="liensNav"> {isConnected ? estConnecte : <a href="../login" className="lien line-connexion">Connexion</a>}</li>
+            </ul>
+          
+          </div>
+        </nav>
+        */
   );
 }
 
