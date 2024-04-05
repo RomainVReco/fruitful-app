@@ -17,7 +17,7 @@
     position: sticky;
     top: 0;
     left: 0;
-    height: 15vh;
+    height: 12vh;
     align-items: center;
   }
   
@@ -29,14 +29,14 @@
   
   .image-header {
     padding: 5px;
-    height: 50px;
+    height: 75px;
   }
   
   .listeMenu {
     height: 65px;
     display: flex;
     align-items: center;
-    width: 50%;
+    width: 90%;
     justify-content: space-evenly;
     margin: 0;
     padding: 0;
@@ -57,17 +57,28 @@
     background-color: #C282A0;
   
   }
+
+  .wrapper-lienHeader{
+    padding: 0.5rem;
+  }
   
   .lienHeader {
     /* S'inscrire et connexion */
     text-align: center;
     align-self: center;
     margin-right: 5px;
-    border-radius: 1rem;
+    border-radius: 0.5rem !important;
+    height: 80%;
   }
   
   .lienHeader:hover {
     /* S'inscrire et connexion */
+    background-color: #C282A0;
+    color: #f1f1f1;;
+  }
+
+  .line-connexion:hover{
+    color: #f1f1f1;;
     background-color: #C282A0;
   }
   
