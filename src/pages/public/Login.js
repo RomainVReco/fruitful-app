@@ -49,18 +49,17 @@ export default function Login() {
     };
 
     return (
-        <div className='d-flex flex-column align-items-center m-3'>
-            <div>
-                <h2>Connectez-vous pour accéder à votre Espace Utilisateur</h2>
-                <InputProfilText label='email' nomLabel='Email' method={handleChange} exemple='Email' />
+        <div className='container d-flex justify-content-center' style={{height:'75vh'}}>
+            <div className='d-flex flex-column align-items-center justify-content-center m-3 col-12 col-md-9 ' >
+                <h3 className='titre-h3-modifier-creer-tache'>Connectez-vous pour accéder à votre Espace Utilisateur</h3>
+                <InputProfilText label='email' nomLabel='Email' method={handleChange} exemple='jeanbonbeurre@gmail.com' />
                 <div className='w-100 m-1'>
                     <label htmlFor='password' className='form-label'>Mot de passe</label>
                     <input type="password" id="password" value={user.password} className='form-control profil-border' onChange={handleChange} />
                 </div>
 
-                <div className='d-flex justify-content-between mt-4 w-45'>
-                    <button type="button" className='btn boutonValiderProfil' onClick={handleSubmit}>Se connecter</button>
-                </div>
+                    <button type="button" className='btn boutonValiderProfil mt-5' onClick={handleSubmit}>Se connecter</button>
+
                 {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
             </div>
         </div >

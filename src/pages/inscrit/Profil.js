@@ -151,7 +151,8 @@ export default function Profil() {
 
     // Enregistrement des modifications des informations de profi
 
-    const handleSubmit = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault()
         console.log("handleSubmit monProfil")
         if (adresse.idUtilisateur.length == 0) {
             adresse['idUtilisateur'] = client.idUtilisateur
@@ -249,10 +250,10 @@ export default function Profil() {
                             </div>
                         </div>
                     </div>
-                    <div className='d-flex justify-content-center'>
-                        <a className='btn boutonValiderProfil' onClick={handleSubmit} >Enregistrer</a>
+
+                        <button className='btn boutonValiderProfil' onClick={handleSubmit} >Enregistrer</button>
                         {/* <GenericButton buttonStyle={"boutonValiderProfil"} label={"Enregistrer"} onClick={handleSubmit} /> */}
-                    </div>
+
                 </div>
             </div>
 

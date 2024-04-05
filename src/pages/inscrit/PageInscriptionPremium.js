@@ -18,23 +18,20 @@ const InscriptionPremium = () => {
     'Content-Type': 'application/json'
   }
 
-  const [idUtilisateur, setidUtilisateur] = useState('');
+  const [idUtilisateur, setIdUtilisateur] = useState(gestionConnexion.getSessionId());
   const [errorMessage, setErrorMessage] = useState('');
 
   const [modalShow, setModalShow] = useState(false);
   const [transactionMessage, setTransactionMessage] = useState('');
   const [payPalScript, setPayPalScript] = useState(document.createElement('script'))
-  const [loadingScript, setLoadingScript] = useState(payPalScript['src'] = 'https://www.paypal.com/sdk/js?client-id=AUc9A_Q4BlFKrhLXmVpRkDP4DChqyk3mXCqw_v23Kluwo891aTJRXDhuzLWkAdM6042ih1aGG37s9Kwu')
   const [subscriptionStatus, setSubscriptionStatus] = useState(false);
 
   useEffect(() => {
-    const id = gestionConnexion.getSessionId();
-    setidUtilisateur(id)
-    checkSubscription();
+    checkSubscription(idUtilisateur);
   }, []);
 
-  const checkSubscription = async () => {
-    const isAbonne = await gestionConnexion.checkIsAbonne(7);
+  const checkSubscription = async (id) => {
+    const isAbonne = await gestionConnexion.checkIsAbonne(id);
     setSubscriptionStatus(isAbonne);
   }
 
@@ -45,15 +42,14 @@ const InscriptionPremium = () => {
 
       // Envoyer une requête pour mettre à jour le champ estAbonne
       const response = await axios.post(`http://localhost:8081/updateSubscription/${idUtilisateur}`, { estAbonne: 1 }, { headers });
-
       console.log(response.data); // Affichage de la réponse du serveur
+      setSubscriptionStatus(true);
 
     } catch (error) {
       console.error('Error:', error);
       setErrorMessage('Failed to update subscription. Please try again.');
     }
   };
-
 
   const handleCloseModal = () => {
     setModalShow(false);
@@ -149,38 +145,42 @@ const InscriptionPremium = () => {
   return (
     <div>
       <title>Inscription Premium</title>
-      <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet" />
-      <link rel="stylesheet" href="PageInscriptionPremium.css" type="text/css" />
 
       <br />
       <br />
 
       <Container style={{ borderRadius: '10px' }}>
         <Row className="justify-content-center">
-          <Col xs={12} sm={6} md={4} className="text-center" style={{ backgroundColor: '#F4F269', borderRadius: '10px' }}>
-            <div>
-              <br />
-              <h2>
-                Envie d'un coaching encore meilleur? <br /> <br /> Passez en classe Premium <br/> pour 6.90 euros!
-              </h2>
-            </div>
-          </Col>
-        </Row>
-      </Container>
-
-      <br />
-      <br />
-
-      <Container style={{ borderRadius: '10px' }}>
-        <Row className="justify-content-center">
-          <Col xs={12} sm={6} md={4} className="text-center" style={{ borderRadius: '10px' }}>
+          <Col xs={12} sm={6} md={4} style={{ borderRadius: '10px' }}>
             <div style={{ maxWidth: "750px", minHeight: "200px" }}>
             {subscriptionStatus ? (
-                <p>Vous êtes déjà abonné en Premium</p>
+              <>
+                <h3>Vous avez le statut Premium</h3>
+                <div className='mt-2 text-justify'> Rendez-vous dès à présent dans la rubrique "Évènements" pour profiter de toutes les fonctionnalités premium!
+                  </div>
+              </>
               ) : (
+                <>
+                <Container style={{ borderRadius: '10px'}}>
+                <Row className="justify-content-center ">
+                  <Col xs={12} sm={6} md={4} className="text-center col-premium" style={{ backgroundColor: '#F4F269', borderRadius: '10px' }}>
+                    <div>
+                      <br />
+                      <h2>
+                        Envie d'un coaching encore meilleur? <br /> <br /> Passez au statut Premium <br/> pour 6.90 euros!
+                      </h2>
+                    </div>
+                  </Col>
+                </Row>
+              </Container>
+
+        
+              <br />
+              <br />
               <PayPalScriptProvider options={{ clientId: PAYPAL_ID, components: "buttons", currency: "USD" }}>
                 <ButtonWrapper showSpinner={false} />
               </PayPalScriptProvider>
+              </>
             )}
             </div>
               <Modal show={modalShow} onHide={handleCloseModal}>

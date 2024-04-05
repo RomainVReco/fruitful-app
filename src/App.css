@@ -359,3 +359,10 @@ label {
 .navbar-brand img.link:hover {
   transform: scale(1.05); /* Agrandissement de l'image au survol uniquement si elle a un lien */
 }
+
+
+/****** PAGE PREMIUM *****/
+.col-premium {
+  width:100% !important;
+  padding: 5px;
+}
