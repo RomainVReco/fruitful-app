@@ -37,7 +37,10 @@ export default function Login() {
             console.log('idUtilisateur : ', idUtilisateur)
             if (!!idUtilisateur) {
                 gestionConnexion.saveSessionId(idUtilisateur)
-                navigate("/estConnecte/AtterrissageConnexion")
+                if (!!sessionStorage.getItem("nouvelInscrit") && sessionStorage.getItem("nouvelInscrit") === true) {
+                    navigate("/estConnecte/AtterrissageConnexion")
+                }
+                else { navigate("/estConnecte/ListeTaches") }
             } else {
                 setErrorMessage('Email ou mot de passe invalide')
             }
@@ -49,7 +52,7 @@ export default function Login() {
     };
 
     return (
-        <div className='container d-flex justify-content-center' style={{height:'75vh'}}>
+        <div className='container d-flex justify-content-center' style={{ height: '75vh' }}>
             <div className='d-flex flex-column align-items-center justify-content-center m-3 col-12 col-md-9 ' >
                 <h3 className='titre-h3-modifier-creer-tache'>Connectez-vous pour accéder à votre Espace Utilisateur</h3>
                 <InputProfilText label='email' nomLabel='Email' method={handleChange} exemple='jeanbonbeurre@gmail.com' />
@@ -58,7 +61,7 @@ export default function Login() {
                     <input type="password" id="password" value={user.password} className='form-control profil-border' onChange={handleChange} />
                 </div>
 
-                    <button type="button" className='btn boutonValiderProfil mt-5' onClick={handleSubmit}>Se connecter</button>
+                <button type="button" className='btn boutonValiderProfil mt-5' onClick={handleSubmit}>Se connecter</button>
 
                 {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
             </div>

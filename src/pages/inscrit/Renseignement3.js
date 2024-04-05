@@ -17,7 +17,7 @@ export default function Renseignement3() {
 
   return (
     <>
-      <div className="fond-inscription">
+      <div className="fond-inscription content flex-grow-1 min-vh-100">
         <div className="row ">
           <div className="col"></div>
           <div className="col corps-inscription">

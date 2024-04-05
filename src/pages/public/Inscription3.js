@@ -54,6 +54,7 @@ export default function Inscription3() {
       if (response.data.success == "success") {
         setEmailExiste(true);
         setMessageErreur("Cet e-mail est déjà utilisé. Veuillez vous connecter ici :");
+        sessionStorage.setItem("nouvelInscrit", false);
       } else {
         // On poursuit le processus d'enregistrement
 
@@ -61,6 +62,7 @@ export default function Inscription3() {
         enregistrementInscription(inscrit);
         setEmailExiste(true);
         setMessageErreur("Nous avons bien pris en compte votre inscription, veuillez vous connecter ici :");
+        sessionStorage.setItem("nouvelInscrit", true);
 
         // On se déplace dans les pages renseignement
         // navigate(url);
@@ -135,7 +137,7 @@ console.log("mot de passe avant regex", email, motDePasse);
 
   return (
     <>
-      <div className="fond-inscription">
+      <div className="fond-inscription content flex-grow-1 min-vh-100">
         <div className="row ">
           <div className="col"></div>
           <div className="col corps-inscription centre">

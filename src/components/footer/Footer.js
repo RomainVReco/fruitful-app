@@ -8,7 +8,7 @@ function Footer() {
 
   return (
 
-    <footer className="footerBottom">
+    <footer className="footerBottom fixed-bottom">
       <div className="footer-container">
         <div className="left-column">
           <div>
