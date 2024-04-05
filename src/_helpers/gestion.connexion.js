@@ -22,7 +22,6 @@ let checkCapIsReached = async (jeton) => {
     try {
         console.log('checkCapIsReached : ', jeton)
         const responseIsAbonne = await axios.get(`http://localhost:8081/getIsAbonne/${jeton}`)
-        console.log('checkCapIsReached getIsAbonne : ', responseIsAbonne.data)
         const isAbonne = !!responseIsAbonne.data.data[0].estAbonne
         
         if (!isAbonne) {
@@ -44,7 +43,6 @@ let checkCapIsReached = async (jeton) => {
     try {
         console.log('checkIsAbonne : ', jeton)
         const responseIsAbonne = await axios.get(`http://localhost:8081/getIsAbonne/${jeton}`)
-        console.log('checkIsAbonne : ', responseIsAbonne.data)
         return !!responseIsAbonne.data.data[0].estAbonne
     } catch (error) {
         console.log("Echec du contrôle du statut de l'utilisateur", error)
