@@ -49,12 +49,6 @@ body {
   min-height: calc(100vh - 34px); /* Ajustez la hauteur selon vos besoins */
 }
 
-.footer--pin {
-  position: relative;
-  left: 0;
-  bottom: 0;
-}
-
 .vertical-footer-centrage {
   display: flex;
   align-items: center; /* Centrer verticalement */
