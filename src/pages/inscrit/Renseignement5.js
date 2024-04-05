@@ -32,12 +32,11 @@ export default function Renseignement5() {
   }
 
   var habitudesAuto = [];
-  useEffect(()=>{
-    ecrireTachesAuto(habitudesAuto, tacheAuto);
+  useEffect(() => {
+    habitudesAuto=ecrireTachesAuto(habitudesAuto, tacheAuto);
   })
   //************************************************************************************************************** */
   const enregistrementHabitude = async (tacheAuto) => {
-    console.log("tacheAuto avant try :", tacheAuto);
     try {
       const response = await axios.post('http://localhost:8081/createNewEvent', tacheAuto);
       console.log("response : ", response.data.success);
@@ -82,30 +81,36 @@ export default function Renseignement5() {
   }
   //************************************************************************************************************** */
 
-function ecrireTachesAuto(habitudesAuto, tacheAuto){
+  function ecrireTachesAuto(habitudesAuto, tacheAuto) {
 
-  console.log("TACHE AUTO :", tacheAuto, " HABITUDE AUTO : ", habitudesAuto);
-  console.log("longueur :", habitudesAuto.length)
-  var i = 0;
-  do {
-    tacheAuto.nom = habitudesAuto[i];
-    tacheAuto.dateDebut = format(new Date(), 'dd/MM/yyyy');
-    tacheAuto.frequence = habitudesAuto[i + 1];
-    tacheAuto.typeEvenement = habitudesAuto[i + 2];
-    tacheAuto.logo = habitudesAuto[i + 3];
-    console.log("tache Auto auto:", tacheAuto);
-    enregistrementHabitude(tacheAuto);
-    console.log("longueur tache auto :", tacheAuto.length, "i :", i);
-    i += 4;
+    console.log("TACHE AUTO :", tacheAuto, " HABITUDE AUTO : ", habitudesAuto);
+    console.log("longueur :", habitudesAuto.length)
 
-  } while (i < habitudesAuto.length);
-  return;
-}
+    while (habitudesAuto.length >1) {
+      tacheAuto.nom = habitudesAuto[0];
+      tacheAuto.dateDebut = format(new Date(), 'dd/MM/yyyy');
+      tacheAuto.frequence = habitudesAuto[1];
+      tacheAuto.typeEvenement = habitudesAuto[2];
+      tacheAuto.logo = habitudesAuto[3];
+      console.log("habitudeAuto : ", habitudesAuto," tache Auto auto:", tacheAuto);
+      enregistrementHabitude(tacheAuto);
+      if (habitudesAuto.length > 4) {
+        habitudesAuto = habitudesAuto.slice(4);
+      }
+      else {
+        habitudesAuto=habitudesAuto.slice(0,0); 
+        console.log ("slice :", habitudesAuto);
+        break;
+      };       
+     
 
+    }  
+    return habitudesAuto;
+  }
   //************************************************************************************************************** */
 
   function afficherNouvellesTaches(habitudesAuto) {
-      const intitulesHabitudesAuto = habitudesAuto.filter((_, index) => index % 4 === 0);
+    const intitulesHabitudesAuto = habitudesAuto.filter((_, index) => index % 4 === 0);
 
     return intitulesHabitudesAuto.map((line, index) => (
       <ul><li key={index}>{line}</li></ul>
@@ -133,7 +138,7 @@ function ecrireTachesAuto(habitudesAuto, tacheAuto){
 
               <p>Nous vous proposons les habitudes suivantes :</p>
               {afficherNouvellesTaches(habitudesAuto)}
-             
+
             </div>
             <br />
             <div class="row container-fluid m-auto">
