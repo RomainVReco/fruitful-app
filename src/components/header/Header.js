@@ -4,12 +4,16 @@ import { useState, useEffect } from "react";
 import logoComplet from '../../assets/header/logo-fruit-titre.png'
 import closeIcon from '../../assets/header/x-lg.svg'
 import menu from '../../assets/header/list.svg'
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import { gestionConnexion } from "../../_helpers/gestion.connexion";
 import '../../components/header/header-css.css'
 
 
 function Header() {
-  
+
   let navigate = useNavigate()
 
   const [isConnected, setConnected] = useState(false)
@@ -17,18 +21,19 @@ function Header() {
   const [menuCloseIcon, setIcon] = useState(menu)
   const [menuConnexion, setMenuConnexion] = useState('')
 
+
   useEffect(() => {
     if (gestionConnexion.isLogged()) {
       setConnected(true)
     } else setConnected(false)
-  },[gestionConnexion.isLogged()])
+  }, [gestionConnexion.isLogged()])
 
   const handleClickMenu = () => {
-    console.log("handleClick", "isMenuOpen : "+isMenuOpen)
-    console.log("handleClick", "!isMenuOpen : "+!isMenuOpen)
+    console.log("handleClick", "isMenuOpen : " + isMenuOpen)
+    console.log("handleClick", "!isMenuOpen : " + !isMenuOpen)
     setMenuOpen(!isMenuOpen)
     setIcon(!isMenuOpen ? closeIcon : menu)
-    console.log("handleClick", "isMenuOpen : "+isMenuOpen)
+    console.log("handleClick", "isMenuOpen : " + isMenuOpen)
   }
 
   const handleLogout = () => {
@@ -36,39 +41,36 @@ function Header() {
     navigate("../pageAccueil")
   }
 
-  const blocConnexion = <>
-    <div className="wrapper-lienHeader d-flex" >
-      <div className="lienHeader">
-        <a href="../inscription" className="btn">S'inscrire</a>
-      </div>
-      <div className="lienHeader">
-        <a href="../login" className="btn">Connexion</a>
-      </div>
-    </div></>
-
-  const estConnecte = <>
-    <div className="lienHeader icon-media">
-      <div className="dropwdown">
-        <a className="dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <svg className='' xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#FFF" class="bi bi-person-square" viewBox="0 0 16 16">
-            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
-            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" />
-          </svg>
-        </a>
-        <ul className="dropdown-menu">
-          <li><Link className="dropdown-item" to='/estConnecte/profil'>Mon profil</Link></li>
-          <li><Link className="dropdown-item" to='/estConnecte/bilan'>Mon bilan</Link></li>
-          <li><Link className="dropdown-item" to='/estConnecte/mesTaches'>Mes tâches</Link></li>
-          <li><Link className="dropdown-item" to='/estConnecte/pageInscriptionPremium'>Abonnement</Link></li>
-          <li style={{borderBottom:'1px solid #000', width:'100%', marginBottom:'5px', marginUp:'5px'}}></li>
-          <li><button href="#" className="dropdown-item" onClick={handleLogout}>Déconnexion</button></li>
-        </ul>
-      </div>
-    </div>
-  </>
-  
   return (
+    <div>
+<nav class="navbar navbar-expand-lg headerTop ">
+  <div class="container d-flex align-items-center justify-content-evenly">
+    <a class="navbar-brand mx-auto" href="/">
+      <img src={logoComplet} alt="logo fruitful" class="image-header"/>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul className={`listeMenu show-content`}>
+          <Link className='liensNav' to="/estConnecte/listeTaches"><li className="lien">
+            Tâches</li></Link>
+          <Link className='liensNav' to="/estConnecte/creationTache"><li className="lien">
+            Nouveau</li></Link>
+          <Link className='liensNav' style={{ color: "grey" }} ><li className="lien" >
+            Planning</li></Link>
+            {isConnected ? <Link className='liensNav' to="/estConnecte/profil"><li className="lien">
+            Mon compte</li></Link> : <Link className='liensNav' to="/inscription" ><li className="lien" >
+            Inscription</li></Link>}
+          
 
+        </ul>
+    </div>
+  </div>
+</nav>
+
+  </div>
+/*
     <nav className="headerTop d-flex align-items-center">
       <div className="header-container" >
         <div>
@@ -77,28 +79,21 @@ function Header() {
           </Link>
         </div>
         <div ><img src={menuCloseIcon} className="menu-burger" onClick={handleClickMenu}></img></div>
-        <ul className="listeMenu show-content">
-        <Link className='liensNav' to="/estConnecte/listeTaches"><li className="lien">
+        <ul className={`listeMenu show-content`}>
+          <Link className='liensNav' to="/estConnecte/listeTaches"><li className="lien">
             Tâches</li></Link>
-          <li className="liensNav">
-            <Link className='lien' to="/estConnecte/creationTache">Nouveau</Link>
-          </li>
-          <li className="liensNav" >
-            <Link className='lien' style={{color:"grey"}} >Planning</Link>
-          </li>
+          <Link className='liensNav' to="/estConnecte/creationTache"><li className="lien">
+            Nouveau</li></Link>
+          <Link className='liensNav' style={{ color: "grey" }} ><li className="lien" >
+            Planning</li></Link>
+          <Link className={`liensNav ${isConnected ? 'd-none' : ''}`} to="/inscription" ><li className="lien" >
+            Inscription</li></Link>
+          <li className="liensNav"> {isConnected ? estConnecte : <a href="../login" className="lien line-connexion">Connexion</a>}</li>
         </ul>
-        {isConnected ? estConnecte : blocConnexion}
-
-        {/*
-        <div className="lienHeader">
-          <a href="#" className="btn">S'inscrire</a>
-        </div>
-        <div className="lienHeader">
-          <a href="#" className="btn">Connexion</a>
-        </div>
-        */}
+      
       </div>
     </nav>
+    */
   );
 }
 

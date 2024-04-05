@@ -138,7 +138,7 @@ export default function CreationTache() {
 					method={handleChange} exemple={new Date().toLocaleDateString()} onClick={() => console.log('Clic')} />
 
 				<InputModalQuantity nomLabel={'Fréquence : '} id='frequence' method={handleChange}
-					titre={tache.frequence} periode='jours' minimum />
+					titre={tache.frequence} periode='jours' mini='1' max='7'/>
 
 				<div className='container'>
 					<div className='row'>

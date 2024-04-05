@@ -206,6 +206,7 @@ export default function Profil() {
                 <option value="1">{profil[1]}</option>
                 <option value="2">{profil[2]}</option>
                 <option value="3">{profil[3]}</option>
+                
             </select>
             <div>
                 <h6 className='profil-h6'>Mes informations</h6>
