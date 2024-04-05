@@ -8,6 +8,7 @@ import Renseignement3 from "../inscrit/Renseignement3";
 import Renseignement4 from "../inscrit/Renseignement4";
 import Renseignement5 from "../inscrit/Renseignement5";
 import ModifierTache from "../inscrit/ModifierTache";
+import AtterrissageConnexion from "./AtterrissageConnexion";
 import ListeTaches from '../inscrit/ListeTaches';
 import PageInscriptionPremium from '../inscrit/PageInscriptionPremium'
 import Layout from '../public/Layout';
@@ -22,6 +23,7 @@ const PagesInscrits = () => {
                 <Route path="/listeTaches" element={<ListeTaches />} />
                 <Route path="/modifierTache/:idEvenement" element={<ModifierTache />} />
                 <Route path="/profil" element={<Profil />} />
+                <Route path="/atterrissageConnexion" element={<AtterrissageConnexion />} />
                 <Route path="/renseignement" element={<Renseignement />} />
                 <Route path="/renseignement2" element={<Renseignement2 />} />
                 <Route path="/renseignement3" element={<Renseignement3 />} />

@@ -34,7 +34,7 @@ export default function Inscription() {
 
   const handleClick = () => {
     // On autorise les lettres majuscules, minuscules, accentuées, les espaces et les apostrophes :
-    const regex = /^[a-zÀ-ÿA-Z'\s]+$/;
+    const regex = /^[a-zÀ-ÿA-Z'-\s]+$/;
     
     // On retire les espaces avant et après les caractères du nom et du prénom :
     let nomTraite=nom.replace(/^\s+|\s+$/g, ''); //
