@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import BoutonSuivant from "../../components/BoutonSuivant";
 import BoutonPrecedent from "../../components/BoutonPrecedent";
 import EntreeObjectif from "../../components/EntreeObjectif";
 import { useState } from "react";
 import axios from "axios";
 import { format } from "date-fns";
+import { gestionConnexion } from "../../_helpers/gestion.connexion";
 
 export default function Renseignement5() {
   const donneesRenseignees = {
@@ -21,7 +22,7 @@ export default function Renseignement5() {
     med2: "entre 3 et 5 fois",
     med3: "plus de 6 fois"
   }
-  const tacheAuto = {
+  var tacheAuto = {
     nom: '',
     dateDebut: '',
     frequence: '',
@@ -31,7 +32,21 @@ export default function Renseignement5() {
   }
 
   var habitudesAuto = [];
+  useEffect(() => {
+    habitudesAuto = ecrireTachesAuto(habitudesAuto, tacheAuto);
+  })
+  //************************************************************************************************************** */
+  const enregistrementHabitude = async (tacheAuto) => {
+    try {
+      const response = await axios.post('http://localhost:8081/createNewEvent', tacheAuto);
+      console.log("response : ", response.data.success);
 
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    return tacheAuto;
+  }
+  //************************************************************************************************************** */
   function recupererStorage(domaine) {
     try {
       let domaine2 = sessionStorage.getItem(domaine);
@@ -56,45 +71,63 @@ export default function Renseignement5() {
           habitudesAuto.push("0"); // n° de logo de l'événement
           break;
       }
-
       console.log("motivation :", domaine2);
       console.log(habitudesAuto);
-
-      for (let i = 0; i < (habitudesAuto.length / 4 + 1); i = i + 4) {
-        tacheAuto.nom = habitudesAuto[i];
-        tacheAuto.dateDebut = format(new Date(), 'dd/MM/yyyy');
-        tacheAuto.frequence = habitudesAuto[i+1];
-        tacheAuto.typeEvenement = habitudesAuto[i+2];
-        tacheAuto.logo=habitudesAuto[i+3];
-        console.log("tache Auto :", tacheAuto);
-        enregistrementHabitude(tacheAuto);
-      }
       return donneesRenseignees[domaine2];
     }
     catch (e) {
       console.log(e);
     }
   }
+  //************************************************************************************************************** */
+
+  function ecrireTachesAuto(habitudesAuto, tacheAuto) {
+
+    console.log("TACHE AUTO :", tacheAuto, " HABITUDE AUTO : ", habitudesAuto);
+    console.log("longueur :", habitudesAuto.length)
+
+    while (habitudesAuto.length > 1) {
+      tacheAuto.nom = habitudesAuto[0];
+      tacheAuto.dateDebut = format(new Date(), 'dd/MM/yyyy');
+      tacheAuto.frequence = habitudesAuto[1];
+      tacheAuto.typeEvenement = habitudesAuto[2];
+      tacheAuto.logo = habitudesAuto[3];
+      console.log("habitudeAuto : ", habitudesAuto, " tache Auto auto:", tacheAuto);
+      enregistrementHabitude(tacheAuto);
+      if (habitudesAuto.length > 4) {
+        habitudesAuto = habitudesAuto.slice(4);
+      }
+      else {
+        habitudesAuto = habitudesAuto.slice(0, 0);
+        console.log("slice :", habitudesAuto);
+        break;
+      };
 
 
-  function afficherNouvellesTaches(habitudesAuto) {
-    const intitulesHabitudesAuto = habitudesAuto.filter((_, index) => index % 4 === 0);
-
-    return intitulesHabitudesAuto.map((line, index) => (
-      <p key={index}>{line}</p>
-    ));
+    }
+    return habitudesAuto;
   }
   //************************************************************************************************************** */
-  const enregistrementHabitude = async (tacheAuto) => {
-    console.log("tacheAuto avant try :", tacheAuto);
-    try {
-      const response = await axios.put('http://localhost:8081/createNewEvent', tacheAuto);
-      console.log("response : ", response.data.success);
 
-    } catch (error) {
-      console.error('Error:', error);
+  function afficherNouvellesTaches(habitudesAuto) {
+
+    if (habitudesAuto.length == 0) {
+      const messagePasDHabitudeAProposer = (<p>Nous n'avons pas d'habitude à vous proposer.</p>);
+      return messagePasDHabitudeAProposer;
+    } else {
+      const messageHabitudeAProposer = (<p>Nous vous proposons les habitudes suivantes :</p>);
+      const intitulesHabitudesAuto = habitudesAuto.filter((_, index) => index % 4 === 0);
+
+      return (
+        <>{messageHabitudeAProposer}
+          {intitulesHabitudesAuto.map((line, index) => (
+            <ul><li key={index}>{line}</li></ul>
+          ))}
+
+        </>)
     }
   }
+
   //************************************************************************************************************** */
   return (
     <>
@@ -103,28 +136,27 @@ export default function Renseignement5() {
           <div className="col"></div>
           <div className="col corps-inscription">
             <div>
-              <label for="comment">
+              <label for="comment" className="centre">
                 <h2>Résultats</h2>
               </label>
+
+              <p>Nous vous remercions de votre participation !</p>
+
+              <p>Nous avons établi les habitudes suivantes en fonction du profil que vous venez de renseigner :</p>
+              <p>Ma principale motivation est de {recupererStorage("motivation")}.</p>
+              <p>Je dors {recupererStorage("sommeil")}.</p>
+              <p>Je fais du sport {recupererStorage("sport")} par mois.</p>
+              <p>Je médite {recupererStorage("meditation")} par mois.</p>
+
+              {afficherNouvellesTaches(habitudesAuto)}
+
             </div>
-
-            <p>Nous vous remercions de votre participation !</p>
-
-            <p>Nous avons établi les habitudes suivantes en fonction du profil que vous venez de renseigner :</p>
-            <p>Ma principale motivation est {recupererStorage("motivation")}.</p>
-            <p>Je dors {recupererStorage("sommeil")}.</p>
-            <p>Je fais du sport {recupererStorage("sport")} par mois.</p>
-            <p>Je médite {recupererStorage("meditation")} par mois.</p>
-
-            <p>Nous vous proposons les habitudes suivantes :</p>
-            {afficherNouvellesTaches(habitudesAuto)}
-
             <br />
             <div class="row container-fluid m-auto">
 
 
               <div class="col">
-                <BoutonSuivant page="9" texte="Liste tâches" />
+                <BoutonSuivant page="9" texte="Suivant" />
               </div>
             </div>
           </div>

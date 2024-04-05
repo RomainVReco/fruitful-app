@@ -410,3 +410,25 @@ app.put('/enregistrementInscription', (req, res) => {
         }
     })
 })
+
+// ************** RENSEIGNEMENT ****************** //
+/* Méthodes CRUD pour les pages Renseignement */
+
+app.put('/creerNouvelEvenement', (req, res) => {
+    const { nom, dateDebut, frequence, typeEvenement, idUtilisateur, logo } = req.body
+    const sql = "INSERT INTO evenement (nomEvenement, dateDebut, frequence, idTypeEvenement, idUtilisateur, idIcone) " +
+        "VALUES (?, ?, ?, ?, ?, ?);"
+    db.query(sql, [nom, dateDebut, frequence, typeEvenement, idUtilisateur, logo], (err, data) => {
+        if (err) {
+            return res.status(500).json({
+                error: "Erreur lors de la création d'une nouvelle tâche",
+                details: err
+            })
+        }
+        if (data && data.affectedRows > 0) {
+            return res.status(200).json({ success: "Nouvel évènement créé avec succès.", resultat: data })
+        } else {
+            return res.status(404).json({ failure: "Statut de création de la nouvelle tâche inconnue", info: err })
+        }
+    })
+})

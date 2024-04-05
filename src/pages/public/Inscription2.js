@@ -52,7 +52,7 @@ export default function Inscription2() {
   function AffichageImage() {
     return (
       <div>
-        <img src={bebe} alt="Bébé" style={{ height: 350, padding: 30 }} />
+        <img src={bebe} alt="Bébé" style={{ height: 330, padding: 20 }} />
       </div>
     );
   }
@@ -62,7 +62,7 @@ export default function Inscription2() {
       <div className="fond-inscription">
         <div className="row">
           <div className="col"></div>
-          <div className="col corps-inscription">
+          <div className="col corps-inscription centre">
             <div>
               <label for="comment">
                 <h2>Quelle est votre date de naissance ?</h2>
