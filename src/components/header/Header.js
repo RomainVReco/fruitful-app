@@ -43,9 +43,9 @@ function Header() {
 
   return (
     <div>
-      <nav className="navbar navbar-expand-lg headerTop ">
+      <nav className="navbar navbar-expand-md headerTop ">
         <div className="container d-flex align-items-center justify-content-evenly">
-          <div className="d-flex align-items-center">
+          <div className="d-flex flex-column align-items-start">
             <Link className="" to='/'>
               <img src={logoComplet} alt="logo fruitful" className="image-header"></img>
             </Link>
