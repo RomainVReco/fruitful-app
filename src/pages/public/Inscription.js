@@ -9,6 +9,7 @@ import {
   useNavigate,
   Navigate,
 } from "react-router-dom";
+import InputProfilText from "../../components/InputProfilText";
 
 export default function Inscription() {
   var dateNaissance = "";
@@ -52,72 +53,37 @@ export default function Inscription() {
   function AffichageImage() {
     return (
       <div>
-        <img src={velo} alt="Vélo" style={{ height: 350, padding: 30 }} />
+        <img className='image-velo' src={velo} alt="Vélo"/>
       </div>
     );
   }
   //*********************************************************************************************************************************** */
 
   return (
-    <>
-      <div className="fond-inscription">
-        <div className="row">
-          <div className="col-sm-3"></div>
-          <div className="col-sm-6 corps-inscription">
-            <div>
-              <label for="comment">
-                <h2>Comment pouvons-nous vous appeler ?</h2>
-              </label>
-            </div>
-            <div>
-              <AffichageImage />
-            </div>
+    <div className="fond-inscription ">
+      <div className="container corps-inscription d-flex flex-column align-items-center">
+        
+        <div className="d-flex flex-column">
+          <label for="comment">
+            <h2>Comment pouvons-nous vous appeler ?</h2>
+          </label>
+          <AffichageImage />
 
-            <div className="row">
-              <div className="col-sm-3"></div>
-              <div className="col-sm-6">
-                <div>
-                  <input
-                    className="form-control"
-                    rows="1"
-                    id="prenom"
-                    name="prenom"
-                    placeholder="Veuillez indiquer votre prénom"
-                    onChange={handleChangePrenom}
-                  ></input>
-                </div>
+          <InputProfilText label='prenom' method={handleChangePrenom}
+            exemple='Veuillez indiquer votre prenom' />
+          <InputProfilText label='nom' method={handleChangeNom}
+            exemple='Veuillez indiquer votre nom' />
 
-                <br />
-
-                <div>
-                  <input
-                    className="form-control"
-                    rows="1"
-                    id="nom"
-                    name="nom"
-                    placeholder="Veuillez indiquer votre nom"
-                    onChange={handleChangeNom}
-                  ></input>
-                </div>
-              </div>
-              <div className="col-sm-3"></div>
-            </div>
-
-            <br />
-            <div>
-              <button
-                className="btn boutonValiderSuivant"
-                onClick={handleClick}
-              >
-                Suivant
-              </button>
-              {/* Affichage du message d'erreur */}
-              {messageErreur && <p>{messageErreur}</p>}
-            </div>
-          </div>
-          <div className="col-sm-3"></div>
+          <button
+            className="btn boutonValiderSuivant mt-4"
+            onClick={handleClick}>
+            Suivant
+          </button>
+          {/* Affichage du message d'erreur */}
+          {messageErreur && <p>{messageErreur}</p>}
         </div>
+
       </div>
-    </>
+    </div>
   );
 }

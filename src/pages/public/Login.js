@@ -23,16 +23,6 @@ export default function Login() {
     const [errorMessage, setErrorMessage] = useState('');
     const [subscriptionStatus, setSubscriptionStatus] = useState('')
 
-useEffect(() => {
-    console.log("useEffect login : ", subscriptionStatus)
-    checkSubscription()
-},[subscriptionStatus])
-
-const checkSubscription = async () => {
-    const isAbonne = await gestionConnexion.checkIsAbonne(7)
-    setSubscriptionStatus(isAbonne)
-}
-
     const handleChange = (event) => {
         var temp = { ...user }
         setUser(temp => ({ ...temp, [event.target.id]: [event.target.value] }))
