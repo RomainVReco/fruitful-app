@@ -28,7 +28,7 @@ const InscriptionPremium = () => {
 
   useEffect(() => {
     checkSubscription(idUtilisateur);
-  }, [subscriptionStatus]);
+  }, []);
 
   const checkSubscription = async (id) => {
     const isAbonne = await gestionConnexion.checkIsAbonne(id);
@@ -151,10 +151,14 @@ const InscriptionPremium = () => {
 
       <Container style={{ borderRadius: '10px' }}>
         <Row className="justify-content-center">
-          <Col xs={12} sm={6} md={4} className="text-center" style={{ borderRadius: '10px' }}>
+          <Col xs={12} sm={6} md={4} style={{ borderRadius: '10px' }}>
             <div style={{ maxWidth: "750px", minHeight: "200px" }}>
             {subscriptionStatus ? (
+              <>
                 <h3>Vous avez le statut Premium</h3>
+                <div className='mt-2 text-justify'> Rendez-vous dès à présent dans la rubrique "Évènements" pour profiter de toutes les fonctionnalités premium!
+                  </div>
+              </>
               ) : (
                 <>
                 <Container style={{ borderRadius: '10px'}}>
