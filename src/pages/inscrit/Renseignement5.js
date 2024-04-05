@@ -33,7 +33,7 @@ export default function Renseignement5() {
 
   var habitudesAuto = [];
   useEffect(() => {
-    habitudesAuto=ecrireTachesAuto(habitudesAuto, tacheAuto);
+    habitudesAuto = ecrireTachesAuto(habitudesAuto, tacheAuto);
   })
   //************************************************************************************************************** */
   const enregistrementHabitude = async (tacheAuto) => {
@@ -86,37 +86,49 @@ export default function Renseignement5() {
     console.log("TACHE AUTO :", tacheAuto, " HABITUDE AUTO : ", habitudesAuto);
     console.log("longueur :", habitudesAuto.length)
 
-    while (habitudesAuto.length >1) {
+    while (habitudesAuto.length > 1) {
       tacheAuto.nom = habitudesAuto[0];
       tacheAuto.dateDebut = format(new Date(), 'dd/MM/yyyy');
       tacheAuto.frequence = habitudesAuto[1];
       tacheAuto.typeEvenement = habitudesAuto[2];
       tacheAuto.logo = habitudesAuto[3];
-      console.log("habitudeAuto : ", habitudesAuto," tache Auto auto:", tacheAuto);
+      console.log("habitudeAuto : ", habitudesAuto, " tache Auto auto:", tacheAuto);
       enregistrementHabitude(tacheAuto);
       if (habitudesAuto.length > 4) {
         habitudesAuto = habitudesAuto.slice(4);
       }
       else {
-        habitudesAuto=habitudesAuto.slice(0,0); 
-        console.log ("slice :", habitudesAuto);
+        habitudesAuto = habitudesAuto.slice(0, 0);
+        console.log("slice :", habitudesAuto);
         break;
-      };       
-     
+      };
 
-    }  
+
+    }
     return habitudesAuto;
   }
   //************************************************************************************************************** */
 
   function afficherNouvellesTaches(habitudesAuto) {
-    const intitulesHabitudesAuto = habitudesAuto.filter((_, index) => index % 4 === 0);
 
-    return intitulesHabitudesAuto.map((line, index) => (
-      <ul><li key={index}>{line}</li></ul>
-    ));
+    if (habitudesAuto.length == 0) {
+      const messagePasDHabitudeAProposer = (<p>Nous n'avons pas d'habitude à vous proposer.</p>);
+      return messagePasDHabitudeAProposer;
+    } else {
+      const messageHabitudeAProposer = (<p>Nous vous proposons les habitudes suivantes :</p>);
+      const intitulesHabitudesAuto = habitudesAuto.filter((_, index) => index % 4 === 0);
+
+      return (
+        <>{messageHabitudeAProposer}
+          {intitulesHabitudesAuto.map((line, index) => (
+            <ul><li key={index}>{line}</li></ul>
+          ))}
+
+        </>)
+    }
   }
 
+  //************************************************************************************************************** */
   return (
     <>
       <div className="fond-inscription">
@@ -136,7 +148,6 @@ export default function Renseignement5() {
               <p>Je fais du sport {recupererStorage("sport")} par mois.</p>
               <p>Je médite {recupererStorage("meditation")} par mois.</p>
 
-              <p>Nous vous proposons les habitudes suivantes :</p>
               {afficherNouvellesTaches(habitudesAuto)}
 
             </div>
@@ -145,7 +156,7 @@ export default function Renseignement5() {
 
 
               <div class="col">
-                <BoutonSuivant page="9" texte="J'accepte les " />
+                <BoutonSuivant page="9" texte="Suivant" />
               </div>
             </div>
           </div>
