@@ -126,7 +126,7 @@ console.log("mot de passe avant regex", email, motDePasse);
   //*********************************************************************************************************************************** */
   function AffichageImage() {
     return (
-      <div>
+      <div className="centre">
         <img src={contact} alt="Contact" style={{ height: 330, padding: 20 }} />
       </div>
     );

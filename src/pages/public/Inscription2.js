@@ -51,7 +51,7 @@ export default function Inscription2() {
 
   function AffichageImage() {
     return (
-      <div>
+      <div className="centre">
         <img src={bebe} alt="Bébé" style={{ height: 330, padding: 20 }} />
       </div>
     );
