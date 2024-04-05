@@ -59,7 +59,6 @@ export default function Inscription() {
   //*********************************************************************************************************************************** */
 
   return (
-    <>
       <div className="fond-inscription">
         <div className="row">
           <div className="col-sm-3"></div>
@@ -83,8 +82,7 @@ export default function Inscription() {
                     id="prenom"
                     name="prenom"
                     placeholder="Veuillez indiquer votre prénom"
-                    onChange={handleChangePrenom}
-                  ></input>
+                    onChange={handleChangePrenom}/>
                 </div>
 
                 <br />
@@ -96,8 +94,7 @@ export default function Inscription() {
                     id="nom"
                     name="nom"
                     placeholder="Veuillez indiquer votre nom"
-                    onChange={handleChangeNom}
-                  ></input>
+                    onChange={handleChangeNom}/>
                 </div>
               </div>
               <div className="col-sm-3"></div>
@@ -107,8 +104,7 @@ export default function Inscription() {
             <div>
               <button
                 className="btn boutonValiderSuivant"
-                onClick={handleClick}
-              >
+                onClick={handleClick}>
                 Suivant
               </button>
               {/* Affichage du message d'erreur */}
@@ -118,6 +114,5 @@ export default function Inscription() {
           <div className="col-sm-3"></div>
         </div>
       </div>
-    </>
   );
 }
