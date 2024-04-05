@@ -2,17 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le : dim. 31 mars 2024 à 14:49
--- Version du serveur : 10.4.32-MariaDB
--- Version de PHP : 8.2.12
-
-
-DROP DATABASE IF EXISTS fruitful;
-
-CREATE DATABASE fruitful CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
-USE fruitful;
+-- Hôte : localhost
+-- Généré le : ven. 05 avr. 2024 à 14:33
+-- Version du serveur : 10.4.28-MariaDB
+-- Version de PHP : 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -52,6 +45,16 @@ INSERT INTO `adresse` (`idAdresse`, `adresse`, `codePostal`, `ville`, `idUtilisa
 (3, '789 Oak St', '13579', 'City3', 0),
 (4, '321 Pine St', '24680', 'City4', 0),
 (5, '654 Maple St', '98765', 'City5', 0);
+
+--
+-- Déclencheurs `adresse`
+--
+DELIMITER $$
+CREATE TRIGGER `update_idAdresse` AFTER INSERT ON `adresse` FOR EACH ROW BEGIN
+	UPDATE utilisateur SET idAdresse = NEW.idAdresse WHERE idUtilisateur = NEW.idUtilisateur;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
