@@ -119,6 +119,11 @@ export default function CreationTache() {
 		navigate('../listeTaches#')
 	}
 
+	const onCloseConfirmation = () => {
+        setModaleSuppressionOpen(false)
+        navigate("../../estConnecte/listeTaches/")
+    }
+
 
 	return (
 		<div className='container d-flex flex-column align-items-center gap-3 mt-5'>
@@ -168,6 +173,8 @@ export default function CreationTache() {
 
 				<div className='d-flex justify-content-between mt-4 w-100'>
 					<button href="" className='btn boutonValiderProfil' onClick={handleSubmit} disabled={isDisabled}>Valider</button>
+					<ModaleConfirmation open={isModaleConfirmationOpen} method={onCloseConfirmation}
+                        lignes={infoConfirmation} titre={"Une nouvelle tâche a été créée"} />
 					<button href="" className='btn boutonAnnuler' onClick={handleClickCancel}>Annuler</button>
 					{/* <GenericButton label="Valider" buttonStyle='boutonValider' method={handleSubmit}/> */}
 				</div>

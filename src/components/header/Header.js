@@ -4,10 +4,6 @@ import { useState, useEffect } from "react";
 import logoComplet from '../../assets/header/logo-fruit-titre.png'
 import closeIcon from '../../assets/header/x-lg.svg'
 import menu from '../../assets/header/list.svg'
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import { gestionConnexion } from "../../_helpers/gestion.connexion";
 import '../../components/header/header-css.css'
 
