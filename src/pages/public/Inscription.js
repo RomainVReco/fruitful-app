@@ -21,10 +21,12 @@ export default function Inscription() {
   const [messageErreur, setMessageErreur] = useState("");
 
   const handleChangeNom = (e) => {
+    console.log(e.target.value)
     setNom(e.target.value); // Mettre à jour le nom dans l'état
   };
 
   const handleChangePrenom = (e) => {
+    console.log(e.target.value)
     setPrenom(e.target.value); // Mettre à jour le prénom dans l'état
   };
   let url = "../Inscription2";
