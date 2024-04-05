@@ -1,4 +1,5 @@
 import axios from "axios"
+import { CAP_EVENTS } from "./data.env"
 
 let saveSessionId = (jeton) => {
     sessionStorage.setItem('jeton', jeton)
@@ -27,7 +28,7 @@ let checkCapIsReached = async (jeton) => {
         if (!isAbonne) {
             const responseCountEvent = await axios.get(`http://localhost:8081/getEventUserCount/${jeton}`)
             console.log('checkCapIsReached getEventUserCount :',  responseCountEvent.data)
-            let isCapReached = responseCountEvent.data.resultat[0].numEvents >= 4
+            let isCapReached = responseCountEvent.data.resultat[0].numEvents >= CAP_EVENTS
             return !isAbonne && isCapReached
 
         } else {

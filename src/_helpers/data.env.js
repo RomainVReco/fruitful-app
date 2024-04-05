@@ -30,3 +30,5 @@ export const couleurTypeEvenement = {
     1:"#2ea44f", // turquoise Habitude
     2:"#dfaf2c" // ocre Addiction
 }
+
+export const CAP_EVENTS = 4

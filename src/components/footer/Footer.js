@@ -8,7 +8,9 @@ function Footer() {
 
   return (
 
+
     <footer className="footerBottom fixed-bottom">
+
       <div className="footer-container">
         <div className="left-column">
           <div>
@@ -17,14 +19,14 @@ function Footer() {
             </Link>
           </div>
         </div>
-        <div className="center-column">
+        <div className="center-column mt-3">
           <div className="vertical-footer-links">
-            <Link className='lien' to="/contactezNous">Contactez-nous</Link>
+            {/*<Link className='lien' to="/contactezNous">Contactez-nous</Link>*/}
             <Link className='lien' to="/PageQuiSommesNous">Qui sommes nous?</Link>
             <Link className='lien' to="/PageMentionsLegales">Mentions légales</Link>
           </div>
         </div>
-        <div className="right-column">
+        <div className="right-column mt-3">
           <div className="copyright">
             <p>&copy; {new Date().getFullYear()} Fruitful Coaching Numérique SARL.<br />Tous droits réservés.</p>
           </div>
