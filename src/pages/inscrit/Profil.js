@@ -3,6 +3,7 @@ import InputProfilText from '../../components/InputProfilText'
 import axios from 'axios'
 import { gestionConnexion } from '../../_helpers/gestion.connexion'
 import { gestionRetourAdresseAPI } from '../../_helpers/gestion.retour.api'
+import { useNavigate } from 'react-router-dom'
 
 export default function Profil() {
 
@@ -11,8 +12,8 @@ export default function Profil() {
     const profil = {
         0: 'Mon profil',
         1: 'Mon bilan',
-        2: 'Mes tâches',
-        3: 'Abonnement'
+        3: 'Abonnement',
+        4: 'Deconnexion'
     }
     const [client, setClient] = useState({
         idUtilisateur: '',
@@ -38,6 +39,8 @@ export default function Profil() {
     const [subSpecialOffer, setSpecialOffer] = useState(client.specialOffer)
     const [adresseAPI, setAdresseAPI] = useState('')
 
+    let navigate = useNavigate()
+
     useEffect(() => {
         if (gestionConnexion.isLogged()) {
             fetchData(gestionConnexion.getSessionId());
@@ -46,7 +49,7 @@ export default function Profil() {
 
     useEffect(() => {
         if (client.idAdresse) {
-            console.log("useEffect fetchAddress : ",client.idAdresse)
+            console.log("useEffect fetchAddress : ", client.idAdresse)
             fetchAddress(client.idUtilisateur)
         }
     }, [client.idAdresse])
@@ -86,6 +89,20 @@ export default function Profil() {
         setSelecteurActif(!isActif)
         console.log("isActif :" + !isActif)
         console.log('Sélecteur : ', event.target.value)
+        switch (event.target.value) {
+            case '0':
+
+                break
+            case '1':
+                break;
+            case '3':
+                navigate('../pageInscriptionPremium')
+                break;
+            case '4':
+                gestionConnexion.deconnexion()
+                navigate('/')
+                break;
+        }
     }
     const checkMail = () => {
         console.log("checkMail")
@@ -204,8 +221,8 @@ export default function Profil() {
                 onChange={event => handleSelectorChange(event)} defaultValue={profil[0]}>
                 <option value="0" >{profil[0]}</option>
                 <option value="1">{profil[1]}</option>
-                <option value="2">{profil[2]}</option>
                 <option value="3">{profil[3]}</option>
+                <option value='4'>{profil[4]}</option>
             </select>
             <div>
                 <h6 className='profil-h6'>Mes informations</h6>
@@ -251,8 +268,8 @@ export default function Profil() {
                         </div>
                     </div>
 
-                        <button className='btn boutonValiderProfil' onClick={handleSubmit} >Enregistrer</button>
-                        {/* <GenericButton buttonStyle={"boutonValiderProfil"} label={"Enregistrer"} onClick={handleSubmit} /> */}
+                    <button className='btn boutonValiderProfil' onClick={handleSubmit} >Enregistrer</button>
+                    {/* <GenericButton buttonStyle={"boutonValiderProfil"} label={"Enregistrer"} onClick={handleSubmit} /> */}
 
                 </div>
             </div>

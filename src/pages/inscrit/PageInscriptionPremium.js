@@ -149,7 +149,7 @@ const InscriptionPremium = () => {
       <br />
       <br />
 
-      <Container style={{ borderRadius: '10px' }}>
+      <Container style={{ borderRadius: '10px', height:'67vh'}}>
         <Row className="justify-content-center">
           <Col xs={12} sm={6} md={4} style={{ borderRadius: '10px' }}>
             <div style={{ maxWidth: "750px", minHeight: "200px" }}>
