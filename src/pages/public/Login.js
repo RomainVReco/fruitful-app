@@ -37,7 +37,7 @@ export default function Login() {
             console.log('idUtilisateur : ', idUtilisateur)
             if (!!idUtilisateur) {
                 gestionConnexion.saveSessionId(idUtilisateur)
-                if (!!sessionStorage.getItem("nouvelInscrit") && sessionStorage.getItem("nouvelInscrit") === true) {
+                if (!!sessionStorage.getItem("nouvelInscrit") && sessionStorage.getItem("nouvelInscrit") == "true") {
                     navigate("/estConnecte/AtterrissageConnexion")
                 }
                 else { navigate("/estConnecte/ListeTaches") }
