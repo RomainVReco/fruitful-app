@@ -34,7 +34,7 @@ const InscriptionPremium = () => {
   }, []);
 
   const checkSubscription = async () => {
-    const isAbonne = await gestionConnexion.checkIsAbonne(6);
+    const isAbonne = await gestionConnexion.checkIsAbonne(7);
     setSubscriptionStatus(isAbonne);
   }
 
