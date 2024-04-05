@@ -13,65 +13,6 @@ body {
   font-family: sans-serif;
 }
 
-/* FOOTER */
-.footerBottom {
-  background-color: #C12A71;
-  /*height: 65px;*/
-  width: 100%;
-  z-index: 1000;
-  margin-top: 1.5rem;
-}
-
-.footer-container {
-  display: flex;
-}
-
-.left-column {
-  flex: 1; /* Fait en sorte que la colonne prenne l'espace disponible */
-}
-
-.center-column {
-  flex: 1; /* Fait en sorte que la colonne prenne l'espace disponible */
-}
-
-.right-column {
-  flex: 1; /* Fait en sorte que la colonne prenne l'espace disponible */
-  display: flex;
-  align-items: center;
-}
-
-.image-footer {
-  padding: 5px;
-  height: 50px;
-}
-
-.footer-content-container {
-  min-height: calc(100vh - 34px); /* Ajustez la hauteur selon vos besoins */
-}
-
-.vertical-footer-centrage {
-  display: flex;
-  align-items: center; /* Centrer verticalement */
-}
-
-.horizontal-footer-links {
-  display: flex;
-  justify-content: space-around; /* ou une autre valeur selon votre préférence */
-}
-
-.vertical-footer-links {
-  display: flex;
-  flex-direction: column;
-}
-
-.vertical-footer-links .lien {
-  margin-bottom: 10px; /* Espacement entre les liens */
-}
-
-.mentions-legales-bordure {
-  padding: 100px;
-}
-
 @media (max-width: 645px) {
 
   .sticky{
