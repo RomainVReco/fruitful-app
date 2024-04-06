@@ -68,7 +68,7 @@ export default function Inscription() {
 
   return (
 
-    <div className="fond-inscription content flex-grow-1 min-vh-100">
+    <div className="fond-inscription">
     
       <div className="container corps-inscription d-flex flex-column align-items-center">
         
