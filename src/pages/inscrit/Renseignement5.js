@@ -1,15 +1,9 @@
 import React, { useEffect } from "react";
 import BoutonSuivant from "../../components/BoutonSuivant";
-import BoutonPrecedent from "../../components/BoutonPrecedent";
-import EntreeObjectif from "../../components/EntreeObjectif";
 import { useState } from "react";
 import axios from "axios";
 import { format } from "date-fns";
 import { gestionConnexion } from "../../_helpers/gestion.connexion";
-import { Container } from "react-bootstrap";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
 
 
 export default function Renseignement5() {
@@ -36,8 +30,7 @@ export default function Renseignement5() {
     logo: '',
   }
 
-  var [messageEnregistrement, setMessageEnregistrement] = useState("");
-
+  var [messageEnregistrement, setMessageEnregistrement] = useState("Découvrez les listes des habitudes :");
   var habitudesAuto = [];
 
   //************************************************************************************************************** */
@@ -90,9 +83,6 @@ export default function Renseignement5() {
 
     if (!!sessionStorage.getItem("enregistrementHabitudesAuto") && sessionStorage.getItem("enregistrementHabitudesAuto") == "true") return;
 
-    console.log("TACHE AUTO :", tacheAuto, " HABITUDE AUTO : ", habitudesAuto);
-    console.log("longueur :", habitudesAuto.length)
-
     while (habitudesAuto.length > 1) {
       tacheAuto.nom = habitudesAuto[0];
       tacheAuto.dateDebut = format(new Date(), 'dd/MM/yyyy');
@@ -111,7 +101,7 @@ export default function Renseignement5() {
       };
     }
     sessionStorage.setItem("enregistrementHabitudesAuto", true);
-    setMessageEnregistrement ("Enregistrement des nouvelles habitudes effectué avec succès ! Cliquez sur le bouton ci-dessous pour les découvrir et éventuellement les modifier :");
+    setMessageEnregistrement("Enregistrement des nouvelles habitudes effectué avec succès ! Cliquez sur le bouton ci-dessous pour les découvrir et éventuellement les modifier :");
     return;
   }
   //************************************************************************************************************** */
@@ -132,7 +122,6 @@ export default function Renseignement5() {
         </>)
     }
   }
-
   //************************************************************************************************************** */
   return (
     <>
@@ -144,9 +133,7 @@ export default function Renseignement5() {
               <label for="comment" className="centre">
                 <h2>Résultats</h2>
               </label>
-
               <p>Nous vous remercions de votre participation !</p>
-
               <p>Nous avons établi les habitudes suivantes en fonction du profil que vous venez de renseigner :</p>
               <p>Ma principale motivation est de {recupererStorage("motivation")}.</p>
               <p>Je dors {recupererStorage("sommeil")}.</p>
@@ -155,7 +142,6 @@ export default function Renseignement5() {
 
               {afficherNouvellesTaches(habitudesAuto)}
               <p> Souhaitez-vous enregistrer ces habitudes qui formeront votre routine de vie ?</p>
-
             </div>
 
             <div class="row container-fluid m-auto">
@@ -163,17 +149,15 @@ export default function Renseignement5() {
                 className="btn boutonValiderSuivant"
                 onClick={ecrireTachesAuto}
               >Enregistrer mes nouvelles habitudes</button>
-            </div><div> <br />
+            </div>
+            <div>
+              <br />
               {messageEnregistrement && <p>{messageEnregistrement}</p>}
-
-              <p>Découvrez les listes des habitudes :</p>
-
 
               <div class="col">
                 <BoutonSuivant page="9" texte="Liste des habitudes" />
               </div>
             </div>
-
           </div>
           <div class="col"></div>
         </div>
