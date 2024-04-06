@@ -9,7 +9,7 @@ function Footer() {
   return (
 
 
-    <footer className="footerBottom fixed-bottom">
+    <footer className="footerBottom">
 
       <div className="footer-container">
         <div className="left-column">
