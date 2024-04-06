@@ -52,7 +52,7 @@ export default function Login() {
     };
 
     return (
-        <div className='container d-flex justify-content-center' style={{ height: '75vh' }}>
+        <div className='container d-flex justify-content-center' >
             <div className='d-flex flex-column align-items-center justify-content-center m-3 col-12 col-md-9 ' >
                 <h3 className='titre-h3-modifier-creer-tache'>Connectez-vous pour accéder à votre Espace Utilisateur</h3>
                 <InputProfilText label='email' nomLabel='Email' method={handleChange} exemple='jeanbonbeurre@gmail.com' />

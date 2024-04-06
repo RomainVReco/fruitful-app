@@ -82,7 +82,7 @@ export default function ListeTaches() {
       </div>
       <div className="container bg-light d-flex justify-content-center">
 
-        <div className="d-flex flex-wrap ">
+        <div className="d-flex flex-wrap justify-content-bewteen">
           {listeTaches.length > 0 ? (listeTaches.map((element, index) => {
             return <Tache key={index} nomHabitude={element.nomEvenement} frequence={element.frequence}
               dateDebut={element.dateDebut} typeEvenement={element.nomTypeEvenement} idTypeEvenement={element.idTypeEvenement}

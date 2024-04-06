@@ -346,7 +346,7 @@ app.get('/getEvent/:idEvenement', (req, res) => {
 app.get('/getEventUserCount/:jeton', (req, res) => {
     const idUtilisateur = req.params.jeton
     console.log('getEventUserCount jeton : ', idUtilisateur)
-    const sql = "SELECT COUNT(idUtilisateur) as numEvents FROM evenement WHERE idUtilisateur = ? ;"
+    const sql = "SELECT COUNT(idUtilisateur) as numEvents FROM evenement WHERE idUtilisateur = ? AND estActif = 1;"
     db.query(sql, [idUtilisateur], (err, data) => {
         if (err) {
             return res.status(500).json({
