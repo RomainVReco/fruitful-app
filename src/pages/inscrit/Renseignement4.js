@@ -13,6 +13,7 @@ export default function Renseignement4() {
     sessionStorage.setItem("meditation", id);
     setSelectedId(id);
   }
+  sessionStorage.setItem("enregistrementHabitudesAuto", false);
 
   return (
     <>

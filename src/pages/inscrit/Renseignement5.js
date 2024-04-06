@@ -6,6 +6,11 @@ import { useState } from "react";
 import axios from "axios";
 import { format } from "date-fns";
 import { gestionConnexion } from "../../_helpers/gestion.connexion";
+import { Container } from "react-bootstrap";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
+
 
 export default function Renseignement5() {
   const donneesRenseignees = {
@@ -31,16 +36,15 @@ export default function Renseignement5() {
     logo: '',
   }
 
+  var [messageEnregistrement, setMessageEnregistrement] = useState("");
+
   var habitudesAuto = [];
-  useEffect(() => {
-    habitudesAuto = ecrireTachesAuto(habitudesAuto, tacheAuto);
-  })
+
   //************************************************************************************************************** */
   const enregistrementHabitude = async (tacheAuto) => {
     try {
       const response = await axios.post('http://localhost:8081/createNewEvent', tacheAuto);
       console.log("response : ", response.data.success);
-
     } catch (error) {
       console.error('Error:', error);
     }
@@ -72,7 +76,7 @@ export default function Renseignement5() {
           break;
       }
       console.log("motivation :", domaine2);
-      console.log(habitudesAuto);
+      console.log("habitudes auto :", habitudesAuto);
       return donneesRenseignees[domaine2];
     }
     catch (e) {
@@ -81,7 +85,10 @@ export default function Renseignement5() {
   }
   //************************************************************************************************************** */
 
-  function ecrireTachesAuto(habitudesAuto, tacheAuto) {
+  function ecrireTachesAuto(event) {
+    event.preventDefault();
+
+    if (!!sessionStorage.getItem("enregistrementHabitudesAuto") && sessionStorage.getItem("enregistrementHabitudesAuto") == "true") return;
 
     console.log("TACHE AUTO :", tacheAuto, " HABITUDE AUTO : ", habitudesAuto);
     console.log("longueur :", habitudesAuto.length)
@@ -102,10 +109,10 @@ export default function Renseignement5() {
         console.log("slice :", habitudesAuto);
         break;
       };
-
-
     }
-    return habitudesAuto;
+    sessionStorage.setItem("enregistrementHabitudesAuto", true);
+    setMessageEnregistrement ("Enregistrement des nouvelles habitudes effectué avec succès ! Cliquez sur le bouton ci-dessous pour les découvrir et éventuellement les modifier :");
+    return;
   }
   //************************************************************************************************************** */
 
@@ -117,13 +124,11 @@ export default function Renseignement5() {
     } else {
       const messageHabitudeAProposer = (<p>Nous vous proposons les habitudes suivantes :</p>);
       const intitulesHabitudesAuto = habitudesAuto.filter((_, index) => index % 4 === 0);
-
       return (
         <>{messageHabitudeAProposer}
           {intitulesHabitudesAuto.map((line, index) => (
             <ul><li key={index}>{line}</li></ul>
           ))}
-
         </>)
     }
   }
@@ -149,16 +154,26 @@ export default function Renseignement5() {
               <p>Je médite {recupererStorage("meditation")} par mois.</p>
 
               {afficherNouvellesTaches(habitudesAuto)}
+              <p> Souhaitez-vous enregistrer ces habitudes qui formeront votre routine de vie ?</p>
 
             </div>
-            <br />
+
             <div class="row container-fluid m-auto">
+              <button
+                className="btn boutonValiderSuivant"
+                onClick={ecrireTachesAuto}
+              >Enregistrer mes nouvelles habitudes</button>
+            </div><div> <br />
+              {messageEnregistrement && <p>{messageEnregistrement}</p>}
+
+              <p>Découvrez les listes des habitudes :</p>
 
 
               <div class="col">
-                <BoutonSuivant page="9" texte="Suivant" />
+                <BoutonSuivant page="9" texte="Liste des habitudes" />
               </div>
             </div>
+
           </div>
           <div class="col"></div>
         </div>

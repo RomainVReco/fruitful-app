@@ -55,12 +55,16 @@ body {
   border: 2px;
   border-color: #C12A71;
   background-color: #ffffff !important;
+  outline: none;
+  text-decoration: none;
 }
 .boutonValiderSuivant {
   color: #ffffff !important;
   border: 2px;
   border-color: #C12A71;
   background-color: #c12a71 !important;
+  outline: none;
+  text-decoration: none;
 }
 
 .boutonAnnuler {
