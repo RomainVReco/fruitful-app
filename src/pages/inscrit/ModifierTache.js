@@ -185,7 +185,7 @@ export default function ModifierTache() {
                     Coucou
                 </ModaleLogo>
                 <InputModalText nomLabel='A partir du : ' id='dateDebut'
-                    method={handleChange} type='date' onClick={() => console.log('Clic')} titre={tache.dateDebut} />
+                    method={handleChange} onClick={() => console.log('Clic')} titre={tache.dateDebut} />
 
                 <InputModalQuantity nomLabel={'Fréquence : '} id='frequence' titre={tache.frequence} method={handleChange}
                     periode='jours' mini='1' max='7' />

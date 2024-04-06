@@ -1,7 +1,6 @@
 import express from 'express'
 import mysql from 'mysql'
 import cors from 'cors'
-import { dateFormatter } from './service.functions'
 
 const PORT = 8081
 
@@ -241,7 +240,8 @@ app.get('/getAllEventTypes', (req, res) => {
 
 app.post('/createNewEvent', (req, res) => {
     const { nom, dateDebut, frequence, typeEvenement, idUtilisateur, logo } = req.body
-    const formattedDate = dateFormatter(dateDebut)
+    const dateToFormat = new Date(dateDebut);
+    const formattedDate = dateToFormat.toLocaleDateString('fr');
     const sql = "INSERT INTO evenement (nomEvenement, dateDebut, frequence, idTypeEvenement, idUtilisateur, idIcone) " +
         "VALUES (?, ?, ?, ?, ?, ?);"
     db.query(sql, [nom, formattedDate, frequence, typeEvenement, idUtilisateur, logo], (err, data) => {
@@ -282,7 +282,8 @@ app.put('/updateEventStatus/:idEvenement', (req, res) => {
 
 app.put('/updateEvent', (req, res) => {
     const { idEvenement, nom, dateDebut, frequence, typeEvenement, logo } = req.body
-    const formattedDate = dateFormatter(dateDebut)
+    const dateToFormat = new Date(dateDebut);
+    const formattedDate = dateToFormat.toLocaleDateString('fr');
     console.log("updateEvent : ", idEvenement, nom, dateDebut, frequence, typeEvenement, logo)
     const sql = "UPDATE evenement SET nomEvenement = ?, dateDebut = ?, frequence = ?, " +
         "idTypeEvenement = ?, idIcone = ? WHERE idEvenement = ?;"

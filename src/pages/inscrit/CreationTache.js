@@ -3,7 +3,7 @@ import InputGenericText from '../../components/InputGenericText'
 import ModaleLogo from '../../components/ModaleLogo'
 import { CAP_EVENTS, dataImage } from '../../_helpers/data.env'
 import { useState } from 'react'
-import InputModalText from '../../components/InputModalText'
+import InputModalDate from '../../components/InputModalDate'
 import axios from 'axios'
 import InputModalQuantity from '../../components/InputModalQuantity'
 import { Link, useNavigate } from 'react-router-dom'
@@ -44,6 +44,7 @@ export default function CreationTache() {
 		getEventTypes();
 		tache['idUtilisateur'] = sessionStorage.getItem('jeton');
 		fetchCapReachedStatus();
+		minimumDate()
 	}, [isDisabled]);
 
 	const fetchCapReachedStatus = async () => {
@@ -136,6 +137,12 @@ export default function CreationTache() {
         navigate("../../estConnecte/listeTaches/")
     }
 
+	const minimumDate = () => {
+		const today = new Date();
+		console.log('MinimumDate : ', today.toISOString().split('T')[0])
+		return today.toISOString().split('T')[0]
+	}
+
 
 	return (
 		<div className='container d-flex flex-column align-items-center gap-3 mt-5'>
@@ -151,8 +158,8 @@ export default function CreationTache() {
 				</ModaleLogo>
 
 
-				<InputModalText nomLabel='A partir du : ' id='dateDebut' type='date'
-					method={handleChange} exemple={new Date().toLocaleDateString()} onClick={() => console.log('Clic')} />
+				<InputModalDate nomLabel='A partir du : ' id='dateDebut' type='date' minimum={minimumDate}
+					method={handleChange} exemple={new Date().toLocaleDateString('fr')} titre={minimumDate}  onClick={() => console.log('Clic')} />
 
 				<InputModalQuantity nomLabel={'Fréquence : '} id='frequence' method={handleChange}
 					titre={tache.frequence} periode='jours' mini='1' max='7'/>
