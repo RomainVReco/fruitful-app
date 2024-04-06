@@ -151,7 +151,7 @@ export default function CreationTache() {
 				</ModaleLogo>
 
 
-				<InputModalText nomLabel='A partir du : ' id='dateDebut'
+				<InputModalText nomLabel='A partir du : ' id='dateDebut' type='date'
 					method={handleChange} exemple={new Date().toLocaleDateString()} onClick={() => console.log('Clic')} />
 
 				<InputModalQuantity nomLabel={'Fréquence : '} id='frequence' method={handleChange}
