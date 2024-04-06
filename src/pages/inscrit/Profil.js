@@ -120,8 +120,6 @@ export default function Profil() {
         console.log("cible du clic : ", event.target.id)
         let hasBeenChecked = Number(event.target.checked)
         setClient(temp => ({ ...temp, [event.target.id]: hasBeenChecked }))
-        console.log('newsletter : ', client['newsletter'])
-        console.log('specialOffer : ', client['specialOffer'])
     }
 
     const handleChange = (event) => {

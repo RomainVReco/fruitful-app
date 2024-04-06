@@ -185,7 +185,7 @@ export default function ModifierTache() {
                     Coucou
                 </ModaleLogo>
                 <InputModalText nomLabel='A partir du : ' id='dateDebut'
-                    method={handleChange} onClick={() => console.log('Clic')} titre={tache.dateDebut} />
+                    method={handleChange} type='date' onClick={() => console.log('Clic')} titre={tache.dateDebut} />
 
                 <InputModalQuantity nomLabel={'Fréquence : '} id='frequence' titre={tache.frequence} method={handleChange}
                     periode='jours' mini='1' max='7' />
@@ -223,7 +223,7 @@ export default function ModifierTache() {
                     <button className='btn boutonAnnuler' onClick={handleClickCancel}>Annuler</button>
                     {/* <GenericButton label="Valider" buttonStyle='boutonValider' method={handleSubmit}/> */}
                 </div>
-                <div className='d-flex justify-content-end mt-1 w-100'>
+                <div className='d-flex justify-content-end mt-1 w-100 pb-3'>
                 <button className='btn boutonSupprimer' onClick={(event) => handleDelete(event, tache.idEvenement)}>Supprimer</button>
                     <ModaleConfirmation open={isModaleSuppressionOpen} method={onCloseSuppression}
                         lignes={infoSuppression} titre={"Résultat"} />
