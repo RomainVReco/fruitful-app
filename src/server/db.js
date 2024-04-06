@@ -1,6 +1,7 @@
 import express from 'express'
 import mysql from 'mysql'
 import cors from 'cors'
+import { dateFormatter } from './service.functions'
 
 const PORT = 8081
 
@@ -238,12 +239,12 @@ app.get('/getAllEventTypes', (req, res) => {
 
 })
 
-
 app.post('/createNewEvent', (req, res) => {
     const { nom, dateDebut, frequence, typeEvenement, idUtilisateur, logo } = req.body
+    const formattedDate = dateFormatter(dateDebut)
     const sql = "INSERT INTO evenement (nomEvenement, dateDebut, frequence, idTypeEvenement, idUtilisateur, idIcone) " +
         "VALUES (?, ?, ?, ?, ?, ?);"
-    db.query(sql, [nom, dateDebut, frequence, typeEvenement, idUtilisateur, logo], (err, data) => {
+    db.query(sql, [nom, formattedDate, frequence, typeEvenement, idUtilisateur, logo], (err, data) => {
         if (err) {
             return res.status(500).json({
                 error: "Erreur lors de la création d'une nouvelle tâche",
@@ -262,8 +263,6 @@ app.put('/updateEventStatus/:idEvenement', (req, res) => {
     const idEvenement = req.params.idEvenement
     const estActif = 0
     console.log('updateEventStatus idEvenement : ', idEvenement)
-    console.log('updateEventStatus estActif : ', estActif)
-
     const sql = "UPDATE evenement SET estActif = ? WHERE idEvenement = ?;"
     db.query(sql, [estActif, idEvenement], (err, data) => {
         if (err) {
@@ -283,10 +282,11 @@ app.put('/updateEventStatus/:idEvenement', (req, res) => {
 
 app.put('/updateEvent', (req, res) => {
     const { idEvenement, nom, dateDebut, frequence, typeEvenement, logo } = req.body
+    const formattedDate = dateFormatter(dateDebut)
     console.log("updateEvent : ", idEvenement, nom, dateDebut, frequence, typeEvenement, logo)
     const sql = "UPDATE evenement SET nomEvenement = ?, dateDebut = ?, frequence = ?, " +
         "idTypeEvenement = ?, idIcone = ? WHERE idEvenement = ?;"
-    db.query(sql, [nom, dateDebut, frequence, typeEvenement, logo, idEvenement], (err, data) => {
+    db.query(sql, [nom, formattedDate, frequence, typeEvenement, logo, idEvenement], (err, data) => {
         if (err) {
             return res.status(500).json({
                 error: "Erreur lors de la mise à jour d'un évènement",
