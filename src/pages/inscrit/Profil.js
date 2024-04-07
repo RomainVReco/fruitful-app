@@ -59,7 +59,6 @@ export default function Profil() {
     }, [client.idAdresse])
 
     // Récupération des données clients et d'adresse
-
     const fetchData = async (idUtilisateur) => {
         console.log('fetchData : ', idUtilisateur)
         try {
@@ -126,7 +125,6 @@ export default function Profil() {
     }
 
     // Mise à jour des blocs relatifs à l'adresse postale 
-
     const handleAddressChange = (event) => {
         setAdresse(prevState => ({ ...prevState, [event.target.id]: event.target.value }))
         if (adresse.adresse && adresse.adresse.length > 3) {

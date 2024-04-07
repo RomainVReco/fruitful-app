@@ -283,6 +283,7 @@ body {
   background-color: #C12A71;
   position: relative;
   background-position-y: center;
+  border-radius: 1rem;
 }
 
 /*@keyframes App-logo-spin {
