@@ -94,7 +94,7 @@ export default function ListeTaches() {
         </div>
       </div>
       <ModaleConfirmation open={isModaleConfirmationOpen} method={onCloseConfirmation}
-        lignes={infoConfirmation} titre={"La limite d'évènements actifs a été atteinte"} />
+        lignes={infoConfirmation} titre={"La limite d'évènements actifs a été atteinte !"} />
       <div className="d-flex flex-wrap">
         <div className="container bg-light d-flex justify-content-between mt-5">
         </div>

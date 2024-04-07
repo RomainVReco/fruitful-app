@@ -226,7 +226,7 @@ export default function ModifierTache() {
                 <div className='d-flex justify-content-end mt-1 w-100 pb-3'>
                 <button className='btn boutonSupprimer' onClick={(event) => handleDelete(event, tache.idEvenement)}>Supprimer</button>
                     <ModaleConfirmation open={isModaleSuppressionOpen} method={onCloseSuppression}
-                        lignes={infoSuppression} titre={"Résultat"} />
+                        lignes={infoSuppression} titre={"Résultat : "} />
                 </div>
                 {checkErrorMessage && checkIntegrity && (<div style={{ color: 'red' }}>{checkErrorMessage}</div>)}
             </div>

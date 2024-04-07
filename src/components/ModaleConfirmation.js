@@ -3,15 +3,17 @@ import React from 'react'
 
 export default function ModaleLogo({open, method, titre, lignes}) {
 
+  const contenuModale = lignes || ['']
+
   if (!open) return null
 
   return (
     <>
       <div className='overlay-style' />
       <div className='modale-basique'>
-        <h5>{titre} :</h5>
+        <h5>{titre}</h5>
         <div className='container'>
-        {lignes.map((element, index) => {
+        {contenuModale.map((element, index) => {
                                 return <p key={index}>{element}</p>
                             })}
         </div>
