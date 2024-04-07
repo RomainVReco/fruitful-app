@@ -41,6 +41,7 @@ export default function Profil() {
     const [subSpecialOffer, setSpecialOffer] = useState(client.specialOffer)
     const [adresseAPI, setAdresseAPI] = useState('')
     const [isModaleConfirmationOpen, setModaleConfirmationOpen] = useState(false)
+    const [hasSelectedAddress, setSelectedAddress] = useState(false)
 
 
     let navigate = useNavigate()
@@ -53,20 +54,17 @@ export default function Profil() {
 
     useEffect(() => {
         if (client.idAdresse) {
-            console.log("useEffect fetchAddress : ", client.idAdresse)
             fetchAddress(client.idUtilisateur)
         }
     }, [client.idAdresse])
 
     // Récupération des données clients et d'adresse
-
     const fetchData = async (idUtilisateur) => {
         console.log('fetchData : ', idUtilisateur)
         try {
             const response = await axios.post(`http://localhost:8081/getUser/${idUtilisateur}`);
             console.log("Fetchdata profil : ", response.data);
             Object.entries(response.data).forEach(([key, value]) => {
-                console.log(key, value)
                 setClient(prevClient => ({ ...prevClient, [key]: value }))
             });
         } catch (error) {
@@ -79,7 +77,6 @@ export default function Profil() {
         try {
             const response = await axios.post(`http://localhost:8081/getAddress/${idUtilisateur}`)
             Object.entries(response.data).forEach(([key, value]) => {
-                console.log(key, value)
                 setAdresse(prevAdresse => ({ ...prevAdresse, [key]: value }))
             })
         } catch (error) {
@@ -128,11 +125,8 @@ export default function Profil() {
     }
 
     // Mise à jour des blocs relatifs à l'adresse postale 
-
     const handleAddressChange = (event) => {
         setAdresse(prevState => ({ ...prevState, [event.target.id]: event.target.value }))
-        console.log(event.target.value)
-
         if (adresse.adresse && adresse.adresse.length > 3) {
             getAddressFromAPI()
         }
@@ -140,10 +134,6 @@ export default function Profil() {
 
     const handleCityPostCode = (event) => {
         setAdresse(prevState => ({ ...prevState, [event.target.id]: event.target.value }))
-        console.log(event.target.value)
-        Object.entries(adresse).forEach(([key, value]) => {
-            console.log(key, value)
-        })
     }
 
     const getAddressFromAPI = async () => {
@@ -151,6 +141,7 @@ export default function Profil() {
             const response = await axios.get(`https://api-adresse.data.gouv.fr/search/?q=${adresse.adresse}`)
             console.log("adresse(s) : ", response.data['features'])
             setAdresseAPI(gestionRetourAdresseAPI.parseAddressAPI(response.data['features']))
+            setSelectedAddress(false)
         } catch (error) {
             console.log("Erreur lors de l'appel de l'API adresse : ", error)
         }
@@ -162,6 +153,7 @@ export default function Profil() {
         Object.entries(data).forEach(([key, value]) => {
             setAdresse(prevState => ({ ...prevState, [key]: value }));
         });
+        setSelectedAddress(true)
     }
 
     // Enregistrement des modifications des informations de profi
@@ -235,7 +227,7 @@ export default function Profil() {
                     <InputProfilText label='prenom' nomLabel='Prénom' titre={client.prenom} method={handleChange} />
                     <InputProfilText label='email' nomLabel='Email' titre={client.email} method={handleChange} />
                     <InputProfilText label='adresse' nomLabel='Adresse' titre={adresse.adresse} method={handleAddressChange} />
-                    {adresseAPI && (<div className='container d-flex flex-column resultat-recherche '>
+                    {!hasSelectedAddress && adresseAPI && (<div className='container d-flex flex-column resultat-recherche '>
                         <hr></hr>
                         <ul className='liste-resultat-recherche'>
                             {adresseAPI.map((element, index) => {
