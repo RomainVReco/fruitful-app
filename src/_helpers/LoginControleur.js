@@ -7,12 +7,9 @@ export default function LoginControleur({children}) {
     if (sessionStorage.getItem('jeton') !== null ) {
         console.log('Contenu sessionStorage : ', sessionStorage.getItem('jeton'))
         isLogged = true
-        console.log('Login controleur : ', isLogged)
     }
 
     if (!isLogged) {
-        console.log('Contenu sessionStorage : ', sessionStorage.getItem('jeton'))
-        console.log('Login controleur : ', isLogged)
         return <Navigate to="/login"/>
     } else return children
 }

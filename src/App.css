@@ -202,6 +202,11 @@ body {
   background-color: pink;
 }
 
+.liste-resultat-recherche {
+  color: #FFF;
+  cursor: pointer;
+}
+
 /** PROFIL **/
 
 .wrapper-profil {

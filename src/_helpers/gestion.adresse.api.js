@@ -8,7 +8,6 @@ let parseAddressAPI = (array) => {
         addressAPI['ville'] = array[i]['properties']['city']
         resultat.push(addressAPI)
     }
-    console.log("ParseAddressAPI : ",resultat)
     return resultat
 }
 
