@@ -4,6 +4,8 @@ import axios from 'axios'
 import { gestionConnexion } from '../../_helpers/gestion.connexion'
 import { gestionRetourAdresseAPI } from '../../_helpers/gestion.retour.api'
 import { useNavigate } from 'react-router-dom'
+import ModaleConfirmation from '../../components/ModaleConfirmation'
+
 
 export default function Profil() {
 
@@ -38,6 +40,8 @@ export default function Profil() {
     const [subNewsletter, setNewsletter] = useState(client.newsletter)
     const [subSpecialOffer, setSpecialOffer] = useState(client.specialOffer)
     const [adresseAPI, setAdresseAPI] = useState('')
+    const [isModaleConfirmationOpen, setModaleConfirmationOpen] = useState(false)
+
 
     let navigate = useNavigate()
 
@@ -91,7 +95,6 @@ export default function Profil() {
         console.log('Sélecteur : ', event.target.value)
         switch (event.target.value) {
             case '0':
-
                 break
             case '1':
                 break;
@@ -177,6 +180,7 @@ export default function Profil() {
             updateCurrentAddress(adresse)
         }
         updateUserInfo(client)
+        setModaleConfirmationOpen(true)
     }
 
     const createNewAddress = async (adresse) => {
@@ -209,6 +213,10 @@ export default function Profil() {
             console.log("Erreur lors de la mise à jour des informations client : ", error)
         }
     }
+
+    const onCloseConfirmation = () => {
+        setModaleConfirmationOpen(false)
+      }
 
     return (
         <div className='d-flex flex-column align-items-center m-3'>
@@ -265,6 +273,8 @@ export default function Profil() {
 
                     <button className='btn boutonValiderProfil' onClick={handleSubmit} >Enregistrer</button>
                     {/* <GenericButton buttonStyle={"boutonValiderProfil"} label={"Enregistrer"} onClick={handleSubmit} /> */}
+                    <ModaleConfirmation open={isModaleConfirmationOpen} method={onCloseConfirmation} 
+                    titre={"Les informations du profil ont bien été mises à jour"} />
 
                 </div>
             </div>

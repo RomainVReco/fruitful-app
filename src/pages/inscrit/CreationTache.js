@@ -181,7 +181,7 @@ export default function CreationTache() {
 					<button href="" className='btn boutonValiderProfil' onClick={handleSubmit} disabled={isDisabled}>Valider</button>
 					
 					<ModaleConfirmation open={isModaleConfirmationOpen} method={onCloseConfirmation}
-                        lignes={infoConfirmation} titre={"Une nouvelle tâche a été créée"} />
+                        lignes={infoConfirmation} titre={"Une nouvelle tâche a été créée : "} />
 					<button href="" className='btn boutonAnnuler' onClick={handleClickCancel}>Annuler</button>
 					{/* <GenericButton label="Valider" buttonStyle='boutonValider' method={handleSubmit}/> */}
 				</div>
