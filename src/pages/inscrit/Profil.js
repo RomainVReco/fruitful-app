@@ -104,7 +104,7 @@ export default function Profil() {
                 break;
         }
     }
-
+    
     const handlePasswordChange = (event) => {
         console.log("handlePasswordChange :" + event.target.value)
     }

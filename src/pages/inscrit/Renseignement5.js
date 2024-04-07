@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import BoutonSuivant from "../../components/BoutonSuivant";
-import BoutonPrecedent from "../../components/BoutonPrecedent";
-import EntreeObjectif from "../../components/EntreeObjectif";
 import { useState } from "react";
 import axios from "axios";
 import { format } from "date-fns";
 import { gestionConnexion } from "../../_helpers/gestion.connexion";
+
 
 export default function Renseignement5() {
   const donneesRenseignees = {
@@ -31,16 +30,14 @@ export default function Renseignement5() {
     logo: '',
   }
 
+  var [messageEnregistrement, setMessageEnregistrement] = useState("Découvrez les listes des habitudes :");
   var habitudesAuto = [];
-  useEffect(() => {
-    habitudesAuto = ecrireTachesAuto(habitudesAuto, tacheAuto);
-  })
+
   //************************************************************************************************************** */
   const enregistrementHabitude = async (tacheAuto) => {
     try {
       const response = await axios.post('http://localhost:8081/createNewEvent', tacheAuto);
       console.log("response : ", response.data.success);
-
     } catch (error) {
       console.error('Error:', error);
     }
@@ -72,7 +69,7 @@ export default function Renseignement5() {
           break;
       }
       console.log("motivation :", domaine2);
-      console.log(habitudesAuto);
+      console.log("habitudes auto :", habitudesAuto);
       return donneesRenseignees[domaine2];
     }
     catch (e) {
@@ -81,10 +78,10 @@ export default function Renseignement5() {
   }
   //************************************************************************************************************** */
 
-  function ecrireTachesAuto(habitudesAuto, tacheAuto) {
+  function ecrireTachesAuto(event) {
+    event.preventDefault();
 
-    console.log("TACHE AUTO :", tacheAuto, " HABITUDE AUTO : ", habitudesAuto);
-    console.log("longueur :", habitudesAuto.length)
+    if (!!sessionStorage.getItem("enregistrementHabitudesAuto") && sessionStorage.getItem("enregistrementHabitudesAuto") == "true") return;
 
     while (habitudesAuto.length > 1) {
       tacheAuto.nom = habitudesAuto[0];
@@ -102,10 +99,10 @@ export default function Renseignement5() {
         console.log("slice :", habitudesAuto);
         break;
       };
-
-
     }
-    return habitudesAuto;
+    sessionStorage.setItem("enregistrementHabitudesAuto", true);
+    setMessageEnregistrement("Enregistrement des nouvelles habitudes effectué avec succès ! Cliquez sur le bouton ci-dessous pour les découvrir et éventuellement les modifier :");
+    return;
   }
   //************************************************************************************************************** */
 
@@ -117,17 +114,14 @@ export default function Renseignement5() {
     } else {
       const messageHabitudeAProposer = (<p>Nous vous proposons les habitudes suivantes :</p>);
       const intitulesHabitudesAuto = habitudesAuto.filter((_, index) => index % 4 === 0);
-
       return (
         <>{messageHabitudeAProposer}
           {intitulesHabitudesAuto.map((line, index) => (
             <ul><li key={index}>{line}</li></ul>
           ))}
-
         </>)
     }
   }
-
   //************************************************************************************************************** */
   return (
     <>
@@ -139,9 +133,7 @@ export default function Renseignement5() {
               <label for="comment" className="centre">
                 <h2>Résultats</h2>
               </label>
-
               <p>Nous vous remercions de votre participation !</p>
-
               <p>Nous avons établi les habitudes suivantes en fonction du profil que vous venez de renseigner :</p>
               <p>Ma principale motivation est de {recupererStorage("motivation")}.</p>
               <p>Je dors {recupererStorage("sommeil")}.</p>
@@ -149,14 +141,21 @@ export default function Renseignement5() {
               <p>Je médite {recupererStorage("meditation")} par mois.</p>
 
               {afficherNouvellesTaches(habitudesAuto)}
-
+              <p> Souhaitez-vous enregistrer ces habitudes qui formeront votre routine de vie ?</p>
             </div>
-            <br />
-            <div class="row container-fluid m-auto">
 
+            <div class="row container-fluid m-auto">
+              <button
+                className="btn boutonValiderSuivant"
+                onClick={ecrireTachesAuto}
+              >Enregistrer mes nouvelles habitudes</button>
+            </div>
+            <div>
+              <br />
+              {messageEnregistrement && <p>{messageEnregistrement}</p>}
 
               <div class="col">
-                <BoutonSuivant page="9" texte="Suivant" />
+                <BoutonSuivant page="9" texte="Liste des habitudes" />
               </div>
             </div>
           </div>

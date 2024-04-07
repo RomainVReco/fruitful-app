@@ -62,9 +62,7 @@ export default function ModifierTache() {
     const getEventTypes = async () => {
         try {
             const response = await axios.get('http://localhost:8081/getAllEventTypes')
-            console.log("Response status getEventTypes : ", response.status)
             Object.entries(response.data).forEach(([key, value]) => {
-                console.log('evt value : ', key + ' ' + value['nomTypeEvenement'])
                 setEvenements(prevState => ({ ...prevState, [key]: value['nomTypeEvenement'] }))
             })
 
@@ -74,13 +72,9 @@ export default function ModifierTache() {
     }
 
     const getEventToModify = async (idEvenement) => {
-        console.log('getEventToModify : ', idEvenement)
         try {
             const response = await axios.get(`http://localhost:8081/getEvent/${idEvenement}`)
-            console.log('getEventToModify : ', response.status)
-            console.log('getEventToModify : ', response.data['resultat'])
             Object.entries(response.data['resultat'][0]).forEach(([key, value]) => {
-                console.log('tache : ', key + ' ' + value)
                 setTache(prevState => ({ ...prevState, [key]: value }))
             })
 
@@ -92,7 +86,6 @@ export default function ModifierTache() {
     const getAllIcons = async () => {
         try {
             const response = await axios.get('http://localhost:8081/getAllIcons')
-            console.log("Response status getAllIcons : ", response.status)
             Object.entries(response.data).forEach(([key, value]) => {
                 console.log('icone value : ', key + ' ' + value['nomIcone'])
                 setIcones(prevState => ({ ...prevState, [key]: value['nomIcone'] }))
@@ -104,7 +97,6 @@ export default function ModifierTache() {
 
     const handleCallbackLogo = (logo) => {
         var taches = { ...tache }
-        console.log('handleCallbackLogo : ' + logo)
         setSingleIcon(dataImage[logo])
         taches.logo = logo
         setTache(taches)
@@ -112,7 +104,6 @@ export default function ModifierTache() {
 
     const handleChange = (event) => {
         setCheckIntegrity(false)
-        console.log("HandleChange dans ModifierTache : ", [event.target.id] + ':' + event.target.value)
         setTache(prevTache => ({ ...prevTache, [event.target.id]: event.target.value }))
     }
 
@@ -120,8 +111,6 @@ export default function ModifierTache() {
         event.preventDefault()
         try {
             const response = await axios.put(`http://localhost:8081/updateEventStatus/${idEvenement}`)
-            console.log('updateEventStatus : ', response.status)
-            console.log('updateEventStatus : ', response.data)
             if (response.status === 200) {
                 setModaleSuppressionOpen(true)
             }
@@ -146,8 +135,6 @@ export default function ModifierTache() {
     const updateEvent = async (tache) => {
         try {
             const response = await axios.put('http://localhost:8081/updateEvent', tache)
-            console.log('updateEvent : ', response.status)
-            console.log('updateEvent : ', response.data)
             if (response.status === 200) {
                 setModaleModificationOpen(true)
             }
