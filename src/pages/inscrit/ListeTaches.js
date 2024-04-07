@@ -47,8 +47,6 @@ export default function ListeTaches() {
     console.log('getAllUserEvents')
     try {
       const response = await axios.get(`http://localhost:8081/getAllUserEvents/${idUtilisateur}`)
-      console.log('getAllUserEvents : ', response.status)
-      console.log('getAllUserEvents : ', response.data.resultat)
       if (response.status === 200) {
         setListeTaches(response.data.resultat)
       }
@@ -58,13 +56,11 @@ export default function ListeTaches() {
   }
 
   const handleClickEvent = (idEvenement) => {
-    console.log("Clic tache : ", idEvenement)
     navigate('../../estConnecte/modifierTache/' + idEvenement)
   }
 
   const handleNewTask = () => {
     setActive(!isActive)
-    console.log("Clic handleNewTask")
     navigate('../../estConnecte/creationTache')
   }
 

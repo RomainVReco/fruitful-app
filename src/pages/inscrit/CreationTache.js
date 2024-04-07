@@ -44,7 +44,6 @@ export default function CreationTache() {
 		getEventTypes();
 		tache['idUtilisateur'] = sessionStorage.getItem('jeton');
 		fetchCapReachedStatus();
-		minimumDate()
 	}, [isDisabled]);
 
 	const fetchCapReachedStatus = async () => {
@@ -59,9 +58,7 @@ export default function CreationTache() {
 	const getEventTypes = async () => {
 		try {
 			const response = await axios.get('http://localhost:8081/getAllEventTypes')
-			console.log("Response status getEventTypes : ", response.status)
 			Object.entries(response.data).forEach(([key, value]) => {
-				console.log('evt value : ', key + ' ' + value['nomTypeEvenement'])
 				setEvenements(prevState => ({ ...prevState, [key]: value['nomTypeEvenement'] }))
 			})
 
@@ -73,7 +70,6 @@ export default function CreationTache() {
 	const getAllIcons = async () => {
 		try {
 			const response = await axios.get('http://localhost:8081/getAllIcons')
-			console.log("Response status getAllIcons : ", response.status)
 			Object.entries(response.data).forEach(([key, value]) => {
 				console.log('icone value : ', key + ' ' + value['nomIcone'])
 				setIcones(prevState => ({ ...prevState, [key]: value['nomIcone'] }))
@@ -85,14 +81,12 @@ export default function CreationTache() {
 
 	const handleCallbackLogo = (logo) => {
 		var taches = { ...tache }
-		console.log('handleCallbackLogo : ' + logo)
 		taches.logo = logo
 		setTache(taches)
 	}
 
 	const handleChange = (event) => {
 		setCheckIntegrity(false)
-		console.log("Handle Change in création tache : ", [event.target.id] + ':' + event.target.value)
 		setTache(prevTache => ({ ...prevTache, [event.target.id]: event.target.value }))
 	}
 
@@ -118,7 +112,6 @@ export default function CreationTache() {
 	const createNewTache = async (tache) => {
 		try {
 			const response = await axios.post('http://localhost:8081/createNewEvent', tache)
-			console.log(response.status)
 			return !!response.data.resultat.insertId
 		} catch (error) {
 			console.log("Erreur de lors de la création de la nouvelle tâche")
@@ -137,12 +130,6 @@ export default function CreationTache() {
         navigate("../../estConnecte/listeTaches/")
     }
 
-	const minimumDate = () => {
-		const today = new Date();
-		console.log('MinimumDate : ', today.toISOString().split('T')[0])
-		return today.toISOString().split('T')[0]
-	}
-
 
 	return (
 		<div className='container d-flex flex-column align-items-center gap-3 mt-5'>
@@ -158,8 +145,8 @@ export default function CreationTache() {
 				</ModaleLogo>
 
 
-				<InputModalDate nomLabel='A partir du : ' id='dateDebut' type='date' minimum={minimumDate}
-					method={handleChange} exemple={new Date().toLocaleDateString('fr')} titre={minimumDate}  onClick={() => console.log('Clic')} />
+				<InputModalDate nomLabel='A partir du : ' id='dateDebut' type='date' 
+					method={handleChange} exemple={new Date().toLocaleDateString('fr')} onClick={() => console.log('Clic')} />
 
 				<InputModalQuantity nomLabel={'Fréquence : '} id='frequence' method={handleChange}
 					titre={tache.frequence} periode='jours' mini='1' max='7'/>

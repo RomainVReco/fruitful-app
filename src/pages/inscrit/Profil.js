@@ -104,10 +104,7 @@ export default function Profil() {
                 break;
         }
     }
-    const checkMail = () => {
-        console.log("checkMail")
-    }
-
+    
     const handlePasswordChange = (event) => {
         console.log("handlePasswordChange :" + event.target.value)
     }
