@@ -51,7 +51,7 @@ export default function Inscription2() {
 
   function AffichageImage() {
     return (
-      <div className="centre">
+      <div className="centre mt-4 mb-6">
         <img src={bebe} alt="Bébé" className="imageInscription" />
       </div>
     );
@@ -59,34 +59,24 @@ export default function Inscription2() {
 
   return (
     <>
-      <div className="fond-inscription content">
-        <div className="row">
-          <div className="col"></div>
-          <div className="col corps-inscription centre">
-            <div>
-              <label for="comment">
-                <h2>Quelle est votre date de naissance ?</h2>
-              </label>
-            </div>
-            <div className="mt-2 mb-4">
-              <AffichageImage />
-            </div>
+      <div className="fond-inscription">
+        <div className="container corps-inscription d-flex flex-column align-items-center">
+          <div className="d-flex flex-column">
 
-            <div className="row">
-              <div className="col-sm-2"></div>
-              <div className="col-sm-8">
-                <input
-                  className="form-control"
-                  rows="1"
-                  id="dateNaissance"
-                  name="dateNaissance"
-                  placeholder="Format 01/01/1970"
-                  onChange={handleChangeDate}
+            <h2 className="centre">Quelle est votre date de naissance ?</h2>
 
-                ></input>
-              </div>
-              <div className="col-sm-2"></div>
-            </div>
+            <AffichageImage />
+
+            <input
+              className="form-control mt-4"
+              rows="1"
+              id="dateNaissance"
+              name="dateNaissance"
+              placeholder="Format 01/01/1970"
+              onChange={handleChangeDate}
+
+            ></input>
+
             <br />
             <button
               className="btn boutonValiderSuivant"
@@ -96,9 +86,8 @@ export default function Inscription2() {
             </button>
             {/* Affichage du message d'erreur */}
             {messageErreur && <p>{messageErreur}</p>}
-          </div>
-          <div className="col"></div>
-        </div>
+          </div></div>
+
       </div>
     </>
   );
