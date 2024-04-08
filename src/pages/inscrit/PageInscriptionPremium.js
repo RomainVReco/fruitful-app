@@ -28,7 +28,7 @@ const InscriptionPremium = () => {
 
   useEffect(() => {
     checkSubscription(idUtilisateur);
-  }, []);
+  },);
 
   const checkSubscription = async (id) => {
     const isAbonne = await gestionConnexion.checkIsAbonne(id);
