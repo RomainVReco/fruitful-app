@@ -17,16 +17,11 @@ export default function Renseignement3() {
 
   return (
     <>
-      <div className="fond-inscription content flex-grow-1 min-vh-100">
-        <div className="row ">
-          <div className="col"></div>
-          <div className="col corps-inscription">
-            <div>
-              <label for="comment">
-                <h2>Se sentir mieux</h2>
-                <h3>Chaque mois je fais du sport :</h3>
-              </label>
-            </div>
+      <div className="fond-inscription">
+        <div className="container corps-inscription d-flex flex-column align-items-center mt-4">
+          <div className="d-flex flex-column align-items-center">
+            <h2 className="centre">Se sentir mieux</h2>
+                <h3 className="mb-4">Chaque mois je fais du sport :</h3>
 
             <EntreeObjectif fruit="banane" objectif="Entre 0 et 2 fois" idObjectif="spo1" handleCheckBoxChange={handleCheckBoxChange}
         isSelected={selectedId === "spo1"} />
@@ -35,8 +30,7 @@ export default function Renseignement3() {
             <EntreeObjectif fruit="banane" objectif="6 fois et plus" idObjectif="spo3" handleCheckBoxChange={handleCheckBoxChange}
         isSelected={selectedId === "spo3"} />
 
-            <br />
-            <div class="row container-fluid m-auto">
+            <div class="row container-fluid m-auto mt-4">
               <div class="col">
                 <BoutonPrecedent page="5" texte="Répondre plus tard" />
               </div>

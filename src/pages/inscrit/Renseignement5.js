@@ -125,14 +125,11 @@ export default function Renseignement5() {
   //************************************************************************************************************** */
   return (
     <>
-      <div className="fond-inscription content flex-grow-1 min-vh-100">
-        <div className="row ">
-          <div className="col"></div>
-          <div className="col corps-inscription">
-            <div>
-              <label for="comment" className="centre">
-                <h2>Résultats</h2>
-              </label>
+      <div className="fond-inscription">
+        <div className="container corps-inscription d-flex flex-column align-items-center mt-4">
+          <div className="d-flex flex-column align-items-center">
+            <h2 className="centre mb-4">Résultats</h2>
+          
               <p>Nous vous remercions de votre participation !</p>
               <p>Nous avons établi les habitudes suivantes en fonction du profil que vous venez de renseigner :</p>
               <p>Ma principale motivation est de {recupererStorage("motivation")}.</p>
@@ -142,7 +139,7 @@ export default function Renseignement5() {
 
               {afficherNouvellesTaches(habitudesAuto)}
               <p> Souhaitez-vous enregistrer ces habitudes qui formeront votre routine de vie ?</p>
-            </div>
+    
 
             <div class="row container-fluid m-auto">
               <button
@@ -157,9 +154,9 @@ export default function Renseignement5() {
               <div class="col">
                 <BoutonSuivant page="9" texte="Liste des habitudes" />
               </div>
+              <div className="mb-4"></div>
             </div>
           </div>
-          <div class="col"></div>
         </div>
       </div>
     </>

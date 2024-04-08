@@ -29,7 +29,7 @@ function EntreeObjectif({ fruit, objectif, idObjectif, handleCheckBoxChange, isS
             checked={isSelected} />
         </div>
       </div>
-    </div>
+    </div>  
   );
 }
 
