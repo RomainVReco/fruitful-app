@@ -319,13 +319,18 @@ body {
   max-width: 500px !important;
 }
 
+.max-width-absolute-550 {
+  max-width: 550px !important;
+}
+
+
+
 label {
   margin-bottom: 3%;
 }
 .fond-inscription {
   width: 100%;
-  /* height: 100%; */
-  height: 88vh;
+  height: 88vh !important;
   background: url("assets/inscription/fond_ecran2.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -411,4 +416,8 @@ height: 20px;
 .col-premium {
   width:100% !important;
   padding: 5px;
+}
+
+.premium{
+  height: 135 vh;
 }

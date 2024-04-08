@@ -143,7 +143,7 @@ const InscriptionPremium = () => {
   }
 
   return (
-    <div>
+    <div className='premium'>
       <title>Inscription Premium</title>
 
       <br />

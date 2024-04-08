@@ -30,10 +30,14 @@ export default function Inscription2() {
   const handleClick = () => {
     const regex = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
     let formatAnnee = 4;
-    let traitementDate = dateNaissance.split("/");
-    if (traitementDate[2].length != 4) formatAnnee = 2;
-
-    if (!dateNaissance.match(regex) || formatAnnee != 4) {
+    try {
+      let traitementDate = dateNaissance.split("/");
+      if (traitementDate[2].length != 4) formatAnnee = 2;
+    } catch (e) {
+      console.log(e);
+      setMessageErreur("Une erreur a été détectée dans la date indiquée.");
+    }
+    if (dateNaissance.match(regex) == null || formatAnnee != 4) {
       setMessageErreur(
         "La date doit être au format 01/01/1970 et doit être valide."
       );
@@ -48,7 +52,7 @@ export default function Inscription2() {
       return;
     }
   };
-//******************************************************************************************
+  //******************************************************************************************
   function AffichageImage() {
     return (
       <div className="centre mt-4 mb-6">
@@ -56,7 +60,7 @@ export default function Inscription2() {
       </div>
     );
   }
-//******************************************************************************************
+  //******************************************************************************************
 
   return (
     <>

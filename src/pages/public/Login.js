@@ -61,7 +61,7 @@ export default function Login() {
 
    
                 <h3 className='titre-h3-modifier-creer-tache centre'>Connectez-vous pour accéder à votre Espace Utilisateur</h3>
-                <InputProfilText label='email' nomLabel='Email' method={handleChange} exemple='jeanbonbeurre@gmail.com' />
+                <InputProfilText label='email' nomLabel='Email' method={handleChange} exemple='mon_email@site.com' />
                 <div className='w-100 m-1'>
                     <label htmlFor='password' className='form-label'>Mot de passe</label>
                     <input type="password" id="password" value={user.password} className='form-control profil-border' onChange={handleChange} />

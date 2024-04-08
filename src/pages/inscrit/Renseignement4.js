@@ -32,7 +32,7 @@ export default function Renseignement4() {
 
             <div class="row container-fluid m-auto mt-4">
               <div class="col">
-                <BoutonPrecedent page="6" texte="Répondre plus tard" />
+                <BoutonPrecedent page="8" texte="Répondre plus tard" />
               </div>
 
               <div class="col">

@@ -22,7 +22,7 @@ export default function Renseignement2() {
                 <h2 className="centre">Se sentir mieux</h2>
                 <h3 className="centre mb-4">Chaque nuit je dors :</h3>
 
-            <EntreeObjectif fruit="banane" objectif="Mois de 6 heures" idObjectif="som1" handleCheckBoxChange={handleCheckBoxChange}
+            <EntreeObjectif fruit="banane" objectif="Moins de 6 heures" idObjectif="som1" handleCheckBoxChange={handleCheckBoxChange}
         isSelected={selectedId === "som1"} />
             <EntreeObjectif fruit="banane" objectif="Entre 6 et 8 heures" idObjectif="som2" handleCheckBoxChange={handleCheckBoxChange}
         isSelected={selectedId === "som2"} />
@@ -31,7 +31,7 @@ export default function Renseignement2() {
 
             <div class="row container-fluid m-auto mt-4">
               <div class="col">
-                <BoutonPrecedent page="4" texte="Répondre plus tard" />
+                <BoutonPrecedent page="8" texte="Répondre plus tard" />
               </div>
 
               <div class="col">
