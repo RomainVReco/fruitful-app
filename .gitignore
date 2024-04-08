@@ -24,3 +24,4 @@ yarn-debug.log*
 yarn-error.log*
 
 /walter
+/src/assets/footer/photo_fondateurs.png
