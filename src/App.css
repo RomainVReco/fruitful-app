@@ -369,8 +369,22 @@ label {
 /* CAROUSEL PAGE ACCUEIL */
 
 .carousel-container {
-  max-width: 1000px; 
+  max-width: 50%; 
   margin: 0 auto; /* centrage du conteneur horizontalement */
+}
+
+.image-no-link{
+  max-width: 100%;
+}
+
+.image-with-link {
+  max-width: 100%;
+}
+
+@media (max-width: 645px) {
+  .carousel-container {
+    max-width: 100%; 
+  }
 }
 
 /* EFFET DE SURVOL IMAGEACCUEIL AVEC HYPERLIEN */
