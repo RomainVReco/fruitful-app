@@ -52,14 +52,14 @@ export default function Inscription2() {
   function AffichageImage() {
     return (
       <div className="centre">
-        <img src={bebe} alt="Bébé" style={{ height: 330, padding: 20 }} />
+        <img src={bebe} alt="Bébé" className="imageInscription" />
       </div>
     );
   }
 
   return (
     <>
-      <div className="fond-inscription content flex-grow-1 min-vh-100">
+      <div className="fond-inscription content">
         <div className="row">
           <div className="col"></div>
           <div className="col corps-inscription centre">
@@ -68,7 +68,7 @@ export default function Inscription2() {
                 <h2>Quelle est votre date de naissance ?</h2>
               </label>
             </div>
-            <div>
+            <div className="mt-2 mb-4">
               <AffichageImage />
             </div>
 

@@ -59,7 +59,7 @@ export default function Inscription() {
     return (
       <div className="centre">
 
-        <img className='image-velo' src={velo} alt="Vélo" />
+        <img className='imageInscription' src={velo} alt="Vélo" />
 
       </div>
     );

@@ -129,7 +129,7 @@ console.log("mot de passe avant regex", email, motDePasse);
   function AffichageImage() {
     return (
       <div className="centre">
-        <img src={contact} alt="Contact" style={{ height: 330, padding: 20 }} />
+        <img src={contact} alt="Contact" className="imageInscription" />
       </div>
     );
   }
@@ -146,7 +146,7 @@ console.log("mot de passe avant regex", email, motDePasse);
                 <h2>On reste en contact</h2>
               </label>
             </div>
-            <div>
+            <div className="mt-2 mb-4">
               <AffichageImage />
             </div>
             <div class="row">
