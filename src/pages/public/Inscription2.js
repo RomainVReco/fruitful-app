@@ -68,7 +68,7 @@ export default function Inscription2() {
             <AffichageImage />
 
             <input
-              className="form-control mt-4"
+              className="form-control mt-4 profil-border"
               rows="1"
               id="dateNaissance"
               name="dateNaissance"

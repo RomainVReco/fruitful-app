@@ -128,7 +128,7 @@ console.log("mot de passe avant regex", email, motDePasse);
   //*********************************************************************************************************************************** */
   function AffichageImage() {
     return (
-      <div className="centre">
+      <div className="centre mt-4 mb-6">
         <img src={contact} alt="Contact" className="imageInscription" />
       </div>
     );
@@ -137,64 +137,48 @@ console.log("mot de passe avant regex", email, motDePasse);
 
   return (
     <>
-      <div className="fond-inscription content flex-grow-1 min-vh-100">
-        <div className="row ">
-          <div className="col"></div>
-          <div className="col corps-inscription centre">
-            <div>
-              <label for="comment">
-                <h2>On reste en contact</h2>
-              </label>
-            </div>
-            <div className="mt-2 mb-4">
+      <div className="fond-inscription">
+        <div className="container corps-inscription d-flex flex-column align-items-center">
+          <div className="d-flex flex-column">
+
+                <h2  className="centre">On reste en contact</h2>
+
               <AffichageImage />
-            </div>
-            <div class="row">
-              <div class="col-sm-2"></div>
-              <div class="col-sm-8">
 
                 <input
-                  className="form-control"
+                  className="form-control mt-4 profil-border"
                   rows="1"
                   id="email"
                   name="email"
-                  placeholder="Veuillez indiquer votre email"
+                  placeholder="Veuillez indiquer votre e-mail"
                   onChange={handleChangeEmail}
 
                 ></input>
-                <br></br>
-
-                <p></p>
+              
                 <input
                   type="password"
-                  className="form-control"
+                  className="form-control mt-4 profil-border"
                   rows="1"
                   id="motDePasse"
                   name="motDePasse"
-                  placeholder="Veuillez indiquer votre mot de passe"
+                  placeholder="Votre mot de passe"
                   onChange={handleChangeMotDePasse}
 
                 ></input>
-                <br></br>
-
-                <p></p>
+             
                 <input
                   type="password"
-                  className="form-control"
+                  className="form-control mt-4 profil-border"
                   rows="1"
                   id="motDePasse2"
                   name="motDePasse2"
-                  placeholder="Veuillez retaper votre mot de passe"
+                  placeholder="Votre mot de passe"
                   onChange={handleChangeMotDePasse2}
 
                 ></input>
-              </div>
-              <div class="col-sm-2"></div>
-            </div>
-            <br></br>
-
+          
             <button
-              className="btn boutonValiderSuivant"
+              className="btn boutonValiderSuivant mt-4"
               onClick={handleClick}
             >
               Suivant
@@ -203,7 +187,7 @@ console.log("mot de passe avant regex", email, motDePasse);
             {messageErreur && <p>{messageErreur}</p>}
             {emailExiste && <Link to="/login">Login</Link>}
           </div>
-          <div class="col"></div>
+
         </div>
       </div>
     </>
