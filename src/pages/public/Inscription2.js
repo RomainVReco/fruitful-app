@@ -48,14 +48,15 @@ export default function Inscription2() {
       return;
     }
   };
-
+//******************************************************************************************
   function AffichageImage() {
     return (
       <div className="centre mt-4 mb-6">
-        <img src={bebe} alt="Bébé" className="imageInscription" />
+        <img src={bebe} alt="Bébé" className="imageInscription mb-6" />
       </div>
     );
   }
+//******************************************************************************************
 
   return (
     <>

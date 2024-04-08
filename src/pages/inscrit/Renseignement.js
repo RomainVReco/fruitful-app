@@ -14,15 +14,10 @@ export default function Renseignement() {
 
   return (
     <>
-      <div className="fond-inscription content flex-grow-1 min-vh-100">
-        <div className="row ">
-          <div className="col"></div>
-          <div className="col corps-inscription">
-            <div>
-              <label for="comment">
-                <h2>Quelle est votre principale motivation ?</h2>
-              </label>
-            </div>
+      <div className="fond-inscription">
+      <div className="container corps-inscription d-flex flex-column align-items-center mt-4">
+          <div className="d-flex flex-column">
+                <h2 className="centre">Quelle est votre principale motivation ?</h2>
 
             <EntreeObjectif fruit="banane" objectif="Se sentir mieux" idObjectif="mot1" handleCheckBoxChange={handleCheckBoxChange}
         isSelected={selectedId === "mot1"}/>
