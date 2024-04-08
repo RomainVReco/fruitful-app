@@ -75,9 +75,11 @@
     }
   }
 
-  @media screen and (min-width: 646px) {
-    .footerBottom {
+  /* @media screen and (min-width: 646px) {
+    @media screen and (min-height: 1000px) {
+      .footerBottom {
       
       position: absolute;
       bottom: 0;
     }  }
+ */

@@ -162,7 +162,7 @@ export default function ModifierTache() {
     return (
         <div className='container d-flex flex-column align-items-center gap-3 mt-5'>
             <h3 className='titre-h3-modifier-creer-tache'> Modifier votre évènement </h3>
-            <div className='d-flex flex-column align-items-start gap-3'>
+            <div className='gap-3'>
                 <InputGenericText nomLabel={`Nom de votre ${evenements[tache['typeEvenement']]} : `} label='nom' titre={tache.nom}
                     method={handleChange} value={tache.nom} />
                 <button className='btn btn-light ' onClick={() => setIsOpen(true)}>

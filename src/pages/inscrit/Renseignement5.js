@@ -128,8 +128,8 @@ export default function Renseignement5() {
       <div className="fond-inscription">
         <div className="container corps-inscription d-flex flex-column align-items-center">
         <div className="d-flex flex-column align-items-justify max-width-absolute-550">
-            <h2 className="centre mb-4">Résultats</h2>
-          
+            <h2 className="centre">Résultats</h2>
+          <div className="small">
             <p>Nous vous remercions de votre participation !</p>
             <p>Nous avons établi les habitudes suivantes en fonction du profil que vous venez de renseigner :</p>
             <ul><li>Ma principale motivation est de {recupererStorage("motivation")}.</li>
@@ -142,12 +142,12 @@ export default function Renseignement5() {
 
             <div class="col centre">
               <button
-                className="btn boutonValiderSuivant"
+                className="btn boutonValiderSuivant mb-4"
                 onClick={ecrireTachesAuto}
               >Enregistrer mes nouvelles habitudes</button>
             </div>
             <div>
-              <br />
+   
               {messageEnregistrement && <p>{messageEnregistrement}</p>}
 
               <div class="col">
@@ -155,6 +155,7 @@ export default function Renseignement5() {
               </div>
               <div className="mb-4"></div>
             </div>
+          </div>
           </div>
         </div>
       </div>

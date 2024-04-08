@@ -134,7 +134,7 @@ export default function Inscription3() {
   //*********************************************************************************************************************************** */
   function AffichageImage() {
     return (
-      <div className="centre mt-4 mb-6">
+      <div className="centre mb-6">
         <img src={contact} alt="Contact" className="imageInscription" />
       </div>
     );
@@ -147,12 +147,12 @@ export default function Inscription3() {
         <div className="container corps-inscription d-flex flex-column align-items-center">
           <div className="d-flex flex-column">
 
-            <h2 className="centre">On reste en contact</h2>
+            <h2 className="centre max-width-absolute">On reste en contact</h2>
 
             <AffichageImage />
-
+<div className="width-375">
             <input
-              className="form-control mt-4 profil-border"
+              className="form-control mt-2 profil-border"
               rows="1"
               id="email"
               name="email"
@@ -163,7 +163,7 @@ export default function Inscription3() {
 
             <input
               type="password"
-              className="form-control mt-4 profil-border"
+              className="form-control mt-2 profil-border"
               rows="1"
               id="motDePasse"
               name="motDePasse"
@@ -174,7 +174,7 @@ export default function Inscription3() {
 
             <input
               type="password"
-              className="form-control mt-4 profil-border"
+              className="form-control mt-2 profil-border"
               rows="1"
               id="motDePasse2"
               name="motDePasse2"
@@ -182,7 +182,7 @@ export default function Inscription3() {
               onChange={handleChangeMotDePasse2}
 
             ></input>
-
+</div>
             <button
               className="btn boutonValiderSuivant mt-4"
               onClick={handleClick}
