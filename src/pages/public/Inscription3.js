@@ -150,49 +150,49 @@ export default function Inscription3() {
             <h2 className="centre max-width-absolute">On reste en contact</h2>
 
             <AffichageImage />
-<div className="width-375">
-            <input
-              className="form-control mt-2 profil-border"
-              rows="1"
-              id="email"
-              name="email"
-              placeholder="Veuillez indiquer votre e-mail"
-              onChange={handleChangeEmail}
+            <div className="width-375">
+              <input
+                className="form-control mt-2 profil-border"
+                rows="1"
+                id="email"
+                name="email"
+                placeholder="Veuillez indiquer votre e-mail"
+                onChange={handleChangeEmail}
 
-            ></input>
+              ></input>
 
-            <input
-              type="password"
-              className="form-control mt-2 profil-border"
-              rows="1"
-              id="motDePasse"
-              name="motDePasse"
-              placeholder="Votre mot de passe"
-              onChange={handleChangeMotDePasse}
+              <input
+                type="password"
+                className="form-control mt-2 profil-border"
+                rows="1"
+                id="motDePasse"
+                name="motDePasse"
+                placeholder="Votre mot de passe"
+                onChange={handleChangeMotDePasse}
 
-            ></input>
+              ></input>
 
-            <input
-              type="password"
-              className="form-control mt-2 profil-border"
-              rows="1"
-              id="motDePasse2"
-              name="motDePasse2"
-              placeholder="Votre mot de passe"
-              onChange={handleChangeMotDePasse2}
+              <input
+                type="password"
+                className="form-control mt-2 profil-border"
+                rows="1"
+                id="motDePasse2"
+                name="motDePasse2"
+                placeholder="Votre mot de passe"
+                onChange={handleChangeMotDePasse2}
 
-            ></input>
-</div>
+              ></input>
+            </div>
             <button
               className="btn boutonValiderSuivant mt-4"
               onClick={handleClick}
             >
               Suivant
             </button>
-            <div className="max-width-absolute">
-            {/* Affichage du message d'erreur */}
-            {messageErreur && <p>{messageErreur}</p>}
-            {emailExiste && <Link to="/login">Login</Link>}
+            <div className="width-375">
+              {/* Affichage du message d'erreur */}
+              {messageErreur && <p>{messageErreur}</p>}
+              {emailExiste && <Link to="/login">Login</Link>}
             </div>
           </div>
 
