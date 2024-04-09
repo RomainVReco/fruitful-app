@@ -33,13 +33,6 @@ function BoutonSuivant(page) {
     }
   }
 
-  const buttonStyle = {
-    fontSize: "2rem",
-    padding: "30px 40px",
-    margin: "50px",
-  };
-  var retour = "";
-
   return (
     <Container
       fluid

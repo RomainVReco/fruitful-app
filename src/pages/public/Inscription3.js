@@ -21,8 +21,8 @@ export default function Inscription3() {
 
   const [errorMessage, setErrorMessage] = useState('');
   const [email, setEmail] = useState({ email: "" });
-  const [motDePasse, setMotDePasse] = useState({motDePasse:""});
-  const [motDePasse2, setMotDePasse2] = useState({motDePasse2:""});
+  const [motDePasse, setMotDePasse] = useState({ motDePasse: "" });
+  const [motDePasse2, setMotDePasse2] = useState({ motDePasse2: "" });
   const [messageErreur, setMessageErreur] = useState("");
   const [emailExiste, setEmailExiste] = useState(false);
 
@@ -95,24 +95,30 @@ export default function Inscription3() {
     const regexEmail = /^[^\.\s][\w\-]+(\.[\w\-]+)*@([\w-]+\.)+[\w-]{2,}$/gm;
     const regexMotDePasse = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
     //---------------tests
-console.log("mot de passe avant regex", email, motDePasse);
+    console.log("mot de passe avant regex", email, motDePasse);
     let erreur = "";
-    if (!email["email"].match(regexEmail)) {
-      erreur = "L'email entré est invalide, merci de l'entrer à nouveau.\n";
-      console.log(erreur);
-    };
-    if ((!motDePasse.match(regexMotDePasse)) || (!motDePasse2.match(regexMotDePasse))) {
-      erreur += "Le mot de passe doit avoir plus de 8 caractères et comporter au moins une majuscule, une minuscule, un chiffre et un caractère spécial.\n";
-    };
-    if (motDePasse != motDePasse2) {
-      erreur += "Les mots de passe ne correspondent pas."
-    };
+    try {
 
-    setMessageErreur(erreur);
+      if (email["email"].match(regexEmail) == null) {
+        erreur = "L'email entré est invalide, merci de l'entrer à nouveau.\n";
+        console.log(erreur);
+      };
+      if ((!motDePasse.match(regexMotDePasse)) || (!motDePasse2.match(regexMotDePasse))) {
+        erreur += "Le mot de passe doit avoir plus de 8 caractères et comporter au moins une majuscule, une minuscule, un chiffre et un caractère spécial.\n";
+      };
+      if (motDePasse != motDePasse2) {
+        erreur += "Les mots de passe ne correspondent pas."
+      };
+
+      setMessageErreur(erreur);
+    } catch (e) {
+      console.log(e);
+      setMessageErreur("Une erreur a été détectée.");
+    }
 
     if (erreur == "") {
       // S'il n'y a pas d'erreur on enregistre l'email en sessionStorage
-      console.log("avant sessionStorage :",email, motDePasse);
+      console.log("avant sessionStorage :", email, motDePasse);
       sessionStorage.setItem("email", email.email);
       sessionStorage.setItem("motDePasse", motDePasse);
       inscrit.email = email.email;
@@ -128,8 +134,8 @@ console.log("mot de passe avant regex", email, motDePasse);
   //*********************************************************************************************************************************** */
   function AffichageImage() {
     return (
-      <div className="centre">
-        <img src={contact} alt="Contact" style={{ height: 330, padding: 20 }} />
+      <div className="centre mb-6">
+        <img src={contact} alt="Contact" className="imageInscription" />
       </div>
     );
   }
@@ -137,73 +143,59 @@ console.log("mot de passe avant regex", email, motDePasse);
 
   return (
     <>
-      <div className="fond-inscription content flex-grow-1 min-vh-100">
-        <div className="row ">
-          <div className="col"></div>
-          <div className="col corps-inscription centre">
-            <div>
-              <label for="comment">
-                <h2>On reste en contact</h2>
-              </label>
+      <div className="fond-inscription">
+        <div className="container corps-inscription d-flex flex-column align-items-center">
+          <div className="d-flex flex-column">
+
+            <h2 className="centre max-width-absolute">On reste en contact</h2>
+
+            <AffichageImage />
+            <div className="width-375">
+              <input
+                className="form-control mt-2 profil-border"
+                rows="1"
+                id="email"
+                name="email"
+                placeholder="Veuillez indiquer votre e-mail"
+                onChange={handleChangeEmail}
+
+              ></input>
+
+              <input
+                type="password"
+                className="form-control mt-2 profil-border"
+                rows="1"
+                id="motDePasse"
+                name="motDePasse"
+                placeholder="Votre mot de passe"
+                onChange={handleChangeMotDePasse}
+
+              ></input>
+
+              <input
+                type="password"
+                className="form-control mt-2 profil-border"
+                rows="1"
+                id="motDePasse2"
+                name="motDePasse2"
+                placeholder="Votre mot de passe"
+                onChange={handleChangeMotDePasse2}
+
+              ></input>
             </div>
-            <div>
-              <AffichageImage />
-            </div>
-            <div class="row">
-              <div class="col-sm-2"></div>
-              <div class="col-sm-8">
-
-                <input
-                  className="form-control"
-                  rows="1"
-                  id="email"
-                  name="email"
-                  placeholder="Veuillez indiquer votre email"
-                  onChange={handleChangeEmail}
-
-                ></input>
-                <br></br>
-
-                <p></p>
-                <input
-                  type="password"
-                  className="form-control"
-                  rows="1"
-                  id="motDePasse"
-                  name="motDePasse"
-                  placeholder="Veuillez indiquer votre mot de passe"
-                  onChange={handleChangeMotDePasse}
-
-                ></input>
-                <br></br>
-
-                <p></p>
-                <input
-                  type="password"
-                  className="form-control"
-                  rows="1"
-                  id="motDePasse2"
-                  name="motDePasse2"
-                  placeholder="Veuillez retaper votre mot de passe"
-                  onChange={handleChangeMotDePasse2}
-
-                ></input>
-              </div>
-              <div class="col-sm-2"></div>
-            </div>
-            <br></br>
-
             <button
-              className="btn boutonValiderSuivant"
+              className="btn boutonValiderSuivant mt-4"
               onClick={handleClick}
             >
               Suivant
             </button>
-            {/* Affichage du message d'erreur */}
-            {messageErreur && <p>{messageErreur}</p>}
-            {emailExiste && <Link to="/login">Login</Link>}
+            <div className="width-375">
+              {/* Affichage du message d'erreur */}
+              {messageErreur && <p>{messageErreur}</p>}
+              {emailExiste && <Link to="/login">Login</Link>}
+            </div>
           </div>
-          <div class="col"></div>
+
         </div>
       </div>
     </>

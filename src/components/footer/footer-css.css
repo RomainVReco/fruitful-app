@@ -1,4 +1,4 @@
-* {
+/* * {
     margin: 0;
     padding: 0;
     font-family: "Inter", sans-serif;
@@ -6,7 +6,7 @@
     font-style: normal;
     font-variation-settings: "slnt" 0;
     box-sizing: border-box;
-  }
+  } */
 
   /* FOOTER */
 .footerBottom {
@@ -78,3 +78,12 @@
       align-items: center;
     }
   }
+
+  /* @media screen and (min-width: 646px) {
+    @media screen and (min-height: 1000px) {
+      .footerBottom {
+      
+      position: absolute;
+      bottom: 0;
+    }  }
+ */

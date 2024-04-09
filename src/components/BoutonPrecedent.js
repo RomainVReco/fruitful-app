@@ -23,15 +23,10 @@ function BoutonPrecedent(page) {
         return "/estConnecte/Renseignement3";
       case "7":
         return "/estConnecte/Renseignement4";
+      case "8":
+        return "/estConnecte/ListeTaches";
     }
   }
-
-  const buttonStyle = {
-    fontSize: "2rem",
-    padding: "30px 40px",
-    margin: "50px",
-  };
-  var retour = "";
 
   return (
     <Container

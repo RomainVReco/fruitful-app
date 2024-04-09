@@ -14,8 +14,8 @@ function EntreeObjectif({ fruit, objectif, idObjectif, handleCheckBoxChange, isS
   const imageSrc = images[fruit] || null;
   return (
 
-    <div className="container-md">
-      <div className="renseignement-container row align-items-center">
+    <div className="mt-4 mb-4">
+      <div className="renseignement-container align-items-center">
         <div className="col-sm-2">
           <button className="boutonlogo">
             {imageSrc && (
@@ -23,13 +23,13 @@ function EntreeObjectif({ fruit, objectif, idObjectif, handleCheckBoxChange, isS
             )}
           </button>
         </div>
-        <div className="col-sm-7">{objectif}</div>
+        <div className="col-sm-8">{objectif}</div>
         <div className="col-sm-2">
           <input type="checkbox" className="case-a-cocher" id={idObjectif} onClick={() => handleCheckBoxChange(idObjectif)}
             checked={isSelected} />
         </div>
       </div>
-    </div>
+    </div>  
   );
 }
 

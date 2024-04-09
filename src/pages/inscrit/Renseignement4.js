@@ -17,17 +17,12 @@ export default function Renseignement4() {
 
   return (
     <>
-      <div className="fond-inscription content flex-grow-1 min-vh-100">
-        <div className="row ">
-          <div className="col"></div>
-          <div className="col corps-inscription">
-            <div>
-              <label for="comment">
-                <h2>Se sentir mieux</h2>
-                <h3>Chaque mois je médite :</h3>
-              </label>
-            </div>
-
+      <div className="fond-inscription">
+        <div className="container corps-inscription d-flex flex-column align-items-center mt-4">
+          <div className="d-flex flex-column align-items-center">
+            <h2 className="centre">Se sentir mieux</h2>
+                <h3 className="mb-4">Chaque mois je médite :</h3>
+ 
             <EntreeObjectif fruit="banane" objectif="Entre 0 et 2 fois" idObjectif="med1" handleCheckBoxChange={handleCheckBoxChange}
               isSelected={selectedId === "med1"} />
             <EntreeObjectif fruit="banane" objectif="Entre 3 et 5 fois" idObjectif="med2" handleCheckBoxChange={handleCheckBoxChange}
@@ -35,10 +30,9 @@ export default function Renseignement4() {
             <EntreeObjectif fruit="banane" objectif="6 fois et plus" idObjectif="med3" handleCheckBoxChange={handleCheckBoxChange}
               isSelected={selectedId === "med3"} />
 
-            <br />
-            <div class="row container-fluid m-auto">
+            <div class="row container-fluid m-auto mt-4">
               <div class="col">
-                <BoutonPrecedent page="6" texte="Répondre plus tard" />
+                <BoutonPrecedent page="8" texte="Répondre plus tard" />
               </div>
 
               <div class="col">

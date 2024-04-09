@@ -115,51 +115,48 @@ export default function Renseignement5() {
       const messageHabitudeAProposer = (<p>Nous vous proposons les habitudes suivantes :</p>);
       const intitulesHabitudesAuto = habitudesAuto.filter((_, index) => index % 4 === 0);
       return (
-        <>{messageHabitudeAProposer}
+        <><ul>{messageHabitudeAProposer}
           {intitulesHabitudesAuto.map((line, index) => (
-            <ul><li key={index}>{line}</li></ul>
-          ))}
+            <li key={index}>{line}</li>
+          ))}</ul>
         </>)
     }
   }
   //************************************************************************************************************** */
   return (
     <>
-      <div className="fond-inscription content flex-grow-1 min-vh-100">
-        <div className="row ">
-          <div className="col"></div>
-          <div className="col corps-inscription">
-            <div>
-              <label for="comment" className="centre">
-                <h2>Résultats</h2>
-              </label>
-              <p>Nous vous remercions de votre participation !</p>
-              <p>Nous avons établi les habitudes suivantes en fonction du profil que vous venez de renseigner :</p>
-              <p>Ma principale motivation est de {recupererStorage("motivation")}.</p>
-              <p>Je dors {recupererStorage("sommeil")}.</p>
-              <p>Je fais du sport {recupererStorage("sport")} par mois.</p>
-              <p>Je médite {recupererStorage("meditation")} par mois.</p>
+      <div className="fond-inscription">
+        <div className="container corps-inscription d-flex flex-column align-items-center">
+        <div className="d-flex flex-column align-items-justify max-width-absolute-550">
+            <h2 className="centre">Résultats</h2>
+          <div className="small">
+            <p>Nous vous remercions de votre participation !</p>
+            <p>Nous avons établi les habitudes suivantes en fonction du profil que vous venez de renseigner :</p>
+            <ul><li>Ma principale motivation est de {recupererStorage("motivation")}.</li>
+              <li>Je dors {recupererStorage("sommeil")}.</li>
+              <li>Je fais du sport {recupererStorage("sport")} par mois.</li>
+              <li>Je médite {recupererStorage("meditation")} par mois.</li>
+            </ul>
+            {afficherNouvellesTaches(habitudesAuto)}
+            <p> Souhaitez-vous enregistrer ces habitudes qui formeront votre routine de vie ?</p>
 
-              {afficherNouvellesTaches(habitudesAuto)}
-              <p> Souhaitez-vous enregistrer ces habitudes qui formeront votre routine de vie ?</p>
-            </div>
-
-            <div class="row container-fluid m-auto">
+            <div class="col centre">
               <button
-                className="btn boutonValiderSuivant"
+                className="btn boutonValiderSuivant mb-4"
                 onClick={ecrireTachesAuto}
               >Enregistrer mes nouvelles habitudes</button>
             </div>
             <div>
-              <br />
+   
               {messageEnregistrement && <p>{messageEnregistrement}</p>}
 
               <div class="col">
                 <BoutonSuivant page="9" texte="Liste des habitudes" />
               </div>
+              <div className="mb-4"></div>
             </div>
           </div>
-          <div class="col"></div>
+          </div>
         </div>
       </div>
     </>

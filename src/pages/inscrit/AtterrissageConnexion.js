@@ -28,39 +28,38 @@ export default function AtterrissageConnexion() {
     setidUtilisateur(sessionStorage.getItem('jeton'))
   }, [])
 
-return (
-  <>
-    <div className="fond-inscription content flex-grow-1 min-vh-100">
+  return (
+    <>
+      {/* <div className="fond-inscription">
       <div className="row ">
         <div className="col"></div>
         <div className="col corps-inscription">
           <div>
-            <label for="comment" className="centre">
-              <h2>Connexion réussie !</h2>
-            </label>
+                      <label for="comment" className="centre"> */}
+      <div className="fond-inscription">
+        <div className="container corps-inscription d-flex flex-column align-items-center mt-4">
+          <div className="d-flex flex-column align-items-center">
+            <h2 className="centre mb-4"></h2>
+            <h2 className="mt-4">Connexion réussie !</h2>
+            <p className="d-flex justify-content-center mt-4 max-width-absolute">Souhaitez-vous être accompagné par un assistant numérique dans le processus de création de tâches / d'habitudes ou aller directement sur la page listant les tâches et habitudes actuelles, vous permettant d'en ajouter manuellement ? </p>
 
-            <p>Souhaitez-vous être accompagné par un assistant numérique dans le processus de création de tâches/d'habitudes ou aller directement sur la page listant les tâches et habitudes actuelles, vous permettant d'en ajouter manuellement ? </p>
+
+            <div class="row container-fluid m-auto">
+
+              <div class="col mb-4">
+                <BoutonSuivant page="9" texte="Liste" />
+              </div>
+
+              <div class="col mb-4">
+                <BoutonSuivant page="4" texte="Assistant" />
+              </div>
 
 
-
-          </div>
-          <br />
-          <div class="row container-fluid m-auto">
-
-            <div class="col">
-              <BoutonSuivant page="9" texte="Liste" />
             </div>
-
-            <div class="col">
-              <BoutonSuivant page="4" texte="Assistant" />
-            </div>
-
-
           </div>
-        </div>
-        <div class="col"></div>
-      </div>
-    </div>
-  </>
-);
+          <div class="col"></div>
+        </div >
+      </div >
+    </>
+  );
 } 
