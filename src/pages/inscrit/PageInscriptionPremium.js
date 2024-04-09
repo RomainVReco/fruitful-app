@@ -25,10 +25,11 @@ const InscriptionPremium = () => {
   const [transactionMessage, setTransactionMessage] = useState('');
   const [payPalScript, setPayPalScript] = useState(document.createElement('script'))
   const [subscriptionStatus, setSubscriptionStatus] = useState(false);
+  const [isChecked, setChecked] = useState(false)
 
   useEffect(() => {
     checkSubscription(idUtilisateur);
-  }, []);
+  },);
 
   const checkSubscription = async (id) => {
     const isAbonne = await gestionConnexion.checkIsAbonne(id);
@@ -72,6 +73,11 @@ const InscriptionPremium = () => {
     setModalShow(true); // Ouvrir la modale
   };
 
+  const handleClickCheck = () => {
+    setChecked(!isChecked)
+    handleInscription()
+  }
+
   function createOrder() {
     // replace this url with your server
     return fetch("https://react-paypal-js-storybook.fly.dev/api/paypal/create-order", {
@@ -112,7 +118,7 @@ const InscriptionPremium = () => {
       .then((response) => response.json())
       .then((orderData) => {
         handleApproveTransaction();
-        
+
         //const message = `Bravo ${orderData.payer.name.given_name}! Transaction validée par PayPal. <br /> Accès Fruitful Premium accordé!`;
         const firstLine = "Paypal: transaction validée.";
         const secondLine = `Bravo ${orderData.payer.name.given_name}!`;
@@ -149,51 +155,57 @@ const InscriptionPremium = () => {
       <br />
       <br />
 
-      <Container style={{ borderRadius: '10px', height:'67vh'}}>
+      <Container style={{ borderRadius: '10px', height: '67vh' }}>
         <Row className="justify-content-center">
           <Col xs={12} sm={6} md={4} style={{ borderRadius: '10px' }}>
             <div style={{ maxWidth: "750px", minHeight: "200px" }}>
-            {subscriptionStatus ? (
-              <>
-                <h3>Vous avez le statut Premium</h3>
-                <div className='mt-2 text-justify'> Rendez-vous dès à présent dans la rubrique "Évènements" pour profiter de toutes les fonctionnalités premium!
+              {subscriptionStatus ? (
+                <>
+                  <h3>Vous avez le statut Premium</h3>
+                  <div className='mt-2 text-justify'> Rendez-vous dès à présent dans la rubrique "Évènements" pour profiter de toutes les fonctionnalités premium!
                   </div>
-              </>
+                </>
               ) : (
                 <>
-                <Container style={{ borderRadius: '10px'}}>
-                <Row className="justify-content-center ">
-                  <Col xs={12} sm={6} md={4} className="text-center col-premium" style={{ backgroundColor: '#F4F269', borderRadius: '10px' }}>
-                    <div>
-                      <br />
-                      <h2>
-                        Envie d'un coaching encore meilleur? <br /> <br /> Passez au statut Premium <br/> pour 6.90 euros!
-                      </h2>
-                    </div>
-                  </Col>
-                </Row>
-              </Container>
+                  <Container style={{ borderRadius: '10px' }}>
+                    <Row className="justify-content-center ">
+                      <Col xs={12} sm={6} md={4} className="text-center col-premium" style={{ backgroundColor: '#F4F269', borderRadius: '10px' }}>
+                        <div>
+                          <br />
+                          <h2>
+                            Envie d'un coaching encore meilleur? <br /> <br /> Passez au statut Premium <br /> pour 6.90 euros!
+                          </h2>
+                        </div>
+                      </Col>
+                    </Row>
+                  </Container>
 
-        
-              <br />
-              <br />
-              <PayPalScriptProvider options={{ clientId: PAYPAL_ID, components: "buttons", currency: "USD" }}>
-                <ButtonWrapper showSpinner={false} />
-              </PayPalScriptProvider>
-              </>
-            )}
+
+                  <br />
+                  <br />
+
+                  <div className="form-check form-switch">
+                    <input className="form-check-input" type="checkbox" role="switch" id="abonne" checked={isChecked} onChange={handleClickCheck} />
+                    <label className="form-check-label" htmlFor="abonnne">Activer abonnement</label>
+                  </div>
+
+                  <PayPalScriptProvider options={{ clientId: PAYPAL_ID, components: "buttons", currency: "USD" }}>
+                    <ButtonWrapper showSpinner={false} />
+                  </PayPalScriptProvider>
+                </>
+              )}
             </div>
-              <Modal show={modalShow} onHide={handleCloseModal}>
-                <Modal.Header closeButton className="modale-abonnement-paye-header">
-                  <Modal.Title>Résultat transaction</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>{transactionMessage}</Modal.Body>
-                <Modal.Footer className="modale-abonnement-paye-footer">
-                  <Button variant="secondary" onClick={handleCloseModal}>
-                    Fermer
-                  </Button>
-                </Modal.Footer>
-              </Modal>
+            <Modal show={modalShow} onHide={handleCloseModal}>
+              <Modal.Header closeButton className="modale-abonnement-paye-header">
+                <Modal.Title>Résultat transaction</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>{transactionMessage}</Modal.Body>
+              <Modal.Footer className="modale-abonnement-paye-footer">
+                <Button variant="secondary" onClick={handleCloseModal}>
+                  Fermer
+                </Button>
+              </Modal.Footer>
+            </Modal>
           </Col>
         </Row>
       </Container>

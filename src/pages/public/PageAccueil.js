@@ -11,7 +11,7 @@ import image4 from "../../assets/accueil/ciel_nuageux_Mieux_gerer_ses_addictions
 export default function PageAccueil() {
 
   return (
-  <div className="container-fluid PageAccueil">
+  <div className="container-fluid PageAccueil mt-5">
     <ImageAccueil
       src={image1}
       alt="image avec un tournesol"
@@ -21,15 +21,11 @@ export default function PageAccueil() {
 
     <br />
     <br />
-    <br />
-    <br />
 
     <div className="carousel-container">
       <Carousel />
     </div>
 
-    <br />
-    <br />
     <br />
     <br />
 

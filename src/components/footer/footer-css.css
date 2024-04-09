@@ -67,6 +67,10 @@
     padding: 100px;
   }
 
+  .copyright {
+    color: #f1f1f1;
+  }
+
   @media (max-width: 645px) {
     .footer-container {
       display: flex;

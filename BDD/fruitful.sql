@@ -6,6 +6,11 @@
 -- Généré le : ven. 05 avr. 2024 à 14:33
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
+DROP DATABASE IF EXISTS fruitful;
+
+CREATE DATABASE fruitful CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+USE fruitful;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;

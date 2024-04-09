@@ -25,7 +25,7 @@ export default function CreationTache() {
 	const [infoConfirmation, setInfoConfirmation] = useState(['Votre nouvel évènement a bien été créé. Il est disponible dans la liste des évènements'])
 	const [capErrorMessage, setCapErrorMessage] = useState(<><div style={{ height: '50px', marginBottom:'2rem', marginTop:'0.5rem' }}>
 		<p>Vous avez atteint le nombre maximum d'évènements déjà actifs pour un compte standard : {CAP_EVENTS}.</p>
-		<p>Rendez-vous sur la page <Link to="/pageInscriptionPremium">Abonnement</Link> pour passer sur un compte Premium.</p>
+		<p>Rendez-vous sur la page <Link to="/estConnecte/pageInscriptionPremium">Abonnement</Link> pour passer sur un compte Premium.</p>
 		</div>
 		</>
 	)
