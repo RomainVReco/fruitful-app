@@ -282,12 +282,10 @@ app.put('/updateEventStatus/:idEvenement', (req, res) => {
 
 app.put('/updateEvent', (req, res) => {
     const { idEvenement, nom, dateDebut, frequence, typeEvenement, logo } = req.body
-    const dateToFormat = new Date(dateDebut);
-    const formattedDate = dateToFormat.toLocaleDateString('fr');
     console.log("updateEvent : ", idEvenement, nom, dateDebut, frequence, typeEvenement, logo)
     const sql = "UPDATE evenement SET nomEvenement = ?, dateDebut = ?, frequence = ?, " +
         "idTypeEvenement = ?, idIcone = ? WHERE idEvenement = ?;"
-    db.query(sql, [nom, formattedDate, frequence, typeEvenement, logo, idEvenement], (err, data) => {
+    db.query(sql, [nom, dateDebut, frequence, typeEvenement, logo, idEvenement], (err, data) => {
         if (err) {
             return res.status(500).json({
                 error: "Erreur lors de la mise à jour d'un évènement",
