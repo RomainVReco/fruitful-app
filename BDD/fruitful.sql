@@ -2,10 +2,11 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost
--- Généré le : ven. 05 avr. 2024 à 14:33
--- Version du serveur : 10.4.28-MariaDB
--- Version de PHP : 8.2.4
+-- Hôte : 127.0.0.1
+-- Généré le : mar. 09 avr. 2024 à 15:59
+-- Version du serveur : 10.4.32-MariaDB
+-- Version de PHP : 8.2.12
+
 DROP DATABASE IF EXISTS fruitful;
 
 CREATE DATABASE fruitful CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -49,7 +50,8 @@ INSERT INTO `adresse` (`idAdresse`, `adresse`, `codePostal`, `ville`, `idUtilisa
 (2, '456 Elm St', '67890', 'City2', 0),
 (3, '789 Oak St', '13579', 'City3', 0),
 (4, '321 Pine St', '24680', 'City4', 0),
-(5, '654 Maple St', '98765', 'City5', 0);
+(5, '654 Maple St', '98765', 'City5', 0),
+(13, '202 Avenue Thiers', '33100', 'Bordeaux', 7);
 
 --
 -- Déclencheurs `adresse`
@@ -84,8 +86,8 @@ CREATE TABLE `entree_agenda_evenement` (
 
 CREATE TABLE `evenement` (
   `idEvenement` int(11) NOT NULL,
-  `nomEvenement` varchar(20) DEFAULT NULL,
-  `dateDebut` varchar(20) NOT NULL,
+  `nomEvenement` varchar(255) NOT NULL,
+  `dateDebut` varchar(255) NOT NULL,
   `frequence` int(11) NOT NULL,
   `idTypeEvenement` smallint(6) NOT NULL,
   `idObjectif` int(11) DEFAULT NULL,
@@ -100,10 +102,11 @@ CREATE TABLE `evenement` (
 
 INSERT INTO `evenement` (`idEvenement`, `nomEvenement`, `dateDebut`, `frequence`, `idTypeEvenement`, `idObjectif`, `idUtilisateur`, `idIcone`, `estActif`) VALUES
 (2, 'Test_jambon', '05/05/2024', 3, 0, NULL, 7, 6, 0),
-(3, 'Test_2', '09/05/2024', 4, 1, NULL, 7, 3, 1),
+(3, 'Test_2', '09/05/2024', 4, 1, NULL, 7, 3, 0),
 (4, 'Test_3', '28/03/2024', 7, 2, NULL, 7, 5, 1),
 (7, 'Test_4', '30/12/2025', 3, 0, NULL, 7, 4, 1),
-(10, 'Nouvelle tâche', '04/04/2024', 1, 0, NULL, 7, 8, 1);
+(10, 'Nouvelle tâche', '04/04/2024', 1, 0, NULL, 7, 8, 0),
+(11, 'Exemple_4', '04/12/2025', 4, 0, NULL, 7, 8, 1);
 
 -- --------------------------------------------------------
 
@@ -216,7 +219,7 @@ INSERT INTO `utilisateur` (`idUtilisateur`, `email`, `password`, `nom`, `prenom`
 (4, 'test', 'password789', 'AYMARRE', 'Jean', 'Male', '1988-10-20', 3, '555-123-4567', 1, 0, 1),
 (5, 'test', 'passwordabc', 'AYMARRE', 'Jean', 'Female', '1995-03-10', 4, '111-222-3333', 1, 0, 1),
 (6, 'test', 'passwordxyz', 'AYMARRE', 'Jean', 'Male', '1980-12-25', 5, '999-888-7777', 0, 0, 1),
-(7, 'test', 'test', 'BARRE', 'Raymond', NULL, NULL, NULL, NULL, NULL, 0, 1);
+(7, 'test', 'test', 'BARRE', 'Raymond', NULL, NULL, 13, NULL, NULL, 0, 1);
 
 --
 -- Index pour les tables déchargées
@@ -283,7 +286,7 @@ ALTER TABLE `utilisateur`
 -- AUTO_INCREMENT pour la table `adresse`
 --
 ALTER TABLE `adresse`
-  MODIFY `idAdresse` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idAdresse` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT pour la table `entree_agenda_evenement`
@@ -295,7 +298,7 @@ ALTER TABLE `entree_agenda_evenement`
 -- AUTO_INCREMENT pour la table `evenement`
 --
 ALTER TABLE `evenement`
-  MODIFY `idEvenement` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idEvenement` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `icone`
